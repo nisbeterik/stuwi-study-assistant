@@ -5,6 +5,8 @@
 .idea/compiler.xml
 .idea/libraries/
 .idea/workspace.xml
+.idea/misc.xml
+.idea/vcs.xml
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files
