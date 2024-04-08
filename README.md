@@ -12,16 +12,16 @@ StuWi study assistant is a system created for students or anyone engaged in cogn
 
 # Sensors & Hardware Components
 
-**Microcontroller
-[Seeed Wio Terminal](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/)
+**Microcontroller**
+* [Seeed Wio Terminal](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/)
 
-**Sensors: 
-[Ultrasonic Ranger](https://wiki.seeedstudio.com/Grove-Ultrasonic_Ranger/)
-[Loudness](https://wiki.seeedstudio.com/Grove-Loudness_Sensor/)
-[Temperature + Humidity](https://wiki.seeedstudio.com/Grove-TemperatureAndHumidity_Sensor/)
+**Sensors:**
+* [Ultrasonic Ranger](https://wiki.seeedstudio.com/Grove-Ultrasonic_Ranger/)
+* [Loudness](https://wiki.seeedstudio.com/Grove-Loudness_Sensor/)
+* [Temperature + Humidity](https://wiki.seeedstudio.com/Grove-TemperatureAndHumidity_Sensor/)
 
-**Actuators: 
-[Buzzer](https://wiki.seeedstudio.com/Grove-Buzzer/)
-[Real-Time Clock (RTC)](https://wiki.seeedstudio.com/Grove-RTC/)
-[4-Digit display](https://wiki.seeedstudio.com/Grove-4-Digit_Display/)
-[LED](https://www.seeedstudio.com/Grove-Multi-Color-Flash-LED-5mm.html)
+**Actuators:** 
+* [Buzzer](https://wiki.seeedstudio.com/Grove-Buzzer/)
+* [Real-Time Clock (RTC)](https://wiki.seeedstudio.com/Grove-RTC/)
+* [4-Digit display](https://wiki.seeedstudio.com/Grove-4-Digit_Display/)
+* [LED](https://www.seeedstudio.com/Grove-Multi-Color-Flash-LED-5mm.html)
