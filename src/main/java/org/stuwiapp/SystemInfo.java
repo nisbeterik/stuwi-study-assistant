@@ -1,4 +1,4 @@
-package org.openjfx;
+package org.stuwiapp;
 
 public class SystemInfo {
 

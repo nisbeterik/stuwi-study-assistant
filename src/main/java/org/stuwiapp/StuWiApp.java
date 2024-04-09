@@ -1,4 +1,4 @@
-package org.openjfx;
+package org.stuwiapp;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 /**
  * JavaFX App
  */
-public class App extends Application {
+public class StuWiApp extends Application {
 
     @Override
     public void start(Stage stage) {
