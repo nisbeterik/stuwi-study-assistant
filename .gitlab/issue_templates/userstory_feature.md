@@ -4,7 +4,7 @@
 **Short description** <br />
 `<replace>`
 
-**Acceptance critieria** 
+**Acceptance criteria** 
 - [ ] Verify that `<replace>`
 - [ ] Verify that `<replace>`
 - [ ] Verify that `<replace>`
