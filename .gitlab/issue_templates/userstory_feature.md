@@ -1,5 +1,5 @@
 **User story** <br />
-* As a `<replace>` i want `<replace>` So that `<replace>` <br />
+* As a `<replace>`, I want `<replace>`, so that `<replace>`. <br />
 
 **Short description** <br />
 `<replace>`
