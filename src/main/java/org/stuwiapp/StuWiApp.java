@@ -25,7 +25,7 @@ public class StuWiApp extends Application {
 
     @Override
     public void init() throws MqttException {
-        mqttManager = new MQTTManager();
+        mqttManager = MQTTManagerSingleton.getMqttInstance();
         mqttManager.subscribe(subscribeTopic);
     }
     @Override

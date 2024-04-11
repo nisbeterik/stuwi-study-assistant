@@ -3,6 +3,12 @@ package org.stuwiapp;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
+/***
+ * This class creates a client and manages connections to the client.
+ * To make use of the singleton instance, inject the instance into a MQTTManager
+ * using MQTTManager = MQTTManagerSingleton.getMqttInstance()
+ */
+
 public class MQTTManager {
     private final String BROKER ="tcp://broker.hivemq.com:1883" ;
     private String clientId;
