@@ -15,6 +15,10 @@ public class MQTTManager {
     private final int QOS = 0;  // 0 sends message at most once
     private MqttClient client;
 
+    private String latestTemp;
+    private String latestHumidity;
+
+
     public MQTTManager() throws MqttException{
         this.clientId = "StuWiApp";
         initiateMQTTClient();
@@ -60,6 +64,13 @@ public class MQTTManager {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 System.out.println("Message arrived. Topic: " + topic + " Message: " + message.toString());
+
+                if (topic.equals("stuwi/temp")){
+                    latestTemp = message.toString();
+                }
+                if (topic.equals("stuwi/humid")){
+                    latestHumidity = message.toString();
+                }
             }
 
             @Override
@@ -67,5 +78,13 @@ public class MQTTManager {
                 System.out.println("Delivery complete. ");
             }
         };
+    }
+
+    public String getLatestTemp() {
+        return latestTemp;
+    }
+
+    public String getLatestHumidity() {
+        return latestHumidity;
     }
 }
