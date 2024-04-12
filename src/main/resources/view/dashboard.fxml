@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.DashboardController">
+   <children>
+      <Label id="temp" fx:id="tempReadingLabel" layoutX="36.0" layoutY="163.0" text="&lt;temperature&gt;" />
+      <Label layoutX="36.0" layoutY="136.0" prefHeight="17.0" prefWidth="83.0" text="Temperature" />
+      <Label layoutX="36.0" layoutY="200.0" prefHeight="17.0" prefWidth="63.0" text="Humidity" />
+      <Label fx:id="versionLabel" layoutX="36.0" layoutY="34.0" prefHeight="17.0" prefWidth="524.0" text="&lt;JavaFx and Java Version&gt;" />
+      <Label fx:id="humiReadingLabel" layoutX="36.0" layoutY="226.0" text="&lt;humidity&gt;" />
+   </children>
+</AnchorPane>
