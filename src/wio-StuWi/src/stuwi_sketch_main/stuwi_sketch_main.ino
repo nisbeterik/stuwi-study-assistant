@@ -1,13 +1,22 @@
 #include <rpcWiFi.h> // WiFi library
 #include <PubSubClient.h> //MQTT library
+#include <DHT.h> //DHT sensor library by Adafruit
+#include <stdio.h>
 
+#define DHTPIN D0
+#define DHTTYPE DHT11 // DHT 11
 #define TIMEOUT_LIMIT 10  // max amount of tries for connecting to wifi
 
 // WiFi connection global variables
 WiFiClient wioClient; // creates TCP connection for broker
-const char* ssid = "myNetwork";
-const char* password =  "myPassword";
+const char* ssid = "stuwi";
+const char* password =  "stuwi123";
 byte timeout_flag = 0;  
+
+//DHT
+DHT dht(DHTPIN, DHTTYPE);
+char temp_payload[50];
+char humid_payload[50];
 
 // MQTT connection global variables
 // Source for MQTT logic: https://www.hackster.io/Salmanfarisvp/mqtt-on-wio-terminal-4ea8f8
@@ -20,6 +29,8 @@ const char* mqtt_server = "broker.mqtt-dashboard.com";  // MQTT Broker URL
 const char* topic_subscribe = "stuwi/testin"; 
 // publish topics
 const char* topic_publish = "stuwi/testout";
+const char* topic_temp = "stuwi/temp";
+const char* topic_humid = "stuwi/humid";
 
 void setup() {
   Serial.begin(115200);
@@ -28,6 +39,8 @@ void setup() {
   wifi_setup(); 
   client.setServer(mqtt_server, 1883); // Connect the MQTT Server
   client.setCallback(callback);
+
+  dht.begin();
 
 }
 
@@ -47,6 +60,12 @@ void loop() {
     Serial.print("Publish message: ");
     Serial.println(msg);
     client.publish(topic_publish, msg);
+    read_temperature();
+    read_humidity();
+    Serial.println(temp_payload);
+    client.publish(topic_temp, temp_payload);
+    Serial.println(humid_payload);
+    client.publish(topic_humid, humid_payload);
   }
 }
 
@@ -123,3 +142,14 @@ void wifi_setup() {
     }
     
 }
+
+void read_temperature(){
+  float temp = dht.readTemperature();
+  sprintf(temp_payload, "Temperature: %.2f *C", temp);
+}
+
+void read_humidity(){
+  float humidity = dht.readHumidity();
+  sprintf(humid_payload, "Humidity: %.2f %%", humidity);
+}
+
