@@ -1,10 +1,10 @@
-**Affected files** 
-`_list all created and affected files here_`
-Created new directory example/example
-Created new file example/example/test.md
+**Affected files** <br />  
+`_list all created and affected files here_` <br />  
+* Created new directory example/example <br />  
+* Created new file example/example/test.md <br />  
 
-**Description**
+**Description** <br />  
 `_Description about the merge. what it affects and what you have done_`
 
-**Related issue**
+**Related issue**   
 Closes issue #X 
