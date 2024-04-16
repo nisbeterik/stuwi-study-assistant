@@ -1,17 +1,13 @@
 package org.stuwiapp;
 
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.eclipse.paho.client.mqttv3.MqttException;
+import javafx.fxml.FXMLLoader;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.io.IOException;
 
 /**
  * JavaFX App
@@ -22,31 +18,24 @@ public class StuWiApp extends Application {
     private String publishTopic = "stuwi/testin"; // topic that WIO subscribes to
     private String subscribeTopic = "stuwi/testout"; // topic that WIO publishes to
     // private final ScheduledExecutorService publishScheduler = Executors.newSingleThreadScheduledExecutor();
+    private final String temperatureTopic = "stuwi/temp";
+    private final String humidityTopic = "stuwi/humid";
 
     @Override
     public void init() throws MqttException {
         mqttManager = MQTTManagerSingleton.getMqttInstance();
         mqttManager.subscribe(subscribeTopic);
+        mqttManager.subscribe(temperatureTopic);
+        mqttManager.subscribe(humidityTopic);
     }
     @Override
-    public void start(Stage stage) {
-        var javaVersion = SystemInfo.javaVersion();
-        var javafxVersion = SystemInfo.javafxVersion();
-
-        var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        Button publishButton = new Button("Publish message");
-        var scene = new Scene(new VBox(label, publishButton), 640, 480);
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
 
-        // sets button to publish message when clicked
-        publishButton.setOnAction(event -> {
-            try {
-                mqttManager.publish(publishTopic, "Message from StuWi app");
-            } catch (MqttException e) {
-                e.printStackTrace();
-            }
-        });
 
         /*publishScheduler.scheduleAtFixedRate(() -> {
             try {
