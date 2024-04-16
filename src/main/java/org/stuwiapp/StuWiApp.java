@@ -18,11 +18,15 @@ public class StuWiApp extends Application {
     private String publishTopic = "stuwi/testin"; // topic that WIO subscribes to
     private String subscribeTopic = "stuwi/testout"; // topic that WIO publishes to
     // private final ScheduledExecutorService publishScheduler = Executors.newSingleThreadScheduledExecutor();
+    private final String temperatureTopic = "stuwi/temp";
+    private final String humidityTopic = "stuwi/humid";
 
     @Override
     public void init() throws MqttException {
         mqttManager = MQTTManagerSingleton.getMqttInstance();
         mqttManager.subscribe(subscribeTopic);
+        mqttManager.subscribe(temperatureTopic);
+        mqttManager.subscribe(humidityTopic);
     }
     @Override
     public void start(Stage stage) throws IOException {
