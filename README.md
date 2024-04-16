@@ -25,3 +25,11 @@ StuWi study assistant is a system created for students or anyone engaged in cogn
 * [Real-Time Clock (RTC)](https://wiki.seeedstudio.com/Grove-RTC/)
 * [4-Digit display](https://wiki.seeedstudio.com/Grove-4-Digit_Display/)
 * [LED](https://www.seeedstudio.com/Grove-Multi-Color-Flash-LED-5mm.html)
+
+# Team Members
+
+* Erik Nisbet @eriknis
+* Edvin Sanfridsson @edvsan
+* Johannes Borg @johabo
+* Love Carlander Strandäng @loveca
+* Martin Lidgren @marlidg
