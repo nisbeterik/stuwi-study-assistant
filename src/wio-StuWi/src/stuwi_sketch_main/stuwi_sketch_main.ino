@@ -1,5 +1,5 @@
 #include "wifi.h"
-#include <PubSubClient.h> //MQTT library
+#include "mqtt.h"
 #include <DHT.h> //DHT sensor library by Adafruit
 #include <stdio.h>
 
@@ -9,29 +9,20 @@
 
 //DHT
 DHT dht(DHTPIN, DHTTYPE);
-char temp_payload[50];
-char humid_payload[50];
 
-// MQTT connection global variables
-// Source for MQTT logic: https://www.hackster.io/Salmanfarisvp/mqtt-on-wio-terminal-4ea8f8
-PubSubClient client(wioClient); // mqtt client
+
+
 long lastMsg = 0; // tracks when last message was sent in relation to millis variable
-char msg[50]; // publish payload
 int value = 0;  // amount of payloads published
-const char* mqtt_server = "broker.mqtt-dashboard.com";  // MQTT Broker URL
-// subscribe topics
-const char* topic_subscribe = "stuwi/testin"; 
-// publish topics
-const char* topic_publish = "stuwi/testout";
-const char* topic_temp = "stuwi/temp";
-const char* topic_humid = "stuwi/humid";
+
+
 
 void setup() {
   Serial.begin(115200);
   while(!Serial); // Wait for Serial to be ready
 
   wifi_setup(); 
-  client.setServer(mqtt_server, 1883); // Connect the MQTT Server
+  client.setServer(MQTT_SERVER, 1883); // Connect the MQTT Server
   client.setCallback(callback);
 
   dht.begin();
@@ -53,58 +44,15 @@ void loop() {
     snprintf (msg, 50, "Wio message #%ld", value);
     Serial.print("Publish message: ");
     Serial.println(msg);
-    client.publish(topic_publish, msg);
+    client.publish(TOPIC_PUBLISH, msg);
     read_temperature();
     read_humidity();
     Serial.println(temp_payload);
-    client.publish(topic_temp, temp_payload);
+    client.publish(TOPIC_TEMP, temp_payload);
     Serial.println(humid_payload);
-    client.publish(topic_humid, humid_payload);
+    client.publish(TOPIC_HUMID, humid_payload);
   }
 }
-
-void callback(char* topic, byte* payload, unsigned int length) {
-  
-  // prints that message arrived in specific topic
-  Serial.print("Message arrived [");
-  Serial.print(topic);
-  Serial.print("] ");
-  char buff_p[length]; // payload buffer
-  for (int i = 0; i < length; i++) {
-    Serial.print((char)payload[i]);
-    buff_p[i] = (char)payload[i];
-  }
-  Serial.println();
-  buff_p[length] = '\0';  // null terminate buffer
-  String msg_p = String(buff_p);
-  Serial.println(msg_p);  // print payload as string
-
-}
-
-void reconnect_mqtt() {
-  // Loop until we're reconnected
-  while (!client.connected()) {
-    Serial.print("Attempting MQTT connection...");
-    // Create a random client ID
-    String clientId = "WioTerminal-";
-    clientId += String(random(0xffff), HEX);
-    // Attempt to connect
-    if (client.connect(clientId.c_str())) {
-      Serial.println("connected");
-      // Once connected, publish an announcement...
-      client.publish(topic_publish, "First payload published");
-      // ... and resubscribe
-      client.subscribe(topic_subscribe);
-    } else {
-      Serial.print("failed, rc=");
-      Serial.print(client.state());
-      Serial.println(" try again in 5 seconds");
-      // Wait 5 seconds before retrying
-      delay(5000);
-    }
-  }
-}
-
 
 
 void read_temperature(){
