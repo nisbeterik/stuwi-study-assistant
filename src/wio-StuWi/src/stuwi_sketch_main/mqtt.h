@@ -25,5 +25,8 @@ extern void callback(char* topic, byte* payload, unsigned int length);
 
 extern void reconnect_mqtt();
 
+extern void publish_testmessage();
+
+extern void publish_sensor_values();
 
 #endif

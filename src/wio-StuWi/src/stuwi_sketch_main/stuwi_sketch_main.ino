@@ -42,15 +42,10 @@ void loop() {
     lastMsg = now;
     ++value;
     snprintf (msg, 50, "Wio message #%ld", value);
-    Serial.print("Publish message: ");
-    Serial.println(msg);
-    client.publish(TOPIC_PUBLISH, msg);
+    publish_testmessage();
     read_temperature();
     read_humidity();
-    Serial.println(temp_payload);
-    client.publish(TOPIC_TEMP, temp_payload);
-    Serial.println(humid_payload);
-    client.publish(TOPIC_HUMID, humid_payload);
+    publish_sensor_values();
   }
 }
 

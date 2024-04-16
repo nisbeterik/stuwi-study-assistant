@@ -58,3 +58,16 @@ void callback(char* topic, byte* payload, unsigned int length) {
   Serial.println(msg_p);  // print payload as string
 
 }
+
+void publish_testmessage() {
+  Serial.print("Publish message: ");
+  Serial.println(msg);
+  client.publish(TOPIC_PUBLISH, msg);
+}
+
+void publish_sensor_values() {
+  Serial.println(temp_payload);
+  client.publish(TOPIC_TEMP, temp_payload);
+  Serial.println(humid_payload);
+  client.publish(TOPIC_HUMID, humid_payload);
+}
