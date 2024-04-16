@@ -8,3 +8,6 @@
 
 **Related issue**   
 Closes issue #X 
+
+**Authors % Co-Authors**
+_Authors_
