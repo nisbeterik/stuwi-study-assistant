@@ -15,8 +15,8 @@ public class MQTTManager {
     private final int QOS = 0;  // 0 sends message at most once
     private MqttClient client;
 
-    private String latestTemp;
-    private String latestHumidity;
+    private String latestTemp = "0";
+    private String latestHumidity = "0";
 
 
     public MQTTManager() throws MqttException{

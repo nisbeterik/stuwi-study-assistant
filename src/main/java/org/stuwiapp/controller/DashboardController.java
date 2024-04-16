@@ -6,11 +6,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.stuwiapp.MQTTManager;
 import org.stuwiapp.MQTTManagerSingleton;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -19,6 +22,14 @@ import java.util.TimerTask;
 public class DashboardController implements Initializable {
 
     @FXML
+    private ImageView tempImage;
+    @FXML
+    private ImageView humiImage;
+    @FXML
+    private ImageView tempStatusImage;
+    @FXML
+    private ImageView humiStatusImage;
+    @FXML
     private Button publishMsgButton;
     @FXML
     private Label tempReadingLabel;
@@ -26,12 +37,18 @@ public class DashboardController implements Initializable {
     private Label humiReadingLabel;
     MQTTManager mqttManager = MQTTManagerSingleton.getMqttInstance();
     private String publishTopic = "stuwi/testin"; // topic that WIO subscribes to
+    private double currentTemp;
+    private double currentHumid;
 
-    private Timer timer;
+    // Thresholds should not be here, change this later
+    private final double humidityFloor = 40;
+    private final double humidityRoof = 60;
+    private final double temperatureFloor = 21;
+    private final double temperatureRoof = 23;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        timer = new Timer();
+        Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -43,13 +60,27 @@ public class DashboardController implements Initializable {
 
     public void readAndUpdateTemperature(){
         Platform.runLater(() -> {
-            tempReadingLabel.setText(mqttManager.getLatestTemp());
+            currentTemp = Double.parseDouble(mqttManager.getLatestTemp().trim());
+            tempReadingLabel.setText(String.valueOf(currentTemp));
+
+            if (currentTemp >= temperatureFloor && currentTemp <= temperatureRoof){
+                tempStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/happy-regular-240.png")));
+            } else {
+                tempStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/sad-regular-240.png")));
+            }
         });
     }
 
     public void readAndUpdateHumidity(){
         Platform.runLater(() -> {
-            humiReadingLabel.setText(mqttManager.getLatestHumidity());
+            currentHumid = Double.parseDouble(mqttManager.getLatestHumidity().trim());
+            humiReadingLabel.setText(String.valueOf(currentHumid));
+
+            if (currentHumid >= humidityFloor && currentHumid <= humidityRoof){
+                humiStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/happy-regular-240.png")));
+            } else {
+                humiStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/sad-regular-240.png")));
+            }
         });
     }
 
