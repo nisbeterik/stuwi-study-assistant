@@ -1,17 +1,11 @@
-#include <rpcWiFi.h> // WiFi library
+#include "wifi.h"
 #include <PubSubClient.h> //MQTT library
 #include <DHT.h> //DHT sensor library by Adafruit
 #include <stdio.h>
 
 #define DHTPIN D0
 #define DHTTYPE DHT11 // DHT 11
-#define TIMEOUT_LIMIT 10  // max amount of tries for connecting to wifi
 
-// WiFi connection global variables
-WiFiClient wioClient; // creates TCP connection for broker
-const char* ssid = "myNetwork";
-const char* password =  "myPassword";
-byte timeout_flag = 0;  
 
 //DHT
 DHT dht(DHTPIN, DHTTYPE);
@@ -111,37 +105,7 @@ void reconnect_mqtt() {
   }
 }
 
-// connects the  terminal to WiFi
-// Source: https://wiki.seeedstudio.com/Wio-Terminal-Wi-Fi/
-void wifi_setup() {
-    WiFi.mode(WIFI_STA);
-    WiFi.disconnect();
 
-    Serial.println("Connecting to WiFi..");
-    WiFi.begin(ssid, password);
-
-    // tries to connect repeatedly if first try fails
-    // stops trying when TIMEOUT_LIMIT constant reached
-    while ((WiFi.status() != WL_CONNECTED) && (timeout_flag < TIMEOUT_LIMIT)) {
-        delay(500);
-        Serial.println("Connecting to WiFi..");
-        WiFi.begin(ssid, password);
-        timeout_flag++;
-    }
-    // if limit reached and wifi not connected
-    // print failure
-    if((timeout_flag >= TIMEOUT_LIMIT) && (WiFi.status() != WL_CONNECTED)) {
-        Serial.println("Connection failed");
-    } 
-    // success
-    else {
-        Serial.print("Connected to the WiFi network: ");
-        Serial.println(ssid);
-        Serial.print("IP Address: ");
-        Serial.println (WiFi.localIP());
-    }
-    
-}
 
 void read_temperature(){
   float temp = dht.readTemperature();
