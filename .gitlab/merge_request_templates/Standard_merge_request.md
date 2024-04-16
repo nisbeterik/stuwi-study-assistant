@@ -9,5 +9,5 @@
 **Related issue**   
 Closes issue #X 
 
-**Authors % Co-Authors**
+**Authors & Co-Authors** <br />
 _Authors_
