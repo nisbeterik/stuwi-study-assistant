@@ -2,6 +2,7 @@
 #include "mqtt.h"
 #include <DHT.h> //DHT sensor library by Adafruit
 #include <stdio.h>
+#include "screen_draw.h"
 
 #define DHTPIN D0
 #define DHTTYPE DHT11 // DHT 11
@@ -26,6 +27,7 @@ void setup() {
   client.setCallback(callback);
 
   dht.begin();
+  screen_setup();
 
 }
 
@@ -46,17 +48,19 @@ void loop() {
     read_temperature();
     read_humidity();
     publish_sensor_values();
+    
+    update_screen();
   }
 }
 
 
 void read_temperature(){
   float temp = dht.readTemperature();
-  sprintf(temp_payload, "Temperature: %.2f *C", temp);
+  sprintf(temp_payload, "%.2f", temp);
 }
 
 void read_humidity(){
   float humidity = dht.readHumidity();
-  sprintf(humid_payload, "Humidity: %.2f %%", humidity);
+  sprintf(humid_payload, "%.2f", humidity);
 }
 
