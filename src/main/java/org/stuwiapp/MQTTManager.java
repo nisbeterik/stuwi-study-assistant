@@ -17,6 +17,7 @@ public class MQTTManager {
 
     private String latestTemp = "0";
     private String latestHumidity = "0";
+    private String latestSound = "0";
 
 
     public MQTTManager() throws MqttException{
@@ -71,6 +72,9 @@ public class MQTTManager {
                 if (topic.equals("stuwi/humid")){
                     latestHumidity = message.toString();
                 }
+                if (topic.equals("stuwi/loudness")){
+                    latestSound = message.toString();
+                }
             }
 
             @Override
@@ -87,4 +91,7 @@ public class MQTTManager {
     public String getLatestHumidity() {
         return latestHumidity;
     }
+
+    public String getLatestSound() {
+        return latestSound;}
 }

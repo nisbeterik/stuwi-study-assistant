@@ -5,6 +5,7 @@ PubSubClient client(wioClient);
 // payloads
 char temp_payload[50];
 char humid_payload[50];
+char loud_payload[50];
 char msg[50]; // test publish payload
 
 // mqtt server
@@ -16,6 +17,7 @@ const char* TOPIC_SUBSCRIBE = "stuwi/testin";
 const char* TOPIC_PUBLISH = "stuwi/testout";
 extern const char* TOPIC_TEMP = "stuwi/temp";
 const char* TOPIC_HUMID = "stuwi/humid";
+const char* TOPIC_LOUD = "stuwi/loudness";
 
 void reconnect_mqtt() {
   // Loop until we're reconnected
@@ -70,4 +72,6 @@ void publish_sensor_values() {
   client.publish(TOPIC_TEMP, temp_payload);
   Serial.println(humid_payload);
   client.publish(TOPIC_HUMID, humid_payload);
+  Serial.println(loud_payload);
+  client.publish(TOPIC_LOUD, loud_payload);
 }

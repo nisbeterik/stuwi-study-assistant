@@ -2,8 +2,8 @@
 
 
 WiFiClient wioClient;
-const char* SSID       = "myNetword";                        // wifi network name
-const char* PASSWORD   = "myPassword";
+const char* SSID       = "stuwi";                        // wifi network name
+const char* PASSWORD   = "stuwi123";
 byte timeout_flag = 0;       
 
 // connects the  terminal to WiFi
