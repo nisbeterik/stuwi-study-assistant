@@ -22,7 +22,7 @@ public final class FXMLUtil {
         fxmlName = fxmlName.endsWith(".fxml") ? fxmlName : fxmlName + ".fxml"; // appends .fxml if missing in parameter
 
         try {
-            return FXMLLoader.load(requireNonNull(FXMLUtil.class.getResource("/org/stuwiapp/" + fxmlName)));
+            return FXMLLoader.load(requireNonNull(FXMLUtil.class.getResource("/org/stuwiapp/fxml/" + fxmlName)));
         } catch (IOException e) {
             throw new RuntimeException("Failed to load FXML file (" + fxmlName + ")");
         }

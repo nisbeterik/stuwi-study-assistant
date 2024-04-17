@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.stuwiapp.MQTTManager;
 import org.stuwiapp.MQTTManagerSingleton;
@@ -19,9 +20,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class DashboardController {
+public class DashboardController extends ParentController {
 
     public ImageView loudImage;
+    public Button studySessionRedirect;
     @FXML
     private ImageView tempImage;
     @FXML
@@ -120,4 +122,7 @@ public class DashboardController {
         });
     }
 
+    public void redirectStudySession(MouseEvent mouseEvent) {
+        redirect(mouseEvent, "study-session.fxml");
+    }
 }

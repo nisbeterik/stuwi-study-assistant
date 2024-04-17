@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.DashboardController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.DashboardController">
    <children>
       <Label id="temp" fx:id="tempReadingLabel" layoutX="47.0" layoutY="116.0" text="00.00">
          <font>
@@ -23,32 +21,32 @@
          </font></Button>
       <ImageView fx:id="tempImage" fitHeight="130.0" fitWidth="83.0" layoutX="30.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/thermometer-solid-240.png" />
+            <Image url="@../images/thermometer-solid-240.png" />
          </image>
       </ImageView>
       <ImageView fx:id="humiImage" fitHeight="83.0" fitWidth="63.0" layoutX="40.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/droplet-half-solid-240.png" />
+            <Image url="@../images/droplet-half-solid-240.png" />
          </image>
       </ImageView>
       <ImageView fx:id="tempStatusImage" fitHeight="56.0" fitWidth="31.0" layoutX="113.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/happy-regular-240.png" />
+            <Image url="@../images/happy-regular-240.png" />
          </image>
       </ImageView>
       <ImageView fx:id="humiStatusImage" fitHeight="56.0" fitWidth="31.0" layoutX="113.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/happy-regular-240.png" />
+            <Image url="@../images/happy-regular-240.png" />
          </image>
       </ImageView>
       <ImageView fx:id="loudImage" fitHeight="130.0" fitWidth="83.0" layoutX="325.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/volume-full-solid-240.png" />
+            <Image url="@../images/volume-full-solid-240.png" />
          </image>
       </ImageView>
       <ImageView fx:id="loudStatusImage" fitHeight="56.0" fitWidth="31.0" layoutX="408.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/happy-regular-240.png" />
+            <Image url="@../images/happy-regular-240.png" />
          </image>
       </ImageView>
       <Label id="temp" fx:id="loudnessReadingLabel" layoutX="341.0" layoutY="115.0" text="00.00">
@@ -56,5 +54,10 @@
             <Font name="Tahoma" size="20.0" />
          </font>
       </Label>
+      <Button fx:id="studySessionRedirect" layoutX="300.0" layoutY="307.0" mnemonicParsing="false" onMouseClicked="#redirectStudySession" text="Go To Study Session">
+         <font>
+            <Font name="Tahoma" size="17.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
