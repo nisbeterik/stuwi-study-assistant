@@ -1,5 +1,6 @@
 #include "mqtt.h"
 #include "screen_draw.h"
+#include "rtc_handler.h"
 
 TFT_eSPI tft; //initialize TFT LCD
 
@@ -21,4 +22,5 @@ void update_screen(){
   tft.drawString(temp_string,0,0); //draw text string 
   tft.drawString(humid_string,0,50);
   tft.drawString(loudness_string,0, 100);
+  tft.drawString(get_time(current_time), 0, 150); // get time from rtc_handler and
 }

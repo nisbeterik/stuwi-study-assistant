@@ -3,6 +3,7 @@
 #include <DHT.h> //DHT sensor library by Adafruit
 #include <stdio.h>
 #include "screen_draw.h"
+#include "rtc_handler.h"
 
 #define DHTPIN D0
 #define DHTTYPE DHT11 // DHT 11
@@ -24,6 +25,7 @@ void setup() {
   Serial.begin(115200);
   while(!Serial); // Wait for Serial to be ready
   wifi_setup();
+  setup_rtc();
   client.setServer(MQTT_SERVER, 1883); // Connect the MQTT Server
   client.setCallback(callback);
 
@@ -37,7 +39,7 @@ void loop() {
     reconnect_mqtt();
   }
   client.loop();
-
+  current_time = rtc.now(); //update DateTime object to follow rtc
   long now = millis();
 
   // updates screen and values every second
@@ -49,8 +51,8 @@ void loop() {
       update_screen();
   }
   // publishes a message to broker every 10 seconds
-  if (now - lastPublish > 10000) {
-    lastMsg = now;
+  if (now - last_published > 10000) {
+    last_published = now;
     ++value;
     snprintf (msg, 50, "Wio message #%ld", value);
     publish_testmessage();
