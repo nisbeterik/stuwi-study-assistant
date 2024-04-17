@@ -21,6 +21,7 @@ import java.util.TimerTask;
 
 public class DashboardController implements Initializable {
 
+    public ImageView loudImage;
     @FXML
     private ImageView tempImage;
     @FXML
@@ -30,15 +31,23 @@ public class DashboardController implements Initializable {
     @FXML
     private ImageView humiStatusImage;
     @FXML
+    private ImageView loudStatusImage;
+    @FXML
     private Button publishMsgButton;
     @FXML
     private Label tempReadingLabel;
     @FXML
     private Label humiReadingLabel;
+    @FXML
+    private Label loudnessReadingLabel;
+
     MQTTManager mqttManager = MQTTManagerSingleton.getMqttInstance();
     private String publishTopic = "stuwi/testin"; // topic that WIO subscribes to
     private double currentTemp;
     private double currentHumid;
+    private double currentLoudness;
+
+
 
     // Thresholds should not be here, change this later
     private final double humidityFloor = 40;
@@ -46,6 +55,8 @@ public class DashboardController implements Initializable {
     private final double temperatureFloor = 21;
     private final double temperatureRoof = 23;
 
+    private final double loudnessFloor = 0;
+    private final double loudnessRoof = 1000;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Timer timer = new Timer();
@@ -54,6 +65,7 @@ public class DashboardController implements Initializable {
             public void run() {
                 readAndUpdateTemperature();
                 readAndUpdateHumidity();
+                readAndUpdateLoudness();
             }
         }, 0, 1000);
     }
@@ -93,5 +105,17 @@ public class DashboardController implements Initializable {
 
     }
 
+    public void readAndUpdateLoudness(){
+        Platform.runLater(() -> {
+            currentLoudness = Double.parseDouble(mqttManager.getLatestSound().trim());
+            loudnessReadingLabel.setText(String.valueOf(currentLoudness));
+
+            if (currentLoudness >= loudnessFloor && currentLoudness <= loudnessRoof) {
+                loudStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/happy-regular-240.png")));
+            } else {
+                loudStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/sad-regular-240.png")));
+            }
+        });
+    }
 
 }

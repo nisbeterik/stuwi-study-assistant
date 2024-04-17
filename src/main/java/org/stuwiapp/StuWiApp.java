@@ -21,12 +21,15 @@ public class StuWiApp extends Application {
     private final String temperatureTopic = "stuwi/temp";
     private final String humidityTopic = "stuwi/humid";
 
+    private final String loudnessTopic = "stuwi/loudness";
+
     @Override
     public void init() throws MqttException {
         mqttManager = MQTTManagerSingleton.getMqttInstance();
         mqttManager.subscribe(subscribeTopic);
         mqttManager.subscribe(temperatureTopic);
         mqttManager.subscribe(humidityTopic);
+        mqttManager.subscribe(loudnessTopic);
     }
     @Override
     public void start(Stage stage) throws IOException {

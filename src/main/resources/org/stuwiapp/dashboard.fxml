@@ -41,5 +41,20 @@
             <Image url="@images/happy-regular-240.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="loudImage" fitHeight="130.0" fitWidth="83.0" layoutX="325.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/volume-full-solid-240.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="loudStatusImage" fitHeight="56.0" fitWidth="31.0" layoutX="408.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/happy-regular-240.png" />
+         </image>
+      </ImageView>
+      <Label id="temp" fx:id="loudnessReadingLabel" layoutX="341.0" layoutY="115.0" text="00.00">
+         <font>
+            <Font name="Tahoma" size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

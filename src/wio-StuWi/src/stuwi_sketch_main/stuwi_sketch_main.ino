@@ -15,14 +15,14 @@ DHT dht(DHTPIN, DHTTYPE);
 
 long lastMsg = 0; // tracks when last message was sent in relation to millis variable
 int value = 0;  // amount of payloads published
+float loudVal = 0;
 
 
 
 void setup() {
   Serial.begin(115200);
   while(!Serial); // Wait for Serial to be ready
-
-  wifi_setup(); 
+  wifi_setup();
   client.setServer(MQTT_SERVER, 1883); // Connect the MQTT Server
   client.setCallback(callback);
 
@@ -47,6 +47,7 @@ void loop() {
     publish_testmessage();
     read_temperature();
     read_humidity();
+    read_loudness();
     publish_sensor_values();
     
     update_screen();
@@ -64,3 +65,7 @@ void read_humidity(){
   sprintf(humid_payload, "%.2f", humidity);
 }
 
+void read_loudness(){
+
+  loudVal = analogRead(A3);
+  sprintf(loud_payload, "%.2f ", loudVal);}
