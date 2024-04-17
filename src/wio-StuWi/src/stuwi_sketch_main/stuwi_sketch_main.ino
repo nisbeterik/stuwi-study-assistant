@@ -13,7 +13,8 @@ DHT dht(DHTPIN, DHTTYPE);
 
 
 
-long lastMsg = 0; // tracks when last message was sent in relation to millis variable
+long last_published = 0; // tracks when last message was sent in relation to millis variable
+long sensor_value_update = 0; // tracks when last sensor value update was done
 int value = 0;  // amount of payloads published
 float loudVal = 0;
 
@@ -37,20 +38,25 @@ void loop() {
   }
   client.loop();
 
-  //
   long now = millis();
-  // publishes a message every 10 seconds
-  if (now - lastMsg > 10000) {
+
+  // updates screen and values every second
+  if(now - sensor_value_update > 1000) {
+      sensor_value_update = now;
+      read_temperature();
+      read_humidity();
+      read_loudness();
+      update_screen();
+  }
+  // publishes a message to broker every 10 seconds
+  if (now - lastPublish > 10000) {
     lastMsg = now;
     ++value;
     snprintf (msg, 50, "Wio message #%ld", value);
     publish_testmessage();
-    read_temperature();
-    read_humidity();
-    read_loudness();
     publish_sensor_values();
     
-    update_screen();
+    
   }
 }
 
@@ -68,4 +74,5 @@ void read_humidity(){
 void read_loudness(){
 
   loudVal = analogRead(A3);
-  sprintf(loud_payload, "%.2f ", loudVal);}
+  sprintf(loud_payload, "%.2f ", loudVal);
+}
