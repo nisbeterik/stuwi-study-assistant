@@ -68,4 +68,4 @@ void read_humidity(){
 void read_loudness(){
 
   loudVal = analogRead(A3);
-  sprintf(loud_payload, "%.2f ");}
+  sprintf(loud_payload, "%.2f ", loudVal);}

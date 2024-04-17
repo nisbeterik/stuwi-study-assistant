@@ -21,6 +21,7 @@ import java.util.TimerTask;
 
 public class DashboardController implements Initializable {
 
+    public ImageView loudImage;
     @FXML
     private ImageView tempImage;
     @FXML

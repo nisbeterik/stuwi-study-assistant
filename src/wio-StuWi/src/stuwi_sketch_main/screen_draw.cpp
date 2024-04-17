@@ -17,7 +17,7 @@ void screen_setup() {
 void update_screen(){
   sprintf(temp_string, "Temp: %s", temp_payload);
   sprintf(humid_string, "Humid: %s", humid_payload);
-  sprintf(loudness_string, "Loud, %s", loud_payload);
+  sprintf(loudness_string, "Loud: %s", loud_payload);
   tft.drawString(temp_string,0,0); //draw text string 
   tft.drawString(humid_string,0,50);
   tft.drawString(loudness_string,0, 100);
