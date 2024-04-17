@@ -19,7 +19,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class DashboardController implements Initializable {
+public class DashboardController {
 
     public ImageView loudImage;
     @FXML
@@ -57,8 +57,10 @@ public class DashboardController implements Initializable {
 
     private final double loudnessFloor = 0;
     private final double loudnessRoof = 1000;
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+    @FXML
+    public void initialize() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override

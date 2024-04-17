@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import javafx.fxml.FXMLLoader;
+import org.stuwiapp.Utils.FXMLUtil;
 
 import java.io.IOException;
 
@@ -36,9 +37,8 @@ public class StuWiApp extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
-        Parent root = fxmlLoader.load();
-        Scene scene = new Scene(root);
+        Object dashboard = FXMLUtil.loadFxml("dashboard.fxml");
+        Scene scene = new Scene((Parent) dashboard);
         stage.setScene(scene);
         stage.show();
 
