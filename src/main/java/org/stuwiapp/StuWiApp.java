@@ -23,6 +23,8 @@ public class StuWiApp extends Application {
 
     private final String loudnessTopic = "stuwi/loudness";
 
+    private final String sessionOverTopic = "stuwi/sessionover";
+
     @Override
     public void init() throws MqttException {
         mqttManager = MQTTManagerSingleton.getMqttInstance();
@@ -30,6 +32,7 @@ public class StuWiApp extends Application {
         mqttManager.subscribe(temperatureTopic);
         mqttManager.subscribe(humidityTopic);
         mqttManager.subscribe(loudnessTopic);
+        mqttManager.subscribe(sessionOverTopic);
     }
     @Override
     public void start(Stage stage) throws IOException {
