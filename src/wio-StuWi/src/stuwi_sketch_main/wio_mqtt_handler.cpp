@@ -1,4 +1,5 @@
 #include "mqtt.h"
+#include "wio_session_handler.h"
 
 PubSubClient client(wioClient);
 
@@ -12,7 +13,8 @@ char msg[50]; // test publish payload
 const char* MQTT_SERVER = "broker.mqtt-dashboard.com";  // MQTT Broker URL
 
 // subscribe topics
-const char* TOPIC_SUBSCRIBE = "stuwi/testin"; 
+const char* TOPIC_STARTSESSION = "stuwi/startsession"; 
+const char* TOPIC_ENDSESSION = "stuwi/endsession";
 // publish topics
 const char* TOPIC_PUBLISH = "stuwi/testout";
 extern const char* TOPIC_TEMP = "stuwi/temp";
@@ -32,7 +34,8 @@ void reconnect_mqtt() {
       // Once connected, publish an announcement...
       client.publish(TOPIC_PUBLISH, "First payload published");
       // ... and resubscribe
-      client.subscribe(TOPIC_SUBSCRIBE);
+      client.subscribe(TOPIC_STARTSESSION);
+      client.subscribe(TOPIC_ENDSESSION);
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
@@ -74,4 +77,15 @@ void publish_sensor_values() {
   client.publish(TOPIC_HUMID, humid_payload);
   Serial.println(loud_payload);
   client.publish(TOPIC_LOUD, loud_payload);
+}
+
+void check_topic(char* topic) {
+  if( strcmp(topic, TOPIC_STARTSESSION) == 0) {
+    start_session();
+    Serial.println("Session started");
+  }
+  else if( strcmp(topic, TOPIC_ENDSESSION) == 0) {
+    end_session();
+    Serial.println("Session ended");
+  }
 }

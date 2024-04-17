@@ -16,7 +16,8 @@ extern char msg[50]; // test publish payload
 extern const char* MQTT_SERVER;  // MQTT Broker URL
 
 // subscribe topics
-extern const char* TOPIC_SUBSCRIBE; 
+extern const char* TOPIC_STARTSESSION;
+extern const char* TOPIC_ENDSESSION; 
 // publish topics
 extern const char* TOPIC_PUBLISH;
 extern const char* TOPIC_TEMP;
@@ -30,5 +31,7 @@ extern void reconnect_mqtt();
 extern void publish_testmessage();
 
 extern void publish_sensor_values();
+
+extern void check_topic();
 
 #endif

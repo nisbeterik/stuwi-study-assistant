@@ -42,7 +42,7 @@ public class DashboardController implements Initializable {
     private Label loudnessReadingLabel;
 
     MQTTManager mqttManager = MQTTManagerSingleton.getMqttInstance();
-    private String publishTopic = "stuwi/testin"; // topic that WIO subscribes to
+    private String publishTopic = "stuwi/startsession"; // topic that WIO subscribes to
     private double currentTemp;
     private double currentHumid;
     private double currentLoudness;
@@ -98,7 +98,7 @@ public class DashboardController implements Initializable {
 
     public void publishMsg(ActionEvent event) {
         try {
-            mqttManager.publish(publishTopic, "Message from StuWi app");
+            mqttManager.publish(publishTopic, "Start Session");
         } catch (MqttException e) {
             e.printStackTrace();
         }
