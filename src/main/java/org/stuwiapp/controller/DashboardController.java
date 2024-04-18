@@ -80,7 +80,7 @@ public class DashboardController extends ParentController {
     public void readAndUpdateTemperature(){
         Platform.runLater(() -> {
             currentTemp = Double.parseDouble(mqttManager.getLatestTemp().trim());
-            tempReadingLabel.setText(String.valueOf(currentTemp));
+            tempReadingLabel.setText(String.valueOf(currentTemp) + " C");
 
             if (currentTemp >= temperatureFloor && currentTemp <= temperatureRoof){
                 tempStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/happy-regular-240.png")));
@@ -93,7 +93,7 @@ public class DashboardController extends ParentController {
     public void readAndUpdateHumidity(){
         Platform.runLater(() -> {
             currentHumid = Double.parseDouble(mqttManager.getLatestHumidity().trim());
-            humiReadingLabel.setText(String.valueOf(currentHumid));
+            humiReadingLabel.setText(String.valueOf(currentHumid) + " %");
 
             if (currentHumid >= humidityFloor && currentHumid <= humidityRoof){
                 humiStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/happy-regular-240.png")));
