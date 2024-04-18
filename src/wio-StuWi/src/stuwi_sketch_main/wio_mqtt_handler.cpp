@@ -23,7 +23,7 @@ const char* TOPIC_TEMP = "stuwi/temp";
 const char* TOPIC_HUMID = "stuwi/humid";
 const char* TOPIC_LOUD = "stuwi/loudness";
 
-const char* TOPIC_SESSION_OVER = "stuwi/sessionover";
+const char* TOPIC_SESSION_OVER = "stuwi/sessionover"; // topic used when time of session runs out
 
 
 void reconnect_mqtt() {
@@ -51,6 +51,7 @@ void reconnect_mqtt() {
   }
 }
 
+// callback function listening for incoming payloads
 void callback(char* topic, byte* payload, unsigned int length) {
   
   // prints that message arrived in specific topic
@@ -70,12 +71,15 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
 }
 
+// test message that is published every 10 seconds. will be removed in future
 void publish_testmessage() {
   Serial.print("Publish message: ");
   Serial.println(msg);
   client.publish(TOPIC_PUBLISH, msg);
 }
 
+// publishes sensor values to app every 10 seconds
+// from main loop
 void publish_sensor_values() {
   Serial.println(temp_payload);
   client.publish(TOPIC_TEMP, temp_payload);
@@ -85,10 +89,12 @@ void publish_sensor_values() {
   client.publish(TOPIC_LOUD, loud_payload);
 }
 
+// publishes that session is over when remaining time of session is 0
 void publish_session_over() {
     client.publish(TOPIC_SESSION_OVER, session_over_payload);
 }
 
+// checks incoming payload topic and directs program accordingly
 void check_topic(char* topic) {
   if( strcmp(topic, TOPIC_STARTSESSION) == 0) {
     start_session();

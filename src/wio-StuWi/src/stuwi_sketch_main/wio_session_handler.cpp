@@ -6,6 +6,7 @@
 
 bool session_active = 0;
 
+// is called when session is started through app
 void start_session() {
   if(!session_active) {
     session_active = 1;
@@ -13,6 +14,8 @@ void start_session() {
   }
 }
 
+// is called when session is ended through app 
+// or when alarm for session is over
 void end_session() {
   if(session_active) {
     session_active = 0;

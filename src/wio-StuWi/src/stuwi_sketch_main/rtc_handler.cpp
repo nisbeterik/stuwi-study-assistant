@@ -3,16 +3,18 @@
 
 WiFiUDP udp;
 unsigned int udp_local_port = 2390;
-char time_server[] = "ntp.se";
+char time_server[] = "ntp.se";  // swedish server to get time
 byte packetBuffer[NTP_PACKET_SIZE];
 
-RTC_SAMD51 rtc;
+RTC_SAMD51 rtc; // rtc library object
 
-DateTime current_time;
-DateTime alarm_time;
+DateTime current_time; // object to track current time
+DateTime alarm_time;  // object to track potential alarm time
 unsigned long device_time;
-byte alarm_flag = 0;
+byte alarm_flag = 0; // flag to indicate whether alarm is active
 
+// called in setup() of main class
+// gets time from NTP server and injects into RTC
 void setup_rtc() {
   rtc.begin();
   device_time = get_NTP_time();
@@ -25,6 +27,7 @@ void setup_rtc() {
 }
 
 // Source: https://wiki.seeedstudio.com/Wio-Terminal-RTC/
+// if WiFi is connected, send NTP time request to server
 unsigned long get_NTP_time() {
   // Module returns an unsigned long time value as seconds since Jan 1, 1970 (Unix time) or 0 if a problem encountered
 
@@ -86,6 +89,7 @@ unsigned long get_NTP_time() {
 
 
 // Source: https://wiki.seeedstudio.com/Wio-Terminal-RTC/
+// packet to send to NTP server
 unsigned long send_NTP_packet(const char* address) {
   // set all bytes in the buffer to 0
   for (int i = 0; i < NTP_PACKET_SIZE; ++i) {
@@ -110,7 +114,8 @@ unsigned long send_NTP_packet(const char* address) {
   udp.endPacket();
 }
 
-
+// returns time as string
+// called from screen_draw passing current_time object for real-time display of time
 String get_time(DateTime dt) {
   String time_str = "";
 
@@ -128,6 +133,8 @@ String get_time(DateTime dt) {
   return time_str;
 }
 
+// gets remaining time of alarm
+// called by screen_draw to display remaining time of session
 String get_remaining_time() {
   String remaining_time_str = "";
   if(alarm_flag) {
@@ -157,6 +164,7 @@ String get_remaining_time() {
   
 }
 
+// sets alarm (length of study session)
 void set_alarm() {
   if (!alarm_flag) {
     alarm_flag = 1;
@@ -164,11 +172,16 @@ void set_alarm() {
   }
 }
 
+// disables alarm
+// called when session is prematurely ended through app
 void disable_alarm() {
   alarm_flag = 0;
   alarm_time = current_time;
 }
 
+// called by main loop
+// checks to see if alarm is still ongoing
+// when its over, call alarm_over()
 void check_remaining_time() {
   unsigned long remaining_seconds = alarm_time.unixtime() - current_time.unixtime();
   if(remaining_seconds <= 0) {
@@ -176,6 +189,8 @@ void check_remaining_time() {
   }
 }
 
+// alarm_over is called to indicate that the session is over
+// calls end_session which will publish that the session is over to app
 void alarm_over() {
   alarm_flag = 0;
   alarm_time = current_time;

@@ -41,6 +41,7 @@ void loop() {
   client.loop();
   current_time = rtc.now(); //update DateTime object to follow rtc
   long now = millis();
+  // continously checks remaining time of alarm to see when its over
   if(alarm_flag){
     check_remaining_time();
   }

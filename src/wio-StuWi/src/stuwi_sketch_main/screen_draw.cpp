@@ -11,7 +11,8 @@ char loudness_string[20]; // Allocate memory for loudness_string
 
 byte prev_alarm_flag = 0;
 
-
+// sets up LCD screen
+// called by main setup()
 void screen_setup() {
   tft.begin(); //start TFT LCD 
   tft.setRotation(3); //set screen rotation 
@@ -19,6 +20,10 @@ void screen_setup() {
   tft.setTextSize(4);
 }
 
+// called by main loop every second
+// updates sensor values
+// updates current time if no session is ongoing
+// updates time remaining of session if session is ongoing (checked with alarm_flag)
 void update_screen(){
   sprintf(temp_string, "Temp: %s", temp_payload);
   sprintf(humid_string, "Humid: %s", humid_payload);
