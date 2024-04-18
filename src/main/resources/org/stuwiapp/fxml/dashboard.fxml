@@ -15,10 +15,6 @@
          <font>
             <Font name="Tahoma" size="20.0" />
          </font></Label>
-      <Button fx:id="publishMsgButton" layoutX="40.0" layoutY="307.0" mnemonicParsing="false" onAction="#publishMsg" text="Publish Message">
-         <font>
-            <Font name="Tahoma" size="17.0" />
-         </font></Button>
       <ImageView fx:id="tempImage" fitHeight="130.0" fitWidth="83.0" layoutX="30.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/thermometer-solid-240.png" />
@@ -54,10 +50,15 @@
             <Font name="Tahoma" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="studySessionRedirect" layoutX="300.0" layoutY="307.0" mnemonicParsing="false" onMouseClicked="#redirectStudySession" text="Go To Study Session">
+      <Button fx:id="studySessionRedirect" layoutX="300.0" layoutY="307.0" mnemonicParsing="false" onMouseClicked="#redirectStudySession" text="Manage Session">
          <font>
             <Font name="Tahoma" size="17.0" />
          </font>
       </Button>
+      <Label id="temp" fx:id="studyStatusLabel" layoutX="341.0" layoutY="232.0" text="Not studying">
+         <font>
+            <Font name="Tahoma" size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

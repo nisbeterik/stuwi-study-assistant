@@ -6,10 +6,25 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StudySessionController">
    <children>
-      <Button fx:id="backToDashboard" layoutX="33.0" layoutY="45.0" mnemonicParsing="false" onMouseClicked="#redirectDashboard" text="Back To Dashboard">
+      <Button fx:id="backToDashboard" layoutX="216.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#redirectDashboard" text="Back To Dashboard">
          <font>
             <Font name="Tahoma" size="17.0" />
          </font>
       </Button>
+      <Button fx:id="startSessionButton" layoutX="111.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#publishStartSession" text="Start Session">
+         <font>
+            <Font name="Tahoma" size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="stopSessionButton" layoutX="370.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#publishStopSession" text="Stop Session">
+         <font>
+            <Font name="Tahoma" size="17.0" />
+         </font>
+      </Button>
+      <Label layoutX="192.0" layoutY="139.0" text="Manage A Study Session">
+         <font>
+            <Font name="Tahoma" size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

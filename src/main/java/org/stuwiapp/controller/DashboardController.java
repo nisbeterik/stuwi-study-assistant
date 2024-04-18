@@ -24,6 +24,7 @@ public class DashboardController extends ParentController {
 
     public ImageView loudImage;
     public Button studySessionRedirect;
+    public Label studyStatusLabel;
     @FXML
     private ImageView tempImage;
     @FXML
@@ -35,8 +36,6 @@ public class DashboardController extends ParentController {
     @FXML
     private ImageView loudStatusImage;
     @FXML
-    private Button publishMsgButton;
-    @FXML
     private Label tempReadingLabel;
     @FXML
     private Label humiReadingLabel;
@@ -44,10 +43,11 @@ public class DashboardController extends ParentController {
     private Label loudnessReadingLabel;
 
     MQTTManager mqttManager = MQTTManagerSingleton.getMqttInstance();
-    private String publishTopic = "stuwi/startsession"; // topic that WIO subscribes to
+
     private double currentTemp;
     private double currentHumid;
     private double currentLoudness;
+    private boolean isSessionOngoing;
 
 
 
@@ -70,9 +70,12 @@ public class DashboardController extends ParentController {
                 readAndUpdateTemperature();
                 readAndUpdateHumidity();
                 readAndUpdateLoudness();
+                readAndUpdateStudyStatus();
             }
         }, 0, 1000);
     }
+
+
 
     public void readAndUpdateTemperature(){
         Platform.runLater(() -> {
@@ -100,14 +103,7 @@ public class DashboardController extends ParentController {
         });
     }
 
-    public void publishMsg(ActionEvent event) {
-        try {
-            mqttManager.publish(publishTopic, "Start Session");
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
 
-    }
 
     public void readAndUpdateLoudness(){
         Platform.runLater(() -> {
@@ -122,7 +118,21 @@ public class DashboardController extends ParentController {
         });
     }
 
+    private void readAndUpdateStudyStatus() {
+        Platform.runLater(() ->  {
+            isSessionOngoing = mqttManager.getStudySessionStatus();
+            if(isSessionOngoing) {
+                studyStatusLabel.setText("Study Session Ongoing");
+            } else {
+                studyStatusLabel.setText("Not Studying");
+            }
+
+        });
+    }
+
     public void redirectStudySession(MouseEvent mouseEvent) {
         redirect(mouseEvent, "study-session.fxml");
     }
+
+
 }
