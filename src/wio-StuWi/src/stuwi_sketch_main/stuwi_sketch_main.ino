@@ -41,7 +41,9 @@ void loop() {
   client.loop();
   current_time = rtc.now(); //update DateTime object to follow rtc
   long now = millis();
-
+  if(alarm_flag){
+    check_remaining_time();
+  }
   // updates screen and values every second
   if(now - sensor_value_update > 1000) {
       sensor_value_update = now;

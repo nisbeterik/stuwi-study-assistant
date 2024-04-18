@@ -7,6 +7,8 @@ PubSubClient client(wioClient);
 char temp_payload[50];
 char humid_payload[50];
 char loud_payload[50];
+char session_over_payload[13] = "Session over";
+
 char msg[50]; // test publish payload
 
 // mqtt server
@@ -17,9 +19,12 @@ const char* TOPIC_STARTSESSION = "stuwi/startsession";
 const char* TOPIC_ENDSESSION = "stuwi/endsession";
 // publish topics
 const char* TOPIC_PUBLISH = "stuwi/testout";
-extern const char* TOPIC_TEMP = "stuwi/temp";
+const char* TOPIC_TEMP = "stuwi/temp";
 const char* TOPIC_HUMID = "stuwi/humid";
 const char* TOPIC_LOUD = "stuwi/loudness";
+
+const char* TOPIC_SESSION_OVER = "stuwi/sessionover";
+
 
 void reconnect_mqtt() {
   // Loop until we're reconnected
@@ -61,6 +66,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   buff_p[length] = '\0';  // null terminate buffer
   String msg_p = String(buff_p);
   Serial.println(msg_p);  // print payload as string
+  check_topic(topic);
 
 }
 
@@ -79,6 +85,10 @@ void publish_sensor_values() {
   client.publish(TOPIC_LOUD, loud_payload);
 }
 
+void publish_session_over() {
+    client.publish(TOPIC_SESSION_OVER, session_over_payload);
+}
+
 void check_topic(char* topic) {
   if( strcmp(topic, TOPIC_STARTSESSION) == 0) {
     start_session();
@@ -89,3 +99,4 @@ void check_topic(char* topic) {
     Serial.println("Session ended");
   }
 }
+

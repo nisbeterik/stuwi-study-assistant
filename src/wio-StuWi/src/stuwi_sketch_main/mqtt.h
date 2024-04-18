@@ -10,6 +10,7 @@ extern PubSubClient client;
 extern char temp_payload[50];
 extern char humid_payload[50];
 extern char loud_payload[50];
+extern char session_over_payload[13];
 extern char msg[50]; // test publish payload
 
 // mqtt server
@@ -23,6 +24,7 @@ extern const char* TOPIC_PUBLISH;
 extern const char* TOPIC_TEMP;
 extern const char* TOPIC_HUMID;
 extern const char* TOPIC_LOUD;
+extern const char* TOPIC_SESSION_OVER;
 
 extern void callback(char* topic, byte* payload, unsigned int length);
 
@@ -32,6 +34,8 @@ extern void publish_testmessage();
 
 extern void publish_sensor_values();
 
-extern void check_topic();
+extern void publish_session_over();
+
+extern void check_topic(char* topic);
 
 #endif
