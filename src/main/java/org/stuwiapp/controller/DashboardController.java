@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.stuwiapp.MQTTManager;
 import org.stuwiapp.MQTTManagerSingleton;
@@ -19,9 +20,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class DashboardController implements Initializable {
+public class DashboardController extends ParentController {
 
     public ImageView loudImage;
+    public Button studySessionRedirect;
+    public Label studyStatusLabel;
     @FXML
     private ImageView tempImage;
     @FXML
@@ -33,8 +36,6 @@ public class DashboardController implements Initializable {
     @FXML
     private ImageView loudStatusImage;
     @FXML
-    private Button publishMsgButton;
-    @FXML
     private Label tempReadingLabel;
     @FXML
     private Label humiReadingLabel;
@@ -42,10 +43,11 @@ public class DashboardController implements Initializable {
     private Label loudnessReadingLabel;
 
     MQTTManager mqttManager = MQTTManagerSingleton.getMqttInstance();
-    private String publishTopic = "stuwi/testin"; // topic that WIO subscribes to
+
     private double currentTemp;
     private double currentHumid;
     private double currentLoudness;
+    private boolean isSessionOngoing;
 
 
 
@@ -57,8 +59,10 @@ public class DashboardController implements Initializable {
 
     private final double loudnessFloor = 0;
     private final double loudnessRoof = 1000;
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+    @FXML
+    public void initialize() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -66,14 +70,17 @@ public class DashboardController implements Initializable {
                 readAndUpdateTemperature();
                 readAndUpdateHumidity();
                 readAndUpdateLoudness();
+                readAndUpdateStudyStatus();
             }
         }, 0, 1000);
     }
 
+
+
     public void readAndUpdateTemperature(){
         Platform.runLater(() -> {
             currentTemp = Double.parseDouble(mqttManager.getLatestTemp().trim());
-            tempReadingLabel.setText(String.valueOf(currentTemp));
+            tempReadingLabel.setText(String.valueOf(currentTemp) + " C");
 
             if (currentTemp >= temperatureFloor && currentTemp <= temperatureRoof){
                 tempStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/happy-regular-240.png")));
@@ -86,7 +93,7 @@ public class DashboardController implements Initializable {
     public void readAndUpdateHumidity(){
         Platform.runLater(() -> {
             currentHumid = Double.parseDouble(mqttManager.getLatestHumidity().trim());
-            humiReadingLabel.setText(String.valueOf(currentHumid));
+            humiReadingLabel.setText(String.valueOf(currentHumid) + " %");
 
             if (currentHumid >= humidityFloor && currentHumid <= humidityRoof){
                 humiStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/happy-regular-240.png")));
@@ -96,14 +103,7 @@ public class DashboardController implements Initializable {
         });
     }
 
-    public void publishMsg(ActionEvent event) {
-        try {
-            mqttManager.publish(publishTopic, "Message from StuWi app");
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
 
-    }
 
     public void readAndUpdateLoudness(){
         Platform.runLater(() -> {
@@ -117,5 +117,22 @@ public class DashboardController implements Initializable {
             }
         });
     }
+
+    private void readAndUpdateStudyStatus() {
+        Platform.runLater(() ->  {
+            isSessionOngoing = mqttManager.getStudySessionStatus();
+            if(isSessionOngoing) {
+                studyStatusLabel.setText("Study Session Ongoing");
+            } else {
+                studyStatusLabel.setText("Not Studying");
+            }
+
+        });
+    }
+
+    public void redirectStudySession(MouseEvent mouseEvent) {
+        redirect(mouseEvent, "study-session.fxml");
+    }
+
 
 }

@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import javafx.fxml.FXMLLoader;
+import org.stuwiapp.Utils.FXMLUtil;
 
 import java.io.IOException;
 
@@ -23,6 +24,8 @@ public class StuWiApp extends Application {
 
     private final String loudnessTopic = "stuwi/loudness";
 
+    private final String sessionOverTopic = "stuwi/sessionover";
+
     @Override
     public void init() throws MqttException {
         mqttManager = MQTTManagerSingleton.getMqttInstance();
@@ -30,12 +33,12 @@ public class StuWiApp extends Application {
         mqttManager.subscribe(temperatureTopic);
         mqttManager.subscribe(humidityTopic);
         mqttManager.subscribe(loudnessTopic);
+        mqttManager.subscribe(sessionOverTopic);
     }
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
-        Parent root = fxmlLoader.load();
-        Scene scene = new Scene(root);
+        Object dashboard = FXMLUtil.loadFxml("dashboard.fxml");
+        Scene scene = new Scene((Parent) dashboard);
         stage.setScene(scene);
         stage.show();
 

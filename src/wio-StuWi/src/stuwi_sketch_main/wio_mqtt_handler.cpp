@@ -1,4 +1,5 @@
 #include "mqtt.h"
+#include "wio_session_handler.h"
 
 PubSubClient client(wioClient);
 
@@ -6,18 +7,24 @@ PubSubClient client(wioClient);
 char temp_payload[50];
 char humid_payload[50];
 char loud_payload[50];
+char session_over_payload[13] = "Session over";
+
 char msg[50]; // test publish payload
 
 // mqtt server
 const char* MQTT_SERVER = "broker.mqtt-dashboard.com";  // MQTT Broker URL
 
 // subscribe topics
-const char* TOPIC_SUBSCRIBE = "stuwi/testin"; 
+const char* TOPIC_STARTSESSION = "stuwi/startsession"; 
+const char* TOPIC_ENDSESSION = "stuwi/endsession";
 // publish topics
 const char* TOPIC_PUBLISH = "stuwi/testout";
-extern const char* TOPIC_TEMP = "stuwi/temp";
+const char* TOPIC_TEMP = "stuwi/temp";
 const char* TOPIC_HUMID = "stuwi/humid";
 const char* TOPIC_LOUD = "stuwi/loudness";
+
+const char* TOPIC_SESSION_OVER = "stuwi/sessionover"; // topic used when time of session runs out
+
 
 void reconnect_mqtt() {
   // Loop until we're reconnected
@@ -32,7 +39,8 @@ void reconnect_mqtt() {
       // Once connected, publish an announcement...
       client.publish(TOPIC_PUBLISH, "First payload published");
       // ... and resubscribe
-      client.subscribe(TOPIC_SUBSCRIBE);
+      client.subscribe(TOPIC_STARTSESSION);
+      client.subscribe(TOPIC_ENDSESSION);
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
@@ -43,6 +51,7 @@ void reconnect_mqtt() {
   }
 }
 
+// callback function listening for incoming payloads
 void callback(char* topic, byte* payload, unsigned int length) {
   
   // prints that message arrived in specific topic
@@ -58,15 +67,19 @@ void callback(char* topic, byte* payload, unsigned int length) {
   buff_p[length] = '\0';  // null terminate buffer
   String msg_p = String(buff_p);
   Serial.println(msg_p);  // print payload as string
+  check_topic(topic);
 
 }
 
+// test message that is published every 10 seconds. will be removed in future
 void publish_testmessage() {
   Serial.print("Publish message: ");
   Serial.println(msg);
   client.publish(TOPIC_PUBLISH, msg);
 }
 
+// publishes sensor values to app every 10 seconds
+// from main loop
 void publish_sensor_values() {
   Serial.println(temp_payload);
   client.publish(TOPIC_TEMP, temp_payload);
@@ -75,3 +88,21 @@ void publish_sensor_values() {
   Serial.println(loud_payload);
   client.publish(TOPIC_LOUD, loud_payload);
 }
+
+// publishes that session is over when remaining time of session is 0
+void publish_session_over() {
+    client.publish(TOPIC_SESSION_OVER, session_over_payload);
+}
+
+// checks incoming payload topic and directs program accordingly
+void check_topic(char* topic) {
+  if( strcmp(topic, TOPIC_STARTSESSION) == 0) {
+    start_session();
+    Serial.println("Session started");
+  }
+  else if( strcmp(topic, TOPIC_ENDSESSION) == 0) {
+    end_session();
+    Serial.println("Session ended");
+  }
+}
+
