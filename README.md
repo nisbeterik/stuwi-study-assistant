@@ -22,7 +22,7 @@ StuWi study assistant is a system created for students or anyone engaged in cogn
 
 **Actuators:** 
 * [Buzzer](https://wiki.seeedstudio.com/Grove-Buzzer/)
-* [Real-Time Clock (RTC)](https://wiki.seeedstudio.com/Grove-RTC/)
+* [Real-Time Clock (RTC)](https://wiki.seeedstudio.com/Wio-Terminal-RTC/)
 * [4-Digit display](https://wiki.seeedstudio.com/Grove-4-Digit_Display/)
 * [LED](https://www.seeedstudio.com/Grove-Multi-Color-Flash-LED-5mm.html)
 
