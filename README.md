@@ -21,10 +21,9 @@ StuWi study assistant is a system created for students or anyone engaged in cogn
 * [Temperature + Humidity](https://wiki.seeedstudio.com/Grove-TemperatureAndHumidity_Sensor/)
 
 **Actuators:** 
-* [Buzzer](https://wiki.seeedstudio.com/Grove-Buzzer/)
 * [Real-Time Clock (RTC)](https://wiki.seeedstudio.com/Wio-Terminal-RTC/)
 * [4-Digit display](https://wiki.seeedstudio.com/Grove-4-Digit_Display/)
-* [LED](https://www.seeedstudio.com/Grove-Multi-Color-Flash-LED-5mm.html)
+
 
 # Team Members
 
