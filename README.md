@@ -6,13 +6,12 @@ StuWi study assistant is a system created for students or anyone engaged in cogn
 
 StuWi’s desktop application aims to provide a user-friendly interface to monitor sensor values in real time and plan out study sessions with ease so that all effort can be put into doing valuable work. With persistent data storage to track progress and other analytics, StuWi helps the user further optimize how they work to reach their goals.
 
-
 # System Design 
 
 ![StuWi Study Assistant](/docs/images/Architecture_Diagram.png)
 
 
-# Sensors & Hardware Components
+# Hardware Components
 
 **Microcontroller**
 * [Seeed Wio Terminal](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/)
