@@ -1,7 +1,6 @@
 #include "mqtt.h"
 #include "screen_draw.h"
 #include "rtc_handler.h"
-#include "wio_session_handler.h"
 
 TFT_eSPI tft; //initialize TFT LCD
 
