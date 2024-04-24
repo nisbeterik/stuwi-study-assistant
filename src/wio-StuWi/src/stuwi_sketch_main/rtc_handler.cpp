@@ -1,5 +1,6 @@
 #include "rtc_handler.h"
 #include "wio_session_handler.h"
+#include "ArduinoQueue.h"
 
 WiFiUDP udp;
 unsigned int udp_local_port = 2390;
@@ -12,6 +13,7 @@ DateTime current_time; // object to track current time
 DateTime alarm_time;  // object to track potential alarm time
 unsigned long device_time;
 byte alarm_flag = 0; // flag to indicate whether alarm is active
+ArduinoQueue<unsigned long> alarm_queue(50);
 
 // called in setup() of main class
 // gets time from NTP server and injects into RTC
@@ -167,7 +169,7 @@ String get_remaining_time() {
 // sets alarm (length of study session)
 void set_alarm() {
   if (!alarm_flag) {
-    unsigned long duration = 10;
+    unsigned long duration = alarm_queue.dequeue();
     alarm_flag = 1;
     alarm_time = DateTime(current_time + TimeSpan(duration));  // 10 second alarm as placeholder
   }
@@ -177,6 +179,9 @@ void set_alarm() {
 // called when session is prematurely ended through app
 void disable_alarm() {
   alarm_flag = 0;
+  while(!alarm_queue.isEmpty()) {
+        alarm_queue.dequeue();
+  }
   alarm_time = current_time;
 }
 
