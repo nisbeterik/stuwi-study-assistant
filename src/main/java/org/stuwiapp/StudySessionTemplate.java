@@ -1,6 +1,7 @@
 package org.stuwiapp;
 
 public class StudySessionTemplate {
+    private String title;
     private String subject;
     private int duration;
     private int breakInterval;
@@ -9,7 +10,7 @@ public class StudySessionTemplate {
     final static int MAX_BREAK_INTERVAL = 60;
     final static int MAX_DUR_NO_BREAK = 60;
 
-    public StudySessionTemplate(String subject, int durationMinutes, int breakIntervalMinutes, int breakDuration) throws Exception{
+    public StudySessionTemplate(String title, String subject, int durationMinutes, int breakIntervalMinutes, int breakDuration) throws Exception{
         if (breakIntervalMinutes > durationMinutes){
             throw new Exception("Break interval longer than study sessions total duration");
         } if (breakIntervalMinutes > MAX_BREAK_INTERVAL) {
@@ -19,21 +20,32 @@ public class StudySessionTemplate {
                 throw new Exception("breaks must be set for study sessions longer than 60 minutes");
             }
         }
+        this.title = title;
         this.subject = subject;
-        this.duration = durationMinutes * MINUTE_MULTIPLIER;
-        this.breakInterval = breakIntervalMinutes * MINUTE_MULTIPLIER;
+        this.duration = durationMinutes;
+        this.breakInterval = breakIntervalMinutes;
+        this.breakDuration = breakDuration;
     }
 
     public int getBreakInterval() {
-        //returns break interval in seconds
+        //returns break interval in minutes
         return breakInterval;
     }
+    public int getBreakDuration(){
+        //returns break interval in minutes
+        return breakDuration;
+    }
     public int getDuration() {
-        //returns duration in seconds
+        //returns duration in minutes
         return duration;
     }
     public String getSubject(){
         return subject;
+    }
+
+    @Override
+    public String toString(){
+        return title;
     }
 
 }

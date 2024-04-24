@@ -2,6 +2,7 @@ package org.stuwiapp.controller;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
 import org.stuwiapp.StudySessionTemplate;
@@ -11,52 +12,80 @@ import java.util.ResourceBundle;
 
 public class studySessionConfigurationController extends ParentController implements Initializable  {
 
-    public Button saveTemplateButton;
-    public Label titleLabel;
-    public MenuButton templateDropdown;
-    public TextField subjectField;
-    public Label subjectLabel;
-    public Label sessionDurationLabel;
-    public Slider durationSlider;
-    public Slider breakDurationSlider;
-    public Label infoLabel;
-    public Label breakIntervalLabel;
-    public Slider breakIntervalSlider;
-    public Label breakDurationLabel;
-    public Button startSessionButton;
-    public Label sessionDurationIndicator;
-    public Label breakDurationIndicator;
-    public Label breakIntervalIndicator;
 
+    @FXML public ChoiceBox templateChoiceBox;
+    @FXML Button saveTemplateButton;
+    @FXML public Label titleLabel;
+    @FXML public TextField subjectField;
+    @FXML public Label subjectLabel;
+    @FXML public Label sessionDurationLabel;
+    @FXML public Slider durationSlider;
+    @FXML public Slider breakDurationSlider;
+    @FXML public Label infoLabel;
+    @FXML public Label breakIntervalLabel;
+    @FXML public Slider breakIntervalSlider;
+    @FXML public Label breakDurationLabel;
+    @FXML public Button startSessionButton;
+    @FXML public Label sessionDurationIndicator;
+    @FXML public Label breakDurationIndicator;
+    @FXML public Label breakIntervalIndicator;
+
+    public studySessionConfigurationController(){
+
+    }
     public void initialize(URL url, ResourceBundle resourceBundle){
-        durationSlider.valueProperty().addListener(new ChangeListener<Number>() {
+
+        //TODO: for each saved template add as item to the templateChoiceBox.
+
+        try {
+            templateChoiceBox.getItems().add(new StudySessionTemplate("Recommended Settings", "General", 120, 30, 5 ));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        templateChoiceBox.valueProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observableValue, Object o, Object t1) {
+                loadStudyTemplate((StudySessionTemplate)templateChoiceBox.getValue());
+            }
+        });
+        durationSlider.valueProperty().addListener(new ChangeListener<Number>() { //Slider listener tu update indicator
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 sessionDurationIndicator.setText((int)durationSlider.getValue() + " m");
             }
         });
-        breakDurationSlider.valueProperty().addListener(new ChangeListener<Number>() {
+        breakDurationSlider.valueProperty().addListener(new ChangeListener<Number>() {//Slider listener tu update indicator
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 breakDurationIndicator.setText((int)breakDurationSlider.getValue() + " m");
             }
         });
-        breakIntervalSlider.valueProperty().addListener(new ChangeListener<Number>() {
+        breakIntervalSlider.valueProperty().addListener(new ChangeListener<Number>() {//Slider listener tu update indicator
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
                 breakIntervalIndicator.setText((int)breakIntervalSlider.getValue() + " m");
             }
         });
     }
+    public boolean loadStudyTemplate(StudySessionTemplate template){
+        if (template == null) {return false;}
+        durationSlider.setValue(template.getDuration());
+        breakIntervalSlider.setValue(template.getBreakInterval());
+        breakDurationSlider.setValue(template.getBreakDuration());
+        subjectField.setText(template.getSubject());
+
+        return true;
+    }
 
     public StudySessionTemplate saveSettingsAsTemplate() {
+        String title = "title";
         int duration = (int)durationSlider.getValue();
         int breakInterval = (int)breakIntervalSlider.getValue();
         int breakDuration = (int)breakDurationSlider.getValue();
         String subject = subjectField.getText();
 
         try {
-            StudySessionTemplate studySessionTemplate = new StudySessionTemplate(subject, duration, breakInterval, breakDuration);
+            StudySessionTemplate studySessionTemplate = new StudySessionTemplate(title, subject, duration, breakInterval, breakDuration);
             infoLabel.setText("Successfully saved template " + subject);
             return studySessionTemplate;
 
