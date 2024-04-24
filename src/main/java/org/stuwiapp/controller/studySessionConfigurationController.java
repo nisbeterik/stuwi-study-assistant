@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
+import org.stuwiapp.StudySessionTemplate;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,7 +19,7 @@ public class studySessionConfigurationController extends ParentController implem
     public Label sessionDurationLabel;
     public Slider durationSlider;
     public Slider breakDurationSlider;
-    public Label infoLabelBreaks;
+    public Label infoLabel;
     public Label breakIntervalLabel;
     public Slider breakIntervalSlider;
     public Label breakDurationLabel;
@@ -48,8 +49,22 @@ public class studySessionConfigurationController extends ParentController implem
         });
     }
 
-    public void saveSettingsAsTemplate() {
+    public StudySessionTemplate saveSettingsAsTemplate() {
+        int duration = (int)durationSlider.getValue();
+        int breakInterval = (int)breakIntervalSlider.getValue();
+        int breakDuration = (int)breakDurationSlider.getValue();
+        String subject = subjectField.getText();
 
+        try {
+            StudySessionTemplate studySessionTemplate = new StudySessionTemplate(subject, duration, breakInterval, breakDuration);
+            infoLabel.setText("Successfully saved template " + subject);
+            return studySessionTemplate;
+
+        } catch (Exception e) {
+            infoLabel.setText(e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
     }
 }
 
