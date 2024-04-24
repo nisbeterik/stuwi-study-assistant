@@ -19,7 +19,10 @@ long sensor_value_update = 0; // tracks when last sensor value update was done
 int value = 0;  // amount of payloads published
 float loudVal = 0;
 
-
+static bool a_button_pressed = false;
+static bool b_button_pressed = false;
+void check_button_press();
+void check_button_released();
 
 void setup() {
   Serial.begin(115200);
@@ -29,12 +32,19 @@ void setup() {
   client.setServer(MQTT_SERVER, 1883); // Connect the MQTT Server
   client.setCallback(callback);
 
+
+
   dht.begin();
   screen_setup();
+
+  pinMode(WIO_KEY_A, INPUT_PULLUP); //Key A = Button A
+  pinMode(WIO_KEY_B, INPUT_PULLUP); 
+ 
 
 }
 
 void loop() {
+
   if (!client.connected()) {
     reconnect_mqtt();
   }
@@ -45,6 +55,11 @@ void loop() {
   if(alarm_flag){
     check_remaining_time();
   }
+
+  check_button_press();
+  check_button_released();
+
+
   // updates screen and values every second
   if(now - sensor_value_update > 1000) {
       sensor_value_update = now;
@@ -65,6 +80,29 @@ void loop() {
   }
 }
 
+void check_button_press(){
+  if (digitalRead(WIO_KEY_A) == LOW && !a_button_pressed) {
+    Serial.println("A Key pressed");
+    a_button_pressed = true; // Set button state
+  }
+
+  // Check for B button press
+  if (digitalRead(WIO_KEY_B) == LOW && !b_button_pressed) {
+    Serial.println("B Key pressed");
+    b_button_pressed = true; // Set button state
+  }
+}
+
+void check_button_released(){
+   if (digitalRead(WIO_KEY_A) == HIGH && a_button_pressed) {
+    Serial.println("A Key released");
+    a_button_pressed = false;
+   }
+   if (digitalRead(WIO_KEY_B) == HIGH && b_button_pressed) {
+    Serial.println("B Key released");
+    b_button_pressed = false;
+   }
+}
 
 void read_temperature(){
   float temp = dht.readTemperature();
