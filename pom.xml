@@ -50,6 +50,16 @@
                     <mainClass>org.stuwiapp.StuWiApp</mainClass>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <testSourceDirectory>src/test/java</testSourceDirectory>
+                    <includes>
+                        <include>org/stuwiapp/StuWiAppTest.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
