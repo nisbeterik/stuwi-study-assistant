@@ -201,5 +201,11 @@ void alarm_over() {
   alarm_flag = 0;
   alarm_time = current_time;
   Serial.println("Alarm ended");
-  end_session();
+  if(!alarm_queue.isEmpty()) {
+    set_alarm();
+  }
+  else {
+    end_session();
+  }
+
 }
