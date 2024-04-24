@@ -22,7 +22,9 @@ public class StudySessionController extends ParentController {
     public void publishStartSession(MouseEvent event) {
         try {
             mqttManager.publish(startSessionTopic, "Start Session");
+            redirect(event, "studySessionConfiguration.fxml");
         } catch (MqttException e) {
+
             e.printStackTrace();
         }
 
@@ -30,7 +32,7 @@ public class StudySessionController extends ParentController {
 
     public void publishStopSession(MouseEvent event) {
         try {
-            mqttManager.publish(stopSessionTopic, "Stop session");
+            mqttManager.publish(stopSessionTopic, "Stop Session");
         } catch (MqttException e) {
             e.printStackTrace();
         }
