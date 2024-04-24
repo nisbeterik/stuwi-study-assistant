@@ -21,7 +21,6 @@ Last updated Apr 24, 2024
 * [Seeed Wio Terminal](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/)
 
 **Sensors:**
-* [Ultrasonic Ranger](https://wiki.seeedstudio.com/Grove-Ultrasonic_Ranger/)
 * [Loudness](https://wiki.seeedstudio.com/Grove-Loudness_Sensor/)
 * [Temperature + Humidity](https://wiki.seeedstudio.com/Grove-TemperatureAndHumidity_Sensor/)
 
