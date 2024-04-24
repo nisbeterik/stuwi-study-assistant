@@ -167,8 +167,9 @@ String get_remaining_time() {
 // sets alarm (length of study session)
 void set_alarm() {
   if (!alarm_flag) {
+    unsigned long duration = 10;
     alarm_flag = 1;
-    alarm_time = DateTime(current_time.year(), current_time.month(), current_time.day(), current_time.hour(), current_time.minute(), current_time.second() + 10);  // 10 second alarm as placeholder
+    alarm_time = DateTime(current_time + TimeSpan(duration));  // 10 second alarm as placeholder
   }
 }
 
