@@ -10,6 +10,7 @@ StuWi’s desktop application aims to provide a user-friendly interface to monit
 
 ![StuWi Study Assistant](/docs/images/architecture_diagrams/Architecture_DiagramV2.png)
 
+[Diagram 1st edition (Apr 08, 2024)](/docs/images/architecture_diagrams/Architecture_DiagramV1.png)
 
 # Hardware Components
 
