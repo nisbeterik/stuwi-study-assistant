@@ -19,15 +19,15 @@
       <TextField fx:id="subjectField" layoutX="141.0" layoutY="124.0" prefHeight="26.0" prefWidth="300.0" />
       <Label fx:id="subjectLabel" layoutX="141.0" layoutY="107.0" text="Subject" />
       <Label fx:id="sessionDurationLabel" layoutX="141.0" layoutY="160.0" text="Session block duration" />
-      <Slider fx:id="durationSlider" layoutX="141.0" layoutY="184.0" majorTickUnit="5.0" max="60.0" prefHeight="33.0" prefWidth="300.0" showTickLabels="true" />
-      <Slider fx:id="breakDurationSlider" layoutX="141.0" layoutY="252.0" majorTickUnit="5.0" max="20.0" prefHeight="33.0" prefWidth="142.0" showTickLabels="true" />
+      <Slider fx:id="durationSlider" blockIncrement="5.0" layoutX="141.0" layoutY="184.0" majorTickUnit="5.0" max="60.0" minorTickCount="0" prefHeight="33.0" prefWidth="300.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+      <Slider fx:id="breakDurationSlider" blockIncrement="5.0" layoutX="141.0" layoutY="252.0" majorTickUnit="5.0" max="20.0" minorTickCount="0" prefHeight="33.0" prefWidth="142.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
       <Label fx:id="infoLabel" alignment="CENTER" layoutX="37.0" layoutY="299.0" prefHeight="29.0" prefWidth="544.0" textFill="RED">
          <font>
             <Font size="10.0" />
          </font>
       </Label>
       <Label fx:id="blocksLabel" layoutX="300.0" layoutY="227.0" text="Study Blocks" />
-      <Slider fx:id="blocksSlider" layoutX="300.0" layoutY="252.0" majorTickUnit="1.0" max="6.0" prefHeight="33.0" prefWidth="142.0" showTickLabels="true" />
+      <Slider fx:id="blocksSlider" blockIncrement="1.0" layoutX="300.0" layoutY="252.0" majorTickUnit="1.0" max="6.0" minorTickCount="0" prefHeight="33.0" prefWidth="142.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
       <Label fx:id="breakDurationLabel" layoutX="142.0" layoutY="227.0" text="Break duration" />
       <Button fx:id="startSessionButton" layoutX="247.0" layoutY="328.0" mnemonicParsing="false" text="Start Session" />
       <Label fx:id="sessionDurationIndicator" alignment="CENTER_RIGHT" ellipsisString="" layoutX="398.0" layoutY="160.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
