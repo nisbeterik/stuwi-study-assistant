@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
-import javafx.scene.paint.Paint;
 import org.stuwiapp.MQTTManager;
 import org.stuwiapp.MQTTManagerSingleton;
 import org.stuwiapp.StudySessionTemplate;
@@ -15,7 +14,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class studySessionConfigurationController extends ParentController implements Initializable  {
+public class StudySessionConfigurationController extends ParentController implements Initializable  {
 
 
     @FXML public ChoiceBox templateChoiceBox;
@@ -55,7 +54,7 @@ public class studySessionConfigurationController extends ParentController implem
     MQTTManager mqttManager = MQTTManagerSingleton.getMqttInstance();
     private String startSessionTopic = "stuwi/startsession"; // topic that WIO subscribes to
 
-    public studySessionConfigurationController(){
+    public StudySessionConfigurationController(){
 
     }
     public void initialize(URL url, ResourceBundle resourceBundle){

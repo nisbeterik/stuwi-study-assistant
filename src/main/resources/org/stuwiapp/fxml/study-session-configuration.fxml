@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.studySessionConfigurationController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StudySessionConfigurationController">
    <children>
       <Button fx:id="saveTemplateButton" layoutX="279.0" layoutY="70.0" mnemonicParsing="false" onAction="#saveSettingsAsTemplate" prefHeight="26.0" prefWidth="170.0" text="Save Settings as Template" />
       <Label fx:id="titleLabel" layoutX="190.0" layoutY="29.0" text="Start new study session">
