@@ -51,19 +51,19 @@ public class studySessionConfigurationController extends ParentController implem
         durationSlider.valueProperty().addListener(new ChangeListener<Number>() { //Slider listener tu update indicator
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                sessionDurationIndicator.setText((int)durationSlider.getValue() + " m");
+                sessionDurationIndicator.setText((int)durationSlider.getValue() + " min");
             }
         });
         breakDurationSlider.valueProperty().addListener(new ChangeListener<Number>() {//Slider listener tu update indicator
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                breakDurationIndicator.setText((int)breakDurationSlider.getValue() + " m");
+                breakDurationIndicator.setText((int)breakDurationSlider.getValue() + " min");
             }
         });
         blocksSlider.valueProperty().addListener(new ChangeListener<Number>() {//Slider listener tu update indicator
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                blocksIndicator.setText((int)blocksSlider.getValue() + " m");
+                blocksIndicator.setText((int)blocksSlider.getValue() + " st");
             }
         });
     }
