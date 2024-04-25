@@ -2,12 +2,14 @@ package org.stuwiapp.controller;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
 import org.stuwiapp.StudySessionTemplate;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class studySessionConfigurationController extends ParentController implements Initializable  {
@@ -30,6 +32,8 @@ public class studySessionConfigurationController extends ParentController implem
     @FXML public Label breakDurationIndicator;
     @FXML public Label blocksIndicator;
 
+    private String title;
+
     public studySessionConfigurationController(){
 
     }
@@ -38,6 +42,7 @@ public class studySessionConfigurationController extends ParentController implem
         //TODO: for each saved template add as item to the templateChoiceBox.
 
         try {
+            templateChoiceBox.getItems().add(new StudySessionTemplate("Reset", "", 0, 0, 0 ));
             templateChoiceBox.getItems().add(new StudySessionTemplate("Recommended Settings", "General", 25, 5, 4 ));
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -77,17 +82,33 @@ public class studySessionConfigurationController extends ParentController implem
         return true;
     }
 
-    public StudySessionTemplate saveSettingsAsTemplate() {
-        String title = "title";
+    public StudySessionTemplate saveSettingsAsTemplate(ActionEvent event){
+        TextInputDialog nameInputDialog = new TextInputDialog();
+        nameInputDialog.setTitle("Save template as: ");
+        nameInputDialog.setHeaderText(null);
+        nameInputDialog.setContentText("Please name the template");
+
+        Optional<String> nameResult = nameInputDialog.showAndWait();
+
+        String title = null;
+
+        if (nameResult.isPresent()){
+            title = nameResult.get();
+        } else {
+            infoLabel.setText("You need to enter a name! ");
+            return null;
+        }
+
         int duration = (int)durationSlider.getValue();
         int blocks = (int)blocksSlider.getValue();
         int breakDuration = (int)breakDurationSlider.getValue();
         String subject = subjectField.getText();
 
         try {
-            StudySessionTemplate studySessionTemplate = new StudySessionTemplate(title, subject, duration, breakDuration, blocks);
+            StudySessionTemplate newStudySessionTemplate = new StudySessionTemplate(title, subject, duration, breakDuration, blocks);
+            templateChoiceBox.getItems().add(newStudySessionTemplate);
             infoLabel.setText("Successfully saved template " + subject);
-            return studySessionTemplate;
+            return newStudySessionTemplate;
 
         } catch (Exception e) {
             infoLabel.setText(e.getMessage());
