@@ -12,8 +12,6 @@ public class StudySession {
     private ArrayList<Double> tempData;
     private ArrayList<Double> humidData;
     private ArrayList<Double> loudData;
-    private Date sessionStart;
-    private Date sessionEnd;
     private int rating;
     private String ratingText;
 
