@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
+import javafx.scene.paint.Paint;
 import org.stuwiapp.StudySessionTemplate;
 
 import java.net.URL;
@@ -92,9 +93,10 @@ public class studySessionConfigurationController extends ParentController implem
 
         String title = null;
 
-        if (nameResult.isPresent()){
+        if (nameResult.isPresent() && !nameResult.get().isEmpty()){
             title = nameResult.get();
-        } else {
+        } else{
+            infoLabel.setStyle("-fx-text-fill: red;");
             infoLabel.setText("You need to enter a name! ");
             return null;
         }
@@ -107,10 +109,12 @@ public class studySessionConfigurationController extends ParentController implem
         try {
             StudySessionTemplate newStudySessionTemplate = new StudySessionTemplate(title, subject, duration, breakDuration, blocks);
             templateChoiceBox.getItems().add(newStudySessionTemplate);
-            infoLabel.setText("Successfully saved template " + subject);
+            infoLabel.setStyle("-fx-text-fill: green;");
+            infoLabel.setText("Successfully saved template " + title);
             return newStudySessionTemplate;
 
         } catch (Exception e) {
+            infoLabel.setStyle("-fx-text-fill: red;");
             infoLabel.setText(e.getMessage());
             e.printStackTrace();
         }

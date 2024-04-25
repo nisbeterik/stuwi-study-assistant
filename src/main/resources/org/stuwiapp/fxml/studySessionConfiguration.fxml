@@ -10,29 +10,29 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.studySessionConfigurationController">
    <children>
-      <Button fx:id="saveTemplateButton" layoutX="270.0" layoutY="70.0" mnemonicParsing="false" onAction="#saveSettingsAsTemplate" prefHeight="26.0" prefWidth="170.0" text="Save Settings as Template" />
-      <Label fx:id="titleLabel" layoutX="181.0" layoutY="29.0" text="Start new study session">
+      <Button fx:id="saveTemplateButton" layoutX="279.0" layoutY="70.0" mnemonicParsing="false" onAction="#saveSettingsAsTemplate" prefHeight="26.0" prefWidth="170.0" text="Save Settings as Template" />
+      <Label fx:id="titleLabel" layoutX="190.0" layoutY="29.0" text="Start new study session">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="subjectField" layoutX="141.0" layoutY="124.0" prefHeight="26.0" prefWidth="300.0" />
-      <Label fx:id="subjectLabel" layoutX="141.0" layoutY="107.0" text="Subject" />
-      <Label fx:id="sessionDurationLabel" layoutX="141.0" layoutY="160.0" text="Session block duration" />
-      <Slider fx:id="durationSlider" blockIncrement="5.0" layoutX="141.0" layoutY="184.0" majorTickUnit="5.0" max="60.0" minorTickCount="0" prefHeight="33.0" prefWidth="300.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-      <Slider fx:id="breakDurationSlider" blockIncrement="5.0" layoutX="141.0" layoutY="252.0" majorTickUnit="5.0" max="20.0" minorTickCount="0" prefHeight="33.0" prefWidth="142.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-      <Label fx:id="infoLabel" alignment="CENTER" layoutX="37.0" layoutY="299.0" prefHeight="29.0" prefWidth="544.0" textFill="RED">
+      <TextField fx:id="subjectField" layoutX="150.0" layoutY="124.0" prefHeight="26.0" prefWidth="300.0" />
+      <Label fx:id="subjectLabel" layoutX="150.0" layoutY="107.0" text="Subject" />
+      <Label fx:id="sessionDurationLabel" layoutX="150.0" layoutY="160.0" text="Session block duration" />
+      <Slider fx:id="durationSlider" blockIncrement="5.0" layoutX="150.0" layoutY="184.0" majorTickUnit="5.0" max="60.0" minorTickCount="0" prefHeight="33.0" prefWidth="300.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+      <Slider fx:id="breakDurationSlider" blockIncrement="5.0" layoutX="150.0" layoutY="252.0" majorTickUnit="5.0" max="20.0" minorTickCount="0" prefHeight="33.0" prefWidth="142.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+      <Label fx:id="infoLabel" alignment="CENTER" layoutX="28.0" layoutY="290.0" prefHeight="29.0" prefWidth="544.0" textFill="RED">
          <font>
             <Font size="10.0" />
          </font>
       </Label>
-      <Label fx:id="blocksLabel" layoutX="300.0" layoutY="227.0" text="Study Blocks" />
-      <Slider fx:id="blocksSlider" blockIncrement="1.0" layoutX="300.0" layoutY="252.0" majorTickUnit="1.0" max="6.0" minorTickCount="0" prefHeight="33.0" prefWidth="142.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-      <Label fx:id="breakDurationLabel" layoutX="142.0" layoutY="227.0" text="Break duration" />
-      <Button fx:id="startSessionButton" layoutX="247.0" layoutY="328.0" mnemonicParsing="false" text="Start Session" />
-      <Label fx:id="sessionDurationIndicator" alignment="CENTER_RIGHT" ellipsisString="" layoutX="398.0" layoutY="160.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
-      <Label fx:id="breakDurationIndicator" alignment="CENTER_RIGHT" layoutX="241.0" layoutY="227.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
-      <Label fx:id="blocksIndicator" alignment="CENTER_RIGHT" layoutX="400.0" layoutY="227.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
-      <ChoiceBox fx:id="templateChoiceBox" accessibleHelp="Select Template" accessibleText="Select Template" layoutX="141.0" layoutY="70.0" prefHeight="26.0" prefWidth="124.0" />
+      <Label fx:id="blocksLabel" layoutX="309.0" layoutY="227.0" text="Study Blocks" />
+      <Slider fx:id="blocksSlider" blockIncrement="1.0" layoutX="309.0" layoutY="252.0" majorTickUnit="1.0" max="6.0" minorTickCount="0" prefHeight="33.0" prefWidth="142.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+      <Label fx:id="breakDurationLabel" layoutX="151.0" layoutY="227.0" text="Break duration" />
+      <Button fx:id="startSessionButton" layoutX="256.0" layoutY="329.0" mnemonicParsing="false" text="Start Session" />
+      <Label fx:id="sessionDurationIndicator" alignment="CENTER_RIGHT" ellipsisString="" layoutX="407.0" layoutY="160.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
+      <Label fx:id="breakDurationIndicator" alignment="CENTER_RIGHT" layoutX="250.0" layoutY="227.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
+      <Label fx:id="blocksIndicator" alignment="CENTER_RIGHT" layoutX="409.0" layoutY="227.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
+      <ChoiceBox fx:id="templateChoiceBox" accessibleHelp="Select Template" accessibleText="Select Template" layoutX="150.0" layoutY="70.0" prefHeight="26.0" prefWidth="124.0" />
    </children>
 </AnchorPane>
