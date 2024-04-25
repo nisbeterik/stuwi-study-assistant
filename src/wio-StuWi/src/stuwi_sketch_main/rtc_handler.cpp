@@ -1,6 +1,7 @@
 #include "rtc_handler.h"
 #include "wio_session_handler.h"
 #include "ArduinoQueue.h"
+#include <sstream>
 
 WiFiUDP udp;
 unsigned int udp_local_port = 2390;
@@ -177,6 +178,7 @@ void set_alarm() {
 
 // disables alarm
 // called when session is prematurely ended through app
+// empties alarm_queue
 void disable_alarm() {
   alarm_flag = 0;
   while(!alarm_queue.isEmpty()) {
@@ -195,9 +197,10 @@ void check_remaining_time() {
   }
 }
 
-// alarm_over is called to indicate that the session is over
-// calls end_session which will publish that the session is over to app
+// alarm_over is called to indicate that an alarm is over
+// calls end_session which will publish that the session is over to app if there's no alarms left in queue
 void alarm_over() {
+  
   alarm_flag = 0;
   alarm_time = current_time;
   Serial.println("Alarm ended");
@@ -208,4 +211,20 @@ void alarm_over() {
     end_session();
   }
 
+}
+
+void populate_alarm_queue(char* details) {
+     unsigned long study_time;
+     unsigned long break_time;
+     int num_of_blocks;
+    
+     std::stringstream ss(details);
+
+     ss >> study_time >> break_time >> num_of_blocks;
+     
+     for(num_of_blocks; num_of_blocks>0; num_of_blocks--) {
+        alarm_queue.enqueue(study_time);
+        alarm_queue.enqueue(break_time);
+     }
+     
 }

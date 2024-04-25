@@ -40,4 +40,6 @@ extern String get_remaining_time();
 
 extern void check_remaining_time();
 
+extern void populate_alarm_queue(char* details);
+
 #endif
