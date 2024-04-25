@@ -1,5 +1,6 @@
 package org.stuwiapp;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,7 @@ public class StudySession {
     private String ratingText;
 
     public StudySession(UUID sessionId){
+        this.sessionId = sessionId;
         this.startDate = LocalDateTime.now();
         this.endDate = null;
         this.tempData = new ArrayList<>();
@@ -24,7 +26,6 @@ public class StudySession {
         this.rating = 0;
         this.ratingText = "";
     }
-
 
     // Converting from Strings to Double because payload comes as strings from sensors/terminal
     public void addTemperatureData(String tempDataString){
@@ -42,31 +43,104 @@ public class StudySession {
         loudData.add(loudDataDouble);
     }
 
-    public void addRatingScore(int score){
+    public void setRatingScore(int score){
         rating = score;
     }
 
-    public void addRatingText(String text){
+    public void setRatingText(String text){
         ratingText = text;
     }
 
-    public void addEndDate(LocalDateTime end){
+    public void setEndDate(LocalDateTime end){
         this.endDate = end;
     }
 
+    public int getDuration(){
 
+        // TODO Calculate duration from startDate and endDate
 
+        return 0;
+    }
 
+    public UUID getSessionId() {
+        return sessionId;
+    }
 
+    public LocalDateTime getStartDate() {
+        return startDate;
+    }
 
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
 
+    public double getHighestTemp(){
+        return findHighest(tempData);
+    }
+    public double getLowestTemp(){
+        return findLowest(tempData);
+    }
+    public double getAvgTemp(){
+        return calculateAvg(tempData);
+    }
 
+    public double getHighestHumid(){
+        return findHighest(humidData);
+    }
+    public double getLowestHumid(){
+        return findLowest(humidData);
+    }
 
+    public double getAvgHumid(){
+        return calculateAvg(humidData);
+    }
 
+    public double getHighestLoud(){
+        return findHighest(loudData);
+    }
+    public double getLowestLoud(){
+        return findLowest(loudData);
+    }
 
+    public double getAvgLoud(){
+        return calculateAvg(loudData);
+    }
 
+    public int getRating() {
+        return rating;
+    }
 
+    public String getRatingText() {
+        return ratingText;
+    }
 
+    private double calculateAvg(ArrayList<Double> values){
+        double total = 0;
+        for (Double value : values) {
+            total += value;
+        }
+        double average = total / values.size();
+        System.out.println(average);
+        return average;
+    }
 
+    private double findHighest(ArrayList<Double> values){
+        double highest = values.get(0);
+        for (double value : values){
+            if (value > highest){
+                highest = value;
+            }
+        }
+        return highest;
+    }
 
+    private double findLowest(ArrayList<Double> values){
+        double lowest = values.get(0);
+        for (double value : values){
+            if (value < lowest){
+                lowest = value;
+            }
+        }
+        return lowest;
+    }
 }

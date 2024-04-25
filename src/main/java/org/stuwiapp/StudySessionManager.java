@@ -22,7 +22,7 @@ public class StudySessionManager {
     }
 
     public void endSession() {
-        currentSession.addEndDate(LocalDateTime.now());
+        currentSession.setEndDate(LocalDateTime.now());
 
         // Implementation of saving sessions here
 
