@@ -21,7 +21,7 @@ public class StudySessionController extends ParentController {
 
     public void publishStartSession(MouseEvent event) {
         try {
-            mqttManager.publish(startSessionTopic, "Start Session");
+            mqttManager.publish(startSessionTopic, "4 25 5"); // format for study session is "{num of blocks} {study time in minutes} {break time in minutes}"
         } catch (MqttException e) {
             e.printStackTrace();
         }
