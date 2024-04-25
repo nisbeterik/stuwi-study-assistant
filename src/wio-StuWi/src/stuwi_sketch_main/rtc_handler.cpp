@@ -220,10 +220,10 @@ void populate_alarm_queue(char* details) {
     
      std::stringstream ss(details);
 
-     ss >> num_of_blocks >> study_time >> break_time;
-     Serial.println(num_of_blocks);
-     Serial.println(num_of_blocks);
-     Serial.println(num_of_blocks);
+     ss >> num_of_blocks >> study_time >> break_time; // parsing from payload string with the format "num_of_blocks study_time break_time"
+     // convert to seconds
+     study_time = study_time*60;
+     break_time = break_time*60;
      
      for(num_of_blocks; num_of_blocks>0; num_of_blocks--) {
         alarm_queue.enqueue(study_time);
