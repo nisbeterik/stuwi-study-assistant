@@ -5,13 +5,13 @@
 
 
 bool session_active = 0;
-char session_details[100];
+
 
 // is called when session is started through app
-void start_session() {
+void start_session(char* details) {
   if(!session_active) {
     session_active = 1;
-    populate_alarm_queue(session_details);
+    populate_alarm_queue(details);
     set_alarm();
   }
 }
