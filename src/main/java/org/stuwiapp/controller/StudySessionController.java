@@ -24,7 +24,6 @@ public class StudySessionController extends ParentController {
             mqttManager.publish(startSessionTopic, "Start Session");
             redirect(event, "studySessionConfiguration.fxml");
         } catch (MqttException e) {
-
             e.printStackTrace();
         }
 
