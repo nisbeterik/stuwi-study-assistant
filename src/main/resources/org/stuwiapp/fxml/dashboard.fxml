@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.DashboardController">
-   <children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.DashboardController">
       <Label id="temp" fx:id="tempReadingLabel" layoutX="47.0" layoutY="116.0" text="00.00">
          <font>
             <Font name="Tahoma" size="20.0" />
@@ -60,5 +61,9 @@
             <Font name="Tahoma" size="20.0" />
          </font>
       </Label>
-   </children>
+      <Button fx:id="stopSessionButton" layoutX="117.0" layoutY="307.0" mnemonicParsing="false" onAction="#stopSession" prefHeight="33.0" prefWidth="123.0" text="Stop Session">
+         <font>
+          <Font name="Tahoma" size="17.0" />
+         </font>
+      </Button>
 </AnchorPane>

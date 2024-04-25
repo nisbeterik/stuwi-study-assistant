@@ -12,7 +12,7 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 public class MQTTManager {
     private final String BROKER ="tcp://broker.hivemq.com:1883" ;
     private String clientId;
-    private final int QOS = 2;  // 0 sends message at most once
+    private final int QOS = 2;  // 2 sends message at most once
     private MqttClient client;
 
     private String latestTemp = "0";

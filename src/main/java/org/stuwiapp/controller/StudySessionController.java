@@ -25,12 +25,12 @@ public class StudySessionController extends ParentController {
         } catch (MqttException e) {
             e.printStackTrace();
         }
-
     }
+
 
     public void publishStopSession(MouseEvent event) {
         try {
-            mqttManager.publish(stopSessionTopic, "Stop session");
+            mqttManager.publish(stopSessionTopic, "Stop Session");
         } catch (MqttException e) {
             e.printStackTrace();
         }
