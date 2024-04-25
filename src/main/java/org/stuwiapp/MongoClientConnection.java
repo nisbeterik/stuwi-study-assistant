@@ -12,7 +12,7 @@ public class MongoClientConnection {
     private static MongoClient mongoClient;
 
     public MongoClientConnection() {
-        // Create MongoClientSettings
+        // Create MongoClientSettings. NOTE: <password> needs to be replaced with actual password to access database
         String connectionString = "mongodb+srv://stuwiuser:<password>@stuwi.tonjfsu.mongodb.net/?retryWrites=true&w=majority&appName=StuWi";
         MongoClientSettings settings = MongoClientSettings.builder()
                 .applyConnectionString(new ConnectionString(connectionString))
