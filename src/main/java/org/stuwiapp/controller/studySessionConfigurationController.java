@@ -33,7 +33,9 @@ public class studySessionConfigurationController extends ParentController implem
     @FXML public Label breakDurationIndicator;
     @FXML public Label blocksIndicator;
 
-    private String title;
+    final static int SCIENCE_BASED_BLOCK_DURATION = 25;
+    final static int SCIENCE_BASED_BREAK_DURATION = 5;
+    final static int SCIENCE_BASED_BLOCK_AMOUNT = 4;
 
     public studySessionConfigurationController(){
 
@@ -44,7 +46,7 @@ public class studySessionConfigurationController extends ParentController implem
 
         try {
             templateChoiceBox.getItems().add(new StudySessionTemplate("Reset", "", 0, 0, 0 ));
-            templateChoiceBox.getItems().add(new StudySessionTemplate("Recommended Settings", "General", 25, 5, 4 ));
+            templateChoiceBox.getItems().add(new StudySessionTemplate("Recommended Settings", "General", SCIENCE_BASED_BLOCK_DURATION, SCIENCE_BASED_BREAK_DURATION, SCIENCE_BASED_BLOCK_AMOUNT ));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -73,6 +75,22 @@ public class studySessionConfigurationController extends ParentController implem
             }
         });
     }
+    public StudySessionTemplate getSliderValues(){
+        int duration = (int)durationSlider.getValue();
+        int blocks = (int)blocksSlider.getValue();
+        int breakDuration = (int)breakDurationSlider.getValue();
+        String subject = subjectField.getText();
+        String title = null;
+        try{
+            return new StudySessionTemplate(title, subject, duration, breakDuration, blocks);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public void startSession(ActionEvent event){
+        getSliderValues();
+    }
     public boolean loadStudyTemplate(StudySessionTemplate template){
         if (template == null) {return false;}
         durationSlider.setValue(template.getDuration());
@@ -95,19 +113,15 @@ public class studySessionConfigurationController extends ParentController implem
 
         if (nameResult.isPresent() && !nameResult.get().isEmpty()){
             title = nameResult.get();
-        } else{
+        } else {
             infoLabel.setStyle("-fx-text-fill: red;");
             infoLabel.setText("You need to enter a name! ");
             return null;
         }
 
-        int duration = (int)durationSlider.getValue();
-        int blocks = (int)blocksSlider.getValue();
-        int breakDuration = (int)breakDurationSlider.getValue();
-        String subject = subjectField.getText();
-
         try {
-            StudySessionTemplate newStudySessionTemplate = new StudySessionTemplate(title, subject, duration, breakDuration, blocks);
+            StudySessionTemplate curValues = getSliderValues();
+            StudySessionTemplate newStudySessionTemplate = new StudySessionTemplate(title, curValues.getSubject(), curValues.getDuration(), curValues.getBreakDuration(), curValues.getBlocks());
             templateChoiceBox.getItems().add(newStudySessionTemplate);
             infoLabel.setStyle("-fx-text-fill: green;");
             infoLabel.setText("Successfully saved template " + title);
@@ -119,6 +133,8 @@ public class studySessionConfigurationController extends ParentController implem
             e.printStackTrace();
         }
         return null;
+
+
     }
 }
 
