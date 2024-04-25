@@ -1,5 +1,6 @@
 package org.stuwiapp;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class StudySessionManager {
@@ -15,14 +16,15 @@ public class StudySessionManager {
 
     public void startSession() {
         UUID sessionId = UUID.randomUUID();
-        currentSession = new StudySession(sessionId);
+        if (currentSession == null){
+            currentSession = new StudySession(sessionId);
+        }
     }
 
     public void endSession() {
-
+        currentSession.addEndDate(LocalDateTime.now());
 
         // Implementation of saving sessions here
-
 
         currentSession = null;
     }

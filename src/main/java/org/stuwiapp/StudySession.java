@@ -1,11 +1,14 @@
 package org.stuwiapp;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
 public class StudySession {
     private UUID sessionId;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private ArrayList<Double> tempData;
     private ArrayList<Double> humidData;
     private ArrayList<Double> loudData;
@@ -15,6 +18,8 @@ public class StudySession {
     private String ratingText;
 
     public StudySession(UUID sessionId){
+        this.startDate = LocalDateTime.now();
+        this.endDate = null;
         this.tempData = new ArrayList<>();
         this.humidData = new ArrayList<>();
         this.loudData = new ArrayList<>();
@@ -22,17 +27,20 @@ public class StudySession {
         this.ratingText = "";
     }
 
-    public void addTemperatureData(double tempDataPoint){
-        tempData.add(tempDataPoint);
+    // Converting from Strings to Double because payload comes as strings from sensors/terminal
+    public void addTemperatureData(String tempDataString){
+        Double tempDataDouble = Double.parseDouble(tempDataString);
+        tempData.add(tempDataDouble);
     }
 
-    public void addHumidityData(double humidDataPoint){
-        humidData.add(humidDataPoint);
-
+    public void addHumidityData(String humidDataString){
+        Double humidDataDouble = Double.parseDouble(humidDataString);
+        humidData.add(humidDataDouble);
     }
 
-    public void addLoudnessData(double loudDataPoint){
-        loudData.add(loudDataPoint);
+    public void addLoudnessData(String loudDataString){
+        Double loudDataDouble = Double.parseDouble(loudDataString);
+        loudData.add(loudDataDouble);
     }
 
     public void addRatingScore(int score){
@@ -41,6 +49,10 @@ public class StudySession {
 
     public void addRatingText(String text){
         ratingText = text;
+    }
+
+    public void addEndDate(LocalDateTime end){
+        this.endDate = end;
     }
 
 

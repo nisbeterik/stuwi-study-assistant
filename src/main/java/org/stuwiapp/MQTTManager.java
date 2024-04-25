@@ -67,16 +67,21 @@ public class MQTTManager {
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
+                StudySession currentSession = StudySessionManager.getInstance().getCurrentSession();
+
                 System.out.println("Message arrived. Topic: " + topic + " Message: " + message.toString());
 
                 if (topic.equals("stuwi/temp")){
                     latestTemp = message.toString();
+                    currentSession.addTemperatureData(message.toString());
                 }
                 if (topic.equals("stuwi/humid")){
                     latestHumidity = message.toString();
+                    currentSession.addHumidityData(message.toString());
                 }
                 if (topic.equals("stuwi/loudness")){
                     latestSound = message.toString();
+                    currentSession.addLoudnessData(message.toString());
                 }
                 if(topic.equals("stuwi/sessionover")){
                     StudySessionManager.getInstance().endSession();
