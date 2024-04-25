@@ -25,6 +25,7 @@ public class StudySession {
         this.ratingText = "";
     }
 
+
     // Converting from Strings to Double because payload comes as strings from sensors/terminal
     public void addTemperatureData(String tempDataString){
         Double tempDataDouble = Double.parseDouble(tempDataString);
