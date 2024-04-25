@@ -34,5 +34,9 @@
       <Label fx:id="breakDurationIndicator" alignment="CENTER_RIGHT" layoutX="250.0" layoutY="227.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
       <Label fx:id="blocksIndicator" alignment="CENTER_RIGHT" layoutX="409.0" layoutY="227.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
       <ChoiceBox fx:id="templateChoiceBox" accessibleHelp="Select Template" accessibleText="Select Template" layoutX="150.0" layoutY="70.0" prefHeight="26.0" prefWidth="124.0" />
+      <Label layoutX="155.0" layoutY="284.0" text="Science Based Pomodoro-session: 25 min study, 5 min break, 4 times">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
    </children>
 </AnchorPane>
