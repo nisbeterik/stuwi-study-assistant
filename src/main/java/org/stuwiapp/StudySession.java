@@ -121,6 +121,8 @@ public class StudySession {
         }
         double average = total / values.size();
         System.out.println(average);
+
+        // TODO Make this return with only two decimals and make sure it can be parsed by getters without errors
         return average;
     }
 
