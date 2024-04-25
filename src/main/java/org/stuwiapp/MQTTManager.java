@@ -14,7 +14,6 @@ public class MQTTManager {
     private String clientId;
     private final int QOS = 2;  // 0 sends message at most once
     private MqttClient client;
-
     private String latestTemp = "0";
     private String latestHumidity = "0";
     private String latestSound = "0";
@@ -42,10 +41,10 @@ public class MQTTManager {
         MqttMessage message = new MqttMessage(payload.getBytes());
         message.setQos(QOS);
         if(topic.equals("stuwi/startsession")) {
-            StudySession.getInstance().startSession();
+            StudySessionManager.getInstance().startSession();
         }
         if(topic.equals("stuwi/endsession")) {
-            StudySession.getInstance().endSession();
+            StudySessionManager.getInstance().startSession();
         }
         client.publish(topic, message);
     }
@@ -80,7 +79,7 @@ public class MQTTManager {
                     latestSound = message.toString();
                 }
                 if(topic.equals("stuwi/sessionover")){
-                    StudySession.getInstance().endSession();
+                    StudySessionManager.getInstance().endSession();
                 }
             }
 

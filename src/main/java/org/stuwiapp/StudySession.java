@@ -1,28 +1,48 @@
 package org.stuwiapp;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.UUID;
+
 public class StudySession {
+    private UUID sessionId;
+    private ArrayList<Double> tempData;
+    private ArrayList<Double> humidData;
+    private ArrayList<Double> loudData;
+    private Date sessionStart;
+    private Date sessionEnd;
+    private int rating;
+    private String ratingText;
 
-    private static StudySession studySession;
-    private boolean sessionActive;
-
-    public static synchronized StudySession getInstance(){
-        if (studySession == null){
-            studySession = new StudySession();
-        }
-        return  studySession;
+    public StudySession(UUID sessionId){
+        this.tempData = new ArrayList<>();
+        this.humidData = new ArrayList<>();
+        this.loudData = new ArrayList<>();
+        this.rating = 0;
+        this.ratingText = "";
     }
 
-    public void startSession(){
-        sessionActive = true;
+    public void addTemperatureData(double tempDataPoint){
+        tempData.add(tempDataPoint);
     }
 
-    public void endSession(){
-        sessionActive = false;
+    public void addHumidityData(double humidDataPoint){
+        humidData.add(humidDataPoint);
+
     }
 
-    public boolean isStudySessionActive(){
-        return sessionActive;
+    public void addLoudnessData(double loudDataPoint){
+        loudData.add(loudDataPoint);
     }
+
+    public void addRatingScore(int score){
+        rating = score;
+    }
+
+    public void addRatingText(String text){
+        ratingText = text;
+    }
+
 
 
 

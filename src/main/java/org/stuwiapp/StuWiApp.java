@@ -16,6 +16,7 @@ import java.io.IOException;
 public class StuWiApp extends Application {
 
     private MQTTManager mqttManager;
+    private StudySessionManager studySessionManager;
     private String publishTopic = "stuwi/testin"; // topic that WIO subscribes to
     private String subscribeTopic = "stuwi/testout"; // topic that WIO publishes to
     // private final ScheduledExecutorService publishScheduler = Executors.newSingleThreadScheduledExecutor();
@@ -28,6 +29,7 @@ public class StuWiApp extends Application {
 
     @Override
     public void init() throws MqttException {
+        studySessionManager = StudySessionManager.getInstance();
         mqttManager = MQTTManagerSingleton.getMqttInstance();
         mqttManager.subscribe(subscribeTopic);
         mqttManager.subscribe(temperatureTopic);
@@ -50,6 +52,7 @@ public class StuWiApp extends Application {
                 e.printStackTrace();
             }
         }, 0, 10, TimeUnit.SECONDS);*/
+
     }
 
     // stop app and disconnects from mqtt
