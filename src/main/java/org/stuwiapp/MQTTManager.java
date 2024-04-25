@@ -18,8 +18,6 @@ public class MQTTManager {
     private String latestTemp = "0";
     private String latestHumidity = "0";
     private String latestSound = "0";
-    private boolean isStudyActive = false;
-
 
     public MQTTManager() throws MqttException{
         this.clientId = "StuWiApp";
@@ -44,10 +42,10 @@ public class MQTTManager {
         MqttMessage message = new MqttMessage(payload.getBytes());
         message.setQos(QOS);
         if(topic.equals("stuwi/startsession")) {
-            this.isStudyActive = true;
+            StudySession.getInstance().startSession();
         }
         if(topic.equals("stuwi/endsession")) {
-            this.isStudyActive = false;
+            StudySession.getInstance().endSession();
         }
         client.publish(topic, message);
     }
@@ -57,7 +55,6 @@ public class MQTTManager {
     }
 
     public void close() throws MqttException{
-
         client.disconnect();
         client.close();
     }
@@ -83,7 +80,7 @@ public class MQTTManager {
                     latestSound = message.toString();
                 }
                 if(topic.equals("stuwi/sessionover")){
-                    isStudyActive = false;
+                    StudySession.getInstance().endSession();
                 }
             }
 
@@ -104,8 +101,5 @@ public class MQTTManager {
 
     public String getLatestSound() {
         return latestSound;
-    }
-    public boolean getStudySessionStatus() {
-        return isStudyActive;
     }
 }

@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.stuwiapp.MQTTManager;
 import org.stuwiapp.MQTTManagerSingleton;
+import org.stuwiapp.StudySession;
 
 import java.net.URL;
 import java.util.Objects;
@@ -120,7 +121,7 @@ public class DashboardController extends ParentController {
 
     private void readAndUpdateStudyStatus() {
         Platform.runLater(() ->  {
-            isSessionOngoing = mqttManager.getStudySessionStatus();
+            isSessionOngoing = StudySession.getInstance().isStudySessionActive();
             if(isSessionOngoing) {
                 studyStatusLabel.setText("Study Session Ongoing");
             } else {
