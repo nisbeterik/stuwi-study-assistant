@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
 import javafx.scene.paint.Paint;
+import org.stuwiapp.MQTTManager;
+import org.stuwiapp.MQTTManagerSingleton;
 import org.stuwiapp.StudySessionTemplate;
 
 import java.net.URL;
@@ -37,6 +39,22 @@ public class studySessionConfigurationController extends ParentController implem
     final static int SCIENCE_BASED_BREAK_DURATION = 5;
     final static int SCIENCE_BASED_BLOCK_AMOUNT = 4;
 
+    final static StudySessionTemplate RESET_TEMPLATE;
+    final static StudySessionTemplate RECOMMENDED_TEMPLATE;
+
+    //init standard session templates.
+    static {
+        try {
+            RESET_TEMPLATE = new StudySessionTemplate("Reset", "", 0, 0, 0);
+            RECOMMENDED_TEMPLATE = new StudySessionTemplate("Recommended Settings", "General", SCIENCE_BASED_BLOCK_DURATION, SCIENCE_BASED_BREAK_DURATION, SCIENCE_BASED_BLOCK_AMOUNT );
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    MQTTManager mqttManager = MQTTManagerSingleton.getMqttInstance();
+    private String startSessionTopic = "stuwi/startsession"; // topic that WIO subscribes to
+
     public studySessionConfigurationController(){
 
     }
@@ -44,12 +62,9 @@ public class studySessionConfigurationController extends ParentController implem
 
         //TODO: for each saved template add as item to the templateChoiceBox.
 
-        try {
-            templateChoiceBox.getItems().add(new StudySessionTemplate("Reset", "", 0, 0, 0 ));
-            templateChoiceBox.getItems().add(new StudySessionTemplate("Recommended Settings", "General", SCIENCE_BASED_BLOCK_DURATION, SCIENCE_BASED_BREAK_DURATION, SCIENCE_BASED_BLOCK_AMOUNT ));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        templateChoiceBox.getItems().addAll(RESET_TEMPLATE, RECOMMENDED_TEMPLATE);
+        templateChoiceBox.setValue("Recommended Settings");
+
         templateChoiceBox.valueProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
@@ -74,6 +89,8 @@ public class studySessionConfigurationController extends ParentController implem
                 blocksIndicator.setText((int)blocksSlider.getValue() + " st");
             }
         });
+        //Loads the template to update sliders / indicators
+        loadStudyTemplate(RECOMMENDED_TEMPLATE);
     }
     public StudySessionTemplate getSliderValues(){
         int duration = (int)durationSlider.getValue();
@@ -89,7 +106,15 @@ public class studySessionConfigurationController extends ParentController implem
         return null;
     }
     public void startSession(ActionEvent event){
-        getSliderValues();
+        StudySessionTemplate sessionSettings = getSliderValues();
+        try{
+            //Starts a study session with current setting
+            mqttManager.publish(startSessionTopic, String.format("%d %d %d", sessionSettings.getBlocks(), sessionSettings.getDuration(), sessionSettings.getBreakDuration()));
+            redirect(event, "dashboard.fxml");
+        } catch (Exception e){
+            infoLabel.setStyle("-fx-text-fill: red;");
+            infoLabel.setText("Failed to connect to WIO terminal");
+        }
     }
     public boolean loadStudyTemplate(StudySessionTemplate template){
         if (template == null) {return false;}
