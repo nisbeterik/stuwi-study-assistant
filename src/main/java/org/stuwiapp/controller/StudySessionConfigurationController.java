@@ -91,6 +91,8 @@ public class StudySessionConfigurationController extends ParentController implem
         //Loads the template to update sliders / indicators
         loadStudyTemplate(RECOMMENDED_TEMPLATE);
     }
+
+    //gets the current values for each slider and makes a StudySessionTemplateObject from it.
     public StudySessionTemplate getSliderValues(){
         int duration = (int)durationSlider.getValue();
         int blocks = (int)blocksSlider.getValue();
@@ -100,12 +102,15 @@ public class StudySessionConfigurationController extends ParentController implem
         try{
             return new StudySessionTemplate(title, subject, duration, breakDuration, blocks);
         } catch (Exception e) {
-            e.printStackTrace();
+            infoLabel.setStyle("-fx-text-fill: red;");
+            infoLabel.setText(e.getMessage());
         }
         return null;
     }
     public void startSession(ActionEvent event){
         StudySessionTemplate sessionSettings = getSliderValues();
+        if(sessionSettings == null) { return; }
+
         try{
             //Starts a study session with current setting
             mqttManager.publish(startSessionTopic, String.format("%d %d %d", sessionSettings.getBlocks(), sessionSettings.getDuration(), sessionSettings.getBreakDuration()));
@@ -145,6 +150,8 @@ public class StudySessionConfigurationController extends ParentController implem
 
         try {
             StudySessionTemplate curValues = getSliderValues();
+            if (curValues == null) { return null; }
+
             StudySessionTemplate newStudySessionTemplate = new StudySessionTemplate(title, curValues.getSubject(), curValues.getDuration(), curValues.getBreakDuration(), curValues.getBlocks());
             templateChoiceBox.getItems().add(newStudySessionTemplate);
             infoLabel.setStyle("-fx-text-fill: green;");

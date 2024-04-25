@@ -25,6 +25,7 @@ public class DashboardController extends ParentController {
     public ImageView loudImage;
     public Button studySessionRedirect;
     public Label studyStatusLabel;
+    public Button stopSessionButton;
     @FXML
     private ImageView tempImage;
     @FXML
@@ -59,6 +60,8 @@ public class DashboardController extends ParentController {
 
     private final double loudnessFloor = 0;
     private final double loudnessRoof = 1000;
+
+    private String stopSessionTopic = "stuwi/endsession";
 
 
     @FXML
@@ -128,6 +131,14 @@ public class DashboardController extends ParentController {
             }
 
         });
+    }
+    public void stopSession(ActionEvent event) {
+        try {
+            mqttManager.publish(stopSessionTopic, "Stop Session");
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        redirect(event, "stuwi-home.fxml" );
     }
 
     public void redirectStudySession(MouseEvent mouseEvent) {
