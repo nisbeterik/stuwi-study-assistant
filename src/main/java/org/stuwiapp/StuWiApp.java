@@ -14,7 +14,6 @@ import java.io.IOException;
  * JavaFX App
  */
 public class StuWiApp extends Application {
-
     private MQTTManager mqttManager;
     private StudySessionManager studySessionManager;
     private String publishTopic = "stuwi/testin"; // topic that WIO subscribes to
@@ -22,9 +21,7 @@ public class StuWiApp extends Application {
     // private final ScheduledExecutorService publishScheduler = Executors.newSingleThreadScheduledExecutor();
     private final String temperatureTopic = "stuwi/temp";
     private final String humidityTopic = "stuwi/humid";
-
     private final String loudnessTopic = "stuwi/loudness";
-
     private final String sessionOverTopic = "stuwi/sessionover";
 
     @Override
@@ -52,7 +49,6 @@ public class StuWiApp extends Application {
                 e.printStackTrace();
             }
         }, 0, 10, TimeUnit.SECONDS);*/
-
     }
 
     // stop app and disconnects from mqtt
