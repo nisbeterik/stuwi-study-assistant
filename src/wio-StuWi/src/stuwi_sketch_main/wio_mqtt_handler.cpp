@@ -67,7 +67,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   buff_p[length] = '\0';  // null terminate buffer
   String msg_p = String(buff_p);
   Serial.println(msg_p);  // print payload as string
-  check_topic(topic);
+  check_topic(topic, buff_p);
 
 }
 
@@ -95,9 +95,9 @@ void publish_session_over() {
 }
 
 // checks incoming payload topic and directs program accordingly
-void check_topic(char* topic) {
+void check_topic(char* topic, char* payload) {
   if( strcmp(topic, TOPIC_STARTSESSION) == 0) {
-    start_session();
+    start_session(payload);
     Serial.println("Session started");
   }
   else if( strcmp(topic, TOPIC_ENDSESSION) == 0) {
