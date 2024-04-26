@@ -1,4 +1,0 @@
---patch-module
-org.openjfx=_
---add-reads
-org.openjfx=ALL-UNNAMED
