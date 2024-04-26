@@ -1,5 +1,6 @@
 #include "rtc_handler.h"
 #include "wio_session_handler.h"
+#include "buzzer_handler.h"
 
 WiFiUDP udp;
 unsigned int udp_local_port = 2390;
@@ -192,6 +193,7 @@ void check_remaining_time() {
 // alarm_over is called to indicate that the session is over
 // calls end_session which will publish that the session is over to app
 void alarm_over() {
+  play_default_sound();
   alarm_flag = 0;
   alarm_time = current_time;
   Serial.println("Alarm ended");

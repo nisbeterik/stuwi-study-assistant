@@ -1,3 +1,5 @@
+#include "buzzer_handler.h"
+#include "wifi.h"
 #define BUZZER_PIN WIO_BUZZER
 
 void buzzer_setup() {
@@ -9,7 +11,7 @@ void play_default_sound(){
         delay(1000);
         analogWrite(WIO_BUZZER, 0);
         delay(1000);
+        
       }
-
 
 

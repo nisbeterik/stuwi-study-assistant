@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include "screen_draw.h"
 #include "rtc_handler.h"
+#include "buzzer_handler.h"
+#define BUZZER_PIN WIO_BUZZER
 
 #define DHTPIN D0
 #define DHTTYPE DHT11 // DHT 11
@@ -20,7 +22,6 @@ int value = 0;  // amount of payloads published
 float loudVal = 0;
 
 
-
 void setup() {
   Serial.begin(115200);
   while(!Serial); // Wait for Serial to be ready
@@ -31,6 +32,8 @@ void setup() {
 
   dht.begin();
   screen_setup();
+
+  buzzer_setup();
 
 }
 
