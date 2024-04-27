@@ -1,0 +1,67 @@
+# source for arduino: https://git.chalmers.se/courses/dit113/2024/group-2/dit-113-ci-workshop-group-2/ & https://codeblog.dotsandbrackets.com/gitlab-ci-esp32-arduino/
+# source for maven https://cmakkaya.medium.com/gitlab-ci-cd-1-building-a-java-project-using-maven-and-docker-within-the-gitlab-ci-pipeline-278feaf7ee12
+
+image: maven:3-openjdk-17 # image with maven and JDK17 since project is developed in JDK21
+
+
+before_script:
+  # shell script installs arduino-cli dependencies and libraries
+  - chmod +x setup-build-env.sh
+  - ./setup-build-env.sh
+
+stages:
+  - build
+  - test
+  - package
+
+
+arduino_compile:
+  stage: build
+  tags:
+    - docker
+  script:
+    - echo "Wio Terminal compilation..."
+
+    - export PATH=$PATH:/root/bin # set path to where arduino cli is installed
+    - pwd                         # print working directory
+    - cd src/wio-StuWi/src/stuwi_sketch_main # change directory to Wio Terminal source code folder
+
+    - arduino-cli lib list                   # check that libraries are installed
+    # compile
+    - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal
+
+cache:
+  paths:
+    - .m2/repository
+    - target
+
+# compiles using maven
+maven_compile:
+  stage: build
+  tags:
+    - docker
+  script:
+    - echo "Maven compile started"
+    - mvn compile
+
+# runs tests in test directory
+maven_test:
+  stage: test
+  tags:
+    - docker
+  script:
+    - echo "Maven test started"
+    - mvn test
+
+
+maven_package:
+  stage: package
+  tags:
+    - docker
+  script:
+    - echo "Maven packaging started"
+    - mvn package
+
+
+
+

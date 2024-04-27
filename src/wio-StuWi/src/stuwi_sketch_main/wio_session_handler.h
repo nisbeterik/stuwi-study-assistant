@@ -3,7 +3,7 @@
 
 extern bool session_active;
 
-extern void start_session();
+extern void start_session(char* details);
 
 extern void end_session();
 

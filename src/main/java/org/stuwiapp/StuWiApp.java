@@ -36,7 +36,7 @@ public class StuWiApp extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException {
-        Object dashboard = FXMLUtil.loadFxml("dashboard.fxml");
+        Object dashboard = FXMLUtil.loadFxml("stuwi-home.fxml");
         Scene scene = new Scene((Parent) dashboard);
         stage.setScene(scene);
         stage.show();
