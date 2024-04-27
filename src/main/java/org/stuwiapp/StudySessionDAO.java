@@ -17,6 +17,7 @@ public class StudySessionDAO {
         studySessionJson.put("start_date", session.getStartDate().toString());
         studySessionJson.put("end_date", session.getEndDate().toString());
         studySessionJson.put("duration", session.getDuration());
+        studySessionJson.put("minutesPaused", session.getMinutesPaused());
 
         // Temperature data
         JSONObject temperatureJson = new JSONObject();
