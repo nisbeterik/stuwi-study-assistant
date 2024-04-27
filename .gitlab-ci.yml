@@ -1,6 +1,7 @@
-# source: https://git.chalmers.se/courses/dit113/2024/group-2/dit-113-ci-workshop-group-2/ & https://codeblog.dotsandbrackets.com/gitlab-ci-esp32-arduino/
+# source for arduino: https://git.chalmers.se/courses/dit113/2024/group-2/dit-113-ci-workshop-group-2/ & https://codeblog.dotsandbrackets.com/gitlab-ci-esp32-arduino/
+# source for maven https://cmakkaya.medium.com/gitlab-ci-cd-1-building-a-java-project-using-maven-and-docker-within-the-gitlab-ci-pipeline-278feaf7ee12
 
-image: maven:3-openjdk-17
+image: maven:3-openjdk-17 # image with maven and JDK17 since project is developed in JDK21
 
 
 before_script:
@@ -34,6 +35,7 @@ cache:
     - .m2/repository
     - target
 
+# compiles using maven
 maven_compile:
   stage: build
   tags:
@@ -42,6 +44,7 @@ maven_compile:
     - echo "Maven compile started"
     - mvn compile
 
+# runs tests in test directory
 maven_test:
   stage: test
   tags:
@@ -49,6 +52,7 @@ maven_test:
   script:
     - echo "Maven test started"
     - mvn test
+
 
 maven_package:
   stage: package
