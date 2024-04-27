@@ -1,14 +1,12 @@
 # source: https://git.chalmers.se/courses/dit113/2024/group-2/dit-113-ci-workshop-group-2/ & https://codeblog.dotsandbrackets.com/gitlab-ci-esp32-arduino/
 
-image: ubuntu:latest
+image: maven:3.8.4-jdk-11
 
 
 before_script:
   # shell script installs arduino-cli dependencies and libraries
   - chmod +x setup-build-env.sh
   - ./setup-build-env.sh
-  - apt-get update
-  - apt-get install -y maven
 
 stages:
   - build
