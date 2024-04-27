@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# source: https://git.chalmers.se/courses/dit113/2024/group-2/dit-113-ci-workshop-group-2/ & https://codeblog.dotsandbrackets.com/gitlab-ci-esp32-arduino/
+
 apt-get update
 cd ~
 
@@ -15,7 +17,8 @@ printf "board_manager:\n  additional_urls:\n    - https://files.seeedstudio.com/
 arduino-cli core update-index --config-file .arduino-cli.yaml
 arduino-cli core install Seeeduino:samd --config-file .arduino-cli.yaml
 
-arduino-cli lib install "Seeed Arduino rpcWiFi@1.0.6"
+# Install correct libraries
+#arduino-cli lib install "Seeed Arduino rpcWiFi@1.0.6"
 arduino-cli lib install "PubSubClient@2.8"
 arduino-cli lib install "Seeed Arduino RTC@2.0.0"
 arduino-cli lib install "ArduinoQueue@1.2.5"
