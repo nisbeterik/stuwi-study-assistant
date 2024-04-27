@@ -15,16 +15,23 @@ public class StudySession {
     private ArrayList<Double> loudData;
     private int rating;
     private String ratingText;
+    private int minutesPaused;
+
+    // private StudySessionTemplate template;
 
     public StudySession(UUID sessionId){
         this.sessionId = sessionId;
         this.startDate = LocalDateTime.now();
         this.endDate = null;
+        this.minutesPaused = 0;
         this.tempData = new ArrayList<>();
         this.humidData = new ArrayList<>();
         this.loudData = new ArrayList<>();
         this.rating = 0;
         this.ratingText = "";
+
+        // this.template = template;
+
     }
 
     // Converting from Strings to Double because payload comes as strings from sensors/terminal
@@ -55,9 +62,13 @@ public class StudySession {
         this.endDate = end;
     }
 
+    public void addMinutesPaused(int minutes){
+        minutesPaused += minutes;
+    }
+
     public int getDuration(){
 
-        // TODO Calculate duration from startDate and endDate
+        // TODO Calculate duration from startDate and endDate --OR-- Gather it from the template composition
 
         return 0;
     }
@@ -65,54 +76,40 @@ public class StudySession {
     public UUID getSessionId() {
         return sessionId;
     }
-
     public LocalDateTime getStartDate() {
         return startDate;
     }
-
     public LocalDateTime getEndDate() {
         return endDate;
     }
-
     public double getHighestTemp(){
         return findHighest(tempData);
     }
     public double getLowestTemp(){
         return findLowest(tempData);
     }
-    public double getAvgTemp(){
-        return calculateAvg(tempData);
-    }
+    public double getAvgTemp(){return calculateAvg(tempData);}
 
-    public double getHighestHumid(){
-        return findHighest(humidData);
-    }
+    public double getHighestHumid(){return findHighest(humidData);}
+
     public double getLowestHumid(){
         return findLowest(humidData);
     }
-
     public double getAvgHumid(){
         return calculateAvg(humidData);
     }
-
     public double getHighestLoud(){
         return findHighest(loudData);
     }
     public double getLowestLoud(){
         return findLowest(loudData);
     }
-
     public double getAvgLoud(){
         return calculateAvg(loudData);
     }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public String getRatingText() {
-        return ratingText;
-    }
+    public int getMinutesPaused() {return minutesPaused;}
+    public int getRating() {return rating;}
+    public String getRatingText() {return ratingText;}
 
     private double calculateAvg(ArrayList<Double> values){
         double total = 0;
@@ -145,4 +142,5 @@ public class StudySession {
         }
         return lowest;
     }
+
 }
