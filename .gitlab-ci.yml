@@ -1,0 +1,25 @@
+image: ubuntu:latest
+
+before_script:
+  - chmod +x setup-build-env.sh
+  - ./setup-build-env.sh
+
+stages:
+  - build
+
+compile:
+  stage: build
+  tags:
+    - docker
+  script:
+    - echo "Wio Terminal compilation..."
+
+    - export PATH=$PATH:/root/bin
+    - pwd
+    - cd src/wio-StuWi/src/stuwi_sketch_main
+
+    - arduino-cli lib list
+    - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal
+    - arduino-cli board list
+
+
