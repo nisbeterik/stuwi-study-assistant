@@ -7,11 +7,16 @@ before_script:
   # shell script installs arduino-cli dependencies and libraries
   - chmod +x setup-build-env.sh
   - ./setup-build-env.sh
+  - apt-get update
+  - apt-get install -y maven
 
 stages:
   - build
+  - test
+  - package
 
-compile:
+
+arduino_compile:
   stage: build
   tags:
     - docker
@@ -25,6 +30,36 @@ compile:
     - arduino-cli lib list                   # check that libraries are installed
     # compile
     - arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal
+
+cache:
+  paths:
+    - .m2/repository
+    - target
+
+maven_compile:
+  stage: build
+  tags:
+    - docker
+  script:
+    - echo "Maven compile started"
+    - mvn compile
+
+maven_test:
+  stage: test
+  tags:
+    - docker
+  script:
+    - echo "Maven test started"
+    - mvn test
+
+maven_package:
+  stage: package
+  tags:
+    - docker
+  script:
+    - echo "Maven packaging started"
+    - mvn package
+
 
 
 
