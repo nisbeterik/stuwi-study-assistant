@@ -41,18 +41,18 @@ void draw_background() {
     tft.setFreeFont(&FreeSansBoldOblique12pt7b);
   
   // Draws the TEMP Text in the lower box
-  tft.setTextColor(TFT_GREEN);
+  tft.setTextColor(TFT_CYAN);
   tft.drawString("Temp", 10 , 153 , 1);
   tft.setTextColor(TFT_RED);
   tft.drawString("o", 64, 180, 1);
   tft.drawString("C", 75, 193, 1);
 
-  tft.setTextColor(TFT_GREEN);
+  tft.setTextColor(TFT_CYAN);
   tft.drawString("Humi", 10 , 65 , 1);
   tft.setTextColor(TFT_RED);
   tft.drawString("%", 65, 105, 1);
 
-  tft.setTextColor(TFT_GREEN);
+  tft.setTextColor(TFT_CYAN);
   tft.drawString("Loud", 10 + (tft.width() / 2) , 65 , 1);
   tft.setTextColor(TFT_RED);
   tft.drawString("%", 65 + (tft.width() / 2), 105, 1);
@@ -66,12 +66,25 @@ void update_screen(){
   sprintf(humid_string, "%s", humid_int);
   sprintf(loudness_string, "%s", loud_int);
 
-  update_reading(temp_int, 20, 193, 40);
-  update_reading(humid_int, 20, 105, 40);
-  update_reading(loud_int, ((tft.width() / 2) + 25) , 105, 40);
+  spr.setTextColor(TFT_WHITE);
+  update_sprite(temp_int, 20, 193, 40);
+  update_sprite(humid_int, 20, 105, 40);
+  update_sprite(loud_int, ((tft.width() / 2) + 25) , 105, 40);
 
+  if(!alarm_flag) {
+      //tft.drawString("No session", 0, 150);
+      spr.setTextColor(TFT_RED);
+      update_sprite("No Session", ((tft.width() / 2) + 10) , 153, 135);
+      spr.setTextColor(TFT_WHITE);
+      update_sprite(get_time(current_time), ((tft.width() / 2) + 25) , 193, 100); // get time from rtc_handler and
+  } else if(alarm_flag) {
+      spr.setTextColor(TFT_CYAN);
+      update_sprite("Studying", ((tft.width() / 2) + 10) , 153, 135);
+      spr.setTextColor(TFT_WHITE);
+      update_sprite(get_remaining_time(), ((tft.width() / 2) + 25) , 193, 100);
+  }
 
-
+  prev_alarm_flag = alarm_flag;
   
   //if(prev_alarm_flag != alarm_flag) {
   //  tft.fillScreen(TFT_WHITE);
@@ -89,12 +102,10 @@ void update_screen(){
   */
 }
 
-void update_reading(String data, int x, int y, int width){
+void update_sprite(String data, int x, int y, int width){
   spr.createSprite(width, 30);
   spr.setFreeFont(&FreeSansBoldOblique12pt7b);
-  spr.setTextColor(TFT_WHITE);
   spr.drawString(data, 0, 0, 1);
-  spr.setTextColor(TFT_GREEN);
   spr.pushSprite(x, y);
   spr.deleteSprite();
 }
