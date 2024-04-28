@@ -18,6 +18,7 @@ long last_published = 0;       // tracks when last message was sent in relation 
 long sensor_value_update = 0;  // tracks when last sensor value update was done
 int value = 0;                 // amount of payloads published
 float loudVal = 0;
+float loudPercent = 0;
 
 
 
@@ -25,13 +26,15 @@ void setup() {
   Serial.begin(115200);
   while (!Serial)
     ;  // Wait for Serial to be ready
-  dht.begin();
-  screen_setup();
-  draw_background();
+  
   wifi_setup();
   setup_rtc();
   client.setServer(MQTT_SERVER, 1883);  // Connect the MQTT Server
   client.setCallback(callback);
+
+  dht.begin();
+  screen_setup();
+  draw_background();
 }
 
 void loop() {
@@ -51,7 +54,7 @@ void loop() {
     read_temperature();
     read_humidity();
     read_loudness();
-    //update_screen();
+    update_screen();
   }
   // publishes a message to broker every 10 seconds
   if (now - last_published > 10000) {
@@ -67,15 +70,20 @@ void loop() {
 void read_temperature() {
   float temp = dht.readTemperature();
   sprintf(temp_payload, "%.2f", temp);
+  sprintf(temp_int, "%3.f", temp);
 }
 
 void read_humidity() {
   float humidity = dht.readHumidity();
   sprintf(humid_payload, "%.2f", humidity);
+  sprintf(humid_int, "%3.f", humidity);
 }
 
 void read_loudness() {
 
   loudVal = analogRead(A3);
-  sprintf(loud_payload, "%.2f ", loudVal);
+  loudPercent = map(loudVal, 0, 1023, 0, 100);
+  
+  sprintf(loud_payload, "%.2f ", loudPercent);
+  sprintf(loud_int, "%2.f ", loudPercent);
 }

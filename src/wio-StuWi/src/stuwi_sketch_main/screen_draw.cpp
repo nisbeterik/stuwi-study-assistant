@@ -3,6 +3,7 @@
 #include "rtc_handler.h"
 
 TFT_eSPI tft; //initialize TFT LCD
+TFT_eSprite spr = TFT_eSprite(&tft);  //sprite
 
 char temp_string[20]; // Allocate memory for temp_string
 char humid_string[20]; // Allocate memory for humid_string
@@ -38,27 +39,45 @@ void draw_background() {
     tft.drawRoundRect((tft.width() / 2) + 5  , (65 + (tft.height() - 65) / 2), (tft.width() / 2) - 10 , (tft.height() - 70) / 2 , 10, TFT_WHITE); // s1
 
     tft.setFreeFont(&FreeSansBoldOblique12pt7b);
-  tft.setTextColor(TFT_GREEN);
   
   // Draws the TEMP Text in the lower box
+  tft.setTextColor(TFT_GREEN);
   tft.drawString("Temp", 10 , 153 , 1);
   tft.setTextColor(TFT_RED);
   tft.drawString("o", 64, 180, 1);
   tft.drawString("C", 75, 193, 1);
+
+  tft.setTextColor(TFT_GREEN);
+  tft.drawString("Humi", 10 , 65 , 1);
+  tft.setTextColor(TFT_RED);
+  tft.drawString("%", 65, 105, 1);
+
+  tft.setTextColor(TFT_GREEN);
+  tft.drawString("Loud", 10 + (tft.width() / 2) , 65 , 1);
+  tft.setTextColor(TFT_RED);
+  tft.drawString("%", 65 + (tft.width() / 2), 105, 1);
+
+  
+  
 }
 
 void update_screen(){
-  sprintf(temp_string, "Temp: %s", temp_payload);
-  sprintf(humid_string, "Humid: %s", humid_payload);
-  sprintf(loudness_string, "Loud: %s", loud_payload);
-  
-  if(prev_alarm_flag != alarm_flag) {
-    tft.fillScreen(TFT_WHITE);
-  }
+  sprintf(temp_string, "%s", temp_int);
+  sprintf(humid_string, "%s", humid_int);
+  sprintf(loudness_string, "%s", loud_int);
 
-  tft.drawString(temp_string,0,0); //draw text string 
-  tft.drawString(humid_string,0,50);
-  tft.drawString(loudness_string,0, 100);
+  update_reading(temp_int, 20, 193, 40);
+  update_reading(humid_int, 20, 105, 40);
+  update_reading(loud_int, ((tft.width() / 2) + 25) , 105, 40);
+
+
+
+  
+  //if(prev_alarm_flag != alarm_flag) {
+  //  tft.fillScreen(TFT_WHITE);
+  //}
+  /*
+
   if(!alarm_flag) {
       tft.drawString("No session", 0, 150);
       tft.drawString(get_time(current_time), 0, 200); // get time from rtc_handler and
@@ -67,4 +86,16 @@ void update_screen(){
       tft.drawString(get_remaining_time(), 0, 200);
   }
   prev_alarm_flag = alarm_flag;
+  */
 }
+
+void update_reading(String data, int x, int y, int width){
+  spr.createSprite(width, 30);
+  spr.setFreeFont(&FreeSansBoldOblique12pt7b);
+  spr.setTextColor(TFT_WHITE);
+  spr.drawString(data, 0, 0, 1);
+  spr.setTextColor(TFT_GREEN);
+  spr.pushSprite(x, y);
+  spr.deleteSprite();
+}
+

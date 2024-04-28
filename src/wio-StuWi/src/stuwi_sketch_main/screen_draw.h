@@ -12,5 +12,6 @@ extern char loudness_string[20];
 extern void screen_setup();
 extern void draw_background();
 extern void update_screen();
+extern void update_reading(String data, int x, int y, int width);
 
 #endif
