@@ -16,11 +16,13 @@ public class StudySession {
     private int rating;
     private String ratingText;
     private int minutesPaused;
+    private String user;
 
     // private StudySessionTemplate template;
 
     public StudySession(UUID sessionId){
         this.sessionId = sessionId;
+        this.user = UserManager.getInstance().getCurrentUser();
         this.startDate = LocalDateTime.now();
         this.endDate = null;
         this.minutesPaused = 0;
@@ -110,6 +112,7 @@ public class StudySession {
     public int getMinutesPaused() {return minutesPaused;}
     public int getRating() {return rating;}
     public String getRatingText() {return ratingText;}
+    public String getUser(){return this.user;}
 
     private double calculateAvg(ArrayList<Double> values){
         double total = 0;

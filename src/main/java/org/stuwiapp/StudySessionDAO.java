@@ -5,15 +5,18 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class StudySessionDAO {
 
     public static void saveSessionInDatabase(StudySession session){
-        MongoClientConnection clientConnection = new MongoClientConnection();
+        MongoClientConnection clientConnection = MongoClientConnection.getInstance();
         MongoDatabase db = clientConnection.getDatabase("stuwi");
         MongoCollection<Document> collection = db.getCollection("sessions");
 
         JSONObject studySessionJson = new JSONObject();
-        studySessionJson.put("id", session.getSessionId().toString());
+        studySessionJson.put("_id", session.getSessionId().toString());
+        studySessionJson.put("user", session.getUser());
         studySessionJson.put("start_date", session.getStartDate().toString());
         studySessionJson.put("end_date", session.getEndDate().toString());
         studySessionJson.put("duration", session.getDuration());
@@ -50,7 +53,7 @@ public class StudySessionDAO {
     }
 
 
-    public static StudySession getSessionFromDatabase(StudySession session){
+    public static ArrayList<StudySession> getUserSessions(String username){
         // TODO
         return null;
     }
