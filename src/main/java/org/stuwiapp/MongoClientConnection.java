@@ -9,9 +9,10 @@ import com.mongodb.client.MongoDatabase;
 
 public class MongoClientConnection {
 
-    private static MongoClient mongoClient;
+    private static volatile MongoClientConnection instance;
+    private final MongoClient mongoClient;
 
-    public MongoClientConnection() {
+    private MongoClientConnection() {
         // Create MongoClientSettings. NOTE: <password> needs to be replaced with actual password to access database
         String connectionString = "mongodb+srv://stuwiuser:<password>@stuwi.tonjfsu.mongodb.net/?retryWrites=true&w=majority&appName=StuWi";
         MongoClientSettings settings = MongoClientSettings.builder()
@@ -22,20 +23,26 @@ public class MongoClientConnection {
         try {
             mongoClient = MongoClients.create(settings);
         } catch (MongoClientException e) {
-            System.err.println("Error connecting to MongoDB: " + e.getMessage());
+            throw new RuntimeException("Error connecting to MongoDB: " + e.getMessage());
         }
+    }
+
+    public static MongoClientConnection getInstance() {
+        if (instance == null) {
+            synchronized (MongoClientConnection.class) {
+                if (instance == null) {
+                    instance = new MongoClientConnection();
+                }
+            }
+        }
+        return instance;
     }
 
     public MongoDatabase getDatabase(String databaseName) {
-        if (mongoClient != null) {
-            return mongoClient.getDatabase(databaseName);
-        }
-        return null;
+        return mongoClient.getDatabase(databaseName);
     }
 
     public void close() {
-        if (mongoClient != null) {
-            mongoClient.close();
-        }
+        mongoClient.close();
     }
 }
