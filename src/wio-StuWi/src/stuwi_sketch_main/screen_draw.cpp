@@ -42,20 +42,22 @@ void draw_background() {
   
   // Draws the TEMP Text in the lower box
   tft.setTextColor(TFT_CYAN);
-  tft.drawString("Temp", 10 , 153 , 1);
+  tft.drawString("Temperature", 10 , 153 , 1);
   tft.setTextColor(TFT_RED);
   tft.drawString("o", 64, 180, 1);
   tft.drawString("C", 75, 193, 1);
 
   tft.setTextColor(TFT_CYAN);
-  tft.drawString("Humi", 10 , 65 , 1);
+  tft.drawString("Humidity", 10 , 65 , 1);
   tft.setTextColor(TFT_RED);
   tft.drawString("%", 65, 105, 1);
 
   tft.setTextColor(TFT_CYAN);
-  tft.drawString("Loud", 10 + (tft.width() / 2) , 65 , 1);
+  tft.drawString("Loudness", 10 + (tft.width() / 2) , 65 , 1);
   tft.setTextColor(TFT_RED);
   tft.drawString("%", 65 + (tft.width() / 2), 105, 1);
+
+  update_range_indicators();
 
   
   
@@ -66,6 +68,8 @@ void update_screen(){
   sprintf(humid_string, "%s", humid_int);
   sprintf(loudness_string, "%s", loud_int);
 
+
+  //We use sprites so the updated text is not drawn ontop of the old data
   spr.setTextColor(TFT_WHITE);
   update_sprite(temp_int, 20, 193, 40);
   update_sprite(humid_int, 20, 105, 40);
@@ -83,23 +87,15 @@ void update_screen(){
       spr.setTextColor(TFT_WHITE);
       update_sprite(get_remaining_time(), ((tft.width() / 2) + 25) , 193, 100);
   }
-
   prev_alarm_flag = alarm_flag;
+}
+
+void update_range_indicators(){
+
   
-  //if(prev_alarm_flag != alarm_flag) {
-  //  tft.fillScreen(TFT_WHITE);
-  //}
-  /*
-
-  if(!alarm_flag) {
-      tft.drawString("No session", 0, 150);
-      tft.drawString(get_time(current_time), 0, 200); // get time from rtc_handler and
-  } else if(alarm_flag) {
-      tft.drawString("Ongoing sesh", 0, 150);
-      tft.drawString(get_remaining_time(), 0, 200);
-  }
-  prev_alarm_flag = alarm_flag;
-  */
+  tft.fillCircle(125, 117, 20, TFT_GREEN);
+  tft.fillCircle(125, 205, 20, TFT_GREEN);
+  tft.fillCircle((tft.width() / 2) + 125, 117, 20, TFT_GREEN);
 }
 
 void update_sprite(String data, int x, int y, int width){
