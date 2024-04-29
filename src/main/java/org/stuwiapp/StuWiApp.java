@@ -16,6 +16,7 @@ import java.io.IOException;
 public class StuWiApp extends Application {
     private MQTTManager mqttManager;
     private StudySessionManager studySessionManager;
+    private UserManager userManager;
     private String publishTopic = "stuwi/testin"; // topic that WIO subscribes to
     private String subscribeTopic = "stuwi/testout"; // topic that WIO publishes to
     // private final ScheduledExecutorService publishScheduler = Executors.newSingleThreadScheduledExecutor();
@@ -27,6 +28,7 @@ public class StuWiApp extends Application {
     @Override
     public void init() throws MqttException {
         studySessionManager = StudySessionManager.getInstance();
+        userManager = UserManager.getInstance();
         mqttManager = MQTTManagerSingleton.getMqttInstance();
         mqttManager.subscribe(subscribeTopic);
         mqttManager.subscribe(temperatureTopic);
