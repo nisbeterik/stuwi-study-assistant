@@ -82,7 +82,10 @@ void read_humidity() {
 void read_loudness() {
 
   loudVal = analogRead(A3);
-  loudPercent = map(loudVal, 0, 1023, 0, 100);
+  loudPercent = map(loudVal, 0, 1023, 0, 200);
+  if (loudPercent > 100){
+    loudPercent = 100;
+  }
   
   sprintf(loud_payload, "%.2f ", loudPercent);
   sprintf(loud_int, "%2.f ", loudPercent);

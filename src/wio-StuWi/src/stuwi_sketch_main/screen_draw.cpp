@@ -65,10 +65,6 @@ void draw_background() {
 }
 
 void update_screen(){
-  sprintf(temp_string, "%s", temp_int);
-  sprintf(humid_string, "%s", humid_int);
-  sprintf(loudness_string, "%s", loud_int);
-
 
   //We use sprites so the updated text is not drawn ontop of the old data
   spr.setTextColor(TFT_WHITE);
