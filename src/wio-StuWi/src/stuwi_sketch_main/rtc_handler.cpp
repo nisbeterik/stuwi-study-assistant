@@ -1,5 +1,7 @@
 #include "rtc_handler.h"
 #include "wio_session_handler.h"
+#include "ArduinoQueue.h"
+#include <sstream>
 
 WiFiUDP udp;
 unsigned int udp_local_port = 2390;
@@ -12,6 +14,7 @@ DateTime current_time; // object to track current time
 DateTime alarm_time;  // object to track potential alarm time
 unsigned long device_time;
 byte alarm_flag = 0; // flag to indicate whether alarm is active
+ArduinoQueue<unsigned long> alarm_queue(50);
 
 // called in setup() of main class
 // gets time from NTP server and injects into RTC
@@ -178,15 +181,20 @@ String get_remaining_time() {
 // sets alarm (length of study session)
 void set_alarm() {
   if (!alarm_flag) {
+    unsigned long duration = alarm_queue.dequeue();
     alarm_flag = 1;
-    alarm_time = DateTime(current_time.year(), current_time.month(), current_time.day(), current_time.hour(), current_time.minute(), current_time.second() + 10);  // 10 second alarm as placeholder
+    alarm_time = DateTime(current_time + TimeSpan(duration));  // 10 second alarm as placeholder
   }
 }
 
 // disables alarm
 // called when session is prematurely ended through app
+// empties alarm_queue
 void disable_alarm() {
   alarm_flag = 0;
+  while(!alarm_queue.isEmpty()) {
+        alarm_queue.dequeue();
+  }
   alarm_time = current_time;
 }
 
@@ -200,11 +208,37 @@ void check_remaining_time() {
   }
 }
 
-// alarm_over is called to indicate that the session is over
-// calls end_session which will publish that the session is over to app
+// alarm_over is called to indicate that an alarm is over
+// calls end_session which will publish that the session is over to app if there's no alarms left in queue
 void alarm_over() {
+  
   alarm_flag = 0;
   alarm_time = current_time;
   Serial.println("Alarm ended");
-  end_session();
+  if(!alarm_queue.isEmpty()) {
+    set_alarm();
+  }
+  else {
+    end_session();
+  }
+
+}
+
+void populate_alarm_queue(char* details) {
+     unsigned long study_time;
+     unsigned long break_time;
+     int num_of_blocks;
+    
+     std::stringstream ss(details);
+
+     ss >> num_of_blocks >> study_time >> break_time; // parsing from payload string with the format "num_of_blocks study_time break_time"
+     // convert to seconds
+     study_time = study_time*60;
+     break_time = break_time*60;
+     
+     for(num_of_blocks; num_of_blocks>0; num_of_blocks--) {
+        alarm_queue.enqueue(study_time);
+        alarm_queue.enqueue(break_time);
+     }
+
 }

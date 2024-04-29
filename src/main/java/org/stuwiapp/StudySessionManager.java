@@ -6,6 +6,7 @@ import java.util.UUID;
 public class StudySessionManager {
     private static StudySessionManager sessionManager;
     private StudySession currentSession;
+    private LocalDateTime pauseStart;
 
     public static StudySessionManager getInstance() {
         if (sessionManager == null) {
@@ -24,10 +25,29 @@ public class StudySessionManager {
     public void endSession() {
         currentSession.setEndDate(LocalDateTime.now());
 
-        // Implementation of saving sessions here
+        // TODO Implementation for adding ratings from prompting user here
+
+        StudySessionDAO.saveSessionInDatabase(currentSession);
 
         currentSession = null;
     }
+
+    public void pauseSession(){
+        pauseStart = LocalDateTime.now();
+    }
+
+    public void unpauseSession(){
+        LocalDateTime pauseEnd = LocalDateTime.now();
+
+        // TODO Calculate minutes paused here
+        // TODO Need to handle case where it's never unpaused
+
+        int minutes = 0; // Placeholder zero
+
+        currentSession.addMinutesPaused(minutes);
+
+    }
+
 
     public StudySession getCurrentSession() {
         return currentSession;
