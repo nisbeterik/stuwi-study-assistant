@@ -9,5 +9,6 @@ module org.openjfx {
     exports org.stuwiapp;
     exports org.stuwiapp.controller;
     opens org.stuwiapp.controller;
+    exports org.stuwiapp.database;
 
 }

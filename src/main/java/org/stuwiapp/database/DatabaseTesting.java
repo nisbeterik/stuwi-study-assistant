@@ -1,4 +1,6 @@
-package org.stuwiapp;
+package org.stuwiapp.database;
+
+import org.stuwiapp.StudySession;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package org.stuwiapp;
+package org.stuwiapp.database;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientException;

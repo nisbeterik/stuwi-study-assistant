@@ -1,9 +1,10 @@
-package org.stuwiapp;
+package org.stuwiapp.database;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.json.JSONObject;
+import org.stuwiapp.UserManager;
 
 import java.time.LocalDateTime;
 

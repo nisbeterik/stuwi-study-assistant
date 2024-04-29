@@ -1,4 +1,4 @@
-package org.stuwiapp;
+package org.stuwiapp.database;
 
 public class StudySessionTemplateDAO {
 
