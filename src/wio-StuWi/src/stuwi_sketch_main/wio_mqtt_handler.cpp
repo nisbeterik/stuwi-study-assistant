@@ -9,6 +9,10 @@ char humid_payload[50];
 char loud_payload[50];
 char session_over_payload[13] = "Session over";
 
+//Buttons payload:
+char button_a_payload[18] = "Button a pressed";
+char button_b_payload[18] = "Button b pressed";
+
 char msg[50]; // test publish payload
 
 // mqtt server
@@ -22,6 +26,10 @@ const char* TOPIC_PUBLISH = "stuwi/testout";
 const char* TOPIC_TEMP = "stuwi/temp";
 const char* TOPIC_HUMID = "stuwi/humid";
 const char* TOPIC_LOUD = "stuwi/loudness";
+
+//Buttons publish topics
+const char* TOPIC_START_SESSION_BUTTON = "stuwi/button_a";
+const char* TOPIC_STOP_SESSION_BUTTON = "stuwi/button_b";
 
 const char* TOPIC_SESSION_OVER = "stuwi/sessionover"; // topic used when time of session runs out
 

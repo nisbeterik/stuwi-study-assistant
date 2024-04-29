@@ -2,6 +2,7 @@ package org.stuwiapp;
 
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.stuwiapp.controller.StudySessionController;
 
 /***
  * This class creates a client and manages connections to the client.
@@ -18,6 +19,7 @@ public class MQTTManager {
     private String latestTemp = "0";
     private String latestHumidity = "0";
     private String latestSound = "0";
+
     private boolean isStudyActive = false;
 
 
@@ -85,7 +87,22 @@ public class MQTTManager {
                 if(topic.equals("stuwi/sessionover")){
                     isStudyActive = false;
                 }
-            }
+
+                //Buttons
+                if(topic.equals("stuwi/button_a")) {
+                    //Logic to start session:
+
+                    System.out.println("Starting session...");
+
+                }  else if(topic.equals("stuwi/buttom_b")){
+                        //Logic to stop session
+                        System.out.println("Stopping session...");
+                    }
+                }
+
+
+
+
 
             @Override
             public void deliveryComplete(IMqttDeliveryToken token) {

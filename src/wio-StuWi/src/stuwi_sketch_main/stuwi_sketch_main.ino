@@ -38,7 +38,7 @@ void setup() {
   screen_setup();
 
   pinMode(WIO_KEY_A, INPUT_PULLUP); //Key A = Button A
-  pinMode(WIO_KEY_B, INPUT_PULLUP); 
+  pinMode(WIO_KEY_B, INPUT_PULLUP); //Key B = Button B
  
 
 }
@@ -97,10 +97,18 @@ void check_button_released(){
    if (digitalRead(WIO_KEY_A) == HIGH && a_button_pressed) {
     Serial.println("A Key released");
     a_button_pressed = false;
+
+    // Publish a message to the MQTT topic indicating button A press:
+    client.publish(TOPIC_START_SESSION_BUTTON, button_a_payload);
+
    }
    if (digitalRead(WIO_KEY_B) == HIGH && b_button_pressed) {
     Serial.println("B Key released");
     b_button_pressed = false;
+
+    // Publish a message to the MQTT topic indicating button A press:
+    client.publish(TOPIC_STOP_SESSION_BUTTON, button_b_payload);
+
    }
 }
 

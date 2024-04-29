@@ -11,6 +11,7 @@ public class StudySessionController extends ParentController {
     public Button startSessionButton;
     public Button stopSessionButton;
 
+
     private String startSessionTopic = "stuwi/startsession"; // topic that WIO subscribes to
     private String stopSessionTopic = "stuwi/endsession";
     MQTTManager mqttManager = MQTTManagerSingleton.getMqttInstance();
