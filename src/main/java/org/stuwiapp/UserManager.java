@@ -3,7 +3,7 @@ package org.stuwiapp;
 public class UserManager {
 
     private static UserManager instance;
-    private String currentUser;
+    private static String currentUser;
     private UserManager() {}
 
     public static UserManager getInstance() {
@@ -15,8 +15,9 @@ public class UserManager {
 
     public String getCurrentUser() {return currentUser;}
 
-    public void setCurrentUser(String user) {
-        this.currentUser = user;
+    public static void setCurrentUser(String user) {
+        currentUser = user;
+        System.out.println("Current user is now: " + currentUser);
     }
 
     public void resetCurrentUser() {this.currentUser = null;}
