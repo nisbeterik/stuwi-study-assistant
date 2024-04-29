@@ -17,7 +17,7 @@ public class StudySessionManager {
     public void startSession() {
         UUID sessionId = UUID.randomUUID();
         if (currentSession == null){
-            currentSession = new StudySession(sessionId);
+            currentSession = new StudySession(sessionId, LocalDateTime.now());
         }
     }
 

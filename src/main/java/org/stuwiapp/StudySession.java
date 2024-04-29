@@ -16,9 +16,9 @@ public class StudySession {
     private int rating;
     private String ratingText;
 
-    public StudySession(UUID sessionId){
+    public StudySession(UUID sessionId, LocalDateTime startDate){
         this.sessionId = sessionId;
-        this.startDate = LocalDateTime.now();
+        this.startDate = startDate;
         this.endDate = null;
         this.tempData = new ArrayList<>();
         this.humidData = new ArrayList<>();

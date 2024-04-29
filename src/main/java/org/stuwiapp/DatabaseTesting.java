@@ -9,7 +9,7 @@ public class DatabaseTesting {
 
     public static void main(String[] args) {
         UUID id = UUID.randomUUID();
-        StudySession ss = new StudySession(id);
+        StudySession ss = new StudySession(id, LocalDateTime.now());
 
         ss.addTemperatureData("42.6");
         ss.addTemperatureData("49.6");
