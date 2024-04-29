@@ -1,5 +1,6 @@
 #include "mqtt.h"
 #include "wio_session_handler.h"
+#include "range_handler.h"
 
 PubSubClient client(wioClient);
 
@@ -72,6 +73,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   String msg_p = String(buff_p);
   Serial.println(msg_p);  // print payload as string
   check_topic(topic, buff_p);
+  
 
 }
 
@@ -107,6 +109,10 @@ void check_topic(char* topic, char* payload) {
   else if( strcmp(topic, TOPIC_ENDSESSION) == 0) {
     end_session();
     Serial.println("Session ended");
+  }
+  else if( strcmp(topic, TOPIC_RANGE) == 0) {
+    update_ranges(payload);
+    Serial.println("Updating Ranges");
   }
 }
 
