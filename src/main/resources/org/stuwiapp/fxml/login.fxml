@@ -13,7 +13,7 @@
       <Button fx:id="loginButton" layoutX="362.0" layoutY="221.0" mnemonicParsing="false" onAction="#logInUser" text="Log in" />
       <Button fx:id="registrationButton" layoutX="309.0" layoutY="297.0" mnemonicParsing="false" onAction="#goToRegistration" prefHeight="26.0" prefWidth="160.0" text="Register" />
       <PasswordField fx:id="passwordField" layoutX="309.0" layoutY="175.0" promptText="Password" />
-      <ImageView fitHeight="304.0" fitWidth="299.0" layoutX="38.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="stuwiImage" fitHeight="304.0" fitWidth="299.0" layoutX="38.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../docs/images/StuWi-logo.png" />
          </image>
