@@ -1,5 +1,6 @@
 package org.stuwiapp;
 
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
@@ -8,8 +9,8 @@ import org.json.JSONObject;
 public class StudySessionDAO {
 
     public static void saveSessionInDatabase(StudySession session){
-        MongoClientConnection clientConnection = new MongoClientConnection();
-        MongoDatabase db = clientConnection.getDatabase("stuwi");
+        MongoClient client = MongoConnectionManager.getMongoClient();
+        MongoDatabase db = client.getDatabase("stuwi");
         MongoCollection<Document> collection = db.getCollection("sessions");
 
         JSONObject studySessionJson = new JSONObject();
