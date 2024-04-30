@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.LoginController">
+   <children>
+      <TextField fx:id="usernameField" layoutX="309.0" layoutY="144.0" promptText="Username" />
+      <Button fx:id="loginButton" layoutX="362.0" layoutY="221.0" mnemonicParsing="false" onAction="#logInUser" text="Log in" />
+      <Button fx:id="registrationButton" layoutX="309.0" layoutY="297.0" mnemonicParsing="false" onAction="#goToRegistration" prefHeight="26.0" prefWidth="160.0" text="Register" />
+      <PasswordField fx:id="passwordField" layoutX="309.0" layoutY="175.0" promptText="Password" />
+      <ImageView fitHeight="304.0" fitWidth="299.0" layoutX="38.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../docs/images/StuWi-logo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
