@@ -20,8 +20,9 @@ public class StudySession {
 
     // private StudySessionTemplate template;
 
-    public StudySession(UUID sessionId){
+    public StudySession(UUID sessionId, LocalDateTime startDate){
         this.sessionId = sessionId;
+        this.startDate = startDate;
         this.user = UserManager.getInstance().getCurrentUser();
         this.startDate = LocalDateTime.now();
         this.endDate = null;
