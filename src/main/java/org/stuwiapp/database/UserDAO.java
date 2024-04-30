@@ -1,5 +1,6 @@
 package org.stuwiapp.database;
 
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 
 public class UserDAO {
 
-    public void loginUser(String username, String password) throws Exception {
+    public static boolean loginUser(String username, String password) throws Exception {
         MongoClientConnection clientConnection = MongoClientConnection.getInstance();
         MongoDatabase db = clientConnection.getDatabase("stuwi");
         MongoCollection<Document> collection = db.getCollection("users");
@@ -29,6 +30,7 @@ public class UserDAO {
 
             if (password.equals(foundPassword)){
                 UserManager.setCurrentUser(username);
+                return true;
             } else{
                 throw new Exception("Password is incorrect");
             }
