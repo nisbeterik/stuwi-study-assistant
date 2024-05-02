@@ -91,11 +91,19 @@ public class MQTTManager {
                 //Buttons
                 if(topic.equals("stuwi/button_a")) {
                     //Logic to start session:
-
+                    try {
+                        publish("stuwi/button_a", "Start Session");
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                    }
                     System.out.println("Starting session...");
 
-                }  else if(topic.equals("stuwi/buttom_b")){
-                        //Logic to stop session
+                }  else if(topic.equals("stuwi/button_b")){
+                    try {
+                        publish("stuwi/button_b", "Stop session");
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                    }
                         System.out.println("Stopping session...");
                     }
                 }
