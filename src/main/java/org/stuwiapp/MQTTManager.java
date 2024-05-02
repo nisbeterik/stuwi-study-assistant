@@ -104,6 +104,7 @@ public class MQTTManager {
                     } catch (MqttException e) {
                         e.printStackTrace();
                     }
+
                         System.out.println("Stopping session...");
                     }
                 }
