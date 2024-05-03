@@ -13,11 +13,15 @@ void buzzer_setup() {
 
 void play_default_sound(){
 
-        sound_duration = DateTime(current_time + 1);
-        while(current_time.unixtime() != sound_duration.unixtime()) {
-            analogWrite(WIO_BUZZER, 128);
+long startTime = millis();
+        // Turn on the buzzer
+        analogWrite(WIO_BUZZER, 128);
+
+        while(millis() - startTime < 1000) {
+            // Wait
         }
-        
+
+        // Turn off the buzzer after one second
         analogWrite(WIO_BUZZER, 0);
         
         
