@@ -17,7 +17,6 @@ public class StudySessionDAO {
         MongoCollection<Document> collection = db.getCollection("sessions");
 
         JSONObject studySessionJson = new JSONObject();
-        studySessionJson.put("_id", session.getSessionId().toString());
         studySessionJson.put("user", session.getUser());
         studySessionJson.put("start_date", session.getStartDate().toString());
         studySessionJson.put("end_date", session.getEndDate().toString());

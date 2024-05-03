@@ -20,8 +20,7 @@ public class StudySession {
 
     // private StudySessionTemplate template;
 
-    public StudySession(UUID sessionId, LocalDateTime startDate){
-        this.sessionId = sessionId;
+    public StudySession(LocalDateTime startDate){
         this.startDate = startDate;
         this.user = UserManager.getInstance().getCurrentUser();
         this.startDate = LocalDateTime.now();
@@ -74,10 +73,6 @@ public class StudySession {
         // TODO Calculate duration from startDate and endDate --OR-- Gather it from the template composition
 
         return 0;
-    }
-
-    public UUID getSessionId() {
-        return sessionId;
     }
     public LocalDateTime getStartDate() {
         return startDate;
