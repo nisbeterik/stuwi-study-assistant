@@ -11,12 +11,14 @@ byte packetBuffer[NTP_PACKET_SIZE];
 
 RTC_SAMD51 rtc; // rtc library object
 
+bool activeBreak = false; // Flag for if break is currently active
+
 DateTime current_time; // object to track current time
 DateTime alarm_time;  // object to track potential alarm time
 unsigned long device_time;
 byte alarm_flag = 0; // flag to indicate whether alarm is active
 ArduinoQueue<unsigned long> alarm_queue(50);
-
+ArduinoQueue<unsigned long> original_alarm_queue(50);
 // called in setup() of main class
 // gets time from NTP server and injects into RTC
 void setup_rtc() {
@@ -188,12 +190,17 @@ void disable_alarm() {
   alarm_time = current_time;
 }
 
+void check_break(){
+    if (original_alarm_queue.size() != alarm.queue.size() && alarm.queue.size() % 2 == 0){
+    activeBreak = true;}
+}
+
 // called by main loop
 // checks to see if alarm is still ongoing
 // when its over, call alarm_over()
 void check_remaining_time() {
   unsigned long remaining_seconds = alarm_time.unixtime() - current_time.unixtime();
-  if(remaining_seconds <= 0) {
+  if(remaining_seconds x<= 0) {
     alarm_over();
   }
 }
@@ -202,6 +209,9 @@ void check_remaining_time() {
 // calls end_session which will publish that the session is over to app if there's no alarms left in queue
 void alarm_over() {
   play_default_sound();
+  if (check_break()){
+  // Screen draw
+  }
 
   alarm_flag = 0;
   alarm_time = current_time;
