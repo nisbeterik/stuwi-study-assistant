@@ -18,7 +18,7 @@ DateTime alarm_time;  // object to track potential alarm time
 unsigned long device_time;
 byte alarm_flag = 0; // flag to indicate whether alarm is active
 ArduinoQueue<unsigned long> alarm_queue(50);
-ArduinoQueue<unsigned long> original_alarm_queue(50);
+unsigned int alarm_queue_size = 0;
 // called in setup() of main class
 // gets time from NTP server and injects into RTC
 void setup_rtc() {
@@ -186,13 +186,15 @@ void disable_alarm() {
   alarm_flag = 0;
   while(!alarm_queue.isEmpty()) {
         alarm_queue.dequeue();
+        alarm_queue_size--;
   }
   alarm_time = current_time;
 }
 
-void check_break(){
-    if (original_alarm_queue.size() != alarm.queue.size() && alarm.queue.size() % 2 == 0){
+bool check_break(){
+    if (alarm_queue_size > 0 && alarm_queue_size % 2 == 0){
     activeBreak = true;}
+    return activeBreak;
 }
 
 // called by main loop
@@ -200,7 +202,7 @@ void check_break(){
 // when its over, call alarm_over()
 void check_remaining_time() {
   unsigned long remaining_seconds = alarm_time.unixtime() - current_time.unixtime();
-  if(remaining_seconds x<= 0) {
+  if(remaining_seconds <= 0) {
     alarm_over();
   }
 }
@@ -240,6 +242,7 @@ void populate_alarm_queue(char* details) {
      for(num_of_blocks; num_of_blocks>0; num_of_blocks--) {
         alarm_queue.enqueue(study_time);
         alarm_queue.enqueue(break_time);
+        alarm_queue_size = alarm_queue_size + 2;
      }
 
 }
