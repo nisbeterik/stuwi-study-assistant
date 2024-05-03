@@ -137,6 +137,7 @@ public class DashboardController extends ParentController {
     public void stopSession(ActionEvent event) {
         try {
             mqttManager.publish(stopSessionTopic, "Stop Session");
+            StudySessionManager.getInstance().endSession();
         } catch (MqttException e) {
             e.printStackTrace();
         }
