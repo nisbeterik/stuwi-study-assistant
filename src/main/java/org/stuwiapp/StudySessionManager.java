@@ -8,6 +8,7 @@ import java.util.UUID;
 public class StudySessionManager {
     private static StudySessionManager sessionManager;
     private StudySession currentSession;
+    private boolean sessionActive = false;
     private LocalDateTime pauseStart;
 
     public static StudySessionManager getInstance() {
@@ -18,19 +19,28 @@ public class StudySessionManager {
     }
 
     public void startSession() {
-        if (currentSession == null){
+        if (!sessionActive){
             currentSession = new StudySession(LocalDateTime.now());
+            sessionActive = true;
+            System.out.println("New session started");
         }
     }
 
     public void endSession() {
-        currentSession.setEndDate(LocalDateTime.now());
 
-        // TODO Implementation for adding ratings from prompting user here
+        if (sessionActive){
+            sessionActive = false;
+            System.out.println("Session stopped");
+            currentSession.setEndDate(LocalDateTime.now());
 
-        StudySessionDAO.saveSessionInDatabase(currentSession);
+            // TODO Implementation for adding ratings from prompting user here
 
-        currentSession = null;
+            StudySessionDAO.saveSessionInDatabase(currentSession);
+
+            currentSession = null;
+        }
+
+
     }
 
     public void pauseSession(){
@@ -55,7 +65,7 @@ public class StudySessionManager {
     }
 
     public boolean isSessionActive() {
-        return currentSession != null;
+        return sessionActive;
     }
 
 
