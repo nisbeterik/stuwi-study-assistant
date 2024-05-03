@@ -1,4 +1,4 @@
-package org.stuwiapp;
+package org.stuwiapp.database;
 
 import com.mongodb.*;
 import com.mongodb.client.MongoClient;
