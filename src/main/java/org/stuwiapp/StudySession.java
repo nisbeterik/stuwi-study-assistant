@@ -123,6 +123,9 @@ public class StudySession {
     }
 
     private double findHighest(ArrayList<Double> values){
+        if (values.isEmpty()){
+            return 0;
+        }
         double highest = values.get(0);
         for (double value : values){
             if (value > highest){
@@ -133,6 +136,9 @@ public class StudySession {
     }
 
     private double findLowest(ArrayList<Double> values){
+        if (values.isEmpty()){
+            return 0;
+        }
         double lowest = values.get(0);
         for (double value : values){
             if (value < lowest){
