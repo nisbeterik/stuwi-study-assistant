@@ -82,12 +82,12 @@ void update_screen(){
       update_sprite("No Session", ((tft.width() / 2) + 10) , 153, 135);¢¢
       spr.setTextColor(TFT_WHITE);
       update_sprite(get_time(current_time), ((tft.width() / 2) + 25) , 193, 100); // get time from rtc_handler and
-  } else if(alarm_flag) {
+  } else if(alarm_flag && !activeBreak) {
       spr.setTextColor(TFT_CYAN);
       update_sprite("Studying", ((tft.width() / 2) + 10) , 153, 135);
       spr.setTextColor(TFT_WHITE);
       update_sprite(get_remaining_time(), ((tft.width() / 2) + 25) , 193, 100);
-  } else if(activeBreak){
+  } else if(alarm_flag && activeBreak){
       spr.setTextColor(TFT_RED);
       update_sprite("Active break", ((tft.width() / 2) + 10) , 153, 135);
       spr.setTextColor(TFT_WHITE);
