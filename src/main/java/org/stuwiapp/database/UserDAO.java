@@ -5,7 +5,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.json.JSONObject;
-import org.stuwiapp.MongoConnectionManager;
 import org.stuwiapp.UserManager;
 
 import java.time.LocalDateTime;
@@ -16,9 +15,6 @@ public class UserDAO {
         MongoClient client = MongoConnectionManager.getMongoClient();
         MongoDatabase db = client.getDatabase("stuwi");
         MongoCollection<Document> collection = db.getCollection("users");
-
-        // Check if username is valid
-        checkUsernameValidity(username);
 
         // Check if user exists
         Document usernameQuery = new Document("_id", username);
