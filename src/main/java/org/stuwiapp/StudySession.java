@@ -1,13 +1,17 @@
 package org.stuwiapp;
 
+import org.bson.Document;
+
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
 public class StudySession {
-    private UUID sessionId;
+
+    // For StudySessionManager constructor
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private ArrayList<Double> tempData;
@@ -18,6 +22,18 @@ public class StudySession {
     private int minutesPaused;
     private String user;
 
+    // For document based constructor
+    private double avgLoud;
+    private double avgTemp;
+    private double avgHumid;
+    private double highestTemp;
+    private double lowestTemp;
+    private double highestHumid;
+    private double lowestHumid;
+    private double highestLoud;
+    private double lowestLoud;
+
+    // TODO Implement StudySessionTemplate composition
     // private StudySessionTemplate template;
 
     public StudySession(LocalDateTime startDate){
@@ -33,7 +49,30 @@ public class StudySession {
         this.ratingText = "";
 
         // this.template = template;
+    }
 
+    public StudySession(Document doc) {
+        this.startDate = doc.getDate("startDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        this.endDate = doc.getDate("endDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        this.rating = doc.getInteger("rating");
+        this.ratingText = doc.getString("ratingText");
+        this.minutesPaused = doc.getInteger("minutesPaused");
+        this.user = doc.getString("user");
+
+        Document tempDataDoc = (Document) doc.get("tempData");
+        this.avgTemp = tempDataDoc.getDouble("average");
+        this.highestTemp = tempDataDoc.getDouble("highest");
+        this.lowestTemp = tempDataDoc.getDouble("lowest");
+
+        Document humidDataDoc = (Document) doc.get("humidData");
+        this.avgHumid = humidDataDoc.getDouble("average");
+        this.highestHumid = humidDataDoc.getDouble("highest");
+        this.lowestHumid = humidDataDoc.getDouble("lowest");
+
+        Document loudDataDoc = (Document) doc.get("loudData");
+        this.avgLoud = loudDataDoc.getDouble("average");
+        this.highestLoud = loudDataDoc.getDouble("highest");
+        this.lowestLoud = loudDataDoc.getDouble("lowest");
     }
 
     // Converting from Strings to Double because payload comes as strings from sensors/terminal
