@@ -1,7 +1,6 @@
 #include "mqtt.h"
 #include "screen_draw.h"
 #include "rtc_handler.h"
-#include "range_handler.h"
 
 TFT_eSPI tft; //initialize TFT LCD
 TFT_eSprite spr = TFT_eSprite(&tft);  //sprite
@@ -58,8 +57,6 @@ void draw_background() {
   tft.setTextColor(TFT_RED);
   tft.drawString("%", 65 + (tft.width() / 2), 105, 1);
 
-  update_range_indicators();
-
   
   
 }
@@ -89,30 +86,6 @@ void update_screen(){
       update_sprite(get_remaining_time(), ((tft.width() / 2) + 25) , 193, 100);
   }
   prev_alarm_flag = alarm_flag;
-}
-
-void update_range_indicators(){
-  
-  //Temp indicator
-  if (temp_int > temp_max || temp_int < temp_min){
-      tft.fillCircle(125, 205, 20, TFT_RED);
-  } else {
-    tft.fillCircle(125, 205, 20, TFT_GREEN);
-  }
-
-  //humidity indicator
-  if (humid_int > humid_max || humid_int < humid_min){
-      tft.fillCircle(125, 117, 20, TFT_RED);
-  } else {
-    tft.fillCircle(125, 117, 20, TFT_GREEN);
-  }
-
-  //Loudness indicator
-  if (loud_int > loud_max){
-      tft.fillCircle((tft.width() / 2) + 125, 117, 20, TFT_RED);
-  } else {
-    tft.fillCircle((tft.width() / 2) + 125, 117, 20, TFT_GREEN);
-  }
 }
 
 void update_sprite(String data, int x, int y, int width){

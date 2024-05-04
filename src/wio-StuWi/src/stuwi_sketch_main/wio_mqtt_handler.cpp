@@ -1,6 +1,5 @@
 #include "mqtt.h"
 #include "wio_session_handler.h"
-#include "range_handler.h"
 
 PubSubClient client(wioClient);
 
@@ -26,7 +25,6 @@ const char* TOPIC_PUBLISH = "stuwi/testout";
 const char* TOPIC_TEMP = "stuwi/temp";
 const char* TOPIC_HUMID = "stuwi/humid";
 const char* TOPIC_LOUD = "stuwi/loudness";
-const char* TOPIC_RANGE = "stuwi/ranges";
 
 const char* TOPIC_SESSION_OVER = "stuwi/sessionover"; // topic used when time of session runs out
 
@@ -109,10 +107,6 @@ void check_topic(char* topic, char* payload) {
   else if( strcmp(topic, TOPIC_ENDSESSION) == 0) {
     end_session();
     Serial.println("Session ended");
-  }
-  else if( strcmp(topic, TOPIC_RANGE) == 0) {
-    update_ranges(payload);
-    Serial.println("Updating Ranges");
   }
 }
 
