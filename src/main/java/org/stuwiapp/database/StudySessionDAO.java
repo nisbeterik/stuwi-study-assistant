@@ -6,20 +6,27 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.json.JSONObject;
 import org.stuwiapp.StudySession;
+import java.time.ZoneId;
+import java.util.Date;
 
 import java.util.ArrayList;
 
 public class StudySessionDAO {
 
     public static void saveSessionInDatabase(StudySession session){
+
         MongoClient client = MongoConnectionManager.getMongoClient();
         MongoDatabase db = client.getDatabase("stuwi");
         MongoCollection<Document> collection = db.getCollection("sessions");
 
+        // Convert LocalDateTime to Date
+        Date startDate = Date.from(session.getStartDate().atZone(ZoneId.systemDefault()).toInstant());
+        Date endDate = Date.from(session.getEndDate().atZone(ZoneId.systemDefault()).toInstant());
+
         JSONObject studySessionJson = new JSONObject();
         studySessionJson.put("user", session.getUser());
-        studySessionJson.put("start_date", session.getStartDate().toString());
-        studySessionJson.put("end_date", session.getEndDate().toString());
+        studySessionJson.put("start_date", startDate);
+        studySessionJson.put("end_date", endDate);
         studySessionJson.put("duration", session.getDuration());
         studySessionJson.put("minutesPaused", session.getMinutesPaused());
 
