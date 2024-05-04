@@ -76,7 +76,7 @@ void update_screen(){
   if(!alarm_flag) {
       //tft.drawString("No session", 0, 150);
       spr.setTextColor(TFT_RED);
-      update_sprite("No Session", ((tft.width() / 2) + 10) , 153, 135);¢¢
+      update_sprite("No Session", ((tft.width() / 2) + 10) , 153, 135);
       spr.setTextColor(TFT_WHITE);
       update_sprite(get_time(current_time), ((tft.width() / 2) + 25) , 193, 100); // get time from rtc_handler and
   } else if(alarm_flag && !activeBreak) {
