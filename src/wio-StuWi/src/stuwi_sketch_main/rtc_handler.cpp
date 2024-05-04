@@ -229,9 +229,11 @@ void alarm_over() {
 }
 
 void populate_alarm_queue(char* details) {
+
      unsigned long study_time;
      unsigned long break_time;
      int num_of_blocks;
+
 
      std::stringstream ss(details);
 
@@ -239,6 +241,7 @@ void populate_alarm_queue(char* details) {
      // convert to seconds
      study_time = study_time*60;
      break_time = break_time*60;
+     alarm_queue_size = 0;
 
      for(num_of_blocks; num_of_blocks>0; num_of_blocks--) {
         alarm_queue.enqueue(study_time);
