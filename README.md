@@ -9,7 +9,9 @@ StuWi’s desktop application aims to provide a user-friendly interface to monit
 # System Design 
 Last updated Apr 24, 2024
 
-![StuWi Study Assistant](/docs/images/architecture_diagrams/Architecture_DiagramV3.png)
+![StuWi Study Assistant](/docs/images/architecture_diagrams/Architecture_DiagramV4.png)
+
+[Diagram 3rd edition (Apr 24, 2024)](/docs/images/architecture_diagrams/Architecture_DiagramV3.png)
 
 [Diagram 2nd edition (Apr 08, 2024)](/docs/images/architecture_diagrams/Architecture_DiagramV2.png)
 
