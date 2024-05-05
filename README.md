@@ -28,7 +28,7 @@ Last updated May 05, 2024
 
 **Actuators:** 
 * [Real-Time Clock (RTC)](https://wiki.seeedstudio.com/Wio-Terminal-RTC/)
-* [Buzzer](https://wiki.seeedstudio.com/Grove-4-Digit_Display/)
+* [Buzzer](https://wiki.seeedstudio.com/Wio-Terminal-Buzzer/)
 
 
 # Team Members
