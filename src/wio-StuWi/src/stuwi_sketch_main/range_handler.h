@@ -7,7 +7,7 @@ extern int humid_max;
 extern int humid_min;
 extern int loud_max;
 
-extern void update_ranges();
+extern void update_ranges(char* rangeData);
 
 
 #endif
