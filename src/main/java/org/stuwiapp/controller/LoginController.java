@@ -3,6 +3,7 @@ package org.stuwiapp.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -40,6 +41,7 @@ public class LoginController extends ParentController implements Initializable {
         try {
             loginSuccess = UserDAO.loginUser(enteredUsername, enteredPassword);
         } catch (Exception e) {
+            displayAlert(Alert.AlertType.ERROR, "Login unsuccessful", "Username or password is incorrect. Please try again.");
             e.printStackTrace();
         }
 
