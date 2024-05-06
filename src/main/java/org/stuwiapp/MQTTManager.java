@@ -75,43 +75,30 @@ public class MQTTManager {
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 System.out.println("Message arrived. Topic: " + topic + " Message: " + message.toString());
 
-                if (topic.equals("stuwi/temp")){
+                if (topic.equals("stuwi/temp")) {
                     latestTemp = message.toString();
                 }
-                if (topic.equals("stuwi/humid")){
+                if (topic.equals("stuwi/humid")) {
                     latestHumidity = message.toString();
                 }
-                if (topic.equals("stuwi/loudness")){
+                if (topic.equals("stuwi/loudness")) {
                     latestSound = message.toString();
                 }
-                if(topic.equals("stuwi/sessionover")){
+                if (topic.equals("stuwi/sessionover")) {
                     isStudyActive = false;
                 }
-
                 //Buttons
-                if(topic.equals("stuwi/button_a")) {
+                if (topic.equals("stuwi/button_a")) {
                     //Logic to start session:
                     try {
-                        publish("stuwi/button_a", "Start Session");
+                        publish("stuwi/startsession", "Start Session");
                     } catch (MqttException e) {
                         e.printStackTrace();
                     }
                     System.out.println("Starting session...");
 
-                }  else if(topic.equals("stuwi/button_b")){
-                    try {
-                        publish("stuwi/button_b", "Stop session");
-                    } catch (MqttException e) {
-                        e.printStackTrace();
-                    }
-
-                        System.out.println("Stopping session...");
-                    }
                 }
-
-
-
-
+            }
 
             @Override
             public void deliveryComplete(IMqttDeliveryToken token) {
