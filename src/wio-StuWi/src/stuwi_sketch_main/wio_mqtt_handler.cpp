@@ -14,7 +14,7 @@ char session_over_payload[13] = "Session over";
 char break_active_payload[6] = "Break";
 char break_inactive_payload[9] = "No break";
 
-char msg[50]; // test publish payload
+
 
 // mqtt server
 const char* MQTT_SERVER = "broker.mqtt-dashboard.com";  // MQTT Broker URL

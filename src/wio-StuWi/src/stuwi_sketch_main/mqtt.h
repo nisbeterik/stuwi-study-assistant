@@ -14,7 +14,7 @@ extern char temp_int[50];
 extern char humid_int[50];
 extern char loud_int[50];
 extern char session_over_payload[13];
-extern char msg[50]; // test publish payload
+
 
 // mqtt server
 extern const char* MQTT_SERVER;  // MQTT Broker URL
