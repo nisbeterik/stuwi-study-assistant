@@ -44,7 +44,7 @@ public class MQTTManager {
             StudySessionManager.getInstance().startSession();
         }
         if(topic.equals("stuwi/endsession")) {
-            StudySessionManager.getInstance().startSession();
+            StudySessionManager.getInstance().endSession();
         }
         client.publish(topic, message);
     }
