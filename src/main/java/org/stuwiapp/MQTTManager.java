@@ -19,6 +19,7 @@ public class MQTTManager {
     private String latestHumidity = "0";
     private String latestSound = "0";
     private boolean isStudyActive = false;
+    private boolean isBreakActive = false;
 
 
     public MQTTManager() throws MqttException{

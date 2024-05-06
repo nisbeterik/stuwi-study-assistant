@@ -127,6 +127,10 @@ public class DashboardController extends ParentController {
             if(isSessionOngoing) {
                 studyStatusLabel.setText("Study Session Ongoing");
             } else {
+
+                if (check_break()){
+
+                }
                 studyStatusLabel.setText("Not Studying");
             }
 
