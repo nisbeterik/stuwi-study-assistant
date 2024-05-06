@@ -43,8 +43,6 @@ void reconnect_mqtt() {
     // Attempt to connect
     if (client.connect(clientId.c_str())) {
       Serial.println("connected");
-      // Once connected, publish an announcement...
-      client.publish(TOPIC_PUBLISH, "First payload published");
       // ... and resubscribe
       client.subscribe(TOPIC_STARTSESSION);
       client.subscribe(TOPIC_ENDSESSION);
