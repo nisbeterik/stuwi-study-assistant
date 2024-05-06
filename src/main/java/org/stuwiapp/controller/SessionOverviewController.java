@@ -19,10 +19,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SessionOverviewController extends ParentController implements Initializable {
-
     @FXML
     private Button returnButton;
-
     @FXML
     private TableView<StudySession> sessionTable;
     @FXML

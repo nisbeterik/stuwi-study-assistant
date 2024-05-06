@@ -14,9 +14,9 @@ public class StudySessionManager {
     private LocalDateTime sessionStart;
     private LocalDateTime pauseStart;
     private int minutesPaused = 0;
-    private static ArrayList<Double> tempData = new ArrayList<>();
-    private static ArrayList<Double> humidData = new ArrayList<>();
-    private static ArrayList<Double> loudData = new ArrayList<>();
+    private static final ArrayList<Double> tempData = new ArrayList<>();
+    private static final ArrayList<Double> humidData = new ArrayList<>();
+    private static final ArrayList<Double> loudData = new ArrayList<>();
 
 
     public static StudySessionManager getInstance() {
@@ -28,9 +28,9 @@ public class StudySessionManager {
 
     public void startSession() {
         if (!sessionActive){
-            sessionActive = true;
             sessionStart = LocalDateTime.now();
 
+            sessionActive = true;
             System.out.println("New session started");
         }
     }
@@ -48,13 +48,12 @@ public class StudySessionManager {
             // TODO Set rating score and rating text for session
 
             StudySessionDAO.saveSessionInDatabase(session);
-
-            sessionActive = false;
             tempData.clear();
             humidData.clear();
             loudData.clear();
             minutesPaused = 0;
 
+            sessionActive = false;
             System.out.println("Session stopped");
 
         }
@@ -93,6 +92,8 @@ public class StudySessionManager {
         loudData.add(loudDataDouble);
     }
 
+
+    // Helper methods for calculating average, highest and lowest values from sensor data
     private int calculateAvg(ArrayList<Double> values){
         double total = 0;
         for (Double value : values) {
@@ -101,7 +102,6 @@ public class StudySessionManager {
         double average = total / values.size();
         System.out.println(average);
 
-        // TODO Make this return with only two decimals
         return (int) Math.round(average);
     }
 

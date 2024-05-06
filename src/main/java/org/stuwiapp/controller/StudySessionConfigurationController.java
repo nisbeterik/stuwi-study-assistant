@@ -15,9 +15,8 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class StudySessionConfigurationController extends ParentController implements Initializable  {
-
-
     @FXML public ChoiceBox templateChoiceBox;
+
     @FXML Button saveTemplateButton;
     @FXML public Label titleLabel;
     @FXML public TextField subjectField;
