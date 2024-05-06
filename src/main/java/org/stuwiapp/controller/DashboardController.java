@@ -49,6 +49,7 @@ public class DashboardController extends ParentController {
     private double currentHumid;
     private double currentLoudness;
     private boolean isSessionOngoing;
+    private boolean isBreakActive = false;
 
 
 
@@ -124,8 +125,13 @@ public class DashboardController extends ParentController {
     private void readAndUpdateStudyStatus() {
         Platform.runLater(() ->  {
             isSessionOngoing = mqttManager.getStudySessionStatus();
-            if(isSessionOngoing) {
+            isBreakActive = mqttManager.getBreakStatus();
+            if(isSessionOngoing && !isBreakActive) {
                 studyStatusLabel.setText("Study Session Ongoing");
+            } else if (isSessionOngoing) {
+                studyStatusLabel.setText("Break");
+
+
             } else {
                 studyStatusLabel.setText("Not Studying");
             }

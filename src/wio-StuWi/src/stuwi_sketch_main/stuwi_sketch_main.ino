@@ -60,7 +60,11 @@ void loop() {
     snprintf (msg, 50, "Wio message #%ld", value);
     publish_testmessage();
     publish_sensor_values();
-    
+    if(activeBreak) {
+        publish_break_active();
+    } else if (!activeBreak) {
+        publish_break_inactive();
+    }
     
   }
 }

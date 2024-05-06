@@ -10,6 +10,9 @@ extern PubSubClient client;
 extern char temp_payload[50];
 extern char humid_payload[50];
 extern char loud_payload[50];
+extern char temp_int[50];
+extern char humid_int[50];
+extern char loud_int[50];
 extern char session_over_payload[13];
 extern char msg[50]; // test publish payload
 
@@ -35,6 +38,10 @@ extern void publish_testmessage();
 extern void publish_sensor_values();
 
 extern void publish_session_over();
+
+extern void publish_break_active();
+
+extern void publish_break_inactive();
 
 extern void check_topic(char* topic, char* payload);
 
