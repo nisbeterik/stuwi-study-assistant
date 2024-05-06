@@ -1,5 +1,7 @@
 package org.stuwiapp;
 
+import javafx.util.Pair;
+import org.stuwiapp.controller.DashboardController;
 import org.stuwiapp.database.StudySessionDAO;
 
 import java.time.LocalDateTime;
@@ -35,7 +37,7 @@ public class StudySessionManager {
         }
     }
 
-    // Store the current template for the session so that it can be saved with the session
+    // Store information about the session so that it can be saved in the database later
     public void setCurrentTemplate(StudySessionTemplate template){
         currentTemplate = template;
         System.out.println("Template with subject " + template.getSubject() + " set for session");
@@ -51,9 +53,16 @@ public class StudySessionManager {
                     calculateAvg(humidData), findHighest(humidData), findLowest(humidData),
                     calculateAvg(loudData), findHighest(loudData), findLowest(loudData), currentTemplate);
 
-            // TODO Set rating score and rating text for session
+            // TODO: Make this better. We do not want to call controller methods.
+            // Can we make endSession() be called inside popup method? What happens if session is ended on terminal?
+            // Also, we might not want to depend on JavaFx import "Pair" here.
+
+            Pair<Integer, String> ratingData = DashboardController.showFeedbackPopup();
+            session.setRatingScore(ratingData.getKey());
+            session.setRatingText(ratingData.getValue());
 
             StudySessionDAO.saveSessionInDatabase(session);
+
             tempData.clear();
             humidData.clear();
             loudData.clear();

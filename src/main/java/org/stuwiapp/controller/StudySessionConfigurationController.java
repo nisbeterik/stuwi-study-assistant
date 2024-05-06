@@ -112,7 +112,8 @@ public class StudySessionConfigurationController extends ParentController implem
         StudySessionTemplate sessionSettings = getSliderValues();
         if(sessionSettings == null) { return; }
 
-        StudySessionManager.getInstance().setCurrentTemplate(sessionSettings); // TODO: Does this need to be added anywhere else? What is session is started on terminal?
+        // TODO: Does this need to be added anywhere else? What is session is started on terminal?
+        StudySessionManager.getInstance().setCurrentTemplate(sessionSettings);
 
         try{
             //Starts a study session with current setting
