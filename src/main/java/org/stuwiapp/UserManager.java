@@ -15,7 +15,7 @@ public class UserManager {
 
     public String getCurrentUser() {return currentUser;}
 
-    public static void setCurrentUser(String user) {
+    public void setCurrentUser(String user) {
         currentUser = user;
         System.out.println("Current user is now: " + currentUser);
     }

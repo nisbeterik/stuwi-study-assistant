@@ -5,7 +5,6 @@ import org.stuwiapp.database.StudySessionDAO;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class StudySessionManager {
     private static StudySessionManager sessionManager;
@@ -14,6 +13,7 @@ public class StudySessionManager {
     private LocalDateTime sessionStart;
     private LocalDateTime pauseStart;
     private int minutesPaused = 0;
+    private StudySessionTemplate currentTemplate;
     private static final ArrayList<Double> tempData = new ArrayList<>();
     private static final ArrayList<Double> humidData = new ArrayList<>();
     private static final ArrayList<Double> loudData = new ArrayList<>();
@@ -35,6 +35,12 @@ public class StudySessionManager {
         }
     }
 
+    // Store the current template for the session so that it can be saved with the session
+    public void setCurrentTemplate(StudySessionTemplate template){
+        currentTemplate = template;
+        System.out.println("Template with subject " + template.getSubject() + " set for session");
+    }
+
     public void endSession() {
         if (sessionActive){
             LocalDateTime sessionEnd = LocalDateTime.now();
@@ -43,7 +49,7 @@ public class StudySessionManager {
             StudySession session = new StudySession(sessionStart, sessionEnd, user, minutesPaused,
                     calculateAvg(tempData), findHighest(tempData), findLowest(tempData),
                     calculateAvg(humidData), findHighest(humidData), findLowest(humidData),
-                    calculateAvg(loudData), findHighest(loudData), findLowest(loudData));
+                    calculateAvg(loudData), findHighest(loudData), findLowest(loudData), currentTemplate);
 
             // TODO Set rating score and rating text for session
 
@@ -52,6 +58,7 @@ public class StudySessionManager {
             humidData.clear();
             loudData.clear();
             minutesPaused = 0;
+            currentTemplate = null;
 
             sessionActive = false;
             System.out.println("Session stopped");
@@ -130,6 +137,5 @@ public class StudySessionManager {
         }
         return (int)Math.round(lowest);
     }
-
 
 }

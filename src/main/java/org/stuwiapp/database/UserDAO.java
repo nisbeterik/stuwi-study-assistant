@@ -29,7 +29,7 @@ public class UserDAO {
             String foundPassword = passwordResult.getString("password");
 
             if (password.equals(foundPassword)){
-                UserManager.setCurrentUser(username);
+                UserManager.getInstance().setCurrentUser(username);
                 return true;
             } else{
                 throw new Exception("Password is incorrect");
@@ -66,7 +66,7 @@ public class UserDAO {
             Document userAsDoc = Document.parse(userJson.toString());
             collection.insertOne(userAsDoc);
             System.out.println("New user " + username + " successfully created!");
-            UserManager.setCurrentUser(username);
+            UserManager.getInstance().setCurrentUser(username);
             return true;
         } else{
             throw new Exception("Username is already in use");

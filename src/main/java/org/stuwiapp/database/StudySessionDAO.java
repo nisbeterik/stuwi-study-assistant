@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import com.mongodb.client.MongoCursor;
+import org.stuwiapp.StudySessionTemplate;
 
 import java.util.ArrayList;
 
@@ -50,6 +51,14 @@ public class StudySessionDAO {
         loudnessJson.put("average", session.getAvgLoud());
         studySessionJson.put("loudness", loudnessJson);
 
+        // Template info
+        JSONObject templateJson = new JSONObject();
+        templateJson.put("subject", session.getTemplateSubject());
+        templateJson.put("duration", session.getTemplateDuration());
+        templateJson.put("breakDuration", session.getTemplateBreakDuration());
+        templateJson.put("blocks", session.getTemplateBlocks());
+        studySessionJson.put("template", templateJson);
+
         // Rating info
         studySessionJson.put("rating", session.getRating());
         studySessionJson.put("rating_text", session.getRatingText());
@@ -60,7 +69,7 @@ public class StudySessionDAO {
     }
 
 
-    public static ArrayList<StudySession> getUserSessions(String username){
+    public static ArrayList<StudySession> getUserSessions(String username) throws Exception {
         ArrayList<StudySession> sessions = new ArrayList<>();
         MongoClient client = MongoConnectionManager.getMongoClient();
         MongoDatabase db = client.getDatabase("stuwi");
@@ -75,6 +84,15 @@ public class StudySessionDAO {
             Document tempDataDoc = (Document) doc.get("temperature");
             Document humidDataDoc = (Document) doc.get("humidity");
             Document loudDataDoc = (Document) doc.get("loudness");
+            Document templateDoc = (Document) doc.get("template");
+
+            StudySessionTemplate template = new StudySessionTemplate(
+                    null,
+                    templateDoc.getString("subject"),
+                    templateDoc.getInteger("duration"),
+                    templateDoc.getInteger("breakDuration"),
+                    templateDoc.getInteger("blocks")
+            );
 
             StudySession session = new StudySession(
                     LocalDateTime.parse(doc.getString("start_date")),
@@ -89,7 +107,8 @@ public class StudySessionDAO {
                     humidDataDoc.getInteger("lowest"),
                     loudDataDoc.getInteger("average"),
                     loudDataDoc.getInteger("highest"),
-                    loudDataDoc.getInteger("lowest")
+                    loudDataDoc.getInteger("lowest"),
+                    template
             );
 
             session.setRatingScore(doc.getInteger("rating"));

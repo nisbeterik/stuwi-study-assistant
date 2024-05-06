@@ -9,25 +9,26 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class StudySession {
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private final LocalDateTime startDate;
+    private final LocalDateTime endDate;
     private int rating;
     private String ratingText;
-    private int minutesPaused;
-    private String user;
-    private int avgLoud;
-    private int avgTemp;
-    private int avgHumid;
-    private int highestTemp;
-    private int lowestTemp;
-    private int highestHumid;
-    private int lowestHumid;
-    private int highestLoud;
-    private int lowestLoud;
+    private final int minutesPaused;
+    private final String user;
+    private final int avgLoud;
+    private final int avgTemp;
+    private final int avgHumid;
+    private final int highestTemp;
+    private final int lowestTemp;
+    private final int highestHumid;
+    private final int lowestHumid;
+    private final int highestLoud;
+    private final int lowestLoud;
+    private final StudySessionTemplate template;
 
     public StudySession(LocalDateTime startDate, LocalDateTime endDate, String user, int minutesPaused, int avgTemp,
                         int highestTemp, int lowestTemp, int avgHumid, int highestHumid,
-                        int lowestHumid, int avgLoud, int highestLoud, int lowestLoud) {
+                        int lowestHumid, int avgLoud, int highestLoud, int lowestLoud, StudySessionTemplate template) {
 
         this.startDate = startDate;
         this.endDate = endDate;
@@ -48,6 +49,8 @@ public class StudySession {
 
         this.rating = 0;
         this.ratingText = "<no rating>";
+
+        this.template = template;
     }
 
 
@@ -64,6 +67,7 @@ public class StudySession {
         return (int) minutes;
     }
 
+    // Getters for all fields
     public LocalDateTime getStartDate() {
         return startDate;
     }
@@ -122,6 +126,22 @@ public class StudySession {
 
     public String getUser() {
         return this.user;
+    }
+
+    public int getTemplateDuration() {
+        return template.getDuration();
+    }
+
+    public int getTemplateBreakDuration() {
+        return template.getBreakDuration();
+    }
+
+    public int getTemplateBlocks() {
+        return template.getBlocks();
+    }
+
+    public String getTemplateSubject() {
+        return template.getSubject();
     }
 
 

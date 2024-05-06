@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.fxml.Initializable;
 import org.stuwiapp.MQTTManager;
 import org.stuwiapp.MQTTManagerSingleton;
+import org.stuwiapp.StudySessionManager;
 import org.stuwiapp.StudySessionTemplate;
 
 import java.net.URL;
@@ -39,6 +40,7 @@ public class StudySessionConfigurationController extends ParentController implem
 
     final static StudySessionTemplate RESET_TEMPLATE;
     final static StudySessionTemplate RECOMMENDED_TEMPLATE;
+    private StudySessionTemplate currentTemplate;
 
     //init standard session templates.
     static {
@@ -51,7 +53,7 @@ public class StudySessionConfigurationController extends ParentController implem
     }
 
     MQTTManager mqttManager = MQTTManagerSingleton.getMqttInstance();
-    private String startSessionTopic = "stuwi/startsession"; // topic that WIO subscribes to
+    private final String startSessionTopic = "stuwi/startsession"; // topic that WIO subscribes to
 
     public StudySessionConfigurationController(){
 
@@ -110,6 +112,8 @@ public class StudySessionConfigurationController extends ParentController implem
         StudySessionTemplate sessionSettings = getSliderValues();
         if(sessionSettings == null) { return; }
 
+        StudySessionManager.getInstance().setCurrentTemplate(sessionSettings); // TODO: Does this need to be added anywhere else? What is session is started on terminal?
+
         try{
             //Starts a study session with current setting
             mqttManager.publish(startSessionTopic, String.format("%d %d %d", sessionSettings.getBlocks(), sessionSettings.getDuration(), sessionSettings.getBreakDuration()));
@@ -163,9 +167,8 @@ public class StudySessionConfigurationController extends ParentController implem
             e.printStackTrace();
         }
         return null;
-
-
     }
+
 }
 
 

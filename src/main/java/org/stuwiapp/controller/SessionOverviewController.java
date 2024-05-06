@@ -40,17 +40,21 @@ public class SessionOverviewController extends ParentController implements Initi
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String currentUser = UserManager.getInstance().getCurrentUser();
-        ArrayList<StudySession> sessions = StudySessionDAO.getUserSessions(currentUser);
-        ObservableList<StudySession> sessionsList= FXCollections.observableArrayList(sessions);
-        startDateColumn.setCellValueFactory(new PropertyValueFactory<>("formattedStartDate"));
-        endDateColumn.setCellValueFactory(new PropertyValueFactory<>("formattedEndDate"));
-        durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
-        tempColumn.setCellValueFactory(new PropertyValueFactory<>("temperature"));
-        humidColumn.setCellValueFactory(new PropertyValueFactory<>("humidity"));
-        loudColumn.setCellValueFactory(new PropertyValueFactory<>("loudness"));
-        ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
-        sessionTable.getItems().addAll(sessionsList);
+        try {
+            String currentUser = UserManager.getInstance().getCurrentUser();
+            ArrayList<StudySession> sessions = StudySessionDAO.getUserSessions(currentUser);
+            ObservableList<StudySession> sessionsList= FXCollections.observableArrayList(sessions);
+            startDateColumn.setCellValueFactory(new PropertyValueFactory<>("formattedStartDate"));
+            endDateColumn.setCellValueFactory(new PropertyValueFactory<>("formattedEndDate"));
+            durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
+            tempColumn.setCellValueFactory(new PropertyValueFactory<>("temperature"));
+            humidColumn.setCellValueFactory(new PropertyValueFactory<>("humidity"));
+            loudColumn.setCellValueFactory(new PropertyValueFactory<>("loudness"));
+            ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
+            sessionTable.getItems().addAll(sessionsList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
