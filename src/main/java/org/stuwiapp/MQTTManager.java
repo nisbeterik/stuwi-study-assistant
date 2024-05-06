@@ -20,6 +20,7 @@ public class MQTTManager {
     private String latestSound = "0";
     private boolean isStudyActive = false;
     private boolean isBreakActive = false;
+    private boolean isBreakInactive = false;
 
 
     public MQTTManager() throws MqttException{
@@ -94,7 +95,6 @@ public class MQTTManager {
             }
         };
     }
-
     public String getLatestTemp() {
         return latestTemp;
     }
