@@ -24,8 +24,8 @@ public class StudySessionDAO {
 
         JSONObject studySessionJson = new JSONObject();
         studySessionJson.put("user", session.getUser());
-        studySessionJson.put("start_date", session.getStartDate()); // Saving as strings to avoid database issues
-        studySessionJson.put("end_date", session.getEndDate());
+        studySessionJson.put("start_date", session.getStartDate().toString());
+        studySessionJson.put("end_date", session.getEndDate().toString());
         studySessionJson.put("duration", session.getDuration());
         studySessionJson.put("minutesPaused", session.getMinutesPaused());
 
@@ -61,20 +61,43 @@ public class StudySessionDAO {
 
 
     public static ArrayList<StudySession> getUserSessions(String username){
-    ArrayList<StudySession> sessions = new ArrayList<>();
-    MongoClient client = MongoConnectionManager.getMongoClient();
-    MongoDatabase db = client.getDatabase("stuwi");
-    MongoCollection<Document> collection = db.getCollection("sessions");
+        ArrayList<StudySession> sessions = new ArrayList<>();
+        MongoClient client = MongoConnectionManager.getMongoClient();
+        MongoDatabase db = client.getDatabase("stuwi");
+        MongoCollection<Document> collection = db.getCollection("sessions");
 
-    Document query = new Document("user", username);
-    MongoCursor<Document> cursor = collection.find(query).iterator();
+        Document query = new Document("user", username);
+        MongoCursor<Document> cursor = collection.find(query).iterator();
 
-    while (cursor.hasNext()) {
-        Document doc = cursor.next();
-        StudySession session = new StudySession(doc);
-        sessions.add(session);
-    }
-    return sessions;
+        while (cursor.hasNext()) {
+            Document doc = cursor.next();
+
+            Document tempDataDoc = (Document) doc.get("temperature");
+            Document humidDataDoc = (Document) doc.get("humidity");
+            Document loudDataDoc = (Document) doc.get("loudness");
+
+            StudySession session = new StudySession(
+                    LocalDateTime.parse(doc.getString("start_date")),
+                    LocalDateTime.parse(doc.getString("end_date")),
+                    doc.getString("user"),
+                    doc.getInteger("minutesPaused"),
+                    tempDataDoc.getInteger("average"),
+                    tempDataDoc.getInteger("highest"),
+                    tempDataDoc.getInteger("lowest"),
+                    humidDataDoc.getInteger("average"),
+                    humidDataDoc.getInteger("highest"),
+                    humidDataDoc.getInteger("lowest"),
+                    loudDataDoc.getInteger("average"),
+                    loudDataDoc.getInteger("highest"),
+                    loudDataDoc.getInteger("lowest")
+            );
+
+            session.setRatingScore(doc.getInteger("rating"));
+            session.setRatingText(doc.getString("rating_text"));
+
+            sessions.add(session);
+        }
+        return sessions;
     }
 
 
