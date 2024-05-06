@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.SessionOverviewController">
    <children>
       <Button fx:id="returnButton" layoutX="273.0" layoutY="328.0" mnemonicParsing="false" onAction="#redirectToHome" text="Return" />
-      <TableView fx:id="sessionTable" layoutX="13.0" layoutY="37.0" prefHeight="254.0" prefWidth="573.0" />
+      <TableView fx:id="sessionTable" layoutX="13.0" layoutY="37.0" prefHeight="254.0" prefWidth="573.0">
+         <columns>
+            <TableColumn id="startDateColumn" prefWidth="75.0" text="Start" />
+            <TableColumn id="endDateColumn" prefWidth="75.0" text="End" />
+            <TableColumn id="durationColumn" prefWidth="75.0" text="Duration" />
+            <TableColumn id="tempColumn" prefWidth="75.0" text="Temp" />
+            <TableColumn id="humidColumn" prefWidth="75.0" text="Humid" />
+            <TableColumn id="loudColumn" prefWidth="75.0" text="Loud" />
+            <TableColumn id="ratingColumn" prefWidth="75.0" text="Rating" />
+         </columns></TableView>
    </children>
 </AnchorPane>
