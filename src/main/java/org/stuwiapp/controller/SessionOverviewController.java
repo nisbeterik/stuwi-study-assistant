@@ -19,14 +19,13 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SessionOverviewController extends ParentController implements Initializable {
+
     @FXML
     private Button returnButton;
     @FXML
     private TableView<StudySession> sessionTable;
     @FXML
     private TableColumn<StudySession, LocalDateTime> startDateColumn;
-    @FXML
-    private TableColumn<StudySession, LocalDateTime> endDateColumn;
     @FXML
     private TableColumn<StudySession, Integer> durationColumn;
     @FXML
@@ -37,6 +36,8 @@ public class SessionOverviewController extends ParentController implements Initi
     private TableColumn<StudySession, String> loudColumn;
     @FXML
     private TableColumn<StudySession, String> ratingColumn;
+    @FXML
+    public TableColumn<StudySession, String> subjectColumn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -45,12 +46,12 @@ public class SessionOverviewController extends ParentController implements Initi
             ArrayList<StudySession> sessions = StudySessionDAO.getUserSessions(currentUser);
             ObservableList<StudySession> sessionsList= FXCollections.observableArrayList(sessions);
             startDateColumn.setCellValueFactory(new PropertyValueFactory<>("formattedStartDate"));
-            endDateColumn.setCellValueFactory(new PropertyValueFactory<>("formattedEndDate"));
             durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
             tempColumn.setCellValueFactory(new PropertyValueFactory<>("temperature"));
             humidColumn.setCellValueFactory(new PropertyValueFactory<>("humidity"));
             loudColumn.setCellValueFactory(new PropertyValueFactory<>("loudness"));
             ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
+            subjectColumn.setCellValueFactory(new PropertyValueFactory<>("templateSubject"));
             sessionTable.getItems().addAll(sessionsList);
         } catch (Exception e) {
             e.printStackTrace();

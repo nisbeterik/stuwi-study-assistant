@@ -147,15 +147,15 @@ public class StudySession {
 
     // Methods used in GUI to display data
     public String getTemperature() {
-        return "HI: " + highestTemp + " LO: " + lowestTemp + " AVG: " + avgTemp;
+        return highestTemp + " / " + lowestTemp + " / " + avgTemp;
     }
 
     public String getHumidity() {
-        return "HI: " + highestHumid + " LO: " + lowestHumid + " AVG: " + avgHumid;
+        return highestHumid + " / " + lowestHumid + " / " + avgHumid;
     }
 
     public String getLoudness() {
-        return "HI: " + highestLoud + " LO: " + lowestLoud + " AVG: " + avgLoud;
+        return highestLoud + " / " + lowestLoud + " / " + avgLoud;
     }
 
     public String getFormattedStartDate() {
