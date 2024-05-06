@@ -87,6 +87,12 @@ public class MQTTManager {
                 if(topic.equals("stuwi/sessionover")){
                     isStudyActive = false;
                 }
+                if(topic.equals("stuwi/breakActive")){
+                    onBreakStart();
+                }
+                if(topic.equals("stuwi/breakInactive")){
+                    onBreakEnd();
+                }
             }
 
             @Override

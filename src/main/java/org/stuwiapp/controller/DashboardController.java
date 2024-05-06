@@ -123,10 +123,16 @@ public class DashboardController extends ParentController {
     }
 
     public void onBreakStart() {
-        updateBreakStatus(true);
+        // Change text to display "Break"
+        Platform.runLater(() -> {
+            studyStatusLabel.setText("Break");
+        });
     }
     public void onBreakEnd() {
-        updateBreakStatus(false);
+        // Change text to display study session ongoing when break ends
+        Platform.runLater(() -> {
+            studyStatusLabel.setText("Study Session Ongoing");
+        });
     }
     private void updateBreakStatus(boolean isActive) {
         isBreakActive = isActive;
