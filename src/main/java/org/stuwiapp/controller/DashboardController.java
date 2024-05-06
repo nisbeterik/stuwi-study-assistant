@@ -1,6 +1,8 @@
 package org.stuwiapp.controller;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -68,6 +70,8 @@ public class DashboardController extends ParentController {
 
     @FXML
     public void initialize() {
+
+        initListener();
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -157,18 +161,28 @@ public class DashboardController extends ParentController {
         DialogPane dialogPane = alert.getDialogPane();
 
         Slider slider = new Slider();
-        slider.setMin(1); // Set minimum value
-        slider.setMax(5); // Set maximum value
-        slider.setValue(1); // Set initial value
+        slider.setMin(1);
+        slider.setMax(5);
+        slider.setValue(1);
 
-        TextArea textArea = new TextArea(); // Use TextArea instead of TextField
-        textArea.setPrefColumnCount(30); // Set preferred column count
-        textArea.setWrapText(true); // Enable text wrapping
+        TextArea textArea = new TextArea();
+        textArea.setPrefColumnCount(30);
+        textArea.setWrapText(true);
 
-        VBox vbox = new VBox(slider, textArea); // VBox to hold the slider and textfield
+        VBox vbox = new VBox(slider, textArea);
         dialogPane.setContent(vbox);
 
         alert.showAndWait();
+    }
+
+
+    // binds to studyStatus label to prompt user for feedback when status goes from anything to "Not Studying"
+    private void initListener() {
+        studyStatusLabel.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (Objects.equals(newValue, "Not Studying") && !Objects.equals(oldValue, newValue)) {
+                showFeedbackPopup();
+            }
+        });
     }
 
 
