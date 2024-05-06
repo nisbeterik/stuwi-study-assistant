@@ -8,10 +8,6 @@ extern WiFiClient wioClient;
 
 extern WiFiUDP udp;
 
-extern const char* SSID;
-extern const char* PASSWORD;
-
-
 extern void wifi_setup();
 
 #endif  
