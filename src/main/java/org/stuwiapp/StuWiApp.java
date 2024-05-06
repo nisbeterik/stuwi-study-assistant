@@ -39,8 +39,8 @@ public class StuWiApp extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException {
-        Object dashboard = FXMLUtil.loadFxml("stuwi-home.fxml");
-        Scene scene = new Scene((Parent) dashboard);
+        Object home = FXMLUtil.loadFxml("stuwi-home.fxml");
+        Scene scene = new Scene((Parent) home);
         stage.setScene(scene);
         stage.setOnCloseRequest(event -> {
             try {
