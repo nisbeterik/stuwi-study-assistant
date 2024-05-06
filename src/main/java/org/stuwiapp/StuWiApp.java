@@ -42,16 +42,23 @@ public class StuWiApp extends Application {
         Object dashboard = FXMLUtil.loadFxml("stuwi-home.fxml");
         Scene scene = new Scene((Parent) dashboard);
         stage.setScene(scene);
+        stage.setOnCloseRequest(event -> {
+            try {
+                onCloseCallback();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
         stage.show();
     }
 
     // stop app and disconnects from mqtt
-    @Override
-    public void stop() throws Exception {
+
+    public void onCloseCallback() throws Exception {
         if (mqttManager != null) {
             mqttManager.close();
         }
-        super.stop();
+        System.exit(0);
     }
 
 
