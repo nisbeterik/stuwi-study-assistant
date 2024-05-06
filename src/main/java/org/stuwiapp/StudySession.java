@@ -12,8 +12,8 @@ import java.util.UUID;
 public class StudySession {
 
     // For StudySessionManager constructor
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private String startDate;
+    private String endDate;
     private ArrayList<Double> tempData;
     private ArrayList<Double> humidData;
     private ArrayList<Double> loudData;
@@ -33,13 +33,9 @@ public class StudySession {
     private double highestLoud;
     private double lowestLoud;
 
-    // TODO Implement StudySessionTemplate composition
-    // private StudySessionTemplate template;
-
     public StudySession(LocalDateTime startDate){
-        this.startDate = startDate;
+        this.startDate = startDate.toString();
         this.user = UserManager.getInstance().getCurrentUser();
-        this.startDate = LocalDateTime.now();
         this.endDate = null;
         this.minutesPaused = 0;
         this.tempData = new ArrayList<>();
@@ -47,29 +43,27 @@ public class StudySession {
         this.loudData = new ArrayList<>();
         this.rating = 0;
         this.ratingText = "";
-
-        // this.template = template;
     }
 
     public StudySession(Document doc) {
-        this.startDate = doc.getDate("startDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-        this.endDate = doc.getDate("endDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        this.startDate = doc.getString("start_date");
+        this.endDate = doc.getString("end_date");
         this.rating = doc.getInteger("rating");
-        this.ratingText = doc.getString("ratingText");
+        this.ratingText = doc.getString("rating_text");
         this.minutesPaused = doc.getInteger("minutesPaused");
         this.user = doc.getString("user");
 
-        Document tempDataDoc = (Document) doc.get("tempData");
+        Document tempDataDoc = (Document) doc.get("temperature");
         this.avgTemp = tempDataDoc.getDouble("average");
         this.highestTemp = tempDataDoc.getDouble("highest");
         this.lowestTemp = tempDataDoc.getDouble("lowest");
 
-        Document humidDataDoc = (Document) doc.get("humidData");
+        Document humidDataDoc = (Document) doc.get("humidity");
         this.avgHumid = humidDataDoc.getDouble("average");
         this.highestHumid = humidDataDoc.getDouble("highest");
         this.lowestHumid = humidDataDoc.getDouble("lowest");
 
-        Document loudDataDoc = (Document) doc.get("loudData");
+        Document loudDataDoc = (Document) doc.get("loudness");
         this.avgLoud = loudDataDoc.getDouble("average");
         this.highestLoud = loudDataDoc.getDouble("highest");
         this.lowestLoud = loudDataDoc.getDouble("lowest");
@@ -100,7 +94,7 @@ public class StudySession {
     }
 
     public void setEndDate(LocalDateTime end){
-        this.endDate = end;
+        this.endDate = end.toString();
     }
 
     public void addMinutesPaused(int minutes){
@@ -109,14 +103,14 @@ public class StudySession {
 
     public int getDuration(){
 
-        // TODO Calculate duration from startDate and endDate --OR-- Gather it from the template composition
+        // TODO Calculate duration from startDate and endDate
 
         return 0;
     }
-    public LocalDateTime getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
-    public LocalDateTime getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
     public double getHighestTemp(){

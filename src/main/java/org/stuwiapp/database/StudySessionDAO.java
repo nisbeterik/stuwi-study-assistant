@@ -6,8 +6,11 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.json.JSONObject;
 import org.stuwiapp.StudySession;
+
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import com.mongodb.client.MongoCursor;
 
 import java.util.ArrayList;
 
@@ -19,14 +22,10 @@ public class StudySessionDAO {
         MongoDatabase db = client.getDatabase("stuwi");
         MongoCollection<Document> collection = db.getCollection("sessions");
 
-        // Convert LocalDateTime to Date
-        Date startDate = Date.from(session.getStartDate().atZone(ZoneId.systemDefault()).toInstant());
-        Date endDate = Date.from(session.getEndDate().atZone(ZoneId.systemDefault()).toInstant());
-
         JSONObject studySessionJson = new JSONObject();
         studySessionJson.put("user", session.getUser());
-        studySessionJson.put("start_date", startDate);
-        studySessionJson.put("end_date", endDate);
+        studySessionJson.put("start_date", session.getStartDate()); // Saving as strings to avoid database issues
+        studySessionJson.put("end_date", session.getEndDate());
         studySessionJson.put("duration", session.getDuration());
         studySessionJson.put("minutesPaused", session.getMinutesPaused());
 
@@ -62,8 +61,20 @@ public class StudySessionDAO {
 
 
     public static ArrayList<StudySession> getUserSessions(String username){
-        // TODO
-        return null;
+    ArrayList<StudySession> sessions = new ArrayList<>();
+    MongoClient client = MongoConnectionManager.getMongoClient();
+    MongoDatabase db = client.getDatabase("stuwi");
+    MongoCollection<Document> collection = db.getCollection("sessions");
+
+    Document query = new Document("user", username);
+    MongoCursor<Document> cursor = collection.find(query).iterator();
+
+    while (cursor.hasNext()) {
+        Document doc = cursor.next();
+        StudySession session = new StudySession(doc);
+        sessions.add(session);
+    }
+    return sessions;
     }
 
 

@@ -34,6 +34,7 @@ public class StudySessionManager {
             currentSession.setEndDate(LocalDateTime.now());
 
             // TODO Implementation for adding ratings from prompting user here
+            // TODO Make sure session is valid before saving (can be done in StudySessionDAO)
 
             StudySessionDAO.saveSessionInDatabase(currentSession);
 
