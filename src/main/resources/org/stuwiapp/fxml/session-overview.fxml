@@ -10,13 +10,13 @@
       <Button fx:id="returnButton" layoutX="273.0" layoutY="328.0" mnemonicParsing="false" onAction="#redirectToHome" text="Return" />
       <TableView fx:id="sessionTable" layoutX="13.0" layoutY="37.0" prefHeight="254.0" prefWidth="573.0">
          <columns>
-            <TableColumn id="startDateColumn" prefWidth="75.0" text="Start" />
-            <TableColumn id="endDateColumn" prefWidth="75.0" text="End" />
-            <TableColumn id="durationColumn" prefWidth="75.0" text="Duration" />
-            <TableColumn id="tempColumn" prefWidth="75.0" text="Temp" />
-            <TableColumn id="humidColumn" prefWidth="75.0" text="Humid" />
-            <TableColumn id="loudColumn" prefWidth="75.0" text="Loud" />
-            <TableColumn id="ratingColumn" prefWidth="75.0" text="Rating" />
+            <TableColumn id="startDateColumn" fx:id="startDateColumn" prefWidth="75.0" text="Start" />
+            <TableColumn id="endDateColumn" fx:id="endDateColumn" prefWidth="75.0" text="End" />
+            <TableColumn id="durationColumn" fx:id="durationColumn" prefWidth="75.0" text="Duration" />
+            <TableColumn id="tempColumn" fx:id="tempColumn" prefWidth="75.0" text="Temp" />
+            <TableColumn id="humidColumn" fx:id="humidColumn" prefWidth="75.0" text="Humid" />
+            <TableColumn id="loudColumn" fx:id="loudColumn" prefWidth="75.0" text="Loud" />
+            <TableColumn id="ratingColumn" fx:id="ratingColumn" prefWidth="75.0" text="Rating" />
          </columns></TableView>
    </children>
 </AnchorPane>
