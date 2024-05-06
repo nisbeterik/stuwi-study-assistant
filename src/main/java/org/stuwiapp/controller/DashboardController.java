@@ -4,11 +4,11 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.stuwiapp.MQTTManager;
 import org.stuwiapp.MQTTManagerSingleton;
@@ -146,6 +146,29 @@ public class DashboardController extends ParentController {
 
     public void redirectStudySession(MouseEvent mouseEvent) {
         redirect(mouseEvent, "study-session.fxml");
+    }
+
+    // TODO: Implement this method
+    public void showFeedbackPopup() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Study Session Ended");
+        alert.setHeaderText("Please provide your feedback");
+
+        DialogPane dialogPane = alert.getDialogPane();
+
+        Slider slider = new Slider();
+        slider.setMin(1); // Set minimum value
+        slider.setMax(5); // Set maximum value
+        slider.setValue(1); // Set initial value
+
+        TextArea textArea = new TextArea(); // Use TextArea instead of TextField
+        textArea.setPrefColumnCount(30); // Set preferred column count
+        textArea.setWrapText(true); // Enable text wrapping
+
+        VBox vbox = new VBox(slider, textArea); // VBox to hold the slider and textfield
+        dialogPane.setContent(vbox);
+
+        alert.showAndWait();
     }
 
 
