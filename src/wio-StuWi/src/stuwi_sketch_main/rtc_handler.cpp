@@ -194,7 +194,7 @@ void disable_alarm() {
 
 void check_break(){
 
-    if (alarm_queue_size > 0 && alarm_queue_size % 2 == 0){
+    if (alarm_queue_size > 0 && alarm_queue_size % 2 == 0 && !activeBreak){
     activeBreak = true;}
     else {
         activeBreak = false;
