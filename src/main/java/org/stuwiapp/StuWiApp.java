@@ -26,8 +26,8 @@ public class StuWiApp extends Application {
 
     private final String sessionOverTopic = "stuwi/sessionover";
 
-    private final String activebreakTopic = "stuwi/breakActive";
-    private final String inactivebreakTopic = "stuwi/breakInactive";
+    private final String activebreakTopic = "stuwi/breakactive";
+    private final String inactivebreakTopic = "stuwi/breakiwnactive";
 
     @Override
     public void init() throws MqttException {
