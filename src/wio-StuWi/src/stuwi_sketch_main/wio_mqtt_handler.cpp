@@ -14,7 +14,7 @@ char session_over_payload[13] = "Session over";
 char break_active_payload[6] = "Break";
 char break_inactive_payload[9] = "No break";
 
-char msg[50]; // test publish payload
+
 
 // mqtt server
 const char* MQTT_SERVER = "broker.mqtt-dashboard.com";  // MQTT Broker URL
@@ -23,7 +23,6 @@ const char* MQTT_SERVER = "broker.mqtt-dashboard.com";  // MQTT Broker URL
 const char* TOPIC_STARTSESSION = "stuwi/startsession"; 
 const char* TOPIC_ENDSESSION = "stuwi/endsession";
 // publish topics
-const char* TOPIC_PUBLISH = "stuwi/testout";
 const char* TOPIC_TEMP = "stuwi/temp";
 const char* TOPIC_HUMID = "stuwi/humid";
 const char* TOPIC_LOUD = "stuwi/loudness";
@@ -43,8 +42,6 @@ void reconnect_mqtt() {
     // Attempt to connect
     if (client.connect(clientId.c_str())) {
       Serial.println("connected");
-      // Once connected, publish an announcement...
-      client.publish(TOPIC_PUBLISH, "First payload published");
       // ... and resubscribe
       client.subscribe(TOPIC_STARTSESSION);
       client.subscribe(TOPIC_ENDSESSION);
@@ -79,12 +76,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
 }
 
-// test message that is published every 10 seconds. will be removed in future
-void publish_testmessage() {
-  Serial.print("Publish message: ");
-  Serial.println(msg);
-  client.publish(TOPIC_PUBLISH, msg);
-}
+
 
 // publishes sensor values to app every 10 seconds
 // from main loop

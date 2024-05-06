@@ -12,15 +12,7 @@ extern RTC_SAMD51 rtc;
 
 extern bool activeBreak;
 
-extern unsigned int alarm_queue_size;
-
-extern unsigned int udp_local_port;
-
-extern char time_server[];
-
 extern DateTime current_time;
-
-extern unsigned long device_time;
 
 extern byte alarm_flag;
 
@@ -32,13 +24,9 @@ extern unsigned long send_NTP_packet(const char* address);
 
 extern String get_time(DateTime dt);
 
-extern void alarmMatch(uint32_t flag);
-
 extern void set_alarm();
 
 extern void disable_alarm();
-
-extern void check_break();
 
 extern void alarm_over();
 

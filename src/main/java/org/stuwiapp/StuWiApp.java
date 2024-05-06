@@ -16,9 +16,7 @@ import java.io.IOException;
 public class StuWiApp extends Application {
 
     private MQTTManager mqttManager;
-    private String publishTopic = "stuwi/testin"; // topic that WIO subscribes to
-    private String subscribeTopic = "stuwi/testout"; // topic that WIO publishes to
-    // private final ScheduledExecutorService publishScheduler = Executors.newSingleThreadScheduledExecutor();
+
     private final String temperatureTopic = "stuwi/temp";
     private final String humidityTopic = "stuwi/humid";
 
@@ -32,7 +30,6 @@ public class StuWiApp extends Application {
     @Override
     public void init() throws MqttException {
         mqttManager = MQTTManagerSingleton.getMqttInstance();
-        mqttManager.subscribe(subscribeTopic);
         mqttManager.subscribe(temperatureTopic);
         mqttManager.subscribe(humidityTopic);
         mqttManager.subscribe(loudnessTopic);
@@ -42,29 +39,26 @@ public class StuWiApp extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException {
-        Object dashboard = FXMLUtil.loadFxml("stuwi-home.fxml");
-        Scene scene = new Scene((Parent) dashboard);
+        Object home = FXMLUtil.loadFxml("stuwi-home.fxml");
+        Scene scene = new Scene((Parent) home);
         stage.setScene(scene);
-        stage.show();
-
-
-        /*publishScheduler.scheduleAtFixedRate(() -> {
+        stage.setOnCloseRequest(event -> {
             try {
-                mqttManager.publish(publishTopic, "Message from StuWi app");
-            } catch (MqttException e) {
+                onCloseCallback();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        }, 0, 10, TimeUnit.SECONDS);*/
+        });
+        stage.show();
     }
 
     // stop app and disconnects from mqtt
-    @Override
-    public void stop() throws Exception {
+
+    public void onCloseCallback() throws Exception {
         if (mqttManager != null) {
             mqttManager.close();
         }
-        // publishScheduler.shutdown();
-        super.stop();
+        System.exit(0);
     }
 
 
