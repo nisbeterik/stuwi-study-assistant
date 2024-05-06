@@ -38,7 +38,7 @@ extern void set_alarm();
 
 extern void disable_alarm();
 
-extern bool check_break();
+extern void check_break();
 
 extern void alarm_over();
 

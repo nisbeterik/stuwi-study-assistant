@@ -192,11 +192,13 @@ void disable_alarm() {
   alarm_time = current_time;
 }
 
-bool check_break(){
-    activeBreak = false;
+void check_break(){
+
     if (alarm_queue_size > 0 && alarm_queue_size % 2 == 0){
     activeBreak = true;}
-    return activeBreak;
+    else {
+        activeBreak = false;
+    }
 }
 
 // called by main loop
