@@ -23,7 +23,6 @@ const char* MQTT_SERVER = "broker.mqtt-dashboard.com";  // MQTT Broker URL
 const char* TOPIC_STARTSESSION = "stuwi/startsession"; 
 const char* TOPIC_ENDSESSION = "stuwi/endsession";
 // publish topics
-const char* TOPIC_PUBLISH = "stuwi/testout";
 const char* TOPIC_TEMP = "stuwi/temp";
 const char* TOPIC_HUMID = "stuwi/humid";
 const char* TOPIC_LOUD = "stuwi/loudness";
@@ -77,12 +76,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
 }
 
-// test message that is published every 10 seconds. will be removed in future
-void publish_testmessage() {
-  Serial.print("Publish message: ");
-  Serial.println(msg);
-  client.publish(TOPIC_PUBLISH, msg);
-}
+
 
 // publishes sensor values to app every 10 seconds
 // from main loop
