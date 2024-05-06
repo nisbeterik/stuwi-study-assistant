@@ -122,24 +122,6 @@ public class DashboardController extends ParentController {
         });
     }
 
-    public void onBreakStart() {
-        // Change text to display "Break"
-        Platform.runLater(() -> {
-            studyStatusLabel.setText("Break");
-        });
-    }
-    public void onBreakEnd() {
-        // Change text to display study session ongoing when break ends
-        Platform.runLater(() -> {
-            studyStatusLabel.setText("Study Session Ongoing");
-        });
-    }
-    private void updateBreakStatus(boolean isActive) {
-        isBreakActive = isActive;
-        // Call method to update UI based on break status
-        readAndUpdateStudyStatus();
-    }
-
     private void readAndUpdateStudyStatus() {
         Platform.runLater(() ->  {
             isSessionOngoing = mqttManager.getStudySessionStatus();

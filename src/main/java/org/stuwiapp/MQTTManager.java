@@ -88,10 +88,10 @@ public class MQTTManager {
                     isStudyActive = false;
                 }
                 if(topic.equals("stuwi/breakActive")){
-                    onBreakStart();
+                    isBreakActive = true;
                 }
                 if(topic.equals("stuwi/breakInactive")){
-                    onBreakEnd();
+                    isBreakActive = false;
                 }
             }
 
