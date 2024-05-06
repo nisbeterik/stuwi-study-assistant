@@ -47,6 +47,7 @@ public class MQTTManager {
         message.setQos(QOS);
         if(topic.equals("stuwi/startsession")) {
             this.isStudyActive = true;
+            isBreakActive = false;
         }
         if(topic.equals("stuwi/endsession")) {
             this.isStudyActive = false;
@@ -86,11 +87,12 @@ public class MQTTManager {
                 }
                 if(topic.equals("stuwi/sessionover")){
                     isStudyActive = false;
+                    isBreakActive = false;
                 }
-                if(topic.equals("stuwi/breakActive")){
+                if(topic.equals("stuwi/breakactive")){
                     isBreakActive = true;
                 }
-                if(topic.equals("stuwi/breakInactive")){
+                if(topic.equals("stuwi/breakinactive")){
                     isBreakActive = false;
                 }
             }
@@ -114,5 +116,9 @@ public class MQTTManager {
     }
     public boolean getStudySessionStatus() {
         return isStudyActive;
+    }
+
+    public boolean getBreakStatus() {
+        return isBreakActive;
     }
 }
