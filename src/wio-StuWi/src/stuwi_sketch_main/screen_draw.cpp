@@ -86,7 +86,7 @@ void update_screen(){
       update_sprite(get_remaining_time(), ((tft.width() / 2) + 25) , 193, 100);
   } else if(alarm_flag && activeBreak){
       spr.setTextColor(TFT_RED);
-      update_sprite("Active break", ((tft.width() / 2) + 10) , 153, 135);
+      update_sprite("Break", ((tft.width() / 2) + 10) , 153, 135);
       spr.setTextColor(TFT_WHITE);
       update_sprite(get_remaining_time(), ((tft.width() / 2) + 25) , 193, 100);
   }
