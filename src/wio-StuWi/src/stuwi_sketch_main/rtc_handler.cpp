@@ -212,9 +212,6 @@ void check_remaining_time() {
 // calls end_session which will publish that the session is over to app if there's no alarms left in queue
 void alarm_over() {
   play_default_sound();
-  if (check_break()){
-  // Screen draw
-  }
 
   alarm_flag = 0;
   alarm_time = current_time;
