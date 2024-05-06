@@ -184,6 +184,7 @@ void set_alarm() {
 // empties alarm_queue
 void disable_alarm() {
   alarm_flag = 0;
+  activeBreak = false;
   while(!alarm_queue.isEmpty()) {
         alarm_queue.dequeue();
         alarm_queue_size--;
@@ -212,6 +213,7 @@ void check_remaining_time() {
 // calls end_session which will publish that the session is over to app if there's no alarms left in queue
 void alarm_over() {
   play_default_sound();
+  check_break();
 
   alarm_flag = 0;
   alarm_time = current_time;
