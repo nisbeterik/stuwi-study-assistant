@@ -39,6 +39,10 @@ extern void publish_sensor_values();
 
 extern void publish_session_over();
 
+extern void publish_break_active();
+
+extern void publish_break_inactive();
+
 extern void check_topic(char* topic, char* payload);
 
 #endif

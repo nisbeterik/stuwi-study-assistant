@@ -11,6 +11,8 @@ char temp_int[50];
 char humid_int[50];
 char loud_int[50];
 char session_over_payload[13] = "Session over";
+char break_active_payload[6] = "Break";
+char break_inactive_payload[9] = "No break";
 
 char msg[50]; // test publish payload
 
@@ -25,7 +27,8 @@ const char* TOPIC_PUBLISH = "stuwi/testout";
 const char* TOPIC_TEMP = "stuwi/temp";
 const char* TOPIC_HUMID = "stuwi/humid";
 const char* TOPIC_LOUD = "stuwi/loudness";
-const char* TOPIC_BREAK = "stuwi/break";
+const char* TOPIC_BREAK_ACTIVE = "stuwi/breakactive";
+const char* TOPIC_BREAK_INACTIVE = "stuwi/breakinactive";
 
 const char* TOPIC_SESSION_OVER = "stuwi/sessionover"; // topic used when time of session runs out
 
@@ -97,6 +100,14 @@ void publish_sensor_values() {
 // publishes that session is over when remaining time of session is 0
 void publish_session_over() {
     client.publish(TOPIC_SESSION_OVER, session_over_payload);
+}
+
+void publish_break_active() {
+    client.publish(TOPIC_BREAK_ACTIVE, break_active_payload);
+}
+
+void publish_break_inactive() {
+    client.publish(TOPIC_BREAK_INACTIVE, break_inactive_payload);
 }
 
 // checks incoming payload topic and directs program accordingly
