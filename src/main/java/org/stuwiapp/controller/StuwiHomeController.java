@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 
 public class StuwiHomeController extends ParentController{
 
+    @FXML public Button settingsButton;
     @FXML Button overviewButton;
     @FXML public Button newSessionButton;
 
@@ -14,6 +15,10 @@ public class StuwiHomeController extends ParentController{
     }
 
     public void redirectToOverview(ActionEvent event) {redirect(event, "session-overview.fxml");
+
+    }
+    public void redirectToSettings(ActionEvent event) {redirect(event, "range-settings.fxml");
+
     }
 }
 
