@@ -1,4 +1,6 @@
-![StuWi Study Assistant](/docs/images/StuWi-logo.png)
+<div style="text-align:center">
+    <img src="/docs/images/StuWi-logo.png" alt="StuWi Study Assistant" width="400" />
+</div>
 
 # StuWi Study Assistant
 
