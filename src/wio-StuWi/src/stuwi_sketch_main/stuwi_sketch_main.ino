@@ -16,7 +16,6 @@ DHT dht(DHTPIN, DHTTYPE);
 
 long last_published = 0; // tracks when last message was sent in relation to millis variable
 long sensor_value_update = 0; // tracks when last sensor value update was done
-int value = 0;  // amount of payloads published
 float loudVal = 0;
 
 static bool a_button_pressed = false;
@@ -71,11 +70,13 @@ void loop() {
   // publishes a message to broker every 10 seconds
   if (now - last_published > 10000) {
     last_published = now;
-    ++value;
-    snprintf (msg, 50, "Wio message #%ld", value);
-    publish_testmessage();
+
     publish_sensor_values();
-    
+    if(activeBreak) {
+        publish_break_active();
+    } else if (!activeBreak) {
+        publish_break_inactive();
+    }
     
   }
 }

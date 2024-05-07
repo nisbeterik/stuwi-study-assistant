@@ -7,7 +7,12 @@ PubSubClient client(wioClient);
 char temp_payload[50];
 char humid_payload[50];
 char loud_payload[50];
+char temp_int[50];
+char humid_int[50];
+char loud_int[50];
 char session_over_payload[13] = "Session over";
+char break_active_payload[6] = "Break";
+char break_inactive_payload[9] = "No break";
 
 //Buttons payload:
 char button_a_payload[18] = "Button a pressed";
@@ -22,10 +27,11 @@ const char* MQTT_SERVER = "broker.mqtt-dashboard.com";  // MQTT Broker URL
 const char* TOPIC_STARTSESSION = "stuwi/startsession"; 
 const char* TOPIC_ENDSESSION = "stuwi/endsession";
 // publish topics
-const char* TOPIC_PUBLISH = "stuwi/testout";
 const char* TOPIC_TEMP = "stuwi/temp";
 const char* TOPIC_HUMID = "stuwi/humid";
 const char* TOPIC_LOUD = "stuwi/loudness";
+const char* TOPIC_BREAK_ACTIVE = "stuwi/breakactive";
+const char* TOPIC_BREAK_INACTIVE = "stuwi/breakinactive";
 
 //Buttons publish topics
 const char* TOPIC_START_SESSION_BUTTON = "stuwi/button_a";
@@ -44,8 +50,6 @@ void reconnect_mqtt() {
     // Attempt to connect
     if (client.connect(clientId.c_str())) {
       Serial.println("connected");
-      // Once connected, publish an announcement...
-      client.publish(TOPIC_PUBLISH, "First payload published");
       // ... and resubscribe
       client.subscribe(TOPIC_STARTSESSION);
       client.subscribe(TOPIC_ENDSESSION);
@@ -75,16 +79,12 @@ void callback(char* topic, byte* payload, unsigned int length) {
   buff_p[length] = '\0';  // null terminate buffer
   String msg_p = String(buff_p);
   Serial.println(msg_p);  // print payload as string
-  check_topic(topic);
+  check_topic(topic, buff_p);
+
 
 }
 
-// test message that is published every 10 seconds. will be removed in future
-void publish_testmessage() {
-  Serial.print("Publish message: ");
-  Serial.println(msg);
-  client.publish(TOPIC_PUBLISH, msg);
-}
+
 
 // publishes sensor values to app every 10 seconds
 // from main loop
@@ -102,10 +102,18 @@ void publish_session_over() {
     client.publish(TOPIC_SESSION_OVER, session_over_payload);
 }
 
+void publish_break_active() {
+    client.publish(TOPIC_BREAK_ACTIVE, break_active_payload);
+}
+
+void publish_break_inactive() {
+    client.publish(TOPIC_BREAK_INACTIVE, break_inactive_payload);
+}
+
 // checks incoming payload topic and directs program accordingly
-void check_topic(char* topic) {
+void check_topic(char* topic, char* payload) {
   if( strcmp(topic, TOPIC_STARTSESSION) == 0) {
-    start_session();
+    start_session(payload);
     Serial.println("Session started");
   }
   else if( strcmp(topic, TOPIC_ENDSESSION) == 0) {

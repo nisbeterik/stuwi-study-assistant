@@ -3,28 +3,25 @@ package org.stuwiapp.controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.stuwiapp.MQTTManager;
 import org.stuwiapp.MQTTManagerSingleton;
-
-import java.net.URL;
+import org.stuwiapp.StudySessionManager;
 import java.util.Objects;
-import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import javafx.util.Pair;
 
 
 public class DashboardController extends ParentController {
 
     public ImageView loudImage;
-    public Button studySessionRedirect;
     public Label studyStatusLabel;
+    public Button stopSessionButton;
     @FXML
     private ImageView tempImage;
     @FXML
@@ -48,7 +45,7 @@ public class DashboardController extends ParentController {
     private double currentHumid;
     private double currentLoudness;
     private boolean isSessionOngoing;
-
+    private boolean isBreakActive = false;
 
 
     // Thresholds should not be here, change this later
@@ -60,9 +57,12 @@ public class DashboardController extends ParentController {
     private final double loudnessFloor = 0;
     private final double loudnessRoof = 1000;
 
+    private String stopSessionTopic = "stuwi/endsession";
+
 
     @FXML
     public void initialize() {
+        // initListener();
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -120,19 +120,72 @@ public class DashboardController extends ParentController {
 
     private void readAndUpdateStudyStatus() {
         Platform.runLater(() ->  {
-            isSessionOngoing = mqttManager.getStudySessionStatus();
-            if(isSessionOngoing) {
+            isSessionOngoing = StudySessionManager.getInstance().isSessionActive();
+            isBreakActive = mqttManager.getBreakStatus();
+            if(isSessionOngoing && !isBreakActive) {
                 studyStatusLabel.setText("Study Session Ongoing");
+            } else if (isSessionOngoing) {
+                studyStatusLabel.setText("Break");
+
+
             } else {
                 studyStatusLabel.setText("Not Studying");
             }
 
         });
     }
-
-    public void redirectStudySession(MouseEvent mouseEvent) {
-        redirect(mouseEvent, "study-session.fxml");
+    public void stopSession(ActionEvent event) {
+        try {
+            mqttManager.publish(stopSessionTopic, "Stop Session");
+            StudySessionManager.getInstance().endSession();
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        redirect(event, "stuwi-home.fxml" );
     }
+
+
+    public static Pair<Integer, String> showFeedbackPopup() {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Study Session Ended");
+    alert.setHeaderText("Please provide your feedback");
+
+    DialogPane dialogPane = alert.getDialogPane();
+
+    Slider slider = new Slider();
+    slider.setMin(1);
+    slider.setMax(5);
+    slider.setValue(1);
+    slider.setMajorTickUnit(1);
+    slider.setMinorTickCount(0);
+    slider.setSnapToTicks(true);
+    slider.setShowTickMarks(true);
+    slider.setShowTickLabels(true);
+
+    TextArea textArea = new TextArea();
+    textArea.setPrefColumnCount(20);
+    textArea.setPrefRowCount(5);
+    textArea.setWrapText(true);
+
+    VBox vbox = new VBox(slider, textArea);
+    dialogPane.setContent(vbox);
+
+    alert.showAndWait();
+
+    return new Pair<>((int) slider.getValue(), textArea.getText());
+}
+
+
+    // binds to studyStatus label to prompt user for feedback when status goes from anything to "Not Studying"
+    /*
+    private void initListener() {
+        studyStatusLabel.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (Objects.equals(newValue, "Not Studying") && !Objects.equals(oldValue, newValue)) {
+                showFeedbackPopup();
+            }
+        });
+    }
+    */
 
 
 }

@@ -2,7 +2,6 @@ package org.stuwiapp;
 
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-import org.stuwiapp.controller.StudySessionController;
 
 /***
  * This class creates a client and manages connections to the client.
@@ -13,7 +12,7 @@ import org.stuwiapp.controller.StudySessionController;
 public class MQTTManager {
     private final String BROKER ="tcp://broker.hivemq.com:1883" ;
     private String clientId;
-    private final int QOS = 2;  // 0 sends message at most once
+    private final int QOS = 2;  // 2 sends message at most once
     private MqttClient client;
 
     private String latestTemp = "0";
@@ -21,6 +20,8 @@ public class MQTTManager {
     private String latestSound = "0";
 
     private boolean isStudyActive = false;
+    private boolean isBreakActive = false;
+
 
 
     public MQTTManager() throws MqttException{
@@ -46,10 +47,11 @@ public class MQTTManager {
         MqttMessage message = new MqttMessage(payload.getBytes());
         message.setQos(QOS);
         if(topic.equals("stuwi/startsession")) {
-            this.isStudyActive = true;
+            StudySessionManager.getInstance().startSession();
+            isBreakActive = false;
         }
         if(topic.equals("stuwi/endsession")) {
-            this.isStudyActive = false;
+            StudySessionManager.getInstance().endSession();
         }
         client.publish(topic, message);
     }
@@ -77,15 +79,25 @@ public class MQTTManager {
 
                 if (topic.equals("stuwi/temp")) {
                     latestTemp = message.toString();
+                    StudySessionManager.getInstance().addTemperatureData(message.toString());
                 }
                 if (topic.equals("stuwi/humid")) {
                     latestHumidity = message.toString();
+                    StudySessionManager.getInstance().addHumidityData(message.toString());
                 }
                 if (topic.equals("stuwi/loudness")) {
                     latestSound = message.toString();
+                    StudySessionManager.getInstance().addLoudnessData(message.toString());
                 }
-                if (topic.equals("stuwi/sessionover")) {
-                    isStudyActive = false;
+                if(topic.equals("stuwi/sessionover")){
+                    StudySessionManager.getInstance().endSession();
+                    isBreakActive = false;
+                }
+                if(topic.equals("stuwi/breakactive")){
+                    isBreakActive = true;
+                }
+                if(topic.equals("stuwi/breakinactive")){
+                    isBreakActive = false;
                 }
                 //Buttons
                 if (topic.equals("stuwi/button_a")) {
@@ -116,7 +128,6 @@ public class MQTTManager {
             }
         };
     }
-
     public String getLatestTemp() {
         return latestTemp;
     }
@@ -128,7 +139,8 @@ public class MQTTManager {
     public String getLatestSound() {
         return latestSound;
     }
-    public boolean getStudySessionStatus() {
-        return isStudyActive;
+
+    public boolean getBreakStatus() {
+        return isBreakActive;
     }
 }
