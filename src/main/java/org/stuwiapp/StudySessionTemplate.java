@@ -34,6 +34,10 @@ public class StudySessionTemplate {
         //returns duration in minutes
         return blockDuration;
     }
+
+    public String getTitle(){
+        return title;
+    }
     public String getSubject(){
         return subject;
     }

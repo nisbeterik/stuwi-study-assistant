@@ -3,27 +3,23 @@ package org.stuwiapp.controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.stuwiapp.MQTTManager;
 import org.stuwiapp.MQTTManagerSingleton;
-
-import java.net.URL;
+import org.stuwiapp.StudySessionManager;
 import java.util.Objects;
-import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import javafx.util.Pair;
 
 
 public class DashboardController extends ParentController {
 
     public ImageView loudImage;
-    public Button studySessionRedirect;
     public Label studyStatusLabel;
     public Button stopSessionButton;
     @FXML
@@ -52,7 +48,6 @@ public class DashboardController extends ParentController {
     private boolean isBreakActive = false;
 
 
-
     // Thresholds should not be here, change this later
     private final double humidityFloor = 40;
     private final double humidityRoof = 60;
@@ -67,6 +62,7 @@ public class DashboardController extends ParentController {
 
     @FXML
     public void initialize() {
+        // initListener();
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -124,7 +120,7 @@ public class DashboardController extends ParentController {
 
     private void readAndUpdateStudyStatus() {
         Platform.runLater(() ->  {
-            isSessionOngoing = mqttManager.getStudySessionStatus();
+            isSessionOngoing = StudySessionManager.getInstance().isSessionActive();
             isBreakActive = mqttManager.getBreakStatus();
             if(isSessionOngoing && !isBreakActive) {
                 studyStatusLabel.setText("Study Session Ongoing");
@@ -141,15 +137,55 @@ public class DashboardController extends ParentController {
     public void stopSession(ActionEvent event) {
         try {
             mqttManager.publish(stopSessionTopic, "Stop Session");
+            StudySessionManager.getInstance().endSession();
         } catch (MqttException e) {
             e.printStackTrace();
         }
         redirect(event, "stuwi-home.fxml" );
     }
 
-    public void redirectStudySession(MouseEvent mouseEvent) {
-        redirect(mouseEvent, "study-session.fxml");
+
+    public static Pair<Integer, String> showFeedbackPopup() {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Study Session Ended");
+    alert.setHeaderText("Please provide your feedback");
+
+    DialogPane dialogPane = alert.getDialogPane();
+
+    Slider slider = new Slider();
+    slider.setMin(1);
+    slider.setMax(5);
+    slider.setValue(1);
+    slider.setMajorTickUnit(1);
+    slider.setMinorTickCount(0);
+    slider.setSnapToTicks(true);
+    slider.setShowTickMarks(true);
+    slider.setShowTickLabels(true);
+
+    TextArea textArea = new TextArea();
+    textArea.setPrefColumnCount(20);
+    textArea.setPrefRowCount(5);
+    textArea.setWrapText(true);
+
+    VBox vbox = new VBox(slider, textArea);
+    dialogPane.setContent(vbox);
+
+    alert.showAndWait();
+
+    return new Pair<>((int) slider.getValue(), textArea.getText());
+}
+
+
+    // binds to studyStatus label to prompt user for feedback when status goes from anything to "Not Studying"
+    /*
+    private void initListener() {
+        studyStatusLabel.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (Objects.equals(newValue, "Not Studying") && !Objects.equals(oldValue, newValue)) {
+                showFeedbackPopup();
+            }
+        });
     }
+    */
 
 
 }

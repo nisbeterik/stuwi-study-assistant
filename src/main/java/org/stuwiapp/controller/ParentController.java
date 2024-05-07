@@ -4,6 +4,7 @@ import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import org.stuwiapp.Utils.FXMLUtil;
 
@@ -16,4 +17,13 @@ public class ParentController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public static void displayAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 }
