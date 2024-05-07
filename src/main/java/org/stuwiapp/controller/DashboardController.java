@@ -45,6 +45,7 @@ public class DashboardController extends ParentController {
     private double currentHumid;
     private double currentLoudness;
     private boolean isSessionOngoing;
+    private boolean isBreakActive = false;
 
 
     // Thresholds should not be here, change this later
@@ -120,8 +121,13 @@ public class DashboardController extends ParentController {
     private void readAndUpdateStudyStatus() {
         Platform.runLater(() ->  {
             isSessionOngoing = StudySessionManager.getInstance().isSessionActive();
-            if(isSessionOngoing) {
+            isBreakActive = mqttManager.getBreakStatus();
+            if(isSessionOngoing && !isBreakActive) {
                 studyStatusLabel.setText("Study Session Ongoing");
+            } else if (isSessionOngoing) {
+                studyStatusLabel.setText("Break");
+
+
             } else {
                 studyStatusLabel.setText("Not Studying");
             }

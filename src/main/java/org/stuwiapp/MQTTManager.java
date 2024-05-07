@@ -14,9 +14,13 @@ public class MQTTManager {
     private String clientId;
     private final int QOS = 2;  // 2 sends message at most once
     private MqttClient client;
+
     private String latestTemp = "0";
     private String latestHumidity = "0";
     private String latestSound = "0";
+    private boolean isBreakActive = false;
+
+
 
     public MQTTManager() throws MqttException{
         this.clientId = "StuWiApp";
@@ -42,6 +46,7 @@ public class MQTTManager {
         message.setQos(QOS);
         if(topic.equals("stuwi/startsession")) {
             StudySessionManager.getInstance().startSession();
+            isBreakActive = false;
         }
         if(topic.equals("stuwi/endsession")) {
             StudySessionManager.getInstance().endSession();
@@ -54,6 +59,7 @@ public class MQTTManager {
     }
 
     public void close() throws MqttException{
+
         client.disconnect();
         client.close();
     }
@@ -67,7 +73,6 @@ public class MQTTManager {
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
-
                 System.out.println("Message arrived. Topic: " + topic + " Message: " + message.toString());
 
                 if (topic.equals("stuwi/temp")){
@@ -84,6 +89,13 @@ public class MQTTManager {
                 }
                 if(topic.equals("stuwi/sessionover")){
                     StudySessionManager.getInstance().endSession();
+                    isBreakActive = false;
+                }
+                if(topic.equals("stuwi/breakactive")){
+                    isBreakActive = true;
+                }
+                if(topic.equals("stuwi/breakinactive")){
+                    isBreakActive = false;
                 }
             }
 
@@ -93,7 +105,6 @@ public class MQTTManager {
             }
         };
     }
-
     public String getLatestTemp() {
         return latestTemp;
     }
@@ -104,5 +115,9 @@ public class MQTTManager {
 
     public String getLatestSound() {
         return latestSound;
+    }
+
+    public boolean getBreakStatus() {
+        return isBreakActive;
     }
 }

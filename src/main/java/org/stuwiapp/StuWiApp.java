@@ -14,53 +14,54 @@ import java.io.IOException;
  * JavaFX App
  */
 public class StuWiApp extends Application {
+
     private MQTTManager mqttManager;
     private StudySessionManager studySessionManager;
     private UserManager userManager;
-    private String publishTopic = "stuwi/testin"; // topic that WIO subscribes to
-    private String subscribeTopic = "stuwi/testout"; // topic that WIO publishes to
-    // private final ScheduledExecutorService publishScheduler = Executors.newSingleThreadScheduledExecutor();
     private final String temperatureTopic = "stuwi/temp";
     private final String humidityTopic = "stuwi/humid";
+
     private final String loudnessTopic = "stuwi/loudness";
+
     private final String sessionOverTopic = "stuwi/sessionover";
+
+    private final String activebreakTopic = "stuwi/breakactive";
+    private final String inactivebreakTopic = "stuwi/breakinactive";
 
     @Override
     public void init() throws MqttException {
         studySessionManager = StudySessionManager.getInstance();
         userManager = UserManager.getInstance();
         mqttManager = MQTTManagerSingleton.getMqttInstance();
-        mqttManager.subscribe(subscribeTopic);
         mqttManager.subscribe(temperatureTopic);
         mqttManager.subscribe(humidityTopic);
         mqttManager.subscribe(loudnessTopic);
         mqttManager.subscribe(sessionOverTopic);
+        mqttManager.subscribe(activebreakTopic);
+        mqttManager.subscribe(inactivebreakTopic);
     }
     @Override
     public void start(Stage stage) throws IOException {
-        Object dashboard = FXMLUtil.loadFxml("login.fxml");
-        Scene scene = new Scene((Parent) dashboard);
+        Object login = FXMLUtil.loadFxml("login.fxml");
+        Scene scene = new Scene((Parent) login);
         stage.setScene(scene);
-        stage.show();
-
-
-        /*publishScheduler.scheduleAtFixedRate(() -> {
+        stage.setOnCloseRequest(event -> {
             try {
-                mqttManager.publish(publishTopic, "Message from StuWi app");
-            } catch (MqttException e) {
+                onCloseCallback();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        }, 0, 10, TimeUnit.SECONDS);*/
+        });
+        stage.show();
     }
 
     // stop app and disconnects from mqtt
-    @Override
-    public void stop() throws Exception {
+
+    public void onCloseCallback() throws Exception {
         if (mqttManager != null) {
             mqttManager.close();
         }
-        // publishScheduler.shutdown();
-        super.stop();
+        System.exit(0);
     }
 
 

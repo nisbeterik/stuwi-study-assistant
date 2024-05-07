@@ -2,6 +2,7 @@
 #include "wio_session_handler.h"
 #include "ArduinoQueue.h"
 #include <sstream>
+#include "buzzer_handler.h"
 
 WiFiUDP udp;
 unsigned int udp_local_port = 2390;
@@ -10,12 +11,14 @@ byte packetBuffer[NTP_PACKET_SIZE];
 
 RTC_SAMD51 rtc; // rtc library object
 
+bool activeBreak = false; // Flag for if break is currently active
+
 DateTime current_time; // object to track current time
 DateTime alarm_time;  // object to track potential alarm time
 unsigned long device_time;
 byte alarm_flag = 0; // flag to indicate whether alarm is active
 ArduinoQueue<unsigned long> alarm_queue(50);
-
+unsigned int alarm_queue_size = 0;
 // called in setup() of main class
 // gets time from NTP server and injects into RTC
 void setup_rtc() {
@@ -192,10 +195,21 @@ void set_alarm() {
 // empties alarm_queue
 void disable_alarm() {
   alarm_flag = 0;
+  activeBreak = false;
   while(!alarm_queue.isEmpty()) {
         alarm_queue.dequeue();
+        alarm_queue_size--;
   }
   alarm_time = current_time;
+}
+
+void check_break(){
+
+    if (alarm_queue_size > 0 && alarm_queue_size % 2 == 0 && !activeBreak){
+    activeBreak = true;}
+    else {
+        activeBreak = false;
+    }
 }
 
 // called by main loop
@@ -211,7 +225,9 @@ void check_remaining_time() {
 // alarm_over is called to indicate that an alarm is over
 // calls end_session which will publish that the session is over to app if there's no alarms left in queue
 void alarm_over() {
-  
+  play_default_sound();
+  check_break();
+
   alarm_flag = 0;
   alarm_time = current_time;
   Serial.println("Alarm ended");
@@ -225,20 +241,24 @@ void alarm_over() {
 }
 
 void populate_alarm_queue(char* details) {
+
      unsigned long study_time;
      unsigned long break_time;
      int num_of_blocks;
-    
+
+
      std::stringstream ss(details);
 
      ss >> num_of_blocks >> study_time >> break_time; // parsing from payload string with the format "num_of_blocks study_time break_time"
      // convert to seconds
      study_time = study_time*60;
      break_time = break_time*60;
-     
+     alarm_queue_size = 0;
+
      for(num_of_blocks; num_of_blocks>0; num_of_blocks--) {
         alarm_queue.enqueue(study_time);
         alarm_queue.enqueue(break_time);
+        alarm_queue_size = alarm_queue_size + 2;
      }
 
 }
