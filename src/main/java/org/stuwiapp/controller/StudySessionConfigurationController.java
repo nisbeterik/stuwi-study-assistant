@@ -2,22 +2,23 @@ package org.stuwiapp.controller;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
-import org.stuwiapp.MQTTManager;
-import org.stuwiapp.MQTTManagerSingleton;
-import org.stuwiapp.StudySessionTemplate;
+import org.stuwiapp.*;
+import org.stuwiapp.database.StudySessionTemplateDAO;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class StudySessionConfigurationController extends ParentController implements Initializable  {
-
-
     @FXML public ChoiceBox templateChoiceBox;
+
     @FXML Button saveTemplateButton;
     @FXML public Label titleLabel;
     @FXML public TextField subjectField;
@@ -40,6 +41,10 @@ public class StudySessionConfigurationController extends ParentController implem
 
     final static StudySessionTemplate RESET_TEMPLATE;
     final static StudySessionTemplate RECOMMENDED_TEMPLATE;
+    private StudySessionTemplate currentTemplate;
+
+
+    // TODO Add button for going back to stuwi-home.fxml
 
     //init standard session templates.
     static {
@@ -52,14 +57,22 @@ public class StudySessionConfigurationController extends ParentController implem
     }
 
     MQTTManager mqttManager = MQTTManagerSingleton.getMqttInstance();
-    private String startSessionTopic = "stuwi/startsession"; // topic that WIO subscribes to
+    private final String startSessionTopic = "stuwi/startsession"; // topic that WIO subscribes to
 
     public StudySessionConfigurationController(){
 
     }
     public void initialize(URL url, ResourceBundle resourceBundle){
 
-        //TODO: for each saved template add as item to the templateChoiceBox.
+        // Retrieves the current user's saved templates from the database
+        String currentUser = UserManager.getInstance().getCurrentUser();
+        ArrayList<StudySessionTemplate> savedTemplates = StudySessionTemplateDAO.getUserTemplates(currentUser);
+        ObservableList<StudySessionTemplate> templatesList= FXCollections.observableArrayList(savedTemplates);
+
+        // Adds the saved templates to the choice box
+        if (templatesList.size() > 0) {
+            templateChoiceBox.getItems().addAll(templatesList);
+        }
 
         templateChoiceBox.getItems().addAll(RESET_TEMPLATE, RECOMMENDED_TEMPLATE);
         templateChoiceBox.setValue("Recommended Settings");
@@ -111,6 +124,10 @@ public class StudySessionConfigurationController extends ParentController implem
         StudySessionTemplate sessionSettings = getSliderValues();
         if(sessionSettings == null) { return; }
 
+        // TODO: Does this need to be added anywhere else? What is session is started on terminal?
+        // Sets the current template to the one that is about to be started so it can be saved with the session
+        StudySessionManager.getInstance().setCurrentTemplate(sessionSettings);
+
         try{
             //Starts a study session with current setting
             mqttManager.publish(startSessionTopic, String.format("%d %d %d", sessionSettings.getBlocks(), sessionSettings.getDuration(), sessionSettings.getBreakDuration()));
@@ -153,6 +170,10 @@ public class StudySessionConfigurationController extends ParentController implem
             if (curValues == null) { return null; }
 
             StudySessionTemplate newStudySessionTemplate = new StudySessionTemplate(title, curValues.getSubject(), curValues.getDuration(), curValues.getBreakDuration(), curValues.getBlocks());
+
+            // Saves the recently created template to the database
+            StudySessionTemplateDAO.saveTemplateInDatabase(newStudySessionTemplate, UserManager.getInstance().getCurrentUser());
+
             templateChoiceBox.getItems().add(newStudySessionTemplate);
             infoLabel.setStyle("-fx-text-fill: green;");
             infoLabel.setText("Successfully saved template " + title);
@@ -164,9 +185,8 @@ public class StudySessionConfigurationController extends ParentController implem
             e.printStackTrace();
         }
         return null;
-
-
     }
+
 }
 
 

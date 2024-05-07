@@ -5,6 +5,7 @@ import javafx.scene.input.MouseEvent;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.stuwiapp.MQTTManager;
 import org.stuwiapp.MQTTManagerSingleton;
+import org.stuwiapp.StudySessionManager;
 
 public class StudySessionController extends ParentController {
     public Button backToDashboard;
@@ -22,6 +23,7 @@ public class StudySessionController extends ParentController {
     public void publishStartSession(MouseEvent event) {
         try {
             mqttManager.publish(startSessionTopic, "4 25 5"); // format for study session is "{num of blocks} {study time in minutes} {break time in minutes}"
+            StudySessionManager.getInstance().startSession();
         } catch (MqttException e) {
             e.printStackTrace();
         }
@@ -31,6 +33,7 @@ public class StudySessionController extends ParentController {
     public void publishStopSession(MouseEvent event) {
         try {
             mqttManager.publish(stopSessionTopic, "Stop Session");
+            StudySessionManager.getInstance().endSession();
         } catch (MqttException e) {
             e.printStackTrace();
         }

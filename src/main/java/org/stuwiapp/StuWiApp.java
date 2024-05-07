@@ -16,7 +16,8 @@ import java.io.IOException;
 public class StuWiApp extends Application {
 
     private MQTTManager mqttManager;
-
+    private StudySessionManager studySessionManager;
+    private UserManager userManager;
     private final String temperatureTopic = "stuwi/temp";
     private final String humidityTopic = "stuwi/humid";
 
@@ -29,6 +30,8 @@ public class StuWiApp extends Application {
 
     @Override
     public void init() throws MqttException {
+        studySessionManager = StudySessionManager.getInstance();
+        userManager = UserManager.getInstance();
         mqttManager = MQTTManagerSingleton.getMqttInstance();
         mqttManager.subscribe(temperatureTopic);
         mqttManager.subscribe(humidityTopic);
@@ -39,8 +42,8 @@ public class StuWiApp extends Application {
     }
     @Override
     public void start(Stage stage) throws IOException {
-        Object home = FXMLUtil.loadFxml("stuwi-home.fxml");
-        Scene scene = new Scene((Parent) home);
+        Object login = FXMLUtil.loadFxml("login.fxml");
+        Scene scene = new Scene((Parent) login);
         stage.setScene(scene);
         stage.setOnCloseRequest(event -> {
             try {

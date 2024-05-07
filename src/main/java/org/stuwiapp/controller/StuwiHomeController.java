@@ -12,6 +12,9 @@ public class StuwiHomeController extends ParentController{
     public void newSession(ActionEvent event) {
         redirect(event, "study-session-configuration.fxml");
     }
+
+    public void redirectToOverview(ActionEvent event) {redirect(event, "session-overview.fxml");
+    }
 }
 
 

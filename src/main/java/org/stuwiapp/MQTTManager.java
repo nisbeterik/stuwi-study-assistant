@@ -18,7 +18,6 @@ public class MQTTManager {
     private String latestTemp = "0";
     private String latestHumidity = "0";
     private String latestSound = "0";
-    private boolean isStudyActive = false;
     private boolean isBreakActive = false;
 
 
@@ -46,11 +45,11 @@ public class MQTTManager {
         MqttMessage message = new MqttMessage(payload.getBytes());
         message.setQos(QOS);
         if(topic.equals("stuwi/startsession")) {
-            this.isStudyActive = true;
+            StudySessionManager.getInstance().startSession();
             isBreakActive = false;
         }
         if(topic.equals("stuwi/endsession")) {
-            this.isStudyActive = false;
+            StudySessionManager.getInstance().endSession();
         }
         client.publish(topic, message);
     }
@@ -78,15 +77,18 @@ public class MQTTManager {
 
                 if (topic.equals("stuwi/temp")){
                     latestTemp = message.toString();
+                    StudySessionManager.getInstance().addTemperatureData(message.toString());
                 }
                 if (topic.equals("stuwi/humid")){
                     latestHumidity = message.toString();
+                    StudySessionManager.getInstance().addHumidityData(message.toString());
                 }
                 if (topic.equals("stuwi/loudness")){
                     latestSound = message.toString();
+                    StudySessionManager.getInstance().addLoudnessData(message.toString());
                 }
                 if(topic.equals("stuwi/sessionover")){
-                    isStudyActive = false;
+                    StudySessionManager.getInstance().endSession();
                     isBreakActive = false;
                 }
                 if(topic.equals("stuwi/breakactive")){
@@ -113,9 +115,6 @@ public class MQTTManager {
 
     public String getLatestSound() {
         return latestSound;
-    }
-    public boolean getStudySessionStatus() {
-        return isStudyActive;
     }
 
     public boolean getBreakStatus() {
