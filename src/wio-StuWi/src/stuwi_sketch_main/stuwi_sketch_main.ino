@@ -17,8 +17,8 @@ DHT dht(DHTPIN, DHTTYPE);
 long last_published = 0;       // tracks when last message was sent in relation to millis variable
 long sensor_value_update = 0;  // tracks when last sensor value update was done
 int value = 0;                 // amount of payloads published
-float loudVal = 0;
-float loudPercent = 0;
+int loud_val = 0;
+int loud_percent = 0;
 
 
 
@@ -68,25 +68,23 @@ void loop() {
 
 
 void read_temperature() {
-  float temp = dht.readTemperature();
-  sprintf(temp_payload, "%.2f", temp);
-  sprintf(temp_int, "%3.f", temp);
+  temp_int = (int)dht.readTemperature();
+  sprintf(temp_payload, "%d", temp_int);
 }
 
 void read_humidity() {
-  float humidity = dht.readHumidity();
-  sprintf(humid_payload, "%.2f", humidity);
-  sprintf(humid_int, "%3.f", humidity);
+  humid_int = (int)dht.readHumidity();
+  sprintf(humid_payload, "%d", humid_int);
 }
 
 void read_loudness() {
 
-  loudVal = analogRead(A3);
-  loudPercent = map(loudVal, 0, 1023, 0, 200);
-  if (loudPercent > 100){
-    loudPercent = 100;
+  loud_val = (int)analogRead(A3);
+  loud_percent = map(loud_val, 0, 1023, 0, 200);
+  if (loud_percent > 100){ //If value is over 100 change it to 100.
+    loud_percent = 100;
   }
+  loud_int = loud_percent;
+  sprintf(loud_payload, "%d", loud_int);
   
-  sprintf(loud_payload, "%.2f ", loudPercent);
-  sprintf(loud_int, "%2.f ", loudPercent);
 }

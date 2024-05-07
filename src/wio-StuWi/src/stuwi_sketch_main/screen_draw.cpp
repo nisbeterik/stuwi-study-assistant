@@ -6,9 +6,12 @@
 TFT_eSPI tft; //initialize TFT LCD
 TFT_eSprite spr = TFT_eSprite(&tft);  //sprite
 
-char temp_string[20]; // Allocate memory for temp_string
-char humid_string[20]; // Allocate memory for humid_string
-char loudness_string[20]; // Allocate memory for loudness_string
+//char temp_string[20]; // Allocate memory for temp_string
+//char humid_string[20]; // Allocate memory for humid_string
+//char loudness_string[20]; // Allocate memory for loudness_string
+int temp_int;
+int humid_int;
+int loud_int;
 
 byte prev_alarm_flag = 0;
 
@@ -57,10 +60,6 @@ void draw_background() {
   tft.drawString("Loudness", 10 + (tft.width() / 2) , 65 , 1);
   tft.setTextColor(TFT_RED);
   tft.drawString("%", 65 + (tft.width() / 2), 105, 1);
-
-  update_range_indicators();
-
-  
   
 }
 
@@ -68,10 +67,10 @@ void update_screen(){
 
   //We use sprites so the updated text is not drawn ontop of the old data
   spr.setTextColor(TFT_WHITE);
-  update_sprite(temp_int, 20, 193, 40);
-  update_sprite(humid_int, 20, 105, 40);
-  update_sprite(loud_int, ((tft.width() / 2) + 25) , 105, 40);
-
+  update_sprite(temp_payload, 20, 193, 40);
+  update_sprite(humid_payload, 20, 105, 40);
+  update_sprite(loud_payload, ((tft.width() / 2) + 25) , 105, 40);
+  update_range_indicators();
   if(!alarm_flag) {
       //tft.drawString("No session", 0, 150);
       spr.setTextColor(TFT_RED);

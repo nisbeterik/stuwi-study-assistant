@@ -8,9 +8,6 @@ PubSubClient client(wioClient);
 char temp_payload[50];
 char humid_payload[50];
 char loud_payload[50];
-char temp_int[50];
-char humid_int[50];
-char loud_int[50];
 char session_over_payload[13] = "Session over";
 
 char msg[50]; // test publish payload
