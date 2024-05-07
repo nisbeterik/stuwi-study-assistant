@@ -3,6 +3,7 @@
 
 #include <PubSubClient.h> //MQTT library
 #include "wifi.h"
+#include "range_handler.h"
 
 extern PubSubClient client;
 

@@ -15,9 +15,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.*;
 import org.controlsfx.control.RangeSlider;
 import javafx.scene.layout.HBox;
-import org.stuwiapp.RangeSettingsTemplate;
-import org.stuwiapp.StudySessionTemplate;
-import org.stuwiapp.UserManager;
+import org.stuwiapp.*;
 import org.stuwiapp.database.RangeSettingsTemplateDAO;
 import org.stuwiapp.database.StudySessionTemplateDAO;
 
@@ -36,6 +34,10 @@ public class RangeSettingsController implements Initializable {
     public Label tempHighLabel;
     public Label loudHighLabel;
     public Label infoLabel;
+    public Button loadSettings;
+
+    MQTTManager mqttManager = MQTTManagerSingleton.getMqttInstance();
+    private final String publicRangeDataTopic = "stuwi/rangeupdate";
 
     public void initialize(URL url, ResourceBundle resourceBundle){
         // Retrieves the current user's saved templates from the database
@@ -143,6 +145,20 @@ public class RangeSettingsController implements Initializable {
         infoLabel.setStyle("-fx-text-fill: green;");
         infoLabel.setText("Successfully saved template " + title);
         return newRangeSettingsTempalte;
+    }
+
+    public void publishRangeSettings(ActionEvent event){
+        RangeSettingsTemplate rangeSettings = getSliderValues();
+        try{
+            //Starts a study session with current setting
+            mqttManager.publish(publicRangeDataTopic, String.format("%d %d %d %d %d", rangeSettings.getTempMax(), rangeSettings.getTempMin(), rangeSettings.getHumidMax(), rangeSettings.getHumidMin(), rangeSettings.getLoudMax()));
+            infoLabel.setStyle("-fx-text-fill: green;");
+            infoLabel.setText("Successfully loaded settings to terminal!");
+        } catch (Exception e){
+            infoLabel.setStyle("-fx-text-fill: red;");
+            infoLabel.setText("Failed to connect to WIO terminal");
+        }
+
     }
 
 }

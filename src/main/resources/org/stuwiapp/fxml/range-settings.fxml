@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.RangeSlider?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.RangeSettingsController">
+<AnchorPane prefHeight="422.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.RangeSettingsController">
    <children>
       <RangeSlider fx:id="tempSlider" blockIncrement="0.5" highValue="23.0" layoutX="79.0" layoutY="184.0" lowValue="21.0" majorTickUnit="1.0" max="30.0" min="15.0" minorTickCount="1" prefHeight="16.0" prefWidth="442.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
       <RangeSlider fx:id="humidSlider" blockIncrement="5.0" layoutX="79.0" layoutY="247.0" majorTickUnit="5.0" max="80.0" min="20.0" minorTickCount="1" prefHeight="16.0" prefWidth="442.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
@@ -32,7 +32,8 @@
       <Label fx:id="tempLowLabel" layoutX="105.0" layoutY="155.0" prefHeight="17.0" prefWidth="59.0" />
       <Label fx:id="tempHighLabel" alignment="CENTER_RIGHT" layoutX="430.0" layoutY="155.0" prefHeight="17.0" prefWidth="59.0" />
       <Label fx:id="loudHighLabel" alignment="CENTER_RIGHT" layoutX="430.0" layoutY="286.0" prefHeight="17.0" prefWidth="59.0" />
-      <Label fx:id="HighTempLabel11" layoutX="500.0" layoutY="286.0" text="Db" />
+      <Label layoutX="500.0" layoutY="286.0" text="Db" />
       <Label fx:id="infoLabel" alignment="CENTER" layoutX="30.0" layoutY="347.0" prefHeight="17.0" prefWidth="543.0" />
+      <Button fx:id="loadSettings" layoutX="215.0" layoutY="373.0" mnemonicParsing="false" onAction="#publishRangeSettings" prefHeight="26.0" prefWidth="170.0" text="Load Settings" />
    </children>
 </AnchorPane>
