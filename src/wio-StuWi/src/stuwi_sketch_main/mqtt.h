@@ -13,7 +13,7 @@ extern char loud_payload[50];
 extern char session_over_payload[13];
 extern char msg[50]; // test publish payload
 
-//Buttons: (Is this needed?)
+//Buttons:
 extern char button_a_payload[18];
 extern char button_b_payload[18];
 //
