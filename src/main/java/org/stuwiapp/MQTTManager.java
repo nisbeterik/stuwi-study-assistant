@@ -2,6 +2,7 @@ package org.stuwiapp;
 
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.stuwiapp.Utils.PomodoroMappingDefault;
 
 /***
  * This class creates a client and manages connections to the client.
@@ -99,21 +100,20 @@ public class MQTTManager {
                 if(topic.equals("stuwi/breakinactive")){
                     isBreakActive = false;
                 }
-                //Buttons
-                if (topic.equals("stuwi/button_a")) {
-                    //Check if there is an ongoing session
-                    if (isStudyActive == true) {
+
+                if (topic.equals("stuwi/wiostartsession")) {
+
+                    if (StudySessionManager.getInstance().isSessionActive()) {
                         System.out.println("Already ongoing session");
                     } else {
-                        //Logic to start session:
-                        publish("stuwi/startsession", "Start Session");
+
+                        publish("stuwi/startsession", PomodoroMappingDefault.getPomodoroDefault());
 
                         System.out.println("Starting session...");
                     }
                 }
-                if (topic.equals("stuwi/button_b")) {
-                    //Check if there is an ongoing session
-                    if (isStudyActive == false) {
+                if (topic.equals("stuwi/wiostopsession")) {
+                    if (!StudySessionManager.getInstance().isSessionActive()) {
                         System.out.println("No session ongoing");
                     } else {
                         publish("stuwi/endsession", "Stop session");
