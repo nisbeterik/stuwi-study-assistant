@@ -125,17 +125,6 @@ unsigned long send_NTP_packet(const char* address) {
 String get_time(DateTime dt) {
   String time_str = "";
 
-  time_str += String(dt.year(), DEC);
-  time_str += '-';
-
-  if (dt.month() < 10) time_str += '0';
-  time_str += String(dt.month(), DEC);
-  time_str += '-';
-
-  if (dt.day() < 10) time_str += '0';
-  time_str += String(dt.day(), DEC);
-  time_str += ' ';
-
   if (dt.hour() < 10) time_str += '0';
   time_str += String(dt.hour(), DEC);
   time_str += ':';
