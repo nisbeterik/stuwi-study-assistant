@@ -2,16 +2,17 @@ package org.stuwiapp.controller;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
-import org.stuwiapp.MQTTManager;
-import org.stuwiapp.MQTTManagerSingleton;
-import org.stuwiapp.StudySessionManager;
-import org.stuwiapp.StudySessionTemplate;
+import org.stuwiapp.*;
+import org.stuwiapp.database.StudySessionTemplateDAO;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -42,6 +43,9 @@ public class StudySessionConfigurationController extends ParentController implem
     final static StudySessionTemplate RECOMMENDED_TEMPLATE;
     private StudySessionTemplate currentTemplate;
 
+
+    // TODO Add button for going back to stuwi-home.fxml
+
     //init standard session templates.
     static {
         try {
@@ -60,7 +64,15 @@ public class StudySessionConfigurationController extends ParentController implem
     }
     public void initialize(URL url, ResourceBundle resourceBundle){
 
-        //TODO: for each saved template add as item to the templateChoiceBox.
+        // Retrieves the current user's saved templates from the database
+        String currentUser = UserManager.getInstance().getCurrentUser();
+        ArrayList<StudySessionTemplate> savedTemplates = StudySessionTemplateDAO.getUserTemplates(currentUser);
+        ObservableList<StudySessionTemplate> templatesList= FXCollections.observableArrayList(savedTemplates);
+
+        // Adds the saved templates to the choice box
+        if (templatesList.size() > 0) {
+            templateChoiceBox.getItems().addAll(templatesList);
+        }
 
         templateChoiceBox.getItems().addAll(RESET_TEMPLATE, RECOMMENDED_TEMPLATE);
         templateChoiceBox.setValue("Recommended Settings");
@@ -113,6 +125,7 @@ public class StudySessionConfigurationController extends ParentController implem
         if(sessionSettings == null) { return; }
 
         // TODO: Does this need to be added anywhere else? What is session is started on terminal?
+        // Sets the current template to the one that is about to be started so it can be saved with the session
         StudySessionManager.getInstance().setCurrentTemplate(sessionSettings);
 
         try{
@@ -157,6 +170,10 @@ public class StudySessionConfigurationController extends ParentController implem
             if (curValues == null) { return null; }
 
             StudySessionTemplate newStudySessionTemplate = new StudySessionTemplate(title, curValues.getSubject(), curValues.getDuration(), curValues.getBreakDuration(), curValues.getBlocks());
+
+            // Saves the recently created template to the database
+            StudySessionTemplateDAO.saveTemplateInDatabase(newStudySessionTemplate, UserManager.getInstance().getCurrentUser());
+
             templateChoiceBox.getItems().add(newStudySessionTemplate);
             infoLabel.setStyle("-fx-text-fill: green;");
             infoLabel.setText("Successfully saved template " + title);
