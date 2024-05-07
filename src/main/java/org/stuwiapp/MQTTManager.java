@@ -89,21 +89,24 @@ public class MQTTManager {
                 }
                 //Buttons
                 if (topic.equals("stuwi/button_a")) {
-                    //Logic to start session:
-                    try {
+                    //Check if there is an ongoing session
+                    if (isStudyActive == true) {
+                        System.out.println("Already ongoing session");
+                    } else {
+                        //Logic to start session:
                         publish("stuwi/startsession", "Start Session");
-                    } catch (MqttException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println("Starting session...");
 
-                }  else if(topic.equals("stuwi/button_b")){
-                    try {
-                        publish("stuwi/endsession", "Stop session");
-                    } catch (MqttException e) {
-                        e.printStackTrace();
+                        System.out.println("Starting session...");
                     }
-                    System.out.println("Stopping session...");
+                }
+                if (topic.equals("stuwi/button_b")) {
+                    //Check if there is an ongoing session
+                    if (isStudyActive == false) {
+                        System.out.println("No session ongoing");
+                    } else {
+                        publish("stuwi/endsession", "Stop session");
+                        System.out.println("Stopping session...");
+                    }
                 }
             }
 
