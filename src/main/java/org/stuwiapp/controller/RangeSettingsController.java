@@ -51,6 +51,13 @@ public class RangeSettingsController implements Initializable {
         templateChoiceBox.getItems().add(RECOMMENDED_TEMPLATE);
         templateChoiceBox.setValue("Recommended Settings");
 
+        templateChoiceBox.valueProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observableValue, Object o, Object t1) {
+                loadRangeTemplate((RangeSettingsTemplate) templateChoiceBox.getValue());
+            }
+        });
+
         tempSlider.highValueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
@@ -83,6 +90,27 @@ public class RangeSettingsController implements Initializable {
                 loudHighLabel.setText((int)loudSlider.getValue()+ "");
             }
         });
+        loadRangeTemplate(RECOMMENDED_TEMPLATE);
+    }
+    public boolean loadRangeTemplate(RangeSettingsTemplate template){
+        if (template == null) {return false;}
+        tempSlider.setHighValue((template.getTempMax()));
+        tempSlider.setLowValue((template.getTempMin()));
+        humidSlider.setHighValue((template.getHumidMax()));
+        humidSlider.setLowValue((template.getHumidMin()));
+        loudSlider.setValue(template.getLoudMax());
+
+        return true;
+    }
+
+    public RangeSettingsTemplate getSliderValues(){
+        int tempMax = (int)tempSlider.getHighValue();
+        int tempMin = (int)tempSlider.getLowValue();
+        int humidMax = (int)humidSlider.getHighValue();
+        int humidMin = (int)humidSlider.getLowValue();
+        int loudMax = (int)loudSlider.getValue();
+
+        return new RangeSettingsTemplate("temporary", tempMax, tempMin, humidMax, humidMin, loudMax);
     }
     public StudySessionTemplate saveSettingsAsTemplate(ActionEvent event){
         /*TextInputDialog nameInputDialog = new TextInputDialog();
