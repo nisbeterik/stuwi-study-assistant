@@ -99,17 +99,13 @@ void check_button_released(){
     Serial.println("A Key released");
     a_button_pressed = false;
 
-    // Publish a message to the MQTT topic indicating button A press:
-    client.publish(TOPIC_START_SESSION_BUTTON, button_a_payload);
-
+    publish_start_session();
    }
    if (digitalRead(WIO_KEY_B) == HIGH && b_button_pressed) {
     Serial.println("B Key released");
     b_button_pressed = false;
 
-    // Publish a message to the MQTT topic indicating button A press:
-    client.publish(TOPIC_STOP_SESSION_BUTTON, button_b_payload);
-
+    publish_stop_session();
    }
 }
 

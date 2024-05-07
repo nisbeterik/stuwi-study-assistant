@@ -15,20 +15,13 @@ extern char humid_int[50];
 extern char loud_int[50];
 
 
-//Buttons:
-extern char button_a_payload[18];
-extern char button_b_payload[18];
+// Start/Stop sessions from terminal
+extern char start_session_payload[34];
+extern char stop_session_payload[34];
 //
 
 // mqtt server
 extern const char* MQTT_SERVER;  // MQTT Broker URL
-
-
-
-//Buttons
-extern const char* TOPIC_START_SESSION_BUTTON;
-extern const char* TOPIC_STOP_SESSION_BUTTON;
-//
 
 extern void callback(char* topic, byte* payload, unsigned int length);
 
@@ -37,6 +30,10 @@ extern void reconnect_mqtt();
 extern void publish_sensor_values();
 
 extern void publish_session_over();
+
+extern void publish_start_session();
+
+extern void publish_stop_session();
 
 extern void publish_break_active();
 

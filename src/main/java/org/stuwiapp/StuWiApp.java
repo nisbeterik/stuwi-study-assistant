@@ -27,8 +27,8 @@ public class StuWiApp extends Application {
 
 
 
-    private final String startSessionButtonTopic = "stuwi/button_a";
-    private final String stopSessionButtonTopic = "stuwi/button_b";
+    private final String startSessionButtonTopic = "stuwi/wiostartsession";
+    private final String stopSessionButtonTopic = "stuwi/wiostopsession";
 
 
     private final String activebreakTopic = "stuwi/breakactive";
