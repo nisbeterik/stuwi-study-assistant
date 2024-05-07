@@ -19,7 +19,7 @@ public class RangeSettingsTemplateDAO {
 
         JSONObject templateJson = new JSONObject();
         templateJson.put("user", user);
-        templateJson.put("", template.getTitle());
+        templateJson.put("title", template.getTitle());
         templateJson.put("tempMax", template.getTempMax());
         templateJson.put("tempMin", template.getTempMin());
         templateJson.put("humidMax", template.getHumidMax());

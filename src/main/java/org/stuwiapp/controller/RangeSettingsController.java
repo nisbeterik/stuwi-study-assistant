@@ -35,7 +35,7 @@ public class RangeSettingsController implements Initializable {
     public Label tempLowLabel;
     public Label tempHighLabel;
     public Label loudHighLabel;
-    public Label HighTempLabel11;
+    public Label infoLabel;
 
     public void initialize(URL url, ResourceBundle resourceBundle){
         // Retrieves the current user's saved templates from the database
@@ -112,8 +112,8 @@ public class RangeSettingsController implements Initializable {
 
         return new RangeSettingsTemplate("temporary", tempMax, tempMin, humidMax, humidMin, loudMax);
     }
-    public StudySessionTemplate saveSettingsAsTemplate(ActionEvent event){
-        /*TextInputDialog nameInputDialog = new TextInputDialog();
+    public RangeSettingsTemplate saveSettingsAsTemplate(ActionEvent event){
+        TextInputDialog nameInputDialog = new TextInputDialog();
         nameInputDialog.setTitle("Save template as: ");
         nameInputDialog.setHeaderText(null);
         nameInputDialog.setContentText("Please name the template");
@@ -130,26 +130,19 @@ public class RangeSettingsController implements Initializable {
             return null;
         }
 
-        try {
-            StudySessionTemplate curValues = getSliderValues();
-            if (curValues == null) { return null; }
 
-            StudySessionTemplate newStudySessionTemplate = new StudySessionTemplate(title, curValues.getSubject(), curValues.getDuration(), curValues.getBreakDuration(), curValues.getBlocks());
+        RangeSettingsTemplate curValues = getSliderValues();
+        if (curValues == null) { return null; }
 
-            // Saves the recently created template to the database
-            StudySessionTemplateDAO.saveTemplateInDatabase(newStudySessionTemplate, UserManager.getInstance().getCurrentUser());
+        RangeSettingsTemplate newRangeSettingsTempalte = new RangeSettingsTemplate(title, curValues.getTempMax(), curValues.getTempMin(), curValues.getHumidMax(), curValues.getHumidMin(), curValues.getLoudMax());
 
-            templateChoiceBox.getItems().add(newStudySessionTemplate);
-            infoLabel.setStyle("-fx-text-fill: green;");
-            infoLabel.setText("Successfully saved template " + title);
-            return newStudySessionTemplate;
+        // Saves the recently created template to the database
+        RangeSettingsTemplateDAO.saveRangeTemplateInDatabase(newRangeSettingsTempalte, UserManager.getInstance().getCurrentUser());
 
-        } catch (Exception e) {
-            infoLabel.setStyle("-fx-text-fill: red;");
-            infoLabel.setText(e.getMessage());
-            e.printStackTrace();
-        }*/
-        return null;
+        templateChoiceBox.getItems().add(newRangeSettingsTempalte);
+        infoLabel.setStyle("-fx-text-fill: green;");
+        infoLabel.setText("Successfully saved template " + title);
+        return newRangeSettingsTempalte;
     }
 
 }

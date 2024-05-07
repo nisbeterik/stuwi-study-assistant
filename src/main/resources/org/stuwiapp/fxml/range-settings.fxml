@@ -33,5 +33,6 @@
       <Label fx:id="tempHighLabel" alignment="CENTER_RIGHT" layoutX="430.0" layoutY="155.0" prefHeight="17.0" prefWidth="59.0" />
       <Label fx:id="loudHighLabel" alignment="CENTER_RIGHT" layoutX="430.0" layoutY="286.0" prefHeight="17.0" prefWidth="59.0" />
       <Label fx:id="HighTempLabel11" layoutX="500.0" layoutY="286.0" text="Db" />
+      <Label fx:id="infoLabel" alignment="CENTER" layoutX="30.0" layoutY="347.0" prefHeight="17.0" prefWidth="543.0" />
    </children>
 </AnchorPane>
