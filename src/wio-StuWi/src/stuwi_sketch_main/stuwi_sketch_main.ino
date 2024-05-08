@@ -20,7 +20,6 @@ int loud_val = 0;
 int loud_percent = 0;
 
 static bool a_button_pressed = false;
-static bool b_button_pressed = false;
 void check_button_press();
 void check_button_released();
 
@@ -37,7 +36,6 @@ void setup() {
   draw_background();
 
   pinMode(WIO_KEY_A, INPUT_PULLUP); //Key A = Button A
-  pinMode(WIO_KEY_B, INPUT_PULLUP); //Key B = Button B
 
 
 }
@@ -86,11 +84,6 @@ void check_button_press(){
     a_button_pressed = true; // Set button state
   }
 
-  // Check for B button press
-  if (digitalRead(WIO_KEY_B) == LOW && !b_button_pressed) {
-    Serial.println("B Key pressed");
-    b_button_pressed = true; // Set button state
-  }
 }
 
 void check_button_released(){
@@ -100,12 +93,7 @@ void check_button_released(){
 
     publish_start_session();
    }
-   if (digitalRead(WIO_KEY_B) == HIGH && b_button_pressed) {
-    Serial.println("B Key released");
-    b_button_pressed = false;
 
-    publish_stop_session();
-   }
 }
 
 void read_temperature() {

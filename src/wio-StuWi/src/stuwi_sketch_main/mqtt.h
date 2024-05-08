@@ -12,9 +12,8 @@ extern char temp_payload[50];
 extern char humid_payload[50];
 extern char loud_payload[50];
 
-// Start/Stop sessions from terminal
+// Start sessions from terminal
 extern char start_session_payload[34];
-extern char stop_session_payload[34];
 //
 
 // mqtt server
@@ -29,8 +28,6 @@ extern void publish_sensor_values();
 extern void publish_session_over();
 
 extern void publish_start_session();
-
-extern void publish_stop_session();
 
 extern void publish_break_active();
 

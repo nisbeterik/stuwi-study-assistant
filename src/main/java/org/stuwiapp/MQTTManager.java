@@ -13,7 +13,7 @@ import org.stuwiapp.Utils.PomodoroMappingDefault;
 public class MQTTManager {
     private final String BROKER ="tcp://broker.hivemq.com:1883" ;
     private String clientId;
-    private final int QOS = 2;  // 2 sends message at most once
+    private final int QOS = 1;  // 2 sends message at most once
     private MqttClient client;
 
     private String latestTemp = "0";
@@ -51,10 +51,15 @@ public class MQTTManager {
             StudySessionManager.getInstance().startSession();
             isBreakActive = false;
         }
+
         if(topic.equals("stuwi/endsession")) {
             StudySessionManager.getInstance().endSession();
         }
+        try {
         client.publish(topic, message);
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
     }
 
     public void subscribe(String topic) throws MqttException{
@@ -110,14 +115,6 @@ public class MQTTManager {
                         publish("stuwi/startsession", PomodoroMappingDefault.getPomodoroDefault());
 
                         System.out.println("Starting session...");
-                    }
-                }
-                if (topic.equals("stuwi/wiostopsession")) {
-                    if (!StudySessionManager.getInstance().isSessionActive()) {
-                        System.out.println("No session ongoing");
-                    } else {
-                        publish("stuwi/endsession", "Stop session");
-                        System.out.println("Stopping session...");
                     }
                 }
             }

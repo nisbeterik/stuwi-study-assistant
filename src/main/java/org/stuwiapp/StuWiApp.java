@@ -28,7 +28,6 @@ public class StuWiApp extends Application {
 
 
     private final String startSessionButtonTopic = "stuwi/wiostartsession";
-    private final String stopSessionButtonTopic = "stuwi/wiostopsession";
 
 
     private final String activebreakTopic = "stuwi/breakactive";
@@ -47,7 +46,6 @@ public class StuWiApp extends Application {
         mqttManager.subscribe(inactivebreakTopic);
 
         mqttManager.subscribe(startSessionButtonTopic);
-        mqttManager.subscribe(stopSessionButtonTopic);
     }
     @Override
     public void start(Stage stage) throws IOException {

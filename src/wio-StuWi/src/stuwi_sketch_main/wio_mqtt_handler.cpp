@@ -12,9 +12,8 @@ char session_over_payload[13] = "Session over";
 char break_active_payload[6] = "Break";
 char break_inactive_payload[9] = "No break";
 
-// Start/stop sessions payloads
+// Start sessions payloads
 char start_session_payload[34] = "Session started from Wio Terminal";
-char stop_session_payload[34] = "Session stopped from Wio Terminal";
 
 char msg[50]; // test publish payload
 
@@ -35,7 +34,6 @@ const char* TOPIC_RANGE_UPDATE = "stuwi/rangeupdate";
 
 //Buttons publish topics
 const char* TOPIC_START_SESSION_BUTTON = "stuwi/wiostartsession";
-const char* TOPIC_STOP_SESSION_BUTTON = "stuwi/wiostopsession";
 
 const char* TOPIC_SESSION_OVER = "stuwi/sessionover"; // topic used when time of session runs out
 
@@ -105,10 +103,6 @@ void publish_session_over() {
 
 void publish_start_session() {
     client.publish(TOPIC_START_SESSION_BUTTON, start_session_payload);
-}
-
-void publish_stop_session() {
-    client.publish(TOPIC_STOP_SESSION_BUTTON, stop_session_payload);
 }
 
 void publish_break_active() {
