@@ -51,8 +51,43 @@ public class LatestSettingsDAO {
         templateJson.put("subject", template.getSubject());
         templateJson.put("blockDuration", template.getDuration());
         templateJson.put("breakDuration", template.getBreakDuration());
+        templateJson.put("blocks", template.getBlocks());
 
         Document sessionAsDoc = Document.parse(templateJson.toString());
         collection.insertOne(sessionAsDoc);
     }
+    public static StudySessionTemplate getLatestStudyTemplate(String user){
+
+        for (Document doc : collection.find(new Document("title", "LATESTSESSION"))) {
+
+            String title = doc.getString("title");
+            String subject = doc.getString("subject");
+            int blockDuration = doc.getInteger("blockDuration");
+            int breakDuration = doc.getInteger("breakDuration");
+            int blocks = doc.getInteger("blocks");
+
+            try {
+                return new StudySessionTemplate(title, subject, blockDuration, breakDuration, blocks);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+    public static RangeSettingsTemplate getLatestRangeTemplate(String user){
+
+        for (Document doc : collection.find(new Document("title", "LATESTRANGES"))){
+            String title = doc.getString("title");
+            int tempMax = doc.getInteger("tempMax");
+            int tempMin = doc.getInteger("tempMin");
+            int humidMax = doc.getInteger("humidMax");
+            int humidMin = doc.getInteger("humidMin");
+            int loudMax = doc.getInteger("loudMax");
+
+
+            return new RangeSettingsTemplate(title, tempMax, tempMin, humidMax, humidMin, loudMax);
+        }
+        return null;
+    }
+
 }
