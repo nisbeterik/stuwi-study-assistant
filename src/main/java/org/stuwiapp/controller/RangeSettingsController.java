@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import org.controlsfx.control.RangeSlider;
 import javafx.scene.layout.HBox;
 import org.stuwiapp.*;
+import org.stuwiapp.database.LatestSettingsDAO;
 import org.stuwiapp.database.RangeSettingsTemplateDAO;
 import org.stuwiapp.database.StudySessionTemplateDAO;
 
@@ -36,9 +37,6 @@ public class RangeSettingsController extends ParentController implements Initial
     public Label infoLabel;
     public Button loadSettings;
     public Button backButton;
-
-    MQTTManager mqttManager = MQTTManagerSingleton.getMqttInstance();
-    private final String publicRangeDataTopic = "stuwi/rangeupdate";
 
     public void initialize(URL url, ResourceBundle resourceBundle){
         // Retrieves the current user's saved templates from the database
@@ -93,7 +91,12 @@ public class RangeSettingsController extends ParentController implements Initial
                 loudHighLabel.setText((int)loudSlider.getValue()+ "");
             }
         });
-        loadRangeTemplate(RECOMMENDED_TEMPLATE);
+        RangeSettingsTemplate latestRangeTemplate =  LatestSettingsDAO.getLatestRangeTemplate(currentUser);
+        if (latestRangeTemplate == null) {
+            loadRangeTemplate(RECOMMENDED_TEMPLATE);
+        } else {
+            loadRangeTemplate(latestRangeTemplate);
+        }
     }
     public boolean loadRangeTemplate(RangeSettingsTemplate template){
         if (template == null) {return false;}
@@ -150,19 +153,16 @@ public class RangeSettingsController extends ParentController implements Initial
 
     public void publishRangeSettings(ActionEvent event){
         RangeSettingsTemplate rangeSettings = getSliderValues();
+        LatestSettingsDAO.saveLatestRangeSettings(rangeSettings, UserManager.getInstance().getCurrentUser());
+
         try{
-            //Starts a study session with current setting
-            String payload = String.format("%d %d %d %d %d", rangeSettings.getTempMax(), rangeSettings.getTempMin(), rangeSettings.getHumidMax(), rangeSettings.getHumidMin(), rangeSettings.getLoudMax());
-            mqttManager.publish(publicRangeDataTopic, payload);
+            rangeSettings.publishRangeSettings();
             infoLabel.setStyle("-fx-text-fill: green;");
             infoLabel.setText("Successfully loaded settings to terminal!");
         } catch (Exception e){
             infoLabel.setStyle("-fx-text-fill: red;");
             infoLabel.setText("Failed to connect to WIO terminal");
         }
-
-        DashboardController.setRanges(rangeSettings.getTempMax(), rangeSettings.getTempMin(), rangeSettings.getHumidMax(), rangeSettings.getHumidMin(), rangeSettings.getLoudMax());
-
     }
 
     public void redirectBack(ActionEvent event){

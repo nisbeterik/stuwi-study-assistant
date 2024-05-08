@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
 import org.stuwiapp.*;
+import org.stuwiapp.database.LatestSettingsDAO;
 import org.stuwiapp.database.StudySessionTemplateDAO;
 
 import java.net.URL;
@@ -102,7 +103,13 @@ public class StudySessionConfigurationController extends ParentController implem
             }
         });
         //Loads the template to update sliders / indicators
-        loadStudyTemplate(RECOMMENDED_TEMPLATE);
+        StudySessionTemplate latestStudyTemplate = LatestSettingsDAO.getLatestStudyTemplate(currentUser);
+        if (latestStudyTemplate == null) {
+            loadStudyTemplate(RECOMMENDED_TEMPLATE);
+        } else {
+            loadStudyTemplate(latestStudyTemplate);
+        }
+
     }
 
     //gets the current values for each slider and makes a StudySessionTemplateObject from it.
@@ -127,6 +134,7 @@ public class StudySessionConfigurationController extends ParentController implem
         // TODO: Does this need to be added anywhere else? What is session is started on terminal?
         // Sets the current template to the one that is about to be started so it can be saved with the session
         StudySessionManager.getInstance().setCurrentTemplate(sessionSettings);
+        LatestSettingsDAO.saveLatestStudyTemplateInDatabase(sessionSettings, UserManager.getInstance().getCurrentUser());
 
         try{
             //Starts a study session with current setting
