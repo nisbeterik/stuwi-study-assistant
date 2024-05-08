@@ -161,6 +161,8 @@ public class RangeSettingsController extends ParentController implements Initial
             infoLabel.setText("Failed to connect to WIO terminal");
         }
 
+        DashboardController.setRanges(rangeSettings.getTempMax(), rangeSettings.getTempMin(), rangeSettings.getHumidMax(), rangeSettings.getHumidMin(), rangeSettings.getLoudMax());
+
     }
 
     public void redirectBack(ActionEvent event){
