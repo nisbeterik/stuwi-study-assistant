@@ -5,7 +5,7 @@
 #include "screen_draw.h"
 #include "rtc_handler.h"
 
-#define DHTPIN D0
+#define DHTPIN D1
 #define DHTTYPE DHT11 // DHT 11
 
 
@@ -16,7 +16,8 @@ DHT dht(DHTPIN, DHTTYPE);
 
 long last_published = 0; // tracks when last message was sent in relation to millis variable
 long sensor_value_update = 0; // tracks when last sensor value update was done
-float loudVal = 0;
+int loud_val = 0;
+int loud_percent = 0;
 
 
 
@@ -30,7 +31,7 @@ void setup() {
 
   dht.begin();
   screen_setup();
-
+  draw_background();
 }
 
 void loop() {
@@ -38,47 +39,53 @@ void loop() {
     reconnect_mqtt();
   }
   client.loop();
-  current_time = rtc.now(); //update DateTime object to follow rtc
+  current_time = rtc.now();  //update DateTime object to follow rtc
   long now = millis();
   // continously checks remaining time of alarm to see when its over
   if(alarm_flag){
     check_remaining_time();
   }
   // updates screen and values every second
-  if(now - sensor_value_update > 1000) {
-      sensor_value_update = now;
-      read_temperature();
-      read_humidity();
-      read_loudness();
-      update_screen();
+  if (now - sensor_value_update > 1000) {
+    sensor_value_update = now;
+    read_temperature();
+    read_humidity();
+    read_loudness();
+    update_screen();
   }
   // publishes a message to broker every 10 seconds
-  if (now - last_published > 10000) {
+  if (now - last_published > 10000) { //TODO: make it update every second instead. 
     last_published = now;
 
-    publish_sensor_values();
+    publish_sensor_values(); 
     if(activeBreak) {
         publish_break_active();
     } else if (!activeBreak) {
         publish_break_inactive();
     }
-    
+
   }
 }
 
 
-void read_temperature(){
-  float temp = dht.readTemperature();
-  sprintf(temp_payload, "%.2f", temp);
+void read_temperature() {
+  temp_int = (int)dht.readTemperature();
+  sprintf(temp_payload, "%d", temp_int);
 }
 
-void read_humidity(){
-  float humidity = dht.readHumidity();
-  sprintf(humid_payload, "%.2f", humidity);
+void read_humidity() {
+  humid_int = (int)dht.readHumidity();
+  sprintf(humid_payload, "%d", humid_int);
 }
 
-void read_loudness(){
+void read_loudness() {
 
-  loudVal = analogRead(A3);
-  sprintf(loud_payload, "%.2f ", loudVal);
+  loud_val = (int)analogRead(A0);
+  loud_percent = map(loud_val, 0, 1023, 0, 200);
+  if (loud_percent > 100){ //If value is over 100 change it to 100.
+    loud_percent = 100;
+  }
+  loud_int = loud_percent;
+  sprintf(loud_payload, "%d", loud_int);
+
 }

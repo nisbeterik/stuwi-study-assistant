@@ -12,7 +12,8 @@
             <Font name="Tahoma Bold" size="26.0" />
          </font>
       </Label>
-      <Button fx:id="overviewButton" layoutX="213.0" layoutY="233.0" mnemonicParsing="false" onAction="#redirectToOverview" prefHeight="33.0" prefWidth="180.0" text="Overview" />
-      <Button fx:id="newSessionButton" layoutX="213.0" layoutY="283.0" mnemonicParsing="false" onAction="#newSession" prefHeight="33.0" prefWidth="180.0" text="New Session" />
+      <Button fx:id="overviewButton" layoutX="213.0" layoutY="200.0" mnemonicParsing="false" onAction="#redirectToOverview" prefHeight="33.0" prefWidth="180.0" text="Overview" />
+      <Button fx:id="newSessionButton" layoutX="213.0" layoutY="249.0" mnemonicParsing="false" onAction="#newSession" prefHeight="33.0" prefWidth="180.0" text="New Session" />
+      <Button fx:id="settingsButton" layoutX="213.0" layoutY="297.0" mnemonicParsing="false" onAction="#redirectToSettings" prefHeight="33.0" prefWidth="180.0" text="Settings" />
    </children>
 </AnchorPane>

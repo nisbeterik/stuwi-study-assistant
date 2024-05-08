@@ -1,13 +1,14 @@
 #include "mqtt.h"
 #include "screen_draw.h"
 #include "rtc_handler.h"
+#include "range_handler.h"
 
 TFT_eSPI tft; //initialize TFT LCD
 TFT_eSprite spr = TFT_eSprite(&tft);  //sprite
 
-char temp_string[20]; // Allocate memory for temp_string
-char humid_string[20]; // Allocate memory for humid_string
-char loudness_string[20]; // Allocate memory for loudness_string
+int temp_int;
+int humid_int;
+int loud_int;
 
 byte prev_alarm_flag = 0;
 
@@ -57,24 +58,17 @@ void draw_background() {
   tft.setTextColor(TFT_RED);
   tft.drawString("%", 65 + (tft.width() / 2), 105, 1);
 
-  
-  
 }
 
 void update_screen(){
-  sprintf(temp_string, "%s", temp_int);
-  sprintf(humid_string, "%s", humid_int);
-  sprintf(loudness_string, "%s", loud_int);
-
 
   //We use sprites so the updated text is not drawn ontop of the old data
   spr.setTextColor(TFT_WHITE);
-  update_sprite(temp_int, 20, 193, 40);
-  update_sprite(humid_int, 20, 105, 40);
-  update_sprite(loud_int, ((tft.width() / 2) + 25) , 105, 40);
-
+  update_sprite(temp_payload, 20, 193, 40);
+  update_sprite(humid_payload, 20, 105, 40);
+  update_sprite(loud_payload, ((tft.width() / 2) + 25) , 105, 40);
+  update_range_indicators();
   if(!alarm_flag) {
-      //tft.drawString("No session", 0, 150);
       spr.setTextColor(TFT_RED);
       update_sprite("No Session", ((tft.width() / 2) + 10) , 153, 135);
       spr.setTextColor(TFT_WHITE);
@@ -91,6 +85,30 @@ void update_screen(){
       update_sprite(get_remaining_time(), ((tft.width() / 2) + 25) , 193, 100);
   }
   prev_alarm_flag = alarm_flag;
+}
+
+void update_range_indicators(){
+  
+  //Temp indicator
+  if (temp_int > temp_max || temp_int < temp_min){
+      tft.fillCircle(125, 205, 20, TFT_RED);
+  } else {
+    tft.fillCircle(125, 205, 20, TFT_GREEN);
+  }
+
+  //humidity indicator
+  if (humid_int > humid_max || humid_int < humid_min){
+      tft.fillCircle(125, 117, 20, TFT_RED);
+  } else {
+    tft.fillCircle(125, 117, 20, TFT_GREEN);
+  }
+
+  //Loudness indicator
+  if (loud_int > loud_max){
+      tft.fillCircle((tft.width() / 2) + 125, 117, 20, TFT_RED);
+  } else {
+    tft.fillCircle((tft.width() / 2) + 125, 117, 20, TFT_GREEN);
+  }
 }
 
 void update_sprite(String data, int x, int y, int width){
