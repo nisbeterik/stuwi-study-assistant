@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StudySessionController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StudySessionController">
    <children>
-      <Button fx:id="backToDashboard" layoutX="216.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#redirectDashboard" text="Back To Dashboard">
+      <Button fx:id="backToDashboard" layoutX="208.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#redirectDashboard" text="Return To Dashboard">
          <font>
             <Font name="Tahoma" size="17.0" />
          </font>
