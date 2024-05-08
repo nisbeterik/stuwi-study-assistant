@@ -187,6 +187,10 @@ public class StudySessionConfigurationController extends ParentController implem
         return null;
     }
 
+    public void redirectToHome(ActionEvent event){
+        redirect(event, "stuwi-home.fxml");
+    }
+
 }
 
 
