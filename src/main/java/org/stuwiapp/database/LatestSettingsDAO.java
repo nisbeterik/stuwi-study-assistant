@@ -38,4 +38,21 @@ public class LatestSettingsDAO {
         Document sessionAsDoc = Document.parse(templateJson.toString());
         collection.insertOne(sessionAsDoc);
     }
+    public static void saveLatestStudyTemplateInDatabase(StudySessionTemplate template, String user){
+
+        if (collection.countDocuments() > 0) {
+            Bson filter = Filters.eq("title", "LATESTSESSION");
+            collection.deleteOne(filter);
+        }
+
+        JSONObject templateJson = new JSONObject();
+        templateJson.put("user", user);
+        templateJson.put("title", "LATESTSESSION");
+        templateJson.put("subject", template.getSubject());
+        templateJson.put("blockDuration", template.getDuration());
+        templateJson.put("breakDuration", template.getBreakDuration());
+
+        Document sessionAsDoc = Document.parse(templateJson.toString());
+        collection.insertOne(sessionAsDoc);
+    }
 }
