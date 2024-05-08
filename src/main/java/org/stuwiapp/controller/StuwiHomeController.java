@@ -2,9 +2,27 @@ package org.stuwiapp.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import org.stuwiapp.RangeSettingsTemplate;
+import org.stuwiapp.UserManager;
+import org.stuwiapp.database.LatestSettingsDAO;
 
-public class StuwiHomeController extends ParentController{
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class StuwiHomeController extends ParentController implements Initializable {
+
+    public void initialize(URL url, ResourceBundle resourceBundle){
+        RangeSettingsTemplate latestRangeTemplate =  LatestSettingsDAO.getLatestRangeTemplate(UserManager.getInstance().getCurrentUser());
+        if (latestRangeTemplate == null) {
+            try {
+                latestRangeTemplate.publishRangeSettings();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
 
     @FXML public Button settingsButton;
     @FXML Button overviewButton;
