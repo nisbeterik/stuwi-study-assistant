@@ -8,40 +8,40 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.DashboardController">
-      <Label id="temp" fx:id="tempReadingLabel" layoutX="90.0" layoutY="116.0" text="00.00">
+      <Label id="temp" fx:id="tempReadingLabel" layoutX="116.0" layoutY="116.0" text="00.00">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font></Label>
-      <Label fx:id="humiReadingLabel" layoutX="265.0" layoutY="116.0" text="00.00">
+      <Label fx:id="humiReadingLabel" layoutX="276.0" layoutY="116.0" text="00.00">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font></Label>
-      <ImageView fx:id="tempImage" fitHeight="130.0" fitWidth="83.0" layoutX="73.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="tempImage" fitHeight="130.0" fitWidth="83.0" layoutX="100.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/thermometer-solid-240.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="humiImage" fitHeight="83.0" fitWidth="63.0" layoutX="258.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="humiImage" fitHeight="83.0" fitWidth="63.0" layoutX="270.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/droplet-half-solid-240.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="tempStatusImage" fitHeight="56.0" fitWidth="31.0" layoutX="156.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="tempStatusImage" fitHeight="56.0" fitWidth="31.0" layoutX="188.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/happy-regular-240.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="humiStatusImage" fitHeight="56.0" fitWidth="31.0" layoutX="331.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="humiStatusImage" fitHeight="56.0" fitWidth="31.0" layoutX="342.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/happy-regular-240.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="loudImage" fitHeight="130.0" fitWidth="83.0" layoutX="421.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="loudImage" fitHeight="130.0" fitWidth="83.0" layoutX="421.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/volume-full-solid-240.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="loudStatusImage" fitHeight="56.0" fitWidth="31.0" layoutX="504.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="loudStatusImage" fitHeight="56.0" fitWidth="31.0" layoutX="516.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/happy-regular-240.png" />
          </image>
@@ -51,12 +51,12 @@
             <Font name="Tahoma" size="20.0" />
          </font>
       </Label>
-      <Label id="temp" fx:id="studyStatusLabel" layoutX="234.0" layoutY="200.0" text="Not studying">
+      <Label id="temp" fx:id="studyStatusLabel" layoutX="245.0" layoutY="200.0" text="Not studying">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="stopSessionButton" layoutX="228.0" layoutY="302.0" mnemonicParsing="false" onAction="#stopSession" prefHeight="33.0" prefWidth="123.0" text="Stop Session">
+      <Button fx:id="stopSessionButton" layoutX="239.0" layoutY="303.0" mnemonicParsing="false" onAction="#stopSession" prefHeight="33.0" prefWidth="123.0" text="Stop Session">
          <font>
           <Font name="Tahoma" size="17.0" />
          </font>

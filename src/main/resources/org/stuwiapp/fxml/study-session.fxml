@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StudySessionController">
    <children>
-      <Button fx:id="backToDashboard" layoutX="216.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#redirectDashboard" text="Return To Dashboard">
+      <Button fx:id="backToDashboard" layoutX="208.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#redirectDashboard" text="Return To Dashboard">
          <font>
             <Font name="Tahoma" size="17.0" />
          </font>
