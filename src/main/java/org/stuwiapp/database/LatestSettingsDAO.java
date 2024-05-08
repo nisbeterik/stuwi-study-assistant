@@ -12,5 +12,21 @@ import java.util.ArrayList;
 
 public class LatestSettingsDAO {
 
+    public static void saveLatestRangeSettings(RangeSettingsTemplate template, String user){
+        MongoClient client = MongoConnectionManager.getMongoClient();
+        MongoDatabase db = client.getDatabase("stuwi");
+        MongoCollection<Document> collection = db.getCollection("latestTemplates");
 
+        JSONObject templateJson = new JSONObject();
+        templateJson.put("user", user);
+        templateJson.put("title", template.getTitle());
+        templateJson.put("tempMax", template.getTempMax());
+        templateJson.put("tempMin", template.getTempMin());
+        templateJson.put("humidMax", template.getHumidMax());
+        templateJson.put("humidMin", template.getHumidMin());
+        templateJson.put("loudMax", template.getLoudMax());
+
+        Document sessionAsDoc = Document.parse(templateJson.toString());
+        collection.insertOne(sessionAsDoc);
+    }
 }
