@@ -3,6 +3,7 @@
 
 #include <PubSubClient.h> //MQTT library
 #include "wifi.h"
+#include "range_handler.h"
 
 extern PubSubClient client;
 
@@ -10,10 +11,6 @@ extern PubSubClient client;
 extern char temp_payload[50];
 extern char humid_payload[50];
 extern char loud_payload[50];
-extern char temp_int[50];
-extern char humid_int[50];
-extern char loud_int[50];
-
 
 // mqtt server
 extern const char* MQTT_SERVER;  // MQTT Broker URL
