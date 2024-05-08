@@ -1,5 +1,9 @@
 package org.stuwiapp;
 
+import javafx.event.ActionEvent;
+import org.stuwiapp.controller.DashboardController;
+import org.stuwiapp.database.LatestSettingsDAO;
+
 public class RangeSettingsTemplate {
 
     private String title;
@@ -11,6 +15,9 @@ public class RangeSettingsTemplate {
 
 
     private int loudMax;
+
+    MQTTManager mqttManager = MQTTManagerSingleton.getMqttInstance();
+    private final String publicRangeDataTopic = "stuwi/rangeupdate";
 
     public RangeSettingsTemplate(String title, int tempMax, int tempMin, int humidMax, int humidMin, int loudMax){
         this.title = title;
@@ -43,6 +50,16 @@ public class RangeSettingsTemplate {
     @Override
     public String toString(){
         return title;
+    }
+
+    public void publishRangeSettings() throws Exception{
+
+            //Starts a study session with current setting
+            String payload = String.format("%d %d %d %d %d", this.getTempMax(), this.getTempMin(), this.getHumidMax(), this.getHumidMin(), this.getLoudMax());
+            mqttManager.publish(publicRangeDataTopic, payload);
+
+        DashboardController.setRanges(this.getTempMax(), this.getTempMin(), this.getHumidMax(), this.getHumidMin(), this.getLoudMax());
+
     }
 
 }
