@@ -134,6 +134,7 @@ public class StudySessionConfigurationController extends ParentController implem
         // TODO: Does this need to be added anywhere else? What is session is started on terminal?
         // Sets the current template to the one that is about to be started so it can be saved with the session
         StudySessionManager.getInstance().setCurrentTemplate(sessionSettings);
+        LatestSettingsDAO.saveLatestStudyTemplateInDatabase(sessionSettings, UserManager.getInstance().getCurrentUser());
 
         try{
             //Starts a study session with current setting
