@@ -19,7 +19,9 @@ long sensor_value_update = 0; // tracks when last sensor value update was done
 int loud_val = 0;
 int loud_percent = 0;
 
-
+static bool a_button_pressed = false;
+void check_button_press();
+void check_button_released();
 
 void setup() {
   Serial.begin(115200);
@@ -32,6 +34,10 @@ void setup() {
   dht.begin();
   screen_setup();
   draw_background();
+
+  pinMode(WIO_KEY_A, INPUT_PULLUP); //Key A = Button A
+
+
 }
 
 void loop() {
@@ -45,6 +51,11 @@ void loop() {
   if(alarm_flag){
     check_remaining_time();
   }
+
+  check_button_press();
+  check_button_released();
+
+
   // updates screen and values every second
   if (now - sensor_value_update > 1000) {
     sensor_value_update = now;
@@ -54,10 +65,10 @@ void loop() {
     update_screen();
   }
   // publishes a message to broker every 10 seconds
-  if (now - last_published > 10000) { //TODO: make it update every second instead. 
+  if (now - last_published > 10000) { //TODO: make it update every second instead.
     last_published = now;
 
-    publish_sensor_values(); 
+    publish_sensor_values();
     if(activeBreak) {
         publish_break_active();
     } else if (!activeBreak) {
@@ -67,6 +78,23 @@ void loop() {
   }
 }
 
+void check_button_press(){
+  if (digitalRead(WIO_KEY_A) == LOW && !a_button_pressed) {
+    Serial.println("A Key pressed");
+    a_button_pressed = true; // Set button state
+  }
+
+}
+
+void check_button_released(){
+   if (digitalRead(WIO_KEY_A) == HIGH && a_button_pressed) {
+    Serial.println("A Key released");
+    a_button_pressed = false;
+
+    publish_start_session();
+   }
+
+}
 
 void read_temperature() {
   temp_int = (int)dht.readTemperature();

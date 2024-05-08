@@ -12,7 +12,10 @@ char session_over_payload[13] = "Session over";
 char break_active_payload[6] = "Break";
 char break_inactive_payload[9] = "No break";
 
+// Start sessions payloads
+char start_session_payload[34] = "Session started from Wio Terminal";
 
+char msg[50]; // test publish payload
 
 // mqtt server
 const char* MQTT_SERVER = "broker.mqtt-dashboard.com";  // MQTT Broker URL
@@ -28,6 +31,9 @@ const char* TOPIC_BREAK_ACTIVE = "stuwi/breakactive";
 const char* TOPIC_BREAK_INACTIVE = "stuwi/breakinactive";
 const char* TOPIC_RANGE_UPDATE = "stuwi/rangeupdate";
 
+
+//Buttons publish topics
+const char* TOPIC_START_SESSION_BUTTON = "stuwi/wiostartsession";
 
 const char* TOPIC_SESSION_OVER = "stuwi/sessionover"; // topic used when time of session runs out
 
@@ -73,7 +79,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   String msg_p = String(buff_p);
   Serial.println(msg_p);  // print payload as string
   check_topic(topic, buff_p);
-  
+
 
 }
 
@@ -93,6 +99,10 @@ void publish_sensor_values() {
 // publishes that session is over when remaining time of session is 0
 void publish_session_over() {
     client.publish(TOPIC_SESSION_OVER, session_over_payload);
+}
+
+void publish_start_session() {
+    client.publish(TOPIC_START_SESSION_BUTTON, start_session_payload);
 }
 
 void publish_break_active() {
