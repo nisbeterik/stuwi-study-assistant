@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
 import org.stuwiapp.*;
+import org.stuwiapp.database.LatestSettingsDAO;
 import org.stuwiapp.database.StudySessionTemplateDAO;
 
 import java.net.URL;
@@ -102,7 +103,13 @@ public class StudySessionConfigurationController extends ParentController implem
             }
         });
         //Loads the template to update sliders / indicators
-        loadStudyTemplate(RECOMMENDED_TEMPLATE);
+        StudySessionTemplate latestStudyTemplate = LatestSettingsDAO.getLatestStudyTemplate(currentUser);
+        if (latestStudyTemplate == null) {
+            loadStudyTemplate(RECOMMENDED_TEMPLATE);
+        } else {
+            loadStudyTemplate(latestStudyTemplate);
+        }
+
     }
 
     //gets the current values for each slider and makes a StudySessionTemplateObject from it.
