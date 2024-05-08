@@ -91,7 +91,12 @@ public class RangeSettingsController extends ParentController implements Initial
                 loudHighLabel.setText((int)loudSlider.getValue()+ "");
             }
         });
-        loadRangeTemplate(RECOMMENDED_TEMPLATE);
+        RangeSettingsTemplate latestRangeTemplate =  LatestSettingsDAO.getLatestRangeTemplate(currentUser);
+        if (latestRangeTemplate == null) {
+            loadRangeTemplate(RECOMMENDED_TEMPLATE);
+        } else {
+            loadRangeTemplate(latestRangeTemplate);
+        }
     }
     public boolean loadRangeTemplate(RangeSettingsTemplate template){
         if (template == null) {return false;}
