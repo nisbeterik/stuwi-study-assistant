@@ -1,5 +1,6 @@
 #include "mqtt.h"
 #include "wio_session_handler.h"
+#include "range_handler.h"
 
 PubSubClient client(wioClient);
 
@@ -7,9 +8,6 @@ PubSubClient client(wioClient);
 char temp_payload[50];
 char humid_payload[50];
 char loud_payload[50];
-char temp_int[50];
-char humid_int[50];
-char loud_int[50];
 char session_over_payload[13] = "Session over";
 char break_active_payload[6] = "Break";
 char break_inactive_payload[9] = "No break";
@@ -32,6 +30,8 @@ const char* TOPIC_HUMID = "stuwi/humid";
 const char* TOPIC_LOUD = "stuwi/loudness";
 const char* TOPIC_BREAK_ACTIVE = "stuwi/breakactive";
 const char* TOPIC_BREAK_INACTIVE = "stuwi/breakinactive";
+const char* TOPIC_RANGE_UPDATE = "stuwi/rangeupdate";
+
 
 //Buttons publish topics
 const char* TOPIC_START_SESSION_BUTTON = "stuwi/wiostartsession";
@@ -53,6 +53,7 @@ void reconnect_mqtt() {
       // ... and resubscribe
       client.subscribe(TOPIC_STARTSESSION);
       client.subscribe(TOPIC_ENDSESSION);
+      client.subscribe(TOPIC_RANGE_UPDATE);
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
@@ -127,6 +128,10 @@ void check_topic(char* topic, char* payload) {
   else if( strcmp(topic, TOPIC_ENDSESSION) == 0) {
     end_session();
     Serial.println("Session ended");
+  }
+  else if( strcmp(topic, TOPIC_RANGE_UPDATE) == 0) {
+    update_ranges(payload);
+    Serial.println("Ranges Updated");
   }
 }
 

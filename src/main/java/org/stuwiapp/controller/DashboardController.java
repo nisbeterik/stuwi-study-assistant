@@ -49,13 +49,11 @@ public class DashboardController extends ParentController {
 
 
     // Thresholds should not be here, change this later
-    private final double humidityFloor = 40;
-    private final double humidityRoof = 60;
-    private final double temperatureFloor = 21;
-    private final double temperatureRoof = 23;
-
-    private final double loudnessFloor = 0;
-    private final double loudnessRoof = 1000;
+    private static int humidityFloor = 40;
+    private static int humidityRoof = 60;
+    private static int temperatureFloor = 21;
+    private static int temperatureRoof = 23;
+    private static int loudnessRoof = 1000;
 
     private String stopSessionTopic = "stuwi/endsession";
 
@@ -110,7 +108,7 @@ public class DashboardController extends ParentController {
             currentLoudness = Double.parseDouble(mqttManager.getLatestSound().trim());
             loudnessReadingLabel.setText(String.valueOf(currentLoudness));
 
-            if (currentLoudness >= loudnessFloor && currentLoudness <= loudnessRoof) {
+            if (currentLoudness <= loudnessRoof) {
                 loudStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/happy-regular-240.png")));
             } else {
                 loudStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/sad-regular-240.png")));
@@ -187,5 +185,14 @@ public class DashboardController extends ParentController {
     }
     */
 
+    public static void setRanges(int tempMax, int tempMin, int humidMax, int humidMin, int loudMax){ //updates the ranges when new setting is loaded.
+        humidityFloor = humidMin;
+        humidityRoof = humidMax;
+        temperatureFloor = tempMin;
+        temperatureRoof = tempMax;
+        loudnessRoof = loudMax;
+    }
 
 }
+
+

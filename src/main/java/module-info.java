@@ -6,6 +6,7 @@ module org.openjfx {
     requires org.mongodb.driver.sync.client;
     requires org.mongodb.bson;
     requires org.json;
+    requires org.controlsfx.controls;
     exports org.stuwiapp;
     exports org.stuwiapp.controller;
     opens org.stuwiapp.controller;
