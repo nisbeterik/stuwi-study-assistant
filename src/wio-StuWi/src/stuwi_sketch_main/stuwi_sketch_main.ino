@@ -63,18 +63,12 @@ void loop() {
     read_humidity();
     read_loudness();
     update_screen();
-  }
-  // publishes a message to broker every 10 seconds
-  if (now - last_published > 10000) { //TODO: make it update every second instead.
-    last_published = now;
-
     publish_sensor_values();
     if(activeBreak) {
         publish_break_active();
     } else if (!activeBreak) {
         publish_break_inactive();
-    }
-
+    }    
   }
 }
 
