@@ -5,7 +5,7 @@
 #include "screen_draw.h"
 #include "rtc_handler.h"
 
-#define DHTPIN D0
+#define DHTPIN D1
 #define DHTTYPE DHT11 // DHT 11
 
 
@@ -80,7 +80,7 @@ void read_humidity() {
 
 void read_loudness() {
 
-  loud_val = (int)analogRead(A3);
+  loud_val = (int)analogRead(A0);
   loud_percent = map(loud_val, 0, 1023, 0, 200);
   if (loud_percent > 100){ //If value is over 100 change it to 100.
     loud_percent = 100;

@@ -19,7 +19,7 @@ import org.stuwiapp.*;
 import org.stuwiapp.database.RangeSettingsTemplateDAO;
 import org.stuwiapp.database.StudySessionTemplateDAO;
 
-public class RangeSettingsController implements Initializable {
+public class RangeSettingsController extends ParentController implements Initializable {
 
     public Slider loudSlider;
     public RangeSlider humidSlider;
@@ -35,6 +35,7 @@ public class RangeSettingsController implements Initializable {
     public Label loudHighLabel;
     public Label infoLabel;
     public Button loadSettings;
+    public Button backButton;
 
     MQTTManager mqttManager = MQTTManagerSingleton.getMqttInstance();
     private final String publicRangeDataTopic = "stuwi/rangeupdate";
@@ -151,7 +152,8 @@ public class RangeSettingsController implements Initializable {
         RangeSettingsTemplate rangeSettings = getSliderValues();
         try{
             //Starts a study session with current setting
-            mqttManager.publish(publicRangeDataTopic, String.format("%d %d %d %d %d", rangeSettings.getTempMax(), rangeSettings.getTempMin(), rangeSettings.getHumidMax(), rangeSettings.getHumidMin(), rangeSettings.getLoudMax()));
+            String payload = String.format("%d %d %d %d %d", rangeSettings.getTempMax(), rangeSettings.getTempMin(), rangeSettings.getHumidMax(), rangeSettings.getHumidMin(), rangeSettings.getLoudMax());
+            mqttManager.publish(publicRangeDataTopic, payload);
             infoLabel.setStyle("-fx-text-fill: green;");
             infoLabel.setText("Successfully loaded settings to terminal!");
         } catch (Exception e){
@@ -159,6 +161,10 @@ public class RangeSettingsController implements Initializable {
             infoLabel.setText("Failed to connect to WIO terminal");
         }
 
+    }
+
+    public void redirectBack(ActionEvent event){
+        redirect(event, "stuwi-home.fxml");
     }
 
 }

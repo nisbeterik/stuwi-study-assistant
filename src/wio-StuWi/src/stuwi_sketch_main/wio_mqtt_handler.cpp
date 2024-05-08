@@ -45,6 +45,7 @@ void reconnect_mqtt() {
       // ... and resubscribe
       client.subscribe(TOPIC_STARTSESSION);
       client.subscribe(TOPIC_ENDSESSION);
+      client.subscribe(TOPIC_RANGE_UPDATE);
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());

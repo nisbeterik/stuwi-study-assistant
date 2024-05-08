@@ -2,11 +2,11 @@
 #include "mqtt.h"
 #include <sstream>
 
-int temp_max = 30;
-int temp_min = 26;
-int humid_max = 35; 
-int humid_min = 32;
-int loud_max = 50;
+int temp_max = 23;
+int temp_min = 21;
+int humid_max = 60; 
+int humid_min = 30;
+int loud_max = 70;
 
 
 
