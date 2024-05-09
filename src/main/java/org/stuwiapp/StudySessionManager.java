@@ -50,23 +50,26 @@ public class StudySessionManager {
                     calculateAvg(humidData), findHighest(humidData), findLowest(humidData),
                     calculateAvg(loudData), findHighest(loudData), findLowest(loudData), currentTemplate);
 
-            // TODO: Make this better. We do not want to call controller methods.
-            // Can we make endSession() be called inside popup method? What happens if session is ended on terminal?
-            // Also, we might not want to depend on JavaFx import "Pair" here.
-
-            Pair<Integer, String> ratingData = DashboardController.showFeedbackPopup();
-            session.setRatingScore(ratingData.getKey());
-            session.setRatingText(ratingData.getValue());
-
-            StudySessionDAO.saveSessionInDatabase(session);
-
             tempData.clear();
             humidData.clear();
             loudData.clear();
             currentTemplate = null;
-
             sessionActive = false;
-            System.out.println("Session stopped");
+
+            // It is not good practice to call Controller methods from a different class, but we made an exception here
+            // Since it was the least convoluted way to get the feedback from the user
+
+            Pair<Integer, String> ratingData = DashboardController.showFeedbackPopup();
+            if (ratingData == null) {
+                // User closed the popup without providing feedback
+                System.out.println("Session ended but was not saved");
+                return;
+            }
+            session.setRatingScore(ratingData.getKey());
+            session.setRatingText(ratingData.getValue());
+            StudySessionDAO.saveSessionInDatabase(session);
+            System.out.println("Session ended and saved in database");
+
 
         }
     }
