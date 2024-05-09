@@ -1,3 +1,10 @@
 .pane {
     -fx-background-color: rgb(54,55,74);
 }
+.button {
+    -fx-background-color: rgb(117,171,189);
+    -fx-effect:dropshadow(Gaussian, #797979,0,1, 2, 2);
+}
+.button:hover{
+    -fx-background-color: #DDDDDD;
+}
