@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import org.stuwiapp.database.UserDAO;
 
 import java.net.URL;
@@ -16,6 +17,7 @@ import java.util.ResourceBundle;
 
 public class LoginController extends ParentController implements Initializable {
 
+    public AnchorPane background;
     @FXML
     private ImageView stuwiImage;
     @FXML
@@ -29,6 +31,8 @@ public class LoginController extends ParentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        background.getStyleClass().add("pane"); //sets the style class for the background AnchorPane to "pane".
+
         stuwiImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/stuwi-logo.png")));
     }
 
