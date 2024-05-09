@@ -18,7 +18,7 @@ public class StudySessionManager {
     private StudySessionTemplate currentTemplate;
     private final ArrayList<Double> tempData = new ArrayList<>();
     private final ArrayList<Double> humidData = new ArrayList<>();
-    private static final ArrayList<Double> loudData = new ArrayList<>();
+    private final ArrayList<Double> loudData = new ArrayList<>();
 
 
     public static StudySessionManager getInstance() {
@@ -99,7 +99,7 @@ public class StudySessionManager {
             if (!tempDataDouble.isNaN() && tempDataDouble >= -20 && tempDataDouble <= 60) {
                 tempData.add(tempDataDouble);
             } else {
-                System.out.println("Invalid temperature 'NaN'");
+                System.out.println("Invalid temperature");
             }
         } catch (NumberFormatException e) {
             System.out.println("Invalid value");
@@ -111,10 +111,10 @@ public class StudySessionManager {
     public void addHumidityData(String humidDataString) {
         try{
             Double humidDataDouble = Double.parseDouble(humidDataString);
-            if (!humidDataDouble.isNaN() && humidDataDouble > 0 && humidDataDouble <= 100) {
+            if (!humidDataDouble.isNaN() && humidDataDouble >= 0 && humidDataDouble <= 100) {
                 humidData.add(humidDataDouble);
             } else {
-                System.out.println("Invalid temperature 'NaN'");
+                System.out.println("Invalid humidity");
             }
 
         } catch (NumberFormatException e) {
@@ -125,8 +125,18 @@ public class StudySessionManager {
     }
 
     public void addLoudnessData(String loudDataString) {
-        Double loudDataDouble = Double.parseDouble(loudDataString);
-        loudData.add(loudDataDouble);
+        try{
+            Double loudDataDouble = Double.parseDouble(loudDataString);
+            if(!loudDataDouble.isNaN() && loudDataDouble >= 0 && loudDataDouble <= 100) {
+                loudData.add(loudDataDouble);
+            } else {
+                System.out.println("Invalid loudness");
+            }
+
+        } catch(NumberFormatException e) {
+            System.out.println("Invalid value");
+        }
+
     }
 
 
@@ -174,5 +184,9 @@ public class StudySessionManager {
 
     public ArrayList<Double> getHumidityDataList() {
         return humidData;
+    }
+
+    public ArrayList<Double> getLoudnessDataList() {
+        return loudData;
     }
 }

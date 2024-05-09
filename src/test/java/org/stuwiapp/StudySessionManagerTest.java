@@ -150,9 +150,10 @@ public class StudySessionManagerTest {
 
     @Test
     void addLoudnessData_OverHundred() {
+        String overHundredData = "101";
         m.addLoudnessData(overHundredData);
         ArrayList<Double> expected = new ArrayList<>();
-        // Loudness cannot exceed 100, should result in an empty list
+        // should not exceed 100
         assertEquals(expected, m.getLoudnessDataList());
     }
 
