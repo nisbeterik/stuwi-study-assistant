@@ -82,6 +82,15 @@ public class StudySessionManagerTest {
     }
 
     @Test
+    void addHumidityData_OverHundred() {
+        String over = "101";
+        m.addHumidityData(over);
+        ArrayList<Double> expected = new ArrayList<>();
+        // you cant have humidity over 100%, should be empty
+        assertEquals(expected, m.getHumidityDataList());
+    }
+
+    @Test
     void addHumidityData_NaN() {
         m.addHumidityData(notANumber);
         ArrayList<Double> expected = new ArrayList<>();

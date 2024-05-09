@@ -111,7 +111,7 @@ public class StudySessionManager {
     public void addHumidityData(String humidDataString) {
         try{
             Double humidDataDouble = Double.parseDouble(humidDataString);
-            if (!humidDataDouble.isNaN() && humidDataDouble > 0) {
+            if (!humidDataDouble.isNaN() && humidDataDouble > 0 && humidDataDouble <= 100) {
                 humidData.add(humidDataDouble);
             } else {
                 System.out.println("Invalid temperature 'NaN'");
