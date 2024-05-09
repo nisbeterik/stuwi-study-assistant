@@ -7,15 +7,15 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="background" prefHeight="400.0" prefWidth="600.0" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.LoginController">
+<AnchorPane fx:id="background" prefHeight="399.0" prefWidth="466.0" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.LoginController">
    <children>
-      <TextField fx:id="usernameField" layoutX="309.0" layoutY="144.0" promptText="Username" />
-      <Button fx:id="loginButton" layoutX="362.0" layoutY="221.0" mnemonicParsing="false" onAction="#logInUser" text="Log in" />
-      <Button fx:id="registrationButton" layoutX="309.0" layoutY="297.0" mnemonicParsing="false" onAction="#goToRegistration" prefHeight="26.0" prefWidth="160.0" text="Register" />
-      <PasswordField fx:id="passwordField" layoutX="309.0" layoutY="175.0" promptText="Password" />
-      <ImageView fx:id="stuwiImage" fitHeight="304.0" fitWidth="299.0" layoutX="38.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+      <TextField fx:id="usernameField" layoutX="241.0" layoutY="101.0" prefHeight="39.0" prefWidth="194.0" promptText="Username" />
+      <Button fx:id="loginButton" layoutX="241.0" layoutY="230.0" mnemonicParsing="false" onAction="#logInUser" prefHeight="39.0" prefWidth="194.0" text="Log in" />
+      <Button fx:id="registrationButton" layoutX="241.0" layoutY="281.0" mnemonicParsing="false" onAction="#goToRegistration" prefHeight="39.0" prefWidth="194.0" text="Register" />
+      <PasswordField fx:id="passwordField" layoutX="241.0" layoutY="147.0" prefHeight="39.0" prefWidth="194.0" promptText="Password" />
+      <ImageView fx:id="stuwiImage" fitHeight="335.0" fitWidth="242.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../docs/images/StuWi-logo.png" />
+            <Image url="@../images/StuWi-Transparent.png" />
          </image>
       </ImageView>
    </children>
