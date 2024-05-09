@@ -44,7 +44,7 @@ public class SessionOverviewController extends ParentController implements Initi
         try {
             String currentUser = UserManager.getInstance().getCurrentUser();
             ArrayList<StudySession> sessions = StudySessionDAO.getUserSessions(currentUser);
-            ObservableList<StudySession> sessionsList= FXCollections.observableArrayList(sessions);
+            ObservableList<StudySession> sessionsList = FXCollections.observableArrayList(sessions);
             startDateColumn.setCellValueFactory(new PropertyValueFactory<>("formattedStartDate"));
             durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
             tempColumn.setCellValueFactory(new PropertyValueFactory<>("temperature"));
@@ -59,5 +59,13 @@ public class SessionOverviewController extends ParentController implements Initi
     }
 
 
-    public void redirectToHome(ActionEvent event) {redirect(event, "stuwi-home.fxml");}
+    public void redirectToHome(ActionEvent event) {
+        redirect(event, "stuwi-home.fxml");
+    }
+
+
+    public void deleteSession(ActionEvent event){
+
+    }
+
 }
