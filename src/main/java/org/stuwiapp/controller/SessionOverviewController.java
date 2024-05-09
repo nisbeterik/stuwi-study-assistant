@@ -74,8 +74,7 @@ public class SessionOverviewController extends ParentController implements Initi
 
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK) {
-            //This only deletes the row from the table view. Not from the database.
-            //If "refreshing" (going back to menu and to overview again) the data will still be there.
+            //This only deletes the row from the table view, not from the database
             sessionTable.getItems().removeAll(sessionTable.getSelectionModel().getSelectedItem());
             System.out.println("User deleted session (from tableview)");
         } else {
