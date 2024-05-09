@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.SessionOverviewController">
+<AnchorPane fx:id="background" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.SessionOverviewController">
    <children>
       <Button fx:id="returnButton" layoutX="249.0" layoutY="327.0" mnemonicParsing="false" onAction="#redirectToHome" text="Return to home" />
       <TableView fx:id="sessionTable" layoutX="13.0" layoutY="37.0" prefHeight="254.0" prefWidth="573.0">

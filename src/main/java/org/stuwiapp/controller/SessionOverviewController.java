@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import org.stuwiapp.StudySession;
 import org.stuwiapp.UserManager;
 import org.stuwiapp.database.StudySessionDAO;
@@ -20,6 +21,7 @@ import java.util.ResourceBundle;
 
 public class SessionOverviewController extends ParentController implements Initializable {
 
+    public AnchorPane background;
     @FXML
     private Button returnButton;
     @FXML
@@ -41,6 +43,7 @@ public class SessionOverviewController extends ParentController implements Initi
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        background.getStyleClass().add("pane");
         try {
             String currentUser = UserManager.getInstance().getCurrentUser();
             ArrayList<StudySession> sessions = StudySessionDAO.getUserSessions(currentUser);
