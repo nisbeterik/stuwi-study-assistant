@@ -29,7 +29,7 @@ public class StudySessionManager {
     }
 
     public void startSession() {
-        if (!sessionActive){
+        if (!sessionActive) {
             sessionStart = LocalDateTime.now();
 
             sessionActive = true;
@@ -38,13 +38,13 @@ public class StudySessionManager {
     }
 
     // Store information about the session so that it can be saved in the database later
-    public void setCurrentTemplate(StudySessionTemplate template){
+    public void setCurrentTemplate(StudySessionTemplate template) {
         currentTemplate = template;
         System.out.println("Template with subject " + template.getSubject() + " set for session");
     }
 
     public void endSession() {
-        if (sessionActive){
+        if (sessionActive) {
             LocalDateTime sessionEnd = LocalDateTime.now();
             String user = UserManager.getInstance().getCurrentUser();
 
@@ -75,16 +75,16 @@ public class StudySessionManager {
         }
     }
 
-    public void pauseSession(){
+    public void pauseSession() {
         sessionPaused = true;
         pauseStart = LocalDateTime.now();
     }
 
-    public void unpauseSession(){
+    public void unpauseSession() {
         sessionPaused = false;
         LocalDateTime pauseEnd = LocalDateTime.now();
         long minutes = ChronoUnit.MINUTES.between(pauseStart, pauseEnd);
-        minutesPaused += (int)minutes;
+        minutesPaused += (int) minutes;
     }
 
     public boolean isSessionActive() {
@@ -93,24 +93,34 @@ public class StudySessionManager {
 
 
     // Converting from Strings to Double because payload comes as strings from sensors/terminal
-    public void addTemperatureData(String tempDataString){
-        Double tempDataDouble = Double.parseDouble(tempDataString);
-        tempData.add(tempDataDouble);
+    public void addTemperatureData(String tempDataString) {
+        try {
+            Double tempDataDouble = Double.parseDouble(tempDataString);
+            if (!tempDataDouble.isNaN()) {
+                tempData.add(tempDataDouble);
+            } else {
+                System.out.println("Invalid temperature 'NaN'");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid value");
+        }
+
+
     }
 
-    public void addHumidityData(String humidDataString){
+    public void addHumidityData(String humidDataString) {
         Double humidDataDouble = Double.parseDouble(humidDataString);
         humidData.add(humidDataDouble);
     }
 
-    public void addLoudnessData(String loudDataString){
+    public void addLoudnessData(String loudDataString) {
         Double loudDataDouble = Double.parseDouble(loudDataString);
         loudData.add(loudDataDouble);
     }
 
 
     // Helper methods for calculating average, highest and lowest values from sensor data
-    private int calculateAvg(ArrayList<Double> values){
+    private int calculateAvg(ArrayList<Double> values) {
         double total = 0;
         for (Double value : values) {
             total += value;
@@ -121,30 +131,30 @@ public class StudySessionManager {
         return (int) Math.round(average);
     }
 
-    private int findHighest(ArrayList<Double> values){
-        if (values.isEmpty()){
+    private int findHighest(ArrayList<Double> values) {
+        if (values.isEmpty()) {
             return 0;
         }
         double highest = values.get(0);
-        for (double value : values){
-            if (value > highest){
+        for (double value : values) {
+            if (value > highest) {
                 highest = value;
             }
         }
         return (int) Math.round(highest);
     }
 
-    private int findLowest(ArrayList<Double> values){
-        if (values.isEmpty()){
+    private int findLowest(ArrayList<Double> values) {
+        if (values.isEmpty()) {
             return 0;
         }
         double lowest = values.get(0);
-        for (double value : values){
-            if (value < lowest){
+        for (double value : values) {
+            if (value < lowest) {
                 lowest = value;
             }
         }
-        return (int)Math.round(lowest);
+        return (int) Math.round(lowest);
     }
 
     public ArrayList<Double> getTemperatureDataList() {

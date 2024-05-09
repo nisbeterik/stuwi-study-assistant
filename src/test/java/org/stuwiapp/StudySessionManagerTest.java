@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 
 public class StudySessionManagerTest {
 
@@ -36,6 +37,26 @@ public class StudySessionManagerTest {
         expected.add(-10.0);
         assertEquals(expected, m.getTemperatureDataList());
     }
+    @Test
+    void addTemperatureData_NaN() {
+        m.addTemperatureData(notANumber);
+        ArrayList<Double> expected = new ArrayList<>();
+        assertEquals(expected, m.getTemperatureDataList());
+    }
 
+    @Test
+    void addTemperatureData_Empty() {
+        String empty = "";
+        m.addTemperatureData(empty); // caught in try-catch
+        ArrayList<Double> expected = new ArrayList<>();
+        assertEquals(expected, m.getTemperatureDataList());
+    }
 
+    @Test
+    void addTemperatureData_WrongFormat() {
+        String wrong = "10 C";
+        m.addTemperatureData(wrong); // caught in try-catch
+        ArrayList<Double> expected = new ArrayList<>();
+        assertEquals(expected, m.getTemperatureDataList());
+    }
 }
