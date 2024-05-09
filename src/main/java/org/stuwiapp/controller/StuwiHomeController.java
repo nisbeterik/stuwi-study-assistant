@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import org.stuwiapp.RangeSettingsTemplate;
 import org.stuwiapp.UserManager;
 import org.stuwiapp.database.LatestSettingsDAO;
@@ -13,7 +14,11 @@ import java.util.ResourceBundle;
 
 public class StuwiHomeController extends ParentController implements Initializable {
 
+    public AnchorPane background;
+
     public void initialize(URL url, ResourceBundle resourceBundle){
+        background.getStyleClass().add("pane");
+
         RangeSettingsTemplate latestRangeTemplate =  LatestSettingsDAO.getLatestRangeTemplate(UserManager.getInstance().getCurrentUser());
         if (latestRangeTemplate == null) {
             try {
