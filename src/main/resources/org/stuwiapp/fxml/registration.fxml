@@ -5,8 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane fx:id="background" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.RegistrationController">
+<AnchorPane fx:id="background" prefHeight="400.0" prefWidth="600.0" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.RegistrationController">
    <children>
       <TextField fx:id="usernameField" layoutX="220.0" layoutY="103.0" promptText="Username" />
       <PasswordField fx:id="passwordField" layoutX="220.0" layoutY="145.0" promptText="Password" />
