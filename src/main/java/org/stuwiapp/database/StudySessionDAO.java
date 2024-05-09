@@ -122,8 +122,7 @@ public class StudySessionDAO {
         MongoDatabase db = client.getDatabase("stuwi");
         MongoCollection<Document> collection = db.getCollection("sessions");
 
-
-
+        //TODO: Implement removal of study session from database
     }
 
 
