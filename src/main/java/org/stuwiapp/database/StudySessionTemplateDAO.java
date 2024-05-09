@@ -16,7 +16,7 @@ public class StudySessionTemplateDAO {
     public static void saveTemplateInDatabase(StudySessionTemplate template, String user){
         MongoClient client = MongoConnectionManager.getMongoClient();
         MongoDatabase db = client.getDatabase("stuwi");
-        MongoCollection<Document> collection = db.getCollection("templates");
+        MongoCollection<Document> collection = db.getCollection("sessionTemplates");
 
         JSONObject templateJson = new JSONObject();
         templateJson.put("user", user);
@@ -24,6 +24,7 @@ public class StudySessionTemplateDAO {
         templateJson.put("subject", template.getSubject());
         templateJson.put("blockDuration", template.getDuration());
         templateJson.put("breakDuration", template.getBreakDuration());
+        templateJson.put("blocks", template.getBlocks());
 
         Document sessionAsDoc = Document.parse(templateJson.toString());
         collection.insertOne(sessionAsDoc);
@@ -32,7 +33,7 @@ public class StudySessionTemplateDAO {
     public static ArrayList<StudySessionTemplate> getUserTemplates(String user){
         MongoClient client = MongoConnectionManager.getMongoClient();
         MongoDatabase db = client.getDatabase("stuwi");
-        MongoCollection<Document> collection = db.getCollection("templates");
+        MongoCollection<Document> collection = db.getCollection("sessionTemplates");
 
         ArrayList<StudySessionTemplate> templates = new ArrayList<>();
         for (Document doc : collection.find(new Document("user", user))){
@@ -40,9 +41,10 @@ public class StudySessionTemplateDAO {
             String subject = doc.getString("subject");
             int blockDuration = doc.getInteger("blockDuration");
             int breakDuration = doc.getInteger("breakDuration");
+            int blocks = doc.getInteger("blocks");
             StudySessionTemplate template = null;
             try {
-                template = new StudySessionTemplate(title, subject, blockDuration, breakDuration, 1);
+                template = new StudySessionTemplate(title, subject, blockDuration, breakDuration, blocks);
             } catch (Exception e) {
                 e.printStackTrace();
             }
