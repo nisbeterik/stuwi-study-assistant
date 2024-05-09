@@ -43,6 +43,18 @@ public class StudySessionManagerTest {
         assertEquals(expected, m.getTemperatureDataList());
     }
     @Test
+    void addTemperatureData_OutOfRange() {
+        // DHT11 has a range of -20C - 60C
+        String tooLow = "-21";
+        String tooHigh = "61";
+        m.addTemperatureData(tooHigh);
+        m.addTemperatureData(tooLow);
+        ArrayList<Double> expected = new ArrayList<>();
+        //should be empty
+        assertEquals(expected, m.getTemperatureDataList());
+
+    }
+    @Test
     void addTemperatureData_NaN() {
         m.addTemperatureData(notANumber);
         ArrayList<Double> expected = new ArrayList<>();
@@ -64,6 +76,10 @@ public class StudySessionManagerTest {
         ArrayList<Double> expected = new ArrayList<>();
         assertEquals(expected, m.getTemperatureDataList());
     }
+
+    /***
+     * addHumidityData() tests
+     */
 
     @Test
     void addHumidityData_Normal() {

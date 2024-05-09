@@ -96,7 +96,7 @@ public class StudySessionManager {
     public void addTemperatureData(String tempDataString) {
         try {
             Double tempDataDouble = Double.parseDouble(tempDataString);
-            if (!tempDataDouble.isNaN()) {
+            if (!tempDataDouble.isNaN() && tempDataDouble >= -20 && tempDataDouble <= 60) {
                 tempData.add(tempDataDouble);
             } else {
                 System.out.println("Invalid temperature 'NaN'");
