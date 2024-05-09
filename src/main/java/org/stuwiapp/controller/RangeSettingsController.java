@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.RangeSlider;
 import javafx.scene.layout.HBox;
 import org.stuwiapp.*;
@@ -37,8 +38,11 @@ public class RangeSettingsController extends ParentController implements Initial
     public Label infoLabel;
     public Button loadSettings;
     public Button backButton;
+    public AnchorPane background;
 
     public void initialize(URL url, ResourceBundle resourceBundle){
+        background.getStyleClass().add("pane"); //sets the style class for the background AnchorPane to "pane".
+
         // Retrieves the current user's saved templates from the database
         String currentUser = UserManager.getInstance().getCurrentUser();
         ArrayList<RangeSettingsTemplate> savedTemplates = RangeSettingsTemplateDAO.getUserRangeTemplates(currentUser);
