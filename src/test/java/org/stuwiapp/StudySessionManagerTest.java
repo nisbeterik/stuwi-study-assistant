@@ -22,6 +22,11 @@ public class StudySessionManagerTest {
         m = new StudySessionManager();
     }
 
+
+    /***
+     * addTemperatureData() tests
+     */
+
     @Test
     void addTemperatureData_Normal() {
         m.addTemperatureData(normalData);
@@ -58,5 +63,44 @@ public class StudySessionManagerTest {
         m.addTemperatureData(wrong); // caught in try-catch
         ArrayList<Double> expected = new ArrayList<>();
         assertEquals(expected, m.getTemperatureDataList());
+    }
+
+    @Test
+    void addHumidityData_Normal() {
+        m.addHumidityData(normalData);
+        ArrayList<Double> expected = new ArrayList<>();
+        expected.add(10.0);
+        assertEquals(expected, m.getHumidityDataList());
+    }
+
+    @Test
+    void addHumidityData_Negative(){
+        m.addHumidityData(negativeData);
+        ArrayList<Double> expected = new ArrayList<>();
+        // you cant have negative humidity so should be empty
+        assertEquals(expected, m.getHumidityDataList());
+    }
+
+    @Test
+    void addHumidityData_NaN() {
+        m.addHumidityData(notANumber);
+        ArrayList<Double> expected = new ArrayList<>();
+        assertEquals(expected, m.getHumidityDataList());
+    }
+
+    @Test
+    void addHumidityData_Empty() {
+        String empty = "";
+        m.addHumidityData(empty);
+        ArrayList<Double> expected = new ArrayList<>();
+        assertEquals(expected, m.getHumidityDataList());
+    }
+
+    @Test
+    void addHumidityData_WrongFormat() {
+        String wrong = "70 %";
+        m.addHumidityData(wrong);
+        ArrayList<Double> expected = new ArrayList<>();
+        assertEquals(expected, m.getHumidityDataList());
     }
 }

@@ -109,8 +109,19 @@ public class StudySessionManager {
     }
 
     public void addHumidityData(String humidDataString) {
-        Double humidDataDouble = Double.parseDouble(humidDataString);
-        humidData.add(humidDataDouble);
+        try{
+            Double humidDataDouble = Double.parseDouble(humidDataString);
+            if (!humidDataDouble.isNaN() && humidDataDouble > 0) {
+                humidData.add(humidDataDouble);
+            } else {
+                System.out.println("Invalid temperature 'NaN'");
+            }
+
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid value");
+        }
+
+
     }
 
     public void addLoudnessData(String loudDataString) {
