@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
 import org.stuwiapp.*;
 import org.stuwiapp.database.LatestSettingsDAO;
 import org.stuwiapp.database.StudySessionTemplateDAO;
@@ -19,6 +20,7 @@ import java.util.ResourceBundle;
 
 public class StudySessionConfigurationController extends ParentController implements Initializable  {
     @FXML public ChoiceBox templateChoiceBox;
+    public AnchorPane background;
 
     @FXML Button saveTemplateButton;
     @FXML public Label titleLabel;
@@ -64,6 +66,7 @@ public class StudySessionConfigurationController extends ParentController implem
 
     }
     public void initialize(URL url, ResourceBundle resourceBundle){
+        background.getStyleClass().add("pane");
 
         // Retrieves the current user's saved templates from the database
         String currentUser = UserManager.getInstance().getCurrentUser();
