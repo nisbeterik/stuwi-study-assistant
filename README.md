@@ -1,5 +1,5 @@
 <div style="text-align:center">
-    <img src="/docs/images/StuWi-logo.png" alt="StuWi Study Assistant" width="400" />
+    <img src="/docs/images/StuWi-Transparent.png" alt="StuWi Study Assistant" width="400" />
 </div>
 
 # StuWi Study Assistant
