@@ -81,7 +81,7 @@
                 <configuration>
                     <testSourceDirectory>src/test/java</testSourceDirectory>
                     <includes>
-                        <include>org/stuwiapp/StuWiAppTest.java</include>
+                        <include>org/stuwiapp/*Test.java</include>
                     </includes>
                 </configuration>
             </plugin>
