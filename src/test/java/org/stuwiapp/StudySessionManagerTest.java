@@ -128,4 +128,54 @@ public class StudySessionManagerTest {
         ArrayList<Double> expected = new ArrayList<>();
         assertEquals(expected, m.getHumidityDataList());
     }
+
+    /***
+     * addLoudnessData() tests
+     */
+    @Test
+    void addLoudnessData_Normal() {
+        m.addLoudnessData(normalData);
+        ArrayList<Double> expected = new ArrayList<>();
+        expected.add(10.0);
+        assertEquals(expected, m.getLoudnessDataList());
+    }
+
+    @Test
+    void addLoudnessData_Negative(){
+        m.addLoudnessData(negativeData);
+        ArrayList<Double> expected = new ArrayList<>();
+        // Loudness cannot be negative, should result in an empty list
+        assertEquals(expected, m.getLoudnessDataList());
+    }
+
+    @Test
+    void addLoudnessData_OverHundred() {
+        m.addLoudnessData(overHundredData);
+        ArrayList<Double> expected = new ArrayList<>();
+        // Loudness cannot exceed 100, should result in an empty list
+        assertEquals(expected, m.getLoudnessDataList());
+    }
+
+    @Test
+    void addLoudnessData_NaN() {
+        m.addLoudnessData(notANumber);
+        ArrayList<Double> expected = new ArrayList<>();
+        assertEquals(expected, m.getLoudnessDataList());
+    }
+
+    @Test
+    void addLoudnessData_Empty() {
+        String empty = "";
+        m.addLoudnessData(empty);
+        ArrayList<Double> expected = new ArrayList<>();
+        assertEquals(expected, m.getLoudnessDataList());
+    }
+
+    @Test
+    void addLoudnessData_WrongFormat() {
+        String wrong = "85 dB";
+        m.addLoudnessData(wrong);
+        ArrayList<Double> expected = new ArrayList<>();
+        assertEquals(expected, m.getLoudnessDataList());
+    }
 }
