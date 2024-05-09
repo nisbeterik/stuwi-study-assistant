@@ -117,6 +117,10 @@ public class StudySessionDAO {
         return sessions;
     }
 
+    public static void deleteSessionFromDatabase(StudySession session){
+
+
+    }
 
 
 }
