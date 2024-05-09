@@ -67,7 +67,10 @@ public class SessionOverviewController extends ParentController implements Initi
 
 
     public void deleteSession(ActionEvent event){
+        //This only deletes the row from the table view. Not from the database.
+        //If "refreshing" (going back to menu and to overview again) the data will still be there.
+        sessionTable.getItems().removeAll(sessionTable.getSelectionModel().getSelectedItem());
 
+        //Implement Removal from database
     }
-
 }
