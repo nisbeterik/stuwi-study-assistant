@@ -4,7 +4,16 @@
 .button {
     -fx-background-color: rgb(117,171,189);
     -fx-effect:dropshadow(Gaussian, #797979,0,1, 2, 2);
+    -fx-text-fill: white;
 }
 .button:hover{
-    -fx-background-color: #DDDDDD;
+    -fx-background-color: rgb(127,181,199);
+}
+.text-field{
+    -fx-background-color: #454566;
+    -fx-text-fill: white;
+    -fx-effect:dropshadow(Gaussian, #2c2f43,0,1, 2, 2);
+}
+.text-field:hover{
+    -fx-background-color: #404061;
 }
