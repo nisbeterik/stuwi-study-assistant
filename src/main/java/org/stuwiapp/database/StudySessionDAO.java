@@ -118,7 +118,9 @@ public class StudySessionDAO {
     }
 
     public static void deleteSessionFromDatabase(StudySession session){
-
+        MongoClient client = MongoConnectionManager.getMongoClient();
+        MongoDatabase db = client.getDatabase("stuwi");
+        MongoCollection<Document> collection = db.getCollection("sessions");
 
     }
 
