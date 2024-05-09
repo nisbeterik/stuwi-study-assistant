@@ -11,10 +11,7 @@ import java.util.ArrayList;
 public class StudySessionManager {
     private static StudySessionManager sessionManager;
     private boolean sessionActive = false;
-    private boolean sessionPaused = false;
     private LocalDateTime sessionStart;
-    private LocalDateTime pauseStart;
-    private int minutesPaused = 0;
     private StudySessionTemplate currentTemplate;
     private static final ArrayList<Double> tempData = new ArrayList<>();
     private static final ArrayList<Double> humidData = new ArrayList<>();
@@ -48,7 +45,7 @@ public class StudySessionManager {
             LocalDateTime sessionEnd = LocalDateTime.now();
             String user = UserManager.getInstance().getCurrentUser();
 
-            StudySession session = new StudySession(sessionStart, sessionEnd, user, minutesPaused,
+            StudySession session = new StudySession(sessionStart, sessionEnd, user,
                     calculateAvg(tempData), findHighest(tempData), findLowest(tempData),
                     calculateAvg(humidData), findHighest(humidData), findLowest(humidData),
                     calculateAvg(loudData), findHighest(loudData), findLowest(loudData), currentTemplate);
@@ -66,25 +63,12 @@ public class StudySessionManager {
             tempData.clear();
             humidData.clear();
             loudData.clear();
-            minutesPaused = 0;
             currentTemplate = null;
 
             sessionActive = false;
             System.out.println("Session stopped");
 
         }
-    }
-
-    public void pauseSession(){
-        sessionPaused = true;
-        pauseStart = LocalDateTime.now();
-    }
-
-    public void unpauseSession(){
-        sessionPaused = false;
-        LocalDateTime pauseEnd = LocalDateTime.now();
-        long minutes = ChronoUnit.MINUTES.between(pauseStart, pauseEnd);
-        minutesPaused += (int)minutes;
     }
 
     public boolean isSessionActive() {

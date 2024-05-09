@@ -13,7 +13,6 @@ public class StudySession {
     private final LocalDateTime endDate;
     private int rating;
     private String ratingText;
-    private final int minutesPaused;
     private final String user;
     private final int avgLoud;
     private final int avgTemp;
@@ -26,14 +25,13 @@ public class StudySession {
     private final int lowestLoud;
     private final StudySessionTemplate template;
 
-    public StudySession(LocalDateTime startDate, LocalDateTime endDate, String user, int minutesPaused, int avgTemp,
+    public StudySession(LocalDateTime startDate, LocalDateTime endDate, String user, int avgTemp,
                         int highestTemp, int lowestTemp, int avgHumid, int highestHumid,
                         int lowestHumid, int avgLoud, int highestLoud, int lowestLoud, StudySessionTemplate template) {
 
         this.startDate = startDate;
         this.endDate = endDate;
         this.user = user;
-        this.minutesPaused = minutesPaused;
 
         this.avgTemp = avgTemp;
         this.highestTemp = highestTemp;
@@ -110,10 +108,6 @@ public class StudySession {
 
     public double getLowestLoud() {
         return lowestLoud;
-    }
-
-    public int getMinutesPaused() {
-        return minutesPaused;
     }
 
     public int getRating() {
