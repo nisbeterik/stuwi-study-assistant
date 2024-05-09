@@ -122,6 +122,7 @@ public class StudySessionDAO {
         MongoDatabase db = client.getDatabase("stuwi");
         MongoCollection<Document> collection = db.getCollection("sessions");
 
+
     }
 
 
