@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.stuwiapp.MQTTManager;
@@ -22,6 +23,7 @@ public class DashboardController extends ParentController {
     public ImageView loudImage;
     public Label studyStatusLabel;
     public Button stopSessionButton;
+    public AnchorPane background;
     @FXML
     private ImageView tempImage;
     @FXML
@@ -60,6 +62,8 @@ public class DashboardController extends ParentController {
 
     @FXML
     public void initialize() {
+        background.getStyleClass().add("pane"); //sets the style class for the background AnchorPane to "pane".
+
         // initListener();
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
