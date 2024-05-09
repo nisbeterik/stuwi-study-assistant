@@ -82,6 +82,8 @@ public class SessionOverviewController extends ParentController implements Initi
             System.out.println("User cancelled operation");
         }
 
+        //TODO: Add a confirmation screen that displays to the user a session have been successfully deleted
+
         //TODO: Call deleteSession function to delete study session from database
     }
 }
