@@ -17,7 +17,7 @@ public class StudySessionManager {
     private int minutesPaused = 0;
     private StudySessionTemplate currentTemplate;
     private final ArrayList<Double> tempData = new ArrayList<>();
-    private static final ArrayList<Double> humidData = new ArrayList<>();
+    private final ArrayList<Double> humidData = new ArrayList<>();
     private static final ArrayList<Double> loudData = new ArrayList<>();
 
 
@@ -159,5 +159,9 @@ public class StudySessionManager {
 
     public ArrayList<Double> getTemperatureDataList() {
         return tempData;
+    }
+
+    public ArrayList<Double> getHumidityDataList() {
+        return humidData;
     }
 }
