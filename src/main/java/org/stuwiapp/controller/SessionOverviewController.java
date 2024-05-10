@@ -67,7 +67,11 @@ public class SessionOverviewController extends ParentController implements Initi
 
     public void deleteSession(ActionEvent event){
 
+        //Alert to confirm to delete a session
         Alert confirmDeleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        //A alert for confirming a session was deleted
+        Alert sessionDeletedAlert = new Alert(Alert.AlertType.INFORMATION);
+
         confirmDeleteAlert.setHeaderText(null);
         confirmDeleteAlert.setTitle("Confirmation");
         confirmDeleteAlert.setContentText("Are you sure you want to delete this session?");
@@ -76,6 +80,13 @@ public class SessionOverviewController extends ParentController implements Initi
         if(result.get() == ButtonType.OK) {
             //This only deletes the row from the table view, not from the database
             sessionTable.getItems().removeAll(sessionTable.getSelectionModel().getSelectedItem());
+
+
+            sessionDeletedAlert.setHeaderText(null);
+            sessionDeletedAlert.setTitle("Success");
+            sessionDeletedAlert.setContentText("Session successfully deleted");
+            sessionDeletedAlert.showAndWait();
+
             System.out.println("User deleted session (from tableview)");
         } else {
             System.out.println("User cancelled operation");
