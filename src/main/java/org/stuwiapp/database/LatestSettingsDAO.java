@@ -46,6 +46,7 @@ public class LatestSettingsDAO {
         }
 
         JSONObject templateJson = new JSONObject();
+        templateJson.put("_id", template.getId());
         templateJson.put("user", user);
         templateJson.put("title", "LATESTSESSION");
         templateJson.put("subject", template.getSubject());
@@ -59,7 +60,7 @@ public class LatestSettingsDAO {
     public static StudySessionTemplate getLatestStudyTemplate(String user){
 
         for (Document doc : collection.find(new Document("title", "LATESTSESSION"))) {
-
+            String id = doc.getString("_id");
             String title = doc.getString("title");
             String subject = doc.getString("subject");
             int blockDuration = doc.getInteger("blockDuration");
@@ -67,7 +68,7 @@ public class LatestSettingsDAO {
             int blocks = doc.getInteger("blocks");
 
             try {
-                return new StudySessionTemplate(title, subject, blockDuration, breakDuration, blocks);
+                return new StudySessionTemplate(id, title, subject, blockDuration, breakDuration, blocks);
             } catch (Exception e) {
                 e.printStackTrace();
             }

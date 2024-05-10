@@ -138,6 +138,10 @@ public class StudySession {
         return template.getSubject();
     }
 
+    public String getTemplateId() {
+        return template.getId();
+    }
+
 
     // Methods used in GUI to display data
     public String getTemperature() {
@@ -160,5 +164,4 @@ public class StudySession {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd" + System.lineSeparator() + "HH:mm");
         return endDate.format(formatter);
     }
-
 }

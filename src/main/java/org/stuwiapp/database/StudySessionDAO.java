@@ -53,6 +53,7 @@ public class StudySessionDAO {
 
         // Template info
         JSONObject templateJson = new JSONObject();
+        templateJson.put("_id", session.getTemplateId());
         templateJson.put("subject", session.getTemplateSubject());
         templateJson.put("duration", session.getTemplateDuration());
         templateJson.put("breakDuration", session.getTemplateBreakDuration());
@@ -87,7 +88,8 @@ public class StudySessionDAO {
             Document templateDoc = (Document) doc.get("template");
 
             StudySessionTemplate template = new StudySessionTemplate(
-                    null,
+                    templateDoc.getString("_id"),
+                    null, // Title can be null if user did not use a saved template
                     templateDoc.getString("subject"),
                     templateDoc.getInteger("duration"),
                     templateDoc.getInteger("breakDuration"),
