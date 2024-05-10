@@ -39,6 +39,8 @@ public class SessionOverviewController extends ParentController implements Initi
     private TableColumn<StudySession, String> ratingColumn;
     @FXML
     public TableColumn<StudySession, String> subjectColumn;
+    @FXML
+    public Label deletedSessionLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -93,7 +95,11 @@ public class SessionOverviewController extends ParentController implements Initi
                 StudySession selectedSession = sessionTable.getSelectionModel().getSelectedItem();
                 sessionTable.getItems().remove(selectedSession);
                 StudySessionDAO.deleteSessionFromDatabase(selectedSession);
-                sessionDeletedAlert.showAndWait();
+
+
+
+
+                //sessionDeletedAlert.showAndWait();
 
                 System.out.println("User deleted session");
             } else {
