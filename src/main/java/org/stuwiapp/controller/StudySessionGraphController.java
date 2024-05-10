@@ -33,17 +33,12 @@ public class StudySessionGraphController extends ParentController {
     public void initialize() {
         X = (CategoryAxis) barChart.getXAxis();
         List<Integer> studyTimeData = service.calculateTotalStudyTimePerDay();
-        Collections.reverse(studyTimeData);
-        System.out.println(studyTimeData);
         configureCategoryAxis();
         displayStudyTimeData(studyTimeData);
 
 
         hoursAndMinutesLabel.setText(service.totalStudiedInHoursAndMinutes());
         averageRatingNumberLabel.setText(service.averageRating());
-
-
-
 
     }
 
