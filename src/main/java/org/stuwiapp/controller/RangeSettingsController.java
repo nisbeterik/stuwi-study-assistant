@@ -37,6 +37,7 @@ public class RangeSettingsController extends ParentController implements Initial
     public Label infoLabel;
     public Button loadSettings;
     public Button backButton;
+    public Button deleteSettingsButton;
 
     public void initialize(URL url, ResourceBundle resourceBundle){
         // Retrieves the current user's saved templates from the database
@@ -169,4 +170,8 @@ public class RangeSettingsController extends ParentController implements Initial
         redirect(event, "stuwi-home.fxml");
     }
 
+    public void deleteSettingsFromDatabase(ActionEvent event) {
+        RangeSettingsTemplate settings = (RangeSettingsTemplate) templateChoiceBox.getSelectionModel().getSelectedItem();
+
+    }
 }
