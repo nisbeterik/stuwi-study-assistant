@@ -8,7 +8,7 @@
    <children>
       <LineChart fx:id="durationChart" layoutX="40.0" layoutY="50.0" prefHeight="301.0" prefWidth="521.0">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <CategoryAxis autoRanging="false" side="BOTTOM" />
         </xAxis>
         <yAxis>
           <NumberAxis side="LEFT" />
