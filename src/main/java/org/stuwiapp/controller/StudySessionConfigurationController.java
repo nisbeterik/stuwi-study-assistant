@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 
 public class StudySessionConfigurationController extends ParentController implements Initializable  {
     @FXML public ChoiceBox templateChoiceBox;
+    @FXML public Button deleteTemplateButton;
 
     @FXML Button saveTemplateButton;
     @FXML public Label titleLabel;
@@ -195,10 +196,32 @@ public class StudySessionConfigurationController extends ParentController implem
         return null;
     }
 
+
     public void redirectToHome(ActionEvent event){
         redirect(event, "stuwi-home.fxml");
     }
 
+    public void deleteTemplateFromDatabase(ActionEvent event) {
+        StudySessionTemplate template = (StudySessionTemplate) templateChoiceBox.getValue();
+        if (template == null) {
+            infoLabel.setStyle("-fx-text-fill: red;");
+            infoLabel.setText("No template selected");
+            return;
+        }
+        Alert confirmDeleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDeleteAlert.setHeaderText(null);
+        confirmDeleteAlert.setTitle("Confirmation");
+        confirmDeleteAlert.setContentText("Are you sure you want to delete template: " + template.getTitle() + "?");
+
+        Optional<ButtonType> result = confirmDeleteAlert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // StudySessionTemplateDAO.deleteTemplateFromDatabase(template);
+            templateChoiceBox.getItems().remove(template);
+            infoLabel.setStyle("-fx-text-fill: green;");
+            infoLabel.setText("Template deleted");
+        }
+    }
 }
 
 
