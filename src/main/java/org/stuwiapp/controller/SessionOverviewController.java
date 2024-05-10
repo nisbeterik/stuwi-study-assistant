@@ -69,27 +69,41 @@ public class SessionOverviewController extends ParentController implements Initi
 
         //Alert to confirm to delete a session
         Alert confirmDeleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        //A alert for confirming a session was deleted
+        //Alert for confirming a session was deleted
         Alert sessionDeletedAlert = new Alert(Alert.AlertType.INFORMATION);
 
+        //Confirm to delete a session or not
         confirmDeleteAlert.setHeaderText(null);
         confirmDeleteAlert.setTitle("Confirmation");
         confirmDeleteAlert.setContentText("Are you sure you want to delete this session?");
 
-        Optional<ButtonType> result = confirmDeleteAlert.showAndWait();
-        if(result.get() == ButtonType.OK) {
-            //This only deletes the row from the table view, not from the database
-            sessionTable.getItems().removeAll(sessionTable.getSelectionModel().getSelectedItem());
+        //Confirmation session was deleted
+        sessionDeletedAlert.setHeaderText(null);
+        sessionDeletedAlert.setTitle("Success");
+        sessionDeletedAlert.setContentText("Session successfully deleted");
 
+        try {
+            if (sessionTable.getSelectionModel().isEmpty()) {
+                throw new Exception("No study session selected");
+            }
+            Optional<ButtonType> result = confirmDeleteAlert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
 
-            sessionDeletedAlert.setHeaderText(null);
-            sessionDeletedAlert.setTitle("Success");
-            sessionDeletedAlert.setContentText("Session successfully deleted");
-            sessionDeletedAlert.showAndWait();
+                //This only deletes the row from the table view, not from the database
+                sessionTable.getItems().removeAll(sessionTable.getSelectionModel().getSelectedItem());
+                sessionDeletedAlert.showAndWait();
 
-            System.out.println("User deleted session (from tableview)");
-        } else {
-            System.out.println("User cancelled operation");
+                System.out.println("User deleted session (from tableview)");
+            } else {
+                System.out.println("User cancelled operation");
+            }
+        }catch (Exception e) {
+            // Show error message if no session is selected
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setHeaderText(null);
+            errorAlert.setTitle("Error");
+            errorAlert.setContentText(e.getMessage());
+            errorAlert.showAndWait();
         }
 
         //TODO: Call deleteSession function to delete study session from database
