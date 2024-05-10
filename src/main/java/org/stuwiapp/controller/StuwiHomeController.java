@@ -13,6 +13,8 @@ import java.util.ResourceBundle;
 
 public class StuwiHomeController extends ParentController implements Initializable {
 
+    public Button analyticsButton;
+
     public void initialize(URL url, ResourceBundle resourceBundle){
         RangeSettingsTemplate latestRangeTemplate =  LatestSettingsDAO.getLatestRangeTemplate(UserManager.getInstance().getCurrentUser());
         if (latestRangeTemplate == null) {
@@ -37,6 +39,10 @@ public class StuwiHomeController extends ParentController implements Initializab
     }
     public void redirectToSettings(ActionEvent event) {redirect(event, "range-settings.fxml");
 
+    }
+
+    public void redirectToAnalytics(ActionEvent actionEvent) {
+        redirect(actionEvent, "study-sessions-graph.fxml");
     }
 }
 
