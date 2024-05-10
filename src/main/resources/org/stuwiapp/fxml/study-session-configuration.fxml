@@ -1,44 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StudySessionConfigurationController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StudySessionConfigurationController">
    <children>
-      <Button fx:id="saveTemplateButton" layoutX="279.0" layoutY="70.0" mnemonicParsing="false" onAction="#saveSettingsAsTemplate" prefHeight="26.0" prefWidth="170.0" text="Save Settings as Template" />
-      <Label fx:id="titleLabel" layoutX="190.0" layoutY="29.0" text="Start new study session">
+      <Button fx:id="saveTemplateButton" layoutX="307.0" layoutY="70.0" mnemonicParsing="false" onAction="#saveSettingsAsTemplate" prefHeight="26.0" prefWidth="170.0" text="Save Settings as Template" />
+      <Label fx:id="titleLabel" layoutX="218.0" layoutY="29.0" text="Start new study session">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="subjectField" layoutX="150.0" layoutY="124.0" prefHeight="26.0" prefWidth="300.0" />
-      <Label fx:id="subjectLabel" layoutX="150.0" layoutY="107.0" text="Subject" />
-      <Label fx:id="sessionDurationLabel" layoutX="150.0" layoutY="160.0" text="Session block duration" />
-      <Slider fx:id="durationSlider" blockIncrement="5.0" layoutX="150.0" layoutY="184.0" majorTickUnit="5.0" max="60.0" minorTickCount="0" prefHeight="33.0" prefWidth="300.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-      <Slider fx:id="breakDurationSlider" blockIncrement="5.0" layoutX="150.0" layoutY="252.0" majorTickUnit="5.0" max="20.0" minorTickCount="0" prefHeight="33.0" prefWidth="142.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-      <Label fx:id="infoLabel" alignment="CENTER" layoutX="28.0" layoutY="290.0" prefHeight="29.0" prefWidth="544.0" textFill="RED">
+      <TextField fx:id="subjectField" layoutX="178.0" layoutY="124.0" prefHeight="26.0" prefWidth="300.0" />
+      <Label fx:id="subjectLabel" layoutX="178.0" layoutY="107.0" text="Subject" />
+      <Label fx:id="sessionDurationLabel" layoutX="178.0" layoutY="160.0" text="Session block duration" />
+      <Slider fx:id="durationSlider" blockIncrement="5.0" layoutX="178.0" layoutY="184.0" majorTickUnit="5.0" max="60.0" minorTickCount="0" prefHeight="33.0" prefWidth="300.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+      <Slider fx:id="breakDurationSlider" blockIncrement="5.0" layoutX="178.0" layoutY="252.0" majorTickUnit="5.0" max="20.0" minorTickCount="0" prefHeight="33.0" prefWidth="142.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+      <Label fx:id="infoLabel" alignment="CENTER" layoutX="56.0" layoutY="290.0" prefHeight="29.0" prefWidth="544.0" textFill="RED">
          <font>
             <Font size="10.0" />
          </font>
       </Label>
-      <Label fx:id="blocksLabel" layoutX="309.0" layoutY="227.0" text="Study Blocks" />
-      <Slider fx:id="blocksSlider" blockIncrement="1.0" layoutX="309.0" layoutY="252.0" majorTickUnit="1.0" max="6.0" minorTickCount="0" prefHeight="33.0" prefWidth="142.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-      <Label fx:id="breakDurationLabel" layoutX="151.0" layoutY="227.0" text="Break duration" />
-      <Button fx:id="startSessionButton" layoutX="290.0" layoutY="329.0" mnemonicParsing="false" onAction="#startSession" prefHeight="25.0" prefWidth="170.0" text="Start Session" />
-      <Label fx:id="sessionDurationIndicator" alignment="CENTER_RIGHT" ellipsisString="" layoutX="407.0" layoutY="160.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
-      <Label fx:id="breakDurationIndicator" alignment="CENTER_RIGHT" layoutX="250.0" layoutY="227.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
-      <Label fx:id="blocksIndicator" alignment="CENTER_RIGHT" layoutX="409.0" layoutY="227.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
-      <ChoiceBox fx:id="templateChoiceBox" accessibleHelp="Select Template" accessibleText="Select Template" layoutX="150.0" layoutY="70.0" prefHeight="26.0" prefWidth="124.0" />
-      <Label layoutX="155.0" layoutY="284.0" text="Science Based Pomodoro-session: 25 min study, 5 min break, 4 times">
+      <Label fx:id="blocksLabel" layoutX="337.0" layoutY="227.0" text="Study Blocks" />
+      <Slider fx:id="blocksSlider" blockIncrement="1.0" layoutX="337.0" layoutY="252.0" majorTickUnit="1.0" max="6.0" minorTickCount="0" prefHeight="33.0" prefWidth="142.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+      <Label fx:id="breakDurationLabel" layoutX="179.0" layoutY="227.0" text="Break duration" />
+      <Button fx:id="startSessionButton" layoutX="318.0" layoutY="329.0" mnemonicParsing="false" onAction="#startSession" prefHeight="25.0" prefWidth="170.0" text="Start Session" />
+      <Label fx:id="sessionDurationIndicator" alignment="CENTER_RIGHT" ellipsisString="" layoutX="435.0" layoutY="160.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
+      <Label fx:id="breakDurationIndicator" alignment="CENTER_RIGHT" layoutX="278.0" layoutY="227.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
+      <Label fx:id="blocksIndicator" alignment="CENTER_RIGHT" layoutX="437.0" layoutY="227.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
+      <ChoiceBox fx:id="templateChoiceBox" accessibleHelp="Select Template" accessibleText="Select Template" layoutX="178.0" layoutY="70.0" prefHeight="26.0" prefWidth="124.0" />
+      <Label layoutX="183.0" layoutY="284.0" text="Science Based Pomodoro-session: 25 min study, 5 min break, 4 times">
          <font>
             <Font size="10.0" />
          </font></Label>
       <Button layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#redirectToHome" text="Return to home" />
-      <Button fx:id="deleteTemplateButton" layoutX="150.0" layoutY="329.0" mnemonicParsing="false" onAction="#deleteTemplateFromDatabase" prefHeight="25.0" prefWidth="107.0" text="Delete Template" />
+      <Button fx:id="deleteTemplateButton" layoutX="178.0" layoutY="329.0" mnemonicParsing="false" onAction="#deleteTemplateFromDatabase" prefHeight="25.0" prefWidth="107.0" text="Delete Template" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/StuWi.png" />
+         </image></ImageView>
+      <ImageView fitHeight="90.0" fitWidth="107.0" layoutX="61.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/speech-bubble.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="85.0" layoutY="153.0" text="Good luck!">
+         <font>
+            <Font name="Tahoma" size="12.0" />
+         </font></Label>
    </children>
 </AnchorPane>
