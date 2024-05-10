@@ -39,6 +39,8 @@ public class SessionOverviewController extends ParentController implements Initi
     private TableColumn<StudySession, String> ratingColumn;
     @FXML
     public TableColumn<StudySession, String> subjectColumn;
+    @FXML
+    public Label deletedSessionLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,18 +71,11 @@ public class SessionOverviewController extends ParentController implements Initi
 
         //Alert to confirm to delete a session
         Alert confirmDeleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        //Alert for confirming a session was deleted
-        Alert sessionDeletedAlert = new Alert(Alert.AlertType.INFORMATION);
 
         //Confirm to delete a session or not
         confirmDeleteAlert.setHeaderText(null);
         confirmDeleteAlert.setTitle("Confirmation");
         confirmDeleteAlert.setContentText("Are you sure you want to delete this session?");
-
-        //Confirmation session was deleted
-        sessionDeletedAlert.setHeaderText(null);
-        sessionDeletedAlert.setTitle("Success");
-        sessionDeletedAlert.setContentText("Session successfully deleted");
 
         try {
             if (sessionTable.getSelectionModel().isEmpty()) {
@@ -93,7 +88,10 @@ public class SessionOverviewController extends ParentController implements Initi
                 StudySession selectedSession = sessionTable.getSelectionModel().getSelectedItem();
                 sessionTable.getItems().remove(selectedSession);
                 StudySessionDAO.deleteSessionFromDatabase(selectedSession);
-                sessionDeletedAlert.showAndWait();
+
+                //Confirmation label for when user deletes a session
+                deletedSessionLabel.setStyle("-fx-text-fill: green;");
+                deletedSessionLabel.setText("Session deleted");
 
                 System.out.println("User deleted session");
             } else {
