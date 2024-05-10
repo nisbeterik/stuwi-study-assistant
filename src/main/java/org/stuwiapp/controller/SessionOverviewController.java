@@ -5,9 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.stuwiapp.StudySession;
 import org.stuwiapp.UserManager;
@@ -16,10 +14,13 @@ import org.stuwiapp.database.StudySessionDAO;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class SessionOverviewController extends ParentController implements Initializable {
 
+    @FXML
+    private Button deleteSessionButton;
     @FXML
     private Button returnButton;
     @FXML
@@ -44,7 +45,7 @@ public class SessionOverviewController extends ParentController implements Initi
         try {
             String currentUser = UserManager.getInstance().getCurrentUser();
             ArrayList<StudySession> sessions = StudySessionDAO.getUserSessions(currentUser);
-            ObservableList<StudySession> sessionsList= FXCollections.observableArrayList(sessions);
+            ObservableList<StudySession> sessionsList = FXCollections.observableArrayList(sessions);
             startDateColumn.setCellValueFactory(new PropertyValueFactory<>("formattedStartDate"));
             durationColumn.setCellValueFactory(new PropertyValueFactory<>("duration"));
             tempColumn.setCellValueFactory(new PropertyValueFactory<>("temperature"));
@@ -59,5 +60,52 @@ public class SessionOverviewController extends ParentController implements Initi
     }
 
 
-    public void redirectToHome(ActionEvent event) {redirect(event, "stuwi-home.fxml");}
+    public void redirectToHome(ActionEvent event) {
+        redirect(event, "stuwi-home.fxml");
+    }
+
+
+    public void deleteSession(ActionEvent event){
+
+        //Alert to confirm to delete a session
+        Alert confirmDeleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        //Alert for confirming a session was deleted
+        Alert sessionDeletedAlert = new Alert(Alert.AlertType.INFORMATION);
+
+        //Confirm to delete a session or not
+        confirmDeleteAlert.setHeaderText(null);
+        confirmDeleteAlert.setTitle("Confirmation");
+        confirmDeleteAlert.setContentText("Are you sure you want to delete this session?");
+
+        //Confirmation session was deleted
+        sessionDeletedAlert.setHeaderText(null);
+        sessionDeletedAlert.setTitle("Success");
+        sessionDeletedAlert.setContentText("Session successfully deleted");
+
+        try {
+            if (sessionTable.getSelectionModel().isEmpty()) {
+                throw new Exception("No study session selected");
+            }
+            Optional<ButtonType> result = confirmDeleteAlert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+
+                //Delete from table view and database
+                StudySession selectedSession = sessionTable.getSelectionModel().getSelectedItem();
+                sessionTable.getItems().remove(selectedSession);
+                StudySessionDAO.deleteSessionFromDatabase(selectedSession);
+                sessionDeletedAlert.showAndWait();
+
+                System.out.println("User deleted session");
+            } else {
+                System.out.println("User cancelled operation");
+            }
+        }catch (Exception e) {
+            // Show error message if no session is selected
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setHeaderText(null);
+            errorAlert.setTitle("Error");
+            errorAlert.setContentText(e.getMessage());
+            errorAlert.showAndWait();
+        }
+    }
 }

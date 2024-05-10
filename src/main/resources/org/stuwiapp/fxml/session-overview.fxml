@@ -20,5 +20,6 @@
             <TableColumn id="ratingColumn" fx:id="ratingColumn" editable="false" prefWidth="62.0" text="Rating" />
          </columns></TableView>
       <Label layoutX="14.0" layoutY="291.0" text="Sensor data is displayed as LOW / HIGH / AVG" />
+      <Button fx:id="deleteSessionButton" layoutX="441.0" layoutY="327.0" mnemonicParsing="false" onAction="#deleteSession" text="Delete Session" />
    </children>
 </AnchorPane>
