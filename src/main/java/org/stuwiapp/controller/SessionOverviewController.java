@@ -67,12 +67,12 @@ public class SessionOverviewController extends ParentController implements Initi
 
     public void deleteSession(ActionEvent event){
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText(null);
-        alert.setTitle("Confirmation");
-        alert.setContentText("Are you sure you want to delete this session?");
+        Alert confirmDeleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDeleteAlert.setHeaderText(null);
+        confirmDeleteAlert.setTitle("Confirmation");
+        confirmDeleteAlert.setContentText("Are you sure you want to delete this session?");
 
-        Optional<ButtonType> result = alert.showAndWait();
+        Optional<ButtonType> result = confirmDeleteAlert.showAndWait();
         if(result.get() == ButtonType.OK) {
             //This only deletes the row from the table view, not from the database
             sessionTable.getItems().removeAll(sessionTable.getSelectionModel().getSelectedItem());
@@ -80,6 +80,7 @@ public class SessionOverviewController extends ParentController implements Initi
         } else {
             System.out.println("User cancelled operation");
         }
+
 
         //TODO: Add a confirmation screen that displays to the user a session have been successfully deleted
 
