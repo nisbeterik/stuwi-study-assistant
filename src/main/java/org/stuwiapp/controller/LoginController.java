@@ -29,7 +29,7 @@ public class LoginController extends ParentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        stuwiImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/stuwi-logo.png")));
+        stuwiImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/StuWi-Transparent.png")));
     }
 
 
