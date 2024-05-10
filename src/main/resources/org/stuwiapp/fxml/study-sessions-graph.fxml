@@ -2,11 +2,12 @@
 
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StudySessionGraphController">
    <children>
-      <StackedBarChart fx:id="barChart" layoutX="25.0" layoutY="65.0" legendSide="TOP" legendVisible="false" prefHeight="249.0" prefWidth="520.0">
+      <StackedBarChart fx:id="barChart" layoutX="25.0" layoutY="94.0" legendSide="TOP" legendVisible="false" prefHeight="249.0" prefWidth="520.0">
         <xAxis>
           <CategoryAxis autoRanging="false" label="Days" side="RIGHT" />
         </xAxis>
@@ -20,5 +21,10 @@
       <Button fx:id="returnHomeButton" layoutX="25.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#returnHome" text="Return to Home" />
       <Label fx:id="hoursAndMinutesLabel" layoutX="121.0" layoutY="343.0" />
       <Label fx:id="averageRatingNumberLabel" layoutX="127.0" layoutY="369.0" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="479.0" layoutY="-23.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/StuWi.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
