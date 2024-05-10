@@ -11,8 +11,6 @@ import java.util.ArrayList;
 
 public class StudySessionTemplateDAO {
 
-    // TODO Implement methods for template deletion
-
     public static void saveTemplateInDatabase(StudySessionTemplate template, String user){
         MongoClient client = MongoConnectionManager.getMongoClient();
         MongoDatabase db = client.getDatabase("stuwi");
@@ -53,4 +51,6 @@ public class StudySessionTemplateDAO {
         return templates;
     }
 
+    public static void deleteTemplateFromDatabase(StudySessionTemplate template) {
+    }
 }
