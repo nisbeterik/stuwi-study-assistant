@@ -96,7 +96,8 @@ public class SessionOverviewController extends ParentController implements Initi
                 sessionTable.getItems().remove(selectedSession);
                 StudySessionDAO.deleteSessionFromDatabase(selectedSession);
 
-
+                deletedSessionLabel.setStyle("-fx-text-fill: green;");
+                deletedSessionLabel.setText("Session deleted");
 
 
                 //sessionDeletedAlert.showAndWait();
