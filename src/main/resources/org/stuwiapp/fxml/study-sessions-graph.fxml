@@ -6,12 +6,12 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StudySessionGraphController">
    <children>
-      <StackedBarChart fx:id="barChart" layoutX="40.0" layoutY="65.0" prefHeight="249.0" prefWidth="520.0">
+      <StackedBarChart fx:id="barChart" layoutX="25.0" layoutY="65.0" prefHeight="249.0" prefWidth="520.0">
         <xAxis>
-          <CategoryAxis fx:id="categoryAxis" autoRanging="false" label="Days" />
+          <CategoryAxis autoRanging="false" label="Days" side="RIGHT" />
         </xAxis>
         <yAxis>
-          <NumberAxis fx:id="numberAxis" side="LEFT" />
+          <NumberAxis label="Minutes studied" side="LEFT" />
         </yAxis>
       </StackedBarChart>
       <Label layoutX="40.0" layoutY="343.0" text="Total studied:" />
