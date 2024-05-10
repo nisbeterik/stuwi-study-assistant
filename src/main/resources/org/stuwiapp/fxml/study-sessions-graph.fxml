@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StudySessionGraphController">
    <children>
-      <StackedBarChart fx:id="barChart" layoutX="25.0" layoutY="65.0" prefHeight="249.0" prefWidth="520.0">
+      <StackedBarChart fx:id="barChart" layoutX="25.0" layoutY="65.0" legendSide="TOP" legendVisible="false" prefHeight="249.0" prefWidth="520.0">
         <xAxis>
           <CategoryAxis autoRanging="false" label="Days" side="RIGHT" />
         </xAxis>

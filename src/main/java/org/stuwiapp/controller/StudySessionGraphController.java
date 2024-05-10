@@ -2,6 +2,7 @@ package org.stuwiapp.controller;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -50,6 +51,7 @@ public class StudySessionGraphController extends ParentController {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Duration");
 
+
         for (int day = 1; day <= studyTimeData.size(); day++) {
             int studiedDuration = studyTimeData.get(day - 1);
             series.getData().add(new XYChart.Data<>(String.valueOf(day), studiedDuration));
@@ -58,6 +60,9 @@ public class StudySessionGraphController extends ParentController {
 
         barChart.getData().clear();
         barChart.getData().add(series);
+        for(Node n:barChart.lookupAll(".default-color0.chart-bar")) {
+            n.setStyle("-fx-bar-fill: #33C1FF;");
+        }
     }
 
     public void returnHome(MouseEvent mouseEvent) {
