@@ -7,7 +7,6 @@ import org.stuwiapp.database.StudySessionDAO;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class StudySessionAnalyticsService {
@@ -44,8 +43,6 @@ public class StudySessionAnalyticsService {
         } catch (Exception e) {
 
             e.printStackTrace();
-            Collections.reverse(totalStudyTimePerDay);
-            return totalStudyTimePerDay;
         }
 
         return totalStudyTimePerDay;
