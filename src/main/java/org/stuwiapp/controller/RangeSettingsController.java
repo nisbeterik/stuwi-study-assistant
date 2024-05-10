@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 import javafx.scene.control.*;
 import org.controlsfx.control.RangeSlider;
@@ -28,7 +29,7 @@ public class RangeSettingsController extends ParentController implements Initial
     public ChoiceBox templateChoiceBox;
     public Button saveTemplateButton;
 
-    final static RangeSettingsTemplate RECOMMENDED_TEMPLATE = new RangeSettingsTemplate("Recommended Settings", 23, 21, 40,30, 70);
+    final static RangeSettingsTemplate RECOMMENDED_TEMPLATE = new RangeSettingsTemplate("RECOMMENDED","Recommended Settings", 23, 21, 40,30, 70);
     public Label humidHighLabel;
     public Label humidLowLabel;
     public Label tempLowLabel;
@@ -37,6 +38,7 @@ public class RangeSettingsController extends ParentController implements Initial
     public Label infoLabel;
     public Button loadSettings;
     public Button backButton;
+    public Button deleteSettingsButton;
 
     public void initialize(URL url, ResourceBundle resourceBundle){
         // Retrieves the current user's saved templates from the database
@@ -116,7 +118,8 @@ public class RangeSettingsController extends ParentController implements Initial
         int humidMin = (int)humidSlider.getLowValue();
         int loudMax = (int)loudSlider.getValue();
 
-        return new RangeSettingsTemplate("temporary", tempMax, tempMin, humidMax, humidMin, loudMax);
+        String settingsId = UUID.randomUUID().toString();
+        return new RangeSettingsTemplate("tempId","temporary", tempMax, tempMin, humidMax, humidMin, loudMax);
     }
     public RangeSettingsTemplate saveSettingsAsTemplate(ActionEvent event){
         TextInputDialog nameInputDialog = new TextInputDialog();
@@ -140,15 +143,16 @@ public class RangeSettingsController extends ParentController implements Initial
         RangeSettingsTemplate curValues = getSliderValues();
         if (curValues == null) { return null; }
 
-        RangeSettingsTemplate newRangeSettingsTempalte = new RangeSettingsTemplate(title, curValues.getTempMax(), curValues.getTempMin(), curValues.getHumidMax(), curValues.getHumidMin(), curValues.getLoudMax());
+        String settingsId = UUID.randomUUID().toString();
+        RangeSettingsTemplate newRangeSettingsTemplate = new RangeSettingsTemplate(settingsId, title, curValues.getTempMax(), curValues.getTempMin(), curValues.getHumidMax(), curValues.getHumidMin(), curValues.getLoudMax());
 
         // Saves the recently created template to the database
-        RangeSettingsTemplateDAO.saveRangeTemplateInDatabase(newRangeSettingsTempalte, UserManager.getInstance().getCurrentUser());
+        RangeSettingsTemplateDAO.saveRangeTemplateInDatabase(newRangeSettingsTemplate, UserManager.getInstance().getCurrentUser());
 
-        templateChoiceBox.getItems().add(newRangeSettingsTempalte);
+        templateChoiceBox.getItems().add(newRangeSettingsTemplate);
         infoLabel.setStyle("-fx-text-fill: green;");
         infoLabel.setText("Successfully saved template " + title);
-        return newRangeSettingsTempalte;
+        return newRangeSettingsTemplate;
     }
 
     public void publishRangeSettings(ActionEvent event){
@@ -169,4 +173,31 @@ public class RangeSettingsController extends ParentController implements Initial
         redirect(event, "stuwi-home.fxml");
     }
 
+    public void deleteSettingsFromDatabase(ActionEvent event) {
+        RangeSettingsTemplate settings = (RangeSettingsTemplate) templateChoiceBox.getSelectionModel().getSelectedItem();
+        if (settings == null) {
+            infoLabel.setStyle("-fx-text-fill: red;");
+            infoLabel.setText("No settings template selected");
+            return;
+        }
+        if (settings.getId().equals("RECOMMENDED")) {
+            infoLabel.setStyle("-fx-text-fill: red;");
+            infoLabel.setText("Cannot delete default settings");
+            return;
+        }
+        Alert confirmDeleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDeleteAlert.setHeaderText(null);
+        confirmDeleteAlert.setTitle("Confirmation");
+        confirmDeleteAlert.setContentText("Are you sure you want to delete settings template: " + settings.getTitle() + "?");
+
+        Optional<ButtonType> result = confirmDeleteAlert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            RangeSettingsTemplateDAO.deleteRangeSettingsFromDatabase(settings);
+            templateChoiceBox.getItems().remove(settings);
+            templateChoiceBox.setValue(RECOMMENDED_TEMPLATE);
+            infoLabel.setStyle("-fx-text-fill: green;");
+            infoLabel.setText("Template deleted");
+        }
+    }
 }

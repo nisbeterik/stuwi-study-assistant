@@ -16,9 +16,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class StudySessionConfigurationController extends ParentController implements Initializable  {
     @FXML public ChoiceBox templateChoiceBox;
+    @FXML public Button deleteTemplateButton;
 
     @FXML Button saveTemplateButton;
     @FXML public Label titleLabel;
@@ -45,13 +47,11 @@ public class StudySessionConfigurationController extends ParentController implem
     private StudySessionTemplate currentTemplate;
 
 
-    // TODO Add button for going back to stuwi-home.fxml
-
     //init standard session templates.
     static {
         try {
-            RESET_TEMPLATE = new StudySessionTemplate("Reset", "", 0, 0, 0);
-            RECOMMENDED_TEMPLATE = new StudySessionTemplate("Recommended Settings", "General", SCIENCE_BASED_BLOCK_DURATION, SCIENCE_BASED_BREAK_DURATION, SCIENCE_BASED_BLOCK_AMOUNT );
+            RESET_TEMPLATE = new StudySessionTemplate("RESET", "Reset", "", 0, 0, 0);
+            RECOMMENDED_TEMPLATE = new StudySessionTemplate("RECOMMENDED", "Recommended Settings", "General", SCIENCE_BASED_BLOCK_DURATION, SCIENCE_BASED_BREAK_DURATION, SCIENCE_BASED_BLOCK_AMOUNT );
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -102,6 +102,8 @@ public class StudySessionConfigurationController extends ParentController implem
                 blocksIndicator.setText((int)blocksSlider.getValue() + " st");
             }
         });
+
+
         //Loads the template to update sliders / indicators
         StudySessionTemplate latestStudyTemplate = LatestSettingsDAO.getLatestStudyTemplate(currentUser);
         if (latestStudyTemplate == null) {
@@ -120,7 +122,8 @@ public class StudySessionConfigurationController extends ParentController implem
         String subject = subjectField.getText();
         String title = null;
         try{
-            return new StudySessionTemplate(title, subject, duration, breakDuration, blocks);
+            String templateId = UUID.randomUUID().toString();
+            return new StudySessionTemplate(templateId, title, subject, duration, breakDuration, blocks);
         } catch (Exception e) {
             infoLabel.setStyle("-fx-text-fill: red;");
             infoLabel.setText(e.getMessage());
@@ -131,8 +134,7 @@ public class StudySessionConfigurationController extends ParentController implem
         StudySessionTemplate sessionSettings = getSliderValues();
         if(sessionSettings == null) { return; }
 
-        // TODO: Does this need to be added anywhere else? What is session is started on terminal?
-        // Sets the current template to the one that is about to be started so it can be saved with the session
+        // Sets the current template to the one that is about to be started, so it can be saved with the session
         StudySessionManager.getInstance().setCurrentTemplate(sessionSettings);
         LatestSettingsDAO.saveLatestStudyTemplateInDatabase(sessionSettings, UserManager.getInstance().getCurrentUser());
 
@@ -177,7 +179,8 @@ public class StudySessionConfigurationController extends ParentController implem
             StudySessionTemplate curValues = getSliderValues();
             if (curValues == null) { return null; }
 
-            StudySessionTemplate newStudySessionTemplate = new StudySessionTemplate(title, curValues.getSubject(), curValues.getDuration(), curValues.getBreakDuration(), curValues.getBlocks());
+            String templateId = UUID.randomUUID().toString();
+            StudySessionTemplate newStudySessionTemplate = new StudySessionTemplate(templateId, title, curValues.getSubject(), curValues.getDuration(), curValues.getBreakDuration(), curValues.getBlocks());
 
             // Saves the recently created template to the database
             StudySessionTemplateDAO.saveTemplateInDatabase(newStudySessionTemplate, UserManager.getInstance().getCurrentUser());
@@ -195,10 +198,38 @@ public class StudySessionConfigurationController extends ParentController implem
         return null;
     }
 
+
     public void redirectToHome(ActionEvent event){
         redirect(event, "stuwi-home.fxml");
     }
 
+    public void deleteTemplateFromDatabase(ActionEvent event) {
+        StudySessionTemplate template = (StudySessionTemplate) templateChoiceBox.getValue();
+        if (template == null) {
+            infoLabel.setStyle("-fx-text-fill: red;");
+            infoLabel.setText("No template selected");
+            return;
+        }
+        if (template.getId().equals("RESET") || template.getId().equals("RECOMMENDED")) {
+            infoLabel.setStyle("-fx-text-fill: red;");
+            infoLabel.setText("Cannot delete default templates");
+            return;
+        }
+        Alert confirmDeleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDeleteAlert.setHeaderText(null);
+        confirmDeleteAlert.setTitle("Confirmation");
+        confirmDeleteAlert.setContentText("Are you sure you want to delete template: " + template.getTitle() + "?");
+
+        Optional<ButtonType> result = confirmDeleteAlert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            StudySessionTemplateDAO.deleteTemplateFromDatabase(template);
+            templateChoiceBox.getItems().remove(template);
+            templateChoiceBox.setValue(RECOMMENDED_TEMPLATE);
+            infoLabel.setStyle("-fx-text-fill: green;");
+            infoLabel.setText("Template deleted");
+        }
+    }
 }
 
 

@@ -29,7 +29,7 @@
       <Label fx:id="blocksLabel" layoutX="309.0" layoutY="227.0" text="Study Blocks" />
       <Slider fx:id="blocksSlider" blockIncrement="1.0" layoutX="309.0" layoutY="252.0" majorTickUnit="1.0" max="6.0" minorTickCount="0" prefHeight="33.0" prefWidth="142.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
       <Label fx:id="breakDurationLabel" layoutX="151.0" layoutY="227.0" text="Break duration" />
-      <Button fx:id="startSessionButton" layoutX="256.0" layoutY="329.0" mnemonicParsing="false" onAction="#startSession" text="Start Session" />
+      <Button fx:id="startSessionButton" layoutX="290.0" layoutY="329.0" mnemonicParsing="false" onAction="#startSession" prefHeight="25.0" prefWidth="170.0" text="Start Session" />
       <Label fx:id="sessionDurationIndicator" alignment="CENTER_RIGHT" ellipsisString="" layoutX="407.0" layoutY="160.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
       <Label fx:id="breakDurationIndicator" alignment="CENTER_RIGHT" layoutX="250.0" layoutY="227.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
       <Label fx:id="blocksIndicator" alignment="CENTER_RIGHT" layoutX="409.0" layoutY="227.0" prefHeight="17.0" prefWidth="42.0" text="0" textOverrun="CLIP" />
@@ -39,5 +39,6 @@
             <Font size="10.0" />
          </font></Label>
       <Button layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#redirectToHome" text="Return to home" />
+      <Button fx:id="deleteTemplateButton" layoutX="150.0" layoutY="329.0" mnemonicParsing="false" onAction="#deleteTemplateFromDatabase" prefHeight="25.0" prefWidth="107.0" text="Delete Template" />
    </children>
 </AnchorPane>

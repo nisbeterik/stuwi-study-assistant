@@ -20,13 +20,13 @@ public class LatestSettingsDAO {
 
     public static void saveLatestRangeSettings(RangeSettingsTemplate template, String user){
 
-
         if (collection.countDocuments() > 0) {
             Bson filter = Filters.eq("title", "LATESTRANGES");
             collection.deleteOne(filter);
         }
 
         JSONObject templateJson = new JSONObject();
+        templateJson.put("_id", template.getId());
         templateJson.put("user", user);
         templateJson.put("title", "LATESTRANGES");
         templateJson.put("tempMax", template.getTempMax());
@@ -46,6 +46,7 @@ public class LatestSettingsDAO {
         }
 
         JSONObject templateJson = new JSONObject();
+        templateJson.put("_id", template.getId());
         templateJson.put("user", user);
         templateJson.put("title", "LATESTSESSION");
         templateJson.put("subject", template.getSubject());
@@ -59,7 +60,7 @@ public class LatestSettingsDAO {
     public static StudySessionTemplate getLatestStudyTemplate(String user){
 
         for (Document doc : collection.find(new Document("title", "LATESTSESSION"))) {
-
+            String id = doc.getString("_id");
             String title = doc.getString("title");
             String subject = doc.getString("subject");
             int blockDuration = doc.getInteger("blockDuration");
@@ -67,7 +68,7 @@ public class LatestSettingsDAO {
             int blocks = doc.getInteger("blocks");
 
             try {
-                return new StudySessionTemplate(title, subject, blockDuration, breakDuration, blocks);
+                return new StudySessionTemplate(id, title, subject, blockDuration, breakDuration, blocks);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -77,6 +78,7 @@ public class LatestSettingsDAO {
     public static RangeSettingsTemplate getLatestRangeTemplate(String user){
 
         for (Document doc : collection.find(new Document("title", "LATESTRANGES"))){
+            String id = doc.getString("_id");
             String title = doc.getString("title");
             int tempMax = doc.getInteger("tempMax");
             int tempMin = doc.getInteger("tempMin");
@@ -85,7 +87,7 @@ public class LatestSettingsDAO {
             int loudMax = doc.getInteger("loudMax");
 
 
-            return new RangeSettingsTemplate(title, tempMax, tempMin, humidMax, humidMin, loudMax);
+            return new RangeSettingsTemplate(id, title, tempMax, tempMin, humidMax, humidMin, loudMax);
         }
         return null;
     }
