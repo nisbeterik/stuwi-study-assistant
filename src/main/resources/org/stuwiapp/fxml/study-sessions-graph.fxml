@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StudySessionGraphController">
@@ -13,5 +14,11 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </LineChart>
+      <Label layoutX="40.0" layoutY="343.0" text="Total studied:" />
+      <Label layoutX="40.0" layoutY="369.0" text="Average rating:" />
+      <Label layoutX="268.0" layoutY="23.0" text="Past 30 days" />
+      <Button fx:id="returnHomeButton" layoutX="25.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#returnHome" text="Return to Home" />
+      <Label fx:id="hoursAndMinutesLabel" layoutX="121.0" layoutY="343.0" />
+      <Label fx:id="averageRatingNumberLabel" layoutX="127.0" layoutY="369.0" />
    </children>
 </AnchorPane>
