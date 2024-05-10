@@ -119,7 +119,7 @@ public class RangeSettingsController extends ParentController implements Initial
         int loudMax = (int)loudSlider.getValue();
 
         String settingsId = UUID.randomUUID().toString();
-        return new RangeSettingsTemplate("tempId","temporary", tempMax, tempMin, humidMax, humidMin, loudMax);
+        return new RangeSettingsTemplate(settingsId,"temporary", tempMax, tempMin, humidMax, humidMin, loudMax);
     }
     public RangeSettingsTemplate saveSettingsAsTemplate(ActionEvent event){
         TextInputDialog nameInputDialog = new TextInputDialog();
