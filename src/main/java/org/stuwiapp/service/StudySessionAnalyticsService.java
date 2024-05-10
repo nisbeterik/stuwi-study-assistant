@@ -44,7 +44,6 @@ public class StudySessionAnalyticsService {
         } catch (Exception e) {
 
             e.printStackTrace();
-            Collections.reverse(totalStudyTimePerDay);
         }
         return totalStudyTimePerDay;
     }
