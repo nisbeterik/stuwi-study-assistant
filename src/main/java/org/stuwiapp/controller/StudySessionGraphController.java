@@ -65,7 +65,7 @@ public class StudySessionGraphController extends ParentController {
     }
 
     private void configureCategoryAxis() {
-        List<String> dayLabels = generateDayLabels(1, 31);
+        List<String> dayLabels = generateDayLabels(1, 30);
         X.setCategories(FXCollections.observableArrayList(dayLabels));
     }
 
