@@ -99,9 +99,6 @@ public class SessionOverviewController extends ParentController implements Initi
                 deletedSessionLabel.setStyle("-fx-text-fill: green;");
                 deletedSessionLabel.setText("Session deleted");
 
-
-                //sessionDeletedAlert.showAndWait();
-
                 System.out.println("User deleted session");
             } else {
                 System.out.println("User cancelled operation");

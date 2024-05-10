@@ -21,6 +21,6 @@
          </columns></TableView>
       <Label layoutX="14.0" layoutY="291.0" text="Sensor data is displayed as LOW / HIGH / AVG" />
       <Button fx:id="deleteSessionButton" layoutX="441.0" layoutY="327.0" mnemonicParsing="false" onAction="#deleteSession" text="Delete Session" />
-      <Label fx:id="deletedSessionLabel" layoutX="177.0" layoutY="309.0" />
+      <Label fx:id="deletedSessionLabel" alignment="CENTER" layoutX="12.0" layoutY="359.0" prefHeight="18.0" prefWidth="574.0" />
    </children>
 </AnchorPane>
