@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import org.stuwiapp.service.StudySessionAnalyticsService;
 
-public class StudySessionGraphController {
+public class StudySessionGraphController extends ParentController {
 
     public LineChart durationChart;
     public Label hoursAndMinutesLabel;
@@ -24,5 +24,6 @@ public class StudySessionGraphController {
     }
 
     public void returnHome(MouseEvent mouseEvent) {
+        redirect(mouseEvent, "stuwi-home.fxml");
     }
 }
