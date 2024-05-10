@@ -89,11 +89,13 @@ public class SessionOverviewController extends ParentController implements Initi
             Optional<ButtonType> result = confirmDeleteAlert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
 
-                //This only deletes the row from the table view, not from the database
-                sessionTable.getItems().removeAll(sessionTable.getSelectionModel().getSelectedItem());
+                //Delete from table view and database
+                StudySession selectedSession = sessionTable.getSelectionModel().getSelectedItem();
+                sessionTable.getItems().remove(selectedSession);
+                StudySessionDAO.deleteSessionFromDatabase(selectedSession);
                 sessionDeletedAlert.showAndWait();
 
-                System.out.println("User deleted session (from tableview)");
+                System.out.println("User deleted session");
             } else {
                 System.out.println("User cancelled operation");
             }
@@ -105,7 +107,5 @@ public class SessionOverviewController extends ParentController implements Initi
             errorAlert.setContentText(e.getMessage());
             errorAlert.showAndWait();
         }
-
-        //TODO: Call deleteSession function to delete study session from database
     }
 }

@@ -3,6 +3,7 @@ package org.stuwiapp.database;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import org.bson.Document;
 import org.json.JSONObject;
 import org.stuwiapp.StudySession;
@@ -122,7 +123,11 @@ public class StudySessionDAO {
         MongoDatabase db = client.getDatabase("stuwi");
         MongoCollection<Document> collection = db.getCollection("sessions");
 
-        //TODO: Implement removal of study session from database
+        // Delete documents based on start and end dates
+        collection.deleteMany(Filters.and(
+                Filters.eq("start_date", session.getStartDate().toString()),
+                Filters.eq("end_date", session.getEndDate().toString())
+        ));
     }
 
 
