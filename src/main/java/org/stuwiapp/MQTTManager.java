@@ -19,8 +19,6 @@ public class MQTTManager {
     private String latestTemp = "0";
     private String latestHumidity = "0";
     private String latestSound = "0";
-
-    private boolean isStudyActive = false;
     private boolean isBreakActive = false;
 
 

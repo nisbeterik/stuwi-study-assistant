@@ -13,9 +13,9 @@ public class StudySessionManager {
     private boolean sessionActive = false;
     private LocalDateTime sessionStart;
     private StudySessionTemplate currentTemplate;
-    private static final ArrayList<Double> tempData = new ArrayList<>();
-    private static final ArrayList<Double> humidData = new ArrayList<>();
-    private static final ArrayList<Double> loudData = new ArrayList<>();
+    private final ArrayList<Double> tempData = new ArrayList<>();
+    private final ArrayList<Double> humidData = new ArrayList<>();
+    private final ArrayList<Double> loudData = new ArrayList<>();
 
 
     public static StudySessionManager getInstance() {
@@ -80,19 +80,50 @@ public class StudySessionManager {
 
 
     // Converting from Strings to Double because payload comes as strings from sensors/terminal
-    public void addTemperatureData(String tempDataString){
-        Double tempDataDouble = Double.parseDouble(tempDataString);
-        tempData.add(tempDataDouble);
+    public void addTemperatureData(String tempDataString) {
+        try {
+            Double tempDataDouble = Double.parseDouble(tempDataString);
+            if (!tempDataDouble.isNaN() && tempDataDouble >= -20 && tempDataDouble <= 60) {
+                tempData.add(tempDataDouble);
+            } else {
+                System.out.println("Invalid temperature");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid value");
+        }
+
+
     }
 
-    public void addHumidityData(String humidDataString){
-        Double humidDataDouble = Double.parseDouble(humidDataString);
-        humidData.add(humidDataDouble);
+    public void addHumidityData(String humidDataString) {
+        try{
+            Double humidDataDouble = Double.parseDouble(humidDataString);
+            if (!humidDataDouble.isNaN() && humidDataDouble >= 0 && humidDataDouble <= 100) {
+                humidData.add(humidDataDouble);
+            } else {
+                System.out.println("Invalid humidity");
+            }
+
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid value");
+        }
+
+
     }
 
-    public void addLoudnessData(String loudDataString){
-        Double loudDataDouble = Double.parseDouble(loudDataString);
-        loudData.add(loudDataDouble);
+    public void addLoudnessData(String loudDataString) {
+        try{
+            Double loudDataDouble = Double.parseDouble(loudDataString);
+            if(!loudDataDouble.isNaN() && loudDataDouble >= 0 && loudDataDouble <= 100) {
+                loudData.add(loudDataDouble);
+            } else {
+                System.out.println("Invalid loudness");
+            }
+
+        } catch(NumberFormatException e) {
+            System.out.println("Invalid value");
+        }
+
     }
 
 
@@ -134,4 +165,15 @@ public class StudySessionManager {
         return (int)Math.round(lowest);
     }
 
+    public ArrayList<Double> getTemperatureDataList() {
+        return tempData;
+    }
+
+    public ArrayList<Double> getHumidityDataList() {
+        return humidData;
+    }
+
+    public ArrayList<Double> getLoudnessDataList() {
+        return loudData;
+    }
 }
