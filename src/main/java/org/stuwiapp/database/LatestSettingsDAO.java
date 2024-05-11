@@ -58,15 +58,15 @@ public class LatestSettingsDAO {
         collection.insertOne(sessionAsDoc);
     }
     public static StudySessionTemplate getLatestStudyTemplate(String user){
+        Bson filter = Filters.and(Filters.eq("title", "LATESTSESSION"), Filters.eq("user", user));
 
-        for (Document doc : collection.find(new Document("title", "LATESTSESSION"))) {
+        for (Document doc : collection.find(filter)) {
             String id = doc.getString("_id");
             String title = doc.getString("title");
             String subject = doc.getString("subject");
             int blockDuration = doc.getInteger("blockDuration");
             int breakDuration = doc.getInteger("breakDuration");
             int blocks = doc.getInteger("blocks");
-
             try {
                 return new StudySessionTemplate(id, title, subject, blockDuration, breakDuration, blocks);
             } catch (Exception e) {
