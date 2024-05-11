@@ -81,9 +81,9 @@ public class DashboardController extends ParentController {
             tempReadingLabel.setText(String.valueOf(currentTemp) + " C");
 
             if (currentTemp >= temperatureFloor && currentTemp <= temperatureRoof){
-                tempStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/happy-regular-240.png")));
+                tempStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/greenCircle.png")));
             } else {
-                tempStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/sad-regular-240.png")));
+                tempStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/redCircle.png")));
             }
         });
     }
