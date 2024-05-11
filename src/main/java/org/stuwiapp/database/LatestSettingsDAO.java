@@ -41,7 +41,7 @@ public class LatestSettingsDAO {
     public static void saveLatestStudyTemplateInDatabase(StudySessionTemplate template, String user){
 
         if (collection.countDocuments() > 0) {
-            Bson filter = Filters.eq("title", "LATESTSESSION");
+            Bson filter = Filters.and(Filters.eq("title", "LATESTSESSION"), Filters.eq("user", user));
             collection.deleteOne(filter);
         }
 
