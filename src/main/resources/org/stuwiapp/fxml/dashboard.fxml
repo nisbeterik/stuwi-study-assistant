@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.DashboardController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.DashboardController">
       <Label id="temp" fx:id="tempReadingLabel" layoutX="116.0" layoutY="117.0" text="00.00">
          <font>
             <Font name="Tahoma" size="20.0" />
@@ -24,24 +26,9 @@
             <Image url="@../images/droplet-half-solid-240.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="tempStatusImage" fitHeight="56.0" fitWidth="31.0" layoutX="188.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/happy-regular-240.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="humiStatusImage" fitHeight="56.0" fitWidth="31.0" layoutX="342.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/happy-regular-240.png" />
-         </image>
-      </ImageView>
       <ImageView fx:id="loudImage" fitHeight="130.0" fitWidth="83.0" layoutX="421.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/volume-full-solid-240.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="loudStatusImage" fitHeight="56.0" fitWidth="31.0" layoutX="516.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/happy-regular-240.png" />
          </image>
       </ImageView>
       <Label id="temp" fx:id="loudnessReadingLabel" layoutX="437.0" layoutY="115.0" text="00.00">
@@ -70,4 +57,19 @@
       </image>
    </ImageView>
    <Label layoutX="147.0" layoutY="192.0" text="You're doing great!" />
+   <ImageView fx:id="tempStatusImage" fitHeight="25.0" fitWidth="25.0" layoutX="171.0" layoutY="48.0">
+      <image>
+         <Image url="@../images/greenCircle.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="humiStatusImage" fitHeight="25.0" fitWidth="25.0" layoutX="326.0" layoutY="48.0">
+      <image>
+         <Image url="@../images/greenCircle.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="loudStatusImage" fitHeight="25.0" fitWidth="25.0" layoutX="504.0" layoutY="48.0">
+      <image>
+         <Image url="@../images/greenCircle.png" />
+      </image>
+   </ImageView>
 </AnchorPane>
