@@ -21,7 +21,7 @@ public class LatestSettingsDAO {
     public static void saveLatestRangeSettings(RangeSettingsTemplate template, String user){
 
         if (collection.countDocuments() > 0) {
-            Bson filter = Filters.and(Filters.eq("title", "LATESTSESSION"), Filters.eq("user", user));
+            Bson filter = Filters.and(Filters.eq("title", "LATESTRANGES"), Filters.eq("user", user));
             collection.deleteOne(filter);
         }
 
@@ -77,7 +77,9 @@ public class LatestSettingsDAO {
     }
     public static RangeSettingsTemplate getLatestRangeTemplate(String user){
 
-        for (Document doc : collection.find(new Document("title", "LATESTRANGES"))){
+        Bson filter = Filters.and(Filters.eq("title", "LATESTRANGES"), Filters.eq("user", user));
+
+        for (Document doc : collection.find(filter)){
             String id = doc.getString("_id");
             String title = doc.getString("title");
             int tempMax = doc.getInteger("tempMax");
