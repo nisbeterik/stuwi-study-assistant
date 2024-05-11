@@ -41,11 +41,11 @@ public class LoginController extends ParentController implements Initializable {
 
     private void handleKeyPress(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
-            login(new ActionEvent());
+            logInUser(null, event); // Simulate ActionEvent when Enter key is pressed
         }
     }
 
-    public void login(ActionEvent event){
+    public void login(ActionEvent event, KeyEvent keyEvent){
         String enteredUsername = usernameField.getText().trim();
         String enteredPassword = passwordField.getText();
         boolean loginSuccess = false;
@@ -57,17 +57,33 @@ public class LoginController extends ParentController implements Initializable {
             e.printStackTrace();
         }
 
-        if (loginSuccess){
+        if (loginSuccess && keyEvent == null){
             redirect(event, "stuwi-home.fxml");
+        } else if(loginSuccess && keyEvent != null){
+            // If login is successful and triggered by Enter key
+            keyEvent.consume(); // Consume the key event to prevent further handling
+            loginButton.fire(); // Simulate a mouse click event on the login button
         }
     }
 
     public void logInUser(ActionEvent event)  { // This method runs if you click on the log in button
-        login(event);
+        login(event, null);
+    }
+
+    public void logInUser(ActionEvent event, KeyEvent keyEvent)  { // This method runs if you click on the log in button
+        if (event != null) {
+            login(event, null);
+        } else if (keyEvent != null) {
+            login(null, keyEvent);
+        }
     }
 
     public void goToRegistration(ActionEvent event) {
         redirect(event, "registration.fxml");
+    }
+
+    private ActionEvent createActionEvent() {
+        return new ActionEvent();
     }
 
 }
