@@ -21,7 +21,7 @@ public class LatestSettingsDAO {
     public static void saveLatestRangeSettings(RangeSettingsTemplate template, String user){
 
         if (collection.countDocuments() > 0) {
-            Bson filter = Filters.eq("title", "LATESTRANGES");
+            Bson filter = Filters.and(Filters.eq("title", "LATESTRANGES"), Filters.eq("user", user));
             collection.deleteOne(filter);
         }
 
@@ -41,7 +41,7 @@ public class LatestSettingsDAO {
     public static void saveLatestStudyTemplateInDatabase(StudySessionTemplate template, String user){
 
         if (collection.countDocuments() > 0) {
-            Bson filter = Filters.eq("title", "LATESTSESSION");
+            Bson filter = Filters.and(Filters.eq("title", "LATESTSESSION"), Filters.eq("user", user));
             collection.deleteOne(filter);
         }
 
@@ -58,15 +58,15 @@ public class LatestSettingsDAO {
         collection.insertOne(sessionAsDoc);
     }
     public static StudySessionTemplate getLatestStudyTemplate(String user){
+        Bson filter = Filters.and(Filters.eq("title", "LATESTSESSION"), Filters.eq("user", user));
 
-        for (Document doc : collection.find(new Document("title", "LATESTSESSION"))) {
+        for (Document doc : collection.find(filter)) {
             String id = doc.getString("_id");
             String title = doc.getString("title");
             String subject = doc.getString("subject");
             int blockDuration = doc.getInteger("blockDuration");
             int breakDuration = doc.getInteger("breakDuration");
             int blocks = doc.getInteger("blocks");
-
             try {
                 return new StudySessionTemplate(id, title, subject, blockDuration, breakDuration, blocks);
             } catch (Exception e) {
@@ -77,7 +77,9 @@ public class LatestSettingsDAO {
     }
     public static RangeSettingsTemplate getLatestRangeTemplate(String user){
 
-        for (Document doc : collection.find(new Document("title", "LATESTRANGES"))){
+        Bson filter = Filters.and(Filters.eq("title", "LATESTRANGES"), Filters.eq("user", user));
+
+        for (Document doc : collection.find(filter)){
             String id = doc.getString("_id");
             String title = doc.getString("title");
             int tempMax = doc.getInteger("tempMax");
