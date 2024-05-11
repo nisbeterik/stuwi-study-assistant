@@ -109,9 +109,9 @@ public class DashboardController extends ParentController {
             loudnessReadingLabel.setText(String.valueOf(currentLoudness));
 
             if (currentLoudness <= loudnessRoof) {
-                loudStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/happy-regular-240.png")));
+                loudStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/greenCircle.png")));
             } else {
-                loudStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/sad-regular-240.png")));
+                loudStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/redCircle.png")));
             }
         });
     }
