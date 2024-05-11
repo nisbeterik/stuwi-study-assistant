@@ -13,7 +13,10 @@ import java.util.ResourceBundle;
 
 public class StuwiHomeController extends ParentController implements Initializable {
 
-    public Button analyticsButton;
+    @FXML private Button analyticsButton;
+    @FXML private Button settingsButton;
+    @FXML private Button overviewButton;
+    @FXML private Button newSessionButton;
 
     public void initialize(URL url, ResourceBundle resourceBundle){
         RangeSettingsTemplate latestRangeTemplate =  LatestSettingsDAO.getLatestRangeTemplate(UserManager.getInstance().getCurrentUser());
@@ -25,10 +28,6 @@ public class StuwiHomeController extends ParentController implements Initializab
             }
         }
     }
-
-    @FXML public Button settingsButton;
-    @FXML Button overviewButton;
-    @FXML public Button newSessionButton;
 
     public void newSession(ActionEvent event) {
         redirect(event, "study-session-configuration.fxml");
