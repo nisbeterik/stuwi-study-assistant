@@ -26,7 +26,7 @@ public class LoginController extends ParentController implements Initializable {
     @FXML
     private Button loginButton;
     @FXML
-    private Button registrationButton;
+    private Button registerButton;
     @FXML
     private PasswordField passwordField;
 
