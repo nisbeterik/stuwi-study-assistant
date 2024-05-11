@@ -34,17 +34,15 @@ public class LoginController extends ParentController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         stuwiImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/StuWi-Transparent.png")));
 
-        usernameField.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                //login();
-            }
-        });
+        usernameField.setOnKeyPressed(this::handleKeyPress);
+        passwordField.setOnKeyPressed(this::handleKeyPress); // If you press enter while typing your password or username
+        // this will try to log you in with the credentials entered.
+    }
 
-        passwordField.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                //login();
-            }
-        });
+    private void handleKeyPress(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            login(new ActionEvent());
+        }
     }
 
     public void login(ActionEvent event){
@@ -64,8 +62,7 @@ public class LoginController extends ParentController implements Initializable {
         }
     }
 
-
-    public void logInUser(ActionEvent event) {
+    public void logInUser(ActionEvent event)  { // This method runs if you click on the log in button
         login(event);
     }
 
