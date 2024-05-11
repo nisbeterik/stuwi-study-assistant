@@ -26,11 +26,6 @@
             <Image url="@../images/droplet-half-solid-240.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="humiStatusImage" fitHeight="56.0" fitWidth="31.0" layoutX="342.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/happy-regular-240.png" />
-         </image>
-      </ImageView>
       <ImageView fx:id="loudImage" fitHeight="130.0" fitWidth="83.0" layoutX="421.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/volume-full-solid-240.png" />
@@ -68,6 +63,11 @@
    </ImageView>
    <Label layoutX="147.0" layoutY="192.0" text="You're doing great!" />
    <ImageView fx:id="tempStatusImage" fitHeight="25.0" fitWidth="25.0" layoutX="171.0" layoutY="48.0">
+      <image>
+         <Image url="@../images/greenCircle.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="humiStatusImage" fitHeight="25.0" fitWidth="25.0" layoutX="333.0" layoutY="48.0">
       <image>
          <Image url="@../images/greenCircle.png" />
       </image>

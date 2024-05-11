@@ -94,9 +94,9 @@ public class DashboardController extends ParentController {
             humiReadingLabel.setText(String.valueOf(currentHumid) + " %");
 
             if (currentHumid >= humidityFloor && currentHumid <= humidityRoof){
-                humiStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/happy-regular-240.png")));
+                humiStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/greenCircle.png")));
             } else {
-                humiStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/sad-regular-240.png")));
+                humiStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/redCircle.png")));
             }
         });
     }
