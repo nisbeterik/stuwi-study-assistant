@@ -1,5 +1,6 @@
 package org.stuwiapp;
 
+import javafx.application.Platform;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.stuwiapp.Utils.PomodoroMappingDefault;
@@ -94,7 +95,11 @@ public class MQTTManager {
                     StudySessionManager.getInstance().addLoudnessData(message.toString());
                 }
                 if(topic.equals("stuwi/sessionover")){
-                    StudySessionManager.getInstance().endSession();
+
+                    Platform.runLater(() -> {
+                        StudySessionManager.getInstance().endSession();
+                    });
+
                     isBreakActive = false;
                 }
                 if(topic.equals("stuwi/breakactive")){
