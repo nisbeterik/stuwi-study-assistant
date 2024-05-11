@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import org.controlsfx.control.action.Action;
 import org.stuwiapp.database.UserDAO;
 
 import java.net.URL;
@@ -35,21 +36,18 @@ public class LoginController extends ParentController implements Initializable {
 
         usernameField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                login();
+                //login();
             }
         });
 
         passwordField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                login();
+                //login();
             }
         });
     }
 
-    public void login(){}
-
-
-    public void logInUser(ActionEvent event) {
+    public void login(ActionEvent event){
         String enteredUsername = usernameField.getText().trim();
         String enteredPassword = passwordField.getText();
         boolean loginSuccess = false;
@@ -64,6 +62,11 @@ public class LoginController extends ParentController implements Initializable {
         if (loginSuccess){
             redirect(event, "stuwi-home.fxml");
         }
+    }
+
+
+    public void logInUser(ActionEvent event) {
+        login(event);
     }
 
     public void goToRegistration(ActionEvent event) {
