@@ -55,6 +55,21 @@ public class SessionOverviewController extends ParentController implements Initi
             loudColumn.setCellValueFactory(new PropertyValueFactory<>("loudness"));
             ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
             subjectColumn.setCellValueFactory(new PropertyValueFactory<>("templateSubject"));
+            sessionTable.setRowFactory(tv -> {
+                TableRow<StudySession> row = new TableRow<>();
+                Tooltip tooltip = new Tooltip();
+
+                row.hoverProperty().addListener((observable, oldValue, newValue) -> {
+                    if (row.getItem() != null && newValue) {
+                        String ratingText = row.getItem().getRatingText();
+                        tooltip.setText(ratingText);
+                        tooltip.show(row, row.localToScreen(0, 0).getX() + row.getWidth(), row.localToScreen(0, 0).getY());
+                    } else {
+                        tooltip.hide();
+                    }
+                });
+                return row;
+            });
             sessionTable.getItems().addAll(sessionsList);
         } catch (Exception e) {
             e.printStackTrace();
