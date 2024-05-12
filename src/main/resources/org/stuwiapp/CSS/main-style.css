@@ -9,9 +9,13 @@
     -fx-background-position: center center;
     -fx-effect:dropshadow(Gaussian, #797979,0,1, 2, 2);
     -fx-text-fill: white;
+    -fx-transition: background-image 0,5s;
 }
 .button:hover{
-    -fx-background-color: rgb(127,181,199);
+    -fx-background-image: url('../images/blue-button-lighter.png');
+}
+.button:pressed{
+    -fx-background-image: url('../images/blue-button-darker.png');;
 }
 .text-field{
     -fx-background-color: #454566;
