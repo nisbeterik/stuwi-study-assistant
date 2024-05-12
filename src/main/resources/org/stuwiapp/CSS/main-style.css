@@ -9,7 +9,7 @@
     -fx-background-color: transparent;
     -fx-background-size: stretch;
     -fx-background-position: center center;
-    -fx-effect:dropshadow(Gaussian, rgba(44,45,64,90),0,2, 3, 3);
+    -fx-effect:dropshadow(Gaussian, rgb(30,31,50),0,2, 3, 3);
     -fx-text-fill: white;
 }
 .button:hover{
@@ -20,15 +20,34 @@
 }
 .choice-box {
     -fx-background-image: url('../images/blue-button.png');
+    -fx-background-color: transparent;
     -fx-background-size: stretch;
     -fx-background-position: center center;
     -fx-opacity: 100;
-    -fx-effect:dropshadow(Gaussian, rgba(44,45,64,90),0,2, 3, 3);
+    -fx-effect:dropshadow(Gaussian, rgb(30,31,50),0,2, 3, 3);
 }
+.choice-box .context-menu {
+    -fx-background-image: url('../images/stuwi-background.png');
+    -fx-background-size: stretch;
+    -fx-background-position: center center;
+}
+
+   .choice-box .menu-item:focused {
+       -fx-background-color: rgb(117,179,189);
+   }
+
+   .choice-box .menu-item > .label {
+       -fx-text-fill: white;
+   }
+
+   .choice-box .menu-item:focused > .label {
+       -fx-text-fill: black;
+   }
+
 .text-field{
     -fx-background-color: #454566;
     -fx-text-fill: white;
-    -fx-effect:dropshadow(Gaussian, #2c2f43,0,1, 2, 2);
+    -fx-effect:dropshadow(Gaussian, rgb(30,31,50),0,2, 3, 3);
 }
 .text-field:hover{
     -fx-background-color: #404061;
@@ -117,3 +136,4 @@
 .axis {
     -fx-tick-label-fill: white;
 }
+
