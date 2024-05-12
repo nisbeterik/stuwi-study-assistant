@@ -108,3 +108,12 @@
 .table-view .virtual-flow .scroll-bar:horizontal .thumb {
     -fx-background-color:  linear-gradient(to right, #454566, #797999);
 }
+.chart-plot-background{
+    -fx-background-image: url('../images/stuwi-background.png');
+    -fx-background-color: transparent;
+    -fx-background-size: stretch;
+    -fx-background-position: center center;
+}
+.axis {
+    -fx-tick-label-fill: white;
+}
