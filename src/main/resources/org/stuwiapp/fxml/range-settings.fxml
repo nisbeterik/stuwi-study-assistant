@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import org.controlsfx.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="422.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.RangeSettingsController">
+<AnchorPane prefHeight="422.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.RangeSettingsController">
    <children>
       <RangeSlider fx:id="tempSlider" blockIncrement="0.5" highValue="23.0" layoutX="79.0" layoutY="184.0" lowValue="21.0" majorTickUnit="1.0" max="30.0" min="15.0" minorTickCount="1" prefHeight="16.0" prefWidth="442.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
       <RangeSlider fx:id="humidSlider" blockIncrement="5.0" layoutX="79.0" layoutY="247.0" majorTickUnit="5.0" max="80.0" min="20.0" minorTickCount="1" prefHeight="16.0" prefWidth="442.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
@@ -16,8 +19,8 @@
          </font>
       </Label>
       <Slider fx:id="loudSlider" layoutX="80.0" layoutY="303.0" majorTickUnit="5.0" min="50.0" minorTickCount="1" prefHeight="16.0" prefWidth="442.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-      <ChoiceBox fx:id="templateChoiceBox" accessibleHelp="Select Template" accessibleText="Select Template" layoutX="112.0" layoutY="106.0" prefHeight="26.0" prefWidth="189.0" />
-      <Button fx:id="saveTemplateButton" layoutX="319.0" layoutY="106.0" mnemonicParsing="false" onAction="#saveSettingsAsTemplate" prefHeight="26.0" prefWidth="170.0" text="Save Settings as Template" />
+      <ChoiceBox fx:id="templateChoiceBox" accessibleHelp="Select Template" accessibleText="Select Template" layoutX="81.0" layoutY="106.0" prefHeight="26.0" prefWidth="220.0" />
+      <Button fx:id="saveTemplateButton" layoutX="319.0" layoutY="106.0" mnemonicParsing="false" onAction="#saveSettingsAsTemplate" prefHeight="26.0" prefWidth="203.0" text="Save Settings as Template" />
       <Label layoutX="497.0" layoutY="155.0" text="HI " />
       <Label layoutX="82.0" layoutY="155.0" text="LO" />
       <Label layoutX="500.0" layoutY="220.0" text="HI " />
