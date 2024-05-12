@@ -6,10 +6,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane styleClass="pane" prefHeight="399.0" prefWidth="466.0" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.LoginController">
+<AnchorPane prefHeight="399.0" prefWidth="466.0" styleClass="pane" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.LoginController">
    <children>
       <TextField fx:id="usernameField" layoutX="241.0" layoutY="101.0" prefHeight="39.0" prefWidth="194.0" promptText="Username" />
       <Button fx:id="loginButton" layoutX="241.0" layoutY="230.0" mnemonicParsing="false" onAction="#logInUser" prefHeight="39.0" prefWidth="194.0" text="Log in">
@@ -22,7 +22,7 @@
             <Image url="@../images/StuWi-Transparent.png" />
          </image>
       </ImageView>
-      <Text layoutX="309.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not a user yet?" />
-      <Button fx:id="registerButton" layoutX="397.0" layoutY="254.0" mnemonicParsing="false" onAction="#goToRegistration" prefHeight="26.0" prefWidth="89.0" text="Register here" textFill="#2e2ed3" />
+      <Text fill="WHITE" layoutX="241.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not a user yet?" />
+      <Button fx:id="registerButton" layoutX="333.0" layoutY="276.0" mnemonicParsing="false" onAction="#goToRegistration" prefHeight="26.0" prefWidth="102.0" text="Register here" textFill="#2e2ed3" />
    </children>
 </AnchorPane>
