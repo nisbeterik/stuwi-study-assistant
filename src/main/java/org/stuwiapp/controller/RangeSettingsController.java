@@ -40,10 +40,8 @@ public class RangeSettingsController extends ParentController implements Initial
     public Button loadSettings;
     public Button backButton;
     public Button deleteSettingsButton;
-    public AnchorPane background;
 
     public void initialize(URL url, ResourceBundle resourceBundle){
-        background.getStyleClass().add("pane"); //sets the style class for the background AnchorPane to "pane".
 
         // Retrieves the current user's saved templates from the database
         String currentUser = UserManager.getInstance().getCurrentUser();

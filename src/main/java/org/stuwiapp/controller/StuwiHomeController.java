@@ -13,15 +13,12 @@ import java.util.ResourceBundle;
 
 public class StuwiHomeController extends ParentController implements Initializable {
 
-    public AnchorPane background;
-
     @FXML private Button analyticsButton;
     @FXML private Button settingsButton;
     @FXML private Button overviewButton;
     @FXML private Button newSessionButton;
 
     public void initialize(URL url, ResourceBundle resourceBundle){
-        background.getStyleClass().add("pane");
 
         RangeSettingsTemplate latestRangeTemplate =  LatestSettingsDAO.getLatestRangeTemplate(UserManager.getInstance().getCurrentUser());
         if (latestRangeTemplate != null) {

@@ -13,8 +13,7 @@ import org.stuwiapp.database.UserDAO;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RegistrationController extends ParentController implements Initializable {
-    public AnchorPane background;
+public class RegistrationController extends ParentController {
     @FXML
     private TextField usernameField;
     @FXML
@@ -24,9 +23,6 @@ public class RegistrationController extends ParentController implements Initiali
     @FXML
     private Button cancelButton;
 
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        background.getStyleClass().add("pane");
-    }
 
 
     public void registerNewUser(ActionEvent event) {

@@ -20,7 +20,6 @@ import java.util.ResourceBundle;
 
 public class SessionOverviewController extends ParentController implements Initializable {
 
-    public AnchorPane background;
     @FXML
     private Button deleteSessionButton;
     @FXML
@@ -46,7 +45,6 @@ public class SessionOverviewController extends ParentController implements Initi
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        background.getStyleClass().add("pane");
         try {
             String currentUser = UserManager.getInstance().getCurrentUser();
             ArrayList<StudySession> sessions = StudySessionDAO.getUserSessions(currentUser);

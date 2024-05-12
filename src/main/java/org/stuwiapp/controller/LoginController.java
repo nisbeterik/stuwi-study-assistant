@@ -17,7 +17,6 @@ import java.util.ResourceBundle;
 
 public class LoginController extends ParentController implements Initializable {
 
-    public AnchorPane background;
     @FXML
     private ImageView stuwiImage;
     @FXML
@@ -31,7 +30,6 @@ public class LoginController extends ParentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        background.getStyleClass().add("pane"); //sets the style class for the background AnchorPane to "pane".
 
         stuwiImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/StuWi-Transparent.png")));
     }

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="background" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StudySessionConfigurationController">
+<AnchorPane styleClass="pane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StudySessionConfigurationController">
    <children>
       <Button fx:id="saveTemplateButton" layoutX="394.0" layoutY="70.0" mnemonicParsing="false" onAction="#saveSettingsAsTemplate" prefHeight="26.0" prefWidth="170.0" text="Save Settings as Template" />
       <Label fx:id="titleLabel" alignment="CENTER" layoutX="182.0" layoutY="24.0" prefHeight="30.0" prefWidth="380.0" text="Start new study session">

@@ -21,7 +21,6 @@ import java.util.UUID;
 
 public class StudySessionConfigurationController extends ParentController implements Initializable  {
     @FXML public ChoiceBox templateChoiceBox;
-    public AnchorPane background;
     @FXML public Button deleteTemplateButton;
 
     @FXML Button saveTemplateButton;
@@ -66,7 +65,6 @@ public class StudySessionConfigurationController extends ParentController implem
 
     }
     public void initialize(URL url, ResourceBundle resourceBundle){
-        background.getStyleClass().add("pane");
 
         // Retrieves the current user's saved templates from the database
         String currentUser = UserManager.getInstance().getCurrentUser();

@@ -23,7 +23,6 @@ public class DashboardController extends ParentController {
     public ImageView loudImage;
     public Label studyStatusLabel;
     public Button stopSessionButton;
-    public AnchorPane background;
     @FXML
     private ImageView tempImage;
     @FXML
@@ -62,7 +61,6 @@ public class DashboardController extends ParentController {
 
     @FXML
     public void initialize() {
-        background.getStyleClass().add("pane"); //sets the style class for the background AnchorPane to "pane".
 
         // initListener();
         Timer timer = new Timer();

@@ -16,7 +16,6 @@ import java.util.List;
 
 public class StudySessionGraphController extends ParentController {
 
-    public AnchorPane background;
     public StackedBarChart<String, Number> barChart;
     public CategoryAxis X;
     public NumberAxis Y;
@@ -32,7 +31,6 @@ public class StudySessionGraphController extends ParentController {
     StudySessionAnalyticsService service = new StudySessionAnalyticsService();
     @FXML
     public void initialize() {
-        background.getStyleClass().add("pane"); //sets the style class for the background AnchorPane to "pane".
         X = (CategoryAxis) barChart.getXAxis();
         List<Integer> studyTimeData = service.calculateTotalStudyTimePerDay();
         configureCategoryAxis();
