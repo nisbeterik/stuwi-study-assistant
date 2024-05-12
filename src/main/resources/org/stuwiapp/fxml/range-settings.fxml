@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import org.controlsfx.control.RangeSlider?>
 <AnchorPane prefHeight="422.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.RangeSettingsController">
    <children>
       <RangeSlider fx:id="tempSlider" blockIncrement="0.5" highValue="23.0" layoutX="79.0" layoutY="184.0" lowValue="21.0" majorTickUnit="1.0" max="30.0" min="15.0" minorTickCount="1" prefHeight="16.0" prefWidth="442.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
