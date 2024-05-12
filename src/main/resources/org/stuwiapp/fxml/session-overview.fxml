@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane fx:id="background" prefHeight="400.0" prefWidth="600.0" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.SessionOverviewController">
@@ -20,5 +22,13 @@
             <TableColumn id="ratingColumn" fx:id="ratingColumn" editable="false" prefWidth="62.0" text="Rating" />
          </columns></TableView>
       <Label layoutX="14.0" layoutY="291.0" text="Sensor data is displayed as LOW / HIGH / AVG" />
+      <Button fx:id="deleteSessionButton" layoutX="441.0" layoutY="327.0" mnemonicParsing="false" onAction="#deleteSession" text="Delete Session" />
+      <ImageView fitHeight="101.0" fitWidth="87.0" layoutX="13.0" layoutY="289.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/StuWi.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="deletedSessionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="193.0" layoutY="367.0" prefHeight="18.0" prefWidth="212.0" />
+
    </children>
 </AnchorPane>

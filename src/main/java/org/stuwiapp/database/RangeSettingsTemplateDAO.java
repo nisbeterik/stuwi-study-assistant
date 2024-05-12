@@ -18,6 +18,7 @@ public class RangeSettingsTemplateDAO {
         MongoCollection<Document> collection = db.getCollection("rangeTemplates");
 
         JSONObject templateJson = new JSONObject();
+        templateJson.put("_id", template.getId());
         templateJson.put("user", user);
         templateJson.put("title", template.getTitle());
         templateJson.put("tempMax", template.getTempMax());
@@ -36,6 +37,7 @@ public class RangeSettingsTemplateDAO {
 
         ArrayList<RangeSettingsTemplate> templates = new ArrayList<>();
         for (Document doc : collection.find(new Document("user", user))){
+            String id = doc.getString("_id");
             String title = doc.getString("title");
             int tempMax = doc.getInteger("tempMax");
             int tempMin = doc.getInteger("tempMin");
@@ -43,10 +45,18 @@ public class RangeSettingsTemplateDAO {
             int humidMin = doc.getInteger("humidMin");
             int loudMax = doc.getInteger("loudMax");
 
-            RangeSettingsTemplate template = new RangeSettingsTemplate(title, tempMax, tempMin, humidMax, humidMin, loudMax);
+            RangeSettingsTemplate template = new RangeSettingsTemplate(id, title, tempMax, tempMin, humidMax, humidMin, loudMax);
 
             templates.add(template);
         }
         return templates;
+    }
+
+    public static void deleteRangeSettingsFromDatabase(RangeSettingsTemplate template){
+        MongoClient client = MongoConnectionManager.getMongoClient();
+        MongoDatabase db = client.getDatabase("stuwi");
+        MongoCollection<Document> collection = db.getCollection("rangeTemplates");
+
+        collection.deleteOne(new Document("_id", template.getId()));
     }
 }

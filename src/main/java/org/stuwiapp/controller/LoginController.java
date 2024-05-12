@@ -33,7 +33,7 @@ public class LoginController extends ParentController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         background.getStyleClass().add("pane"); //sets the style class for the background AnchorPane to "pane".
 
-        stuwiImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/stuwi-logo.png")));
+        stuwiImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/StuWi-Transparent.png")));
     }
 
 
