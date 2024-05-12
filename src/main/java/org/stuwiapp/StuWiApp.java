@@ -54,7 +54,6 @@ public class StuWiApp extends Application {
         Object login = FXMLUtil.loadFxml("login.fxml");
         Scene scene = new Scene((Parent) login);
         scene.setFill(Color.TRANSPARENT);
-        stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
         stage.setOnCloseRequest(event -> {
             try {
