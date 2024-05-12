@@ -5,7 +5,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import javafx.fxml.FXMLLoader;
 import org.stuwiapp.Utils.FXMLUtil;

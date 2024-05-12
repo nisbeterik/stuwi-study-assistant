@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.stuwiapp.MQTTManager;
@@ -61,7 +60,6 @@ public class DashboardController extends ParentController {
 
     @FXML
     public void initialize() {
-
         // initListener();
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {

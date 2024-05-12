@@ -2,17 +2,11 @@ package org.stuwiapp.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import org.stuwiapp.database.UserDAO;
-
-import java.net.URL;
-import java.util.ResourceBundle;
-
 public class RegistrationController extends ParentController {
     @FXML
     private TextField usernameField;
@@ -22,8 +16,6 @@ public class RegistrationController extends ParentController {
     private Button registerButton;
     @FXML
     private Button cancelButton;
-
-
 
     public void registerNewUser(ActionEvent event) {
         String enteredUsername = usernameField.getText().trim();

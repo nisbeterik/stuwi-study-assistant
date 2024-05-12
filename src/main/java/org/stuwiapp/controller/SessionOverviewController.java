@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import org.stuwiapp.StudySession;
 import org.stuwiapp.UserManager;
 import org.stuwiapp.database.StudySessionDAO;

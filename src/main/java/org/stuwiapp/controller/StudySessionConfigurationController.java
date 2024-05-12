@@ -8,7 +8,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
 import org.stuwiapp.*;
 import org.stuwiapp.database.LatestSettingsDAO;
 import org.stuwiapp.database.StudySessionTemplateDAO;

@@ -14,7 +14,6 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import org.controlsfx.control.RangeSlider;
 import javafx.scene.layout.HBox;
 import org.stuwiapp.*;
@@ -42,7 +41,6 @@ public class RangeSettingsController extends ParentController implements Initial
     public Button deleteSettingsButton;
 
     public void initialize(URL url, ResourceBundle resourceBundle){
-
         // Retrieves the current user's saved templates from the database
         String currentUser = UserManager.getInstance().getCurrentUser();
         ArrayList<RangeSettingsTemplate> savedTemplates = RangeSettingsTemplateDAO.getUserRangeTemplates(currentUser);

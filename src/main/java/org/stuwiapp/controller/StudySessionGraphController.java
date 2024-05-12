@@ -7,7 +7,6 @@ import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import org.stuwiapp.service.StudySessionAnalyticsService;
 
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class StudySessionGraphController extends ParentController {
+
 
     public StackedBarChart<String, Number> barChart;
     public CategoryAxis X;
