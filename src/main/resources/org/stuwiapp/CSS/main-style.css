@@ -17,3 +17,6 @@
 .text-field:hover{
     -fx-background-color: #404061;
 }
+.label{
+    -fx-text-fill: white;
+}
