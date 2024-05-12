@@ -46,17 +46,17 @@
             <Font name="Tahoma" size="20.0" />
          </font>
       </Label>
-      <Label id="temp" fx:id="studyStatusLabel" layoutX="332.0" layoutY="200.0" text="Not studying">
+      <Label id="temp" fx:id="studyStatusLabel" layoutX="332.0" layoutY="197.0" prefHeight="33.0" prefWidth="133.0" text="Not studying">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="stopSessionButton" layoutX="326.0" layoutY="303.0" mnemonicParsing="false" onAction="#stopSession" prefHeight="33.0" prefWidth="123.0" stylesheets="@../CSS/alt-style.css" text="Stop Session">
+      <Button fx:id="stopSessionButton" layoutX="326.0" layoutY="310.0" mnemonicParsing="false" onAction="#stopSession" prefHeight="63.0" prefWidth="250.0" stylesheets="@../CSS/alt-style.css" text="Stop Session">
          <font>
-          <Font name="Tahoma" size="17.0" />
+          <Font name="Tahoma Bold" size="19.0" />
          </font>
       </Button>
-   <ImageView fitHeight="239.0" fitWidth="216.0" layoutX="35.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="270.0" fitWidth="198.0" layoutX="5.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../images/StuWi.png" />
       </image>
