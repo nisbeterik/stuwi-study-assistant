@@ -1,5 +1,8 @@
 .pane {
     -fx-background-color: rgb(54,55,74);
+    -fx-background-image: url('../images/stuwi-background.png');
+    -fx-background-size: stretch;
+    -fx-background-position: center center;
 }
 .button {
     -fx-background-image: url('../images/blue-button.png');
@@ -41,7 +44,10 @@
     -fx-background-color: transparent;
 }
 .table-view .column-header-background{
-    -fx-background-color: linear-gradient(to bottom, rgb(107,161,179), rgb(127,181,199));
+    -fx-background-image: url('../images/stuwi-background.png');
+    -fx-background-color: transparent;
+    -fx-background-size: stretch;
+    -fx-background-position: right center;
     -fx-background-radius: 7px 7px 0px 0px;
     -fx-background-insets: 0 11px 0 0;
     -fx-padding: 0 0 5px 0;
@@ -94,7 +100,7 @@
 .table-view .virtual-flow .scroll-bar .increment-button,
 .table-view .virtual-flow .scroll-bar .decrement-button {
     -fx-opacity: 0;
-    -fx-padding: 2;
+    -fx-padding: 0;
 }
 .table-view .virtual-flow .scroll-bar:vertical .thumb{
     -fx-background-color:  linear-gradient(to bottom, #454566, #797999);
