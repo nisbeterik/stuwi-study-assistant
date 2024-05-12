@@ -7,10 +7,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="background" prefHeight="387.0" prefWidth="600.0" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.SessionOverviewController">
    <children>
-      <Button fx:id="returnButton" layoutX="106.0" layoutY="318.0" mnemonicParsing="false" onAction="#redirectToHome" prefHeight="45.0" prefWidth="212.0" text="Return to home" />
+      <Button fx:id="returnButton" layoutX="106.0" layoutY="318.0" mnemonicParsing="false" onAction="#redirectToHome" prefHeight="54.0" prefWidth="212.0" text="Return to home">
+         <font>
+            <Font name="Tahoma Bold" size="19.0" />
+         </font></Button>
       <TableView fx:id="sessionTable" layoutX="13.0" layoutY="16.0" prefHeight="275.0" prefWidth="584.0">
          <columns>
             <TableColumn id="startDateColumn" fx:id="startDateColumn" editable="false" prefWidth="75.0" text="Start" />
@@ -22,7 +26,10 @@
             <TableColumn id="ratingColumn" fx:id="ratingColumn" editable="false" prefWidth="62.0" text="Rating" />
          </columns></TableView>
       <Label layoutX="14.0" layoutY="291.0" text="Sensor data is displayed as LOW / HIGH / AVG" />
-      <Button fx:id="deleteSessionButton" layoutX="345.0" layoutY="319.0" mnemonicParsing="false" onAction="#deleteSession" prefHeight="45.0" prefWidth="212.0" stylesheets="@../CSS/alt-style.css" text="Delete Session" />
+      <Button fx:id="deleteSessionButton" layoutX="352.0" layoutY="329.0" mnemonicParsing="false" onAction="#deleteSession" prefHeight="33.0" prefWidth="140.0" stylesheets="@../CSS/alt-style.css" text="Delete Session">
+         <font>
+            <Font name="Tahoma Bold" size="13.0" />
+         </font></Button>
       <ImageView fitHeight="101.0" fitWidth="71.0" layoutX="13.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/StuWi.png" />
