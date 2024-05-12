@@ -7,7 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.stuwiapp.database.UserDAO;
-public class RegistrationController extends ParentController {
+
+public class RegistrationController extends ParentController{
     @FXML
     private TextField usernameField;
     @FXML
