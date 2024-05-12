@@ -51,7 +51,7 @@
             <Font name="Tahoma" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="stopSessionButton" layoutX="326.0" layoutY="303.0" mnemonicParsing="false" onAction="#stopSession" prefHeight="33.0" prefWidth="123.0" text="Stop Session">
+      <Button fx:id="stopSessionButton" layoutX="326.0" layoutY="303.0" mnemonicParsing="false" onAction="#stopSession" prefHeight="33.0" prefWidth="123.0" stylesheets="@../CSS/alt-style.css" text="Stop Session">
          <font>
           <Font name="Tahoma" size="17.0" />
          </font>

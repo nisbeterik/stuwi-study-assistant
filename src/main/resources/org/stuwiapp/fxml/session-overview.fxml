@@ -8,10 +8,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="background" prefHeight="400.0" prefWidth="600.0" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.SessionOverviewController">
+<AnchorPane fx:id="background" prefHeight="387.0" prefWidth="600.0" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.SessionOverviewController">
    <children>
-      <Button fx:id="returnButton" layoutX="249.0" layoutY="327.0" mnemonicParsing="false" onAction="#redirectToHome" text="Return to home" />
-      <TableView fx:id="sessionTable" layoutX="13.0" layoutY="37.0" prefHeight="254.0" prefWidth="573.0">
+      <Button fx:id="returnButton" layoutX="106.0" layoutY="318.0" mnemonicParsing="false" onAction="#redirectToHome" prefHeight="45.0" prefWidth="212.0" text="Return to home" />
+      <TableView fx:id="sessionTable" layoutX="13.0" layoutY="16.0" prefHeight="275.0" prefWidth="584.0">
          <columns>
             <TableColumn id="startDateColumn" fx:id="startDateColumn" editable="false" prefWidth="75.0" text="Start" />
             <TableColumn id="subjectColumn" fx:id="subjectColumn" editable="false" prefWidth="86.0" text="Subject" />
@@ -22,8 +22,8 @@
             <TableColumn id="ratingColumn" fx:id="ratingColumn" editable="false" prefWidth="62.0" text="Rating" />
          </columns></TableView>
       <Label layoutX="14.0" layoutY="291.0" text="Sensor data is displayed as LOW / HIGH / AVG" />
-      <Button fx:id="deleteSessionButton" layoutX="441.0" layoutY="327.0" mnemonicParsing="false" onAction="#deleteSession" text="Delete Session" />
-      <ImageView fitHeight="101.0" fitWidth="87.0" layoutX="13.0" layoutY="289.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="deleteSessionButton" layoutX="345.0" layoutY="319.0" mnemonicParsing="false" onAction="#deleteSession" prefHeight="45.0" prefWidth="212.0" stylesheets="@../CSS/alt-style.css" text="Delete Session" />
+      <ImageView fitHeight="101.0" fitWidth="71.0" layoutX="13.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/StuWi.png" />
          </image>

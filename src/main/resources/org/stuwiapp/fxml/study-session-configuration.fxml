@@ -41,7 +41,7 @@
             <Font size="10.0" />
          </font></Label>
       <Button layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#redirectToHome" text="Return to home" />
-      <Button fx:id="deleteTemplateButton" layoutX="178.0" layoutY="329.0" mnemonicParsing="false" onAction="#deleteTemplateFromDatabase" prefHeight="25.0" prefWidth="107.0" text="Delete Template" />
+      <Button fx:id="deleteTemplateButton" layoutX="178.0" layoutY="329.0" mnemonicParsing="false" onAction="#deleteTemplateFromDatabase" prefHeight="25.0" prefWidth="107.0" stylesheets="@../CSS/alt-style.css" text="Delete Template" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/StuWi.png" />

@@ -9,7 +9,6 @@
     -fx-background-position: center center;
     -fx-effect:dropshadow(Gaussian, #797979,0,1, 2, 2);
     -fx-text-fill: white;
-    -fx-transition: background-image 0,5s;
 }
 .button:hover{
     -fx-background-image: url('../images/blue-button-lighter.png');
