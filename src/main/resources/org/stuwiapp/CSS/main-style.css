@@ -26,6 +26,12 @@
     -fx-opacity: 100;
     -fx-effect:dropshadow(Gaussian, rgb(30,31,50),0,2, 3, 3);
 }
+.choice-box:hover {
+    -fx-background-image: url('../images/blue-button-lighter.png');
+}
+.choice-box:pressed{
+    -fx-background-image: url('../images/blue-button-darker.png');;
+}
 .choice-box .context-menu {
     -fx-background-image: url('../images/stuwi-background.png');
     -fx-background-size: stretch;
@@ -135,5 +141,24 @@
 }
 .axis {
     -fx-tick-label-fill: white;
+}
+.slider .track{
+    -fx-background-color: rgb(54,55,74);
+}
+.slider .thumb{
+    -fx-background-color: rgb(147,209,219);
+}
+.range-slider .track{
+    -fx-background-color: rgb(54,55,74);
+}
+.range-slider .low-thumb{
+     -fx-background-color: rgb(147,209,219);
+}
+.range-slider .high-thumb{
+    -fx-background-color: rgb(147,209,219);
+}
+
+.range-slider .range-bar{
+    -fx-background-color: rgb(107,169,179);
 }
 
