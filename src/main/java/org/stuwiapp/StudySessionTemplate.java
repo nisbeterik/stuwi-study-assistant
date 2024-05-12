@@ -1,6 +1,8 @@
 package org.stuwiapp;
 
 public class StudySessionTemplate {
+
+    private String id;
     private String title;
     private String subject;
     private int blockDuration;
@@ -9,17 +11,22 @@ public class StudySessionTemplate {
     final static int MIN_BREAK_INTERVAL = 5;
     final static int MAX_DUR_NO_BREAK = 60;
 
-    public StudySessionTemplate(String title, String subject, int blockDuration, int breakDuration, int blocks) throws Exception{
+    public StudySessionTemplate(String id, String title, String subject, int blockDuration, int breakDuration, int blocks) throws Exception{
         if (blocks > 1){
             if (breakDuration < 5){
                 throw new Exception("At least 5 min breaks must be set for study sessions with more than 1 block.");
             }
         }
+        this.id = id;
         this.title = title;
         this.subject = subject;
         this.blockDuration = blockDuration;
         this.breakDuration = breakDuration;
         this.blocks = blocks;
+    }
+
+    public String getId(){
+        return id;
     }
 
     public int getBlocks() {

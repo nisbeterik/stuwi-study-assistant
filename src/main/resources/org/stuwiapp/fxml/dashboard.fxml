@@ -12,53 +12,64 @@
          <font>
             <Font name="Tahoma" size="20.0" />
          </font></Label>
-      <Label fx:id="humiReadingLabel" layoutX="276.0" layoutY="116.0" text="00.00">
+      <Label fx:id="humiReadingLabel" layoutX="276.0" layoutY="117.0" text="00.00">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font></Label>
-      <ImageView fx:id="tempImage" fitHeight="130.0" fitWidth="83.0" layoutX="100.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="tempImage" fitHeight="130.0" fitWidth="83.0" layoutX="100.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/thermometer-solid-240.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="humiImage" fitHeight="83.0" fitWidth="63.0" layoutX="270.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="humiImage" fitHeight="83.0" fitWidth="63.0" layoutX="270.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/droplet-half-solid-240.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="tempStatusImage" fitHeight="56.0" fitWidth="31.0" layoutX="188.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/happy-regular-240.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="humiStatusImage" fitHeight="56.0" fitWidth="31.0" layoutX="342.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/happy-regular-240.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="loudImage" fitHeight="130.0" fitWidth="83.0" layoutX="421.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="loudImage" fitHeight="130.0" fitWidth="83.0" layoutX="421.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/volume-full-solid-240.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="loudStatusImage" fitHeight="56.0" fitWidth="31.0" layoutX="516.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/happy-regular-240.png" />
-         </image>
-      </ImageView>
-      <Label id="temp" fx:id="loudnessReadingLabel" layoutX="437.0" layoutY="114.0" text="00.00">
+      <Label id="temp" fx:id="loudnessReadingLabel" layoutX="437.0" layoutY="115.0" text="00.00">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>
       </Label>
-      <Label id="temp" fx:id="studyStatusLabel" layoutX="245.0" layoutY="200.0" text="Not studying">
+      <Label id="temp" fx:id="studyStatusLabel" layoutX="332.0" layoutY="200.0" text="Not studying">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="stopSessionButton" layoutX="239.0" layoutY="303.0" mnemonicParsing="false" onAction="#stopSession" prefHeight="33.0" prefWidth="123.0" text="Stop Session">
+      <Button fx:id="stopSessionButton" layoutX="326.0" layoutY="303.0" mnemonicParsing="false" onAction="#stopSession" prefHeight="33.0" prefWidth="123.0" text="Stop Session">
          <font>
           <Font name="Tahoma" size="17.0" />
          </font>
       </Button>
+   <ImageView fitHeight="239.0" fitWidth="216.0" layoutX="35.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../images/StuWi.png" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="137.0" fitWidth="149.0" layoutX="131.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../images/speech-bubble.png" />
+      </image>
+   </ImageView>
+   <Label layoutX="147.0" layoutY="192.0" text="You're doing great!" />
+   <ImageView fx:id="tempStatusImage" fitHeight="25.0" fitWidth="25.0" layoutX="171.0" layoutY="48.0">
+      <image>
+         <Image url="@../images/greenCircle.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="humiStatusImage" fitHeight="25.0" fitWidth="25.0" layoutX="326.0" layoutY="48.0">
+      <image>
+         <Image url="@../images/greenCircle.png" />
+      </image>
+   </ImageView>
+   <ImageView fx:id="loudStatusImage" fitHeight="25.0" fitWidth="25.0" layoutX="504.0" layoutY="48.0">
+      <image>
+         <Image url="@../images/greenCircle.png" />
+      </image>
+   </ImageView>
 </AnchorPane>

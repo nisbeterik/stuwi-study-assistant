@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <AnchorPane fx:id="background" prefHeight="400.0" prefWidth="600.0" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StuwiHomeController">
    <children>
       <Label alignment="CENTER" layoutX="108.0" layoutY="43.0" prefHeight="32.0" prefWidth="376.0" stylesheets="@../CSS/main-style.css" text="StuWi Study Assistant">
@@ -12,8 +13,24 @@
             <Font name="Tahoma Bold" size="26.0" />
          </font>
       </Label>
-      <Button fx:id="overviewButton" layoutX="213.0" layoutY="200.0" mnemonicParsing="false" onAction="#redirectToOverview" prefHeight="33.0" prefWidth="180.0" text="Overview" />
-      <Button fx:id="newSessionButton" layoutX="213.0" layoutY="249.0" mnemonicParsing="false" onAction="#newSession" prefHeight="33.0" prefWidth="180.0" text="New Session" />
-      <Button fx:id="settingsButton" layoutX="213.0" layoutY="297.0" mnemonicParsing="false" onAction="#redirectToSettings" prefHeight="33.0" prefWidth="180.0" text="Settings" />
+      <Button fx:id="overviewButton" layoutX="327.0" layoutY="135.0" mnemonicParsing="false" onAction="#redirectToOverview" prefHeight="33.0" prefWidth="180.0" text="Overview" />
+      <Button fx:id="newSessionButton" layoutX="327.0" layoutY="184.0" mnemonicParsing="false" onAction="#newSession" prefHeight="33.0" prefWidth="180.0" text="New Session" />
+      <Button fx:id="settingsButton" layoutX="327.0" layoutY="232.0" mnemonicParsing="false" onAction="#redirectToSettings" prefHeight="33.0" prefWidth="180.0" text="Settings" />
+      <Button fx:id="analyticsButton" layoutX="327.0" layoutY="277.0" mnemonicParsing="false" onAction="#redirectToAnalytics" prefHeight="33.0" prefWidth="180.0" text="Analytics" />
+      <ImageView fitHeight="248.0" fitWidth="250.0" layoutX="43.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/StuWi.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="162.0" fitWidth="180.0" layoutX="130.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/speech-bubble.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="151.0" layoutY="152.0" text="It's a good day to study!">
+         <font>
+            <Font name="Tahoma" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
