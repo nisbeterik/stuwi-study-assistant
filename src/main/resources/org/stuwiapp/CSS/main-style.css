@@ -4,10 +4,9 @@
 .button {
     -fx-background-image: url('../images/blue-button.png');
     -fx-background-color: transparent;
-    -fx-background-size: cover;
-    -fx-background-repeat: stretch;
+    -fx-background-size: stretch;
     -fx-background-position: center center;
-    -fx-effect:dropshadow(Gaussian, #797979,0,1, 2, 2);
+    -fx-effect:dropshadow(Gaussian, rgba(44,45,64,90),0,2, 3, 3);
     -fx-text-fill: white;
 }
 .button:hover{
@@ -15,6 +14,13 @@
 }
 .button:pressed{
     -fx-background-image: url('../images/blue-button-darker.png');;
+}
+.choice-box {
+    -fx-background-image: url('../images/blue-button.png');
+    -fx-background-size: stretch;
+    -fx-background-position: center center;
+    -fx-opacity: 100;
+    -fx-effect:dropshadow(Gaussian, rgba(44,45,64,90),0,2, 3, 3);
 }
 .text-field{
     -fx-background-color: #454566;
