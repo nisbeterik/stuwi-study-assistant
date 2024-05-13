@@ -29,15 +29,23 @@ Last updated May 11, 2024
 
 ![StuWi Study Assistant](/docs/images/architecture_diagrams/Architecture_DiagramV5.png)
 
-[Diagram 4th edition (May 5, 2024)](/docs/images/architecture_diagrams/Architecture_DiagramV4.png)
-
-[Diagram 3rd edition (Apr 24, 2024)](/docs/images/architecture_diagrams/Architecture_DiagramV3.png)
-
-[Diagram 2nd edition (Apr 08, 2024)](/docs/images/architecture_diagrams/Architecture_DiagramV2.png)
-
-[Diagram 1st edition (Apr 08, 2024)](/docs/images/architecture_diagrams/Architecture_DiagramV1.png)
 
 ## Dependencies & Requirements
+
+This section outlines dependencies & requirements to run StuWi Study Assistant.
+
+1. [Seeed Wio Terminal](https://wiki.seeedstudio.com/Wio_Terminal_Intro/)
+2. [Arduino IDE](https://www.arduino.cc/en/software)
+3. Wio Terminal Board Library. See: [Link](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/#getting-started)
+4. Following Arduino Libraries:
+   - "Seeed Arduino rpcWiFi@1.0.6" (WiFi)
+   - "PubSubClient@2.8" (MQTT)
+   - "Seeed Arduino RTC@2.0.0" (Built-in Real-Time CLock)
+   - "ArduinoQueue@1.2.5" (Queue data structure)
+   - "DHT sensor library@1.4.6" (DHT11 Temp/Humid)
+
+5. Java SDK 21.0.2 [Download](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
+6. [Apache Maven 4.0.0 Alpha](https://maven.apache.org/download.cgi)
 
 ### Hardware Components
 
