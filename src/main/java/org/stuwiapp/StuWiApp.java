@@ -54,6 +54,7 @@ public class StuWiApp extends Application {
         Scene scene = new Scene((Parent) login);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.setOnCloseRequest(event -> {
             try {
                 onCloseCallback();
