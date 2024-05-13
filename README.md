@@ -43,10 +43,10 @@ This section outlines dependencies & requirements to run StuWi Study Assistant.
    - "Seeed Arduino RTC@2.0.0" by Seeed Studio (Built-in Real-Time CLock)
    - "ArduinoQueue@1.2.5" by Einar Arnason (Queue data structure)
    - "DHT sensor library@1.4.6" by Adafruit (DHT11 Temp/Humid)
-
-Other libraries used exist natively in Arduino IDE & Seeed Wio Terminal Board library
 5. Java SDK 21.0.2 [Download](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
 6. [Apache Maven 4.0.0 Alpha](https://maven.apache.org/download.cgi)
+
+Other libraries used exist natively in Arduino IDE & Seeed Wio Terminal Board library
 
 ### Hardware Components
 
