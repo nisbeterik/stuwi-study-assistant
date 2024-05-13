@@ -186,7 +186,7 @@ public class StudySessionConfigurationController extends ParentController implem
             StudySessionTemplateDAO.saveTemplateInDatabase(newStudySessionTemplate, UserManager.getInstance().getCurrentUser());
 
             templateChoiceBox.getItems().add(newStudySessionTemplate);
-            infoLabel.setStyle("-fx-text-fill: green;");
+            infoLabel.setStyle("-fx-text-fill: lightgreen;");
             infoLabel.setText("Successfully saved template " + title);
             return newStudySessionTemplate;
 
@@ -226,7 +226,7 @@ public class StudySessionConfigurationController extends ParentController implem
             StudySessionTemplateDAO.deleteTemplateFromDatabase(template);
             templateChoiceBox.getItems().remove(template);
             templateChoiceBox.setValue(RECOMMENDED_TEMPLATE);
-            infoLabel.setStyle("-fx-text-fill: green;");
+            infoLabel.setStyle("-fx-text-fill: lightgreen;");
             infoLabel.setText("Template deleted");
         }
     }

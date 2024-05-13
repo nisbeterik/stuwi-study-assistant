@@ -31,7 +31,10 @@
             <Image url="@../images/StuWi.png" />
          </image>
       </ImageView>
-      <Label fx:id="deletedSessionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="316.0" layoutY="289.0" prefHeight="18.0" prefWidth="212.0" />
+      <Label fx:id="deletedSessionLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="316.0" layoutY="289.0" prefHeight="18.0" prefWidth="212.0">
+         <font>
+            <Font name="Tahoma Bold" size="12.0" />
+         </font></Label>
 
    </children>
 </AnchorPane>
