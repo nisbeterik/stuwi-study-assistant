@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane styleClass="pane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StudySessionConfigurationController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" styleClass="pane" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StudySessionConfigurationController">
    <children>
       <Button fx:id="saveTemplateButton" layoutX="394.0" layoutY="70.0" mnemonicParsing="false" onAction="#saveSettingsAsTemplate" prefHeight="26.0" prefWidth="170.0" text="Save Settings as Template" />
       <Label fx:id="titleLabel" alignment="CENTER" layoutX="182.0" layoutY="24.0" prefHeight="30.0" prefWidth="380.0" text="Start new study session">
@@ -48,18 +48,18 @@
             <Font name="Tahoma Bold" size="19.0" />
          </font></Button>
       <Button fx:id="deleteTemplateButton" layoutX="25.0" layoutY="70.0" mnemonicParsing="false" onAction="#deleteTemplateFromDatabase" prefHeight="26.0" prefWidth="142.0" stylesheets="@../CSS/alt-style.css" text="Delete Template" />
-      <ImageView fitHeight="188.0" fitWidth="136.0" layoutX="14.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="188.0" fitWidth="136.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/StuWi.png" />
          </image></ImageView>
-      <ImageView fitHeight="90.0" fitWidth="107.0" layoutX="80.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="90.0" fitWidth="107.0" layoutX="73.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/speech-bubble.png" />
          </image>
       </ImageView>
-      <Label layoutX="104.0" layoutY="196.0" stylesheets="@../CSS/alt-style.css" text="Good luck!">
+      <Label layoutX="93.0" layoutY="191.0" stylesheets="@../CSS/alt-style.css" text="Good luck!">
          <font>
-            <Font name="Tahoma" size="12.0" />
+            <Font name="Tahoma" size="14.0" />
          </font></Label>
    </children>
 </AnchorPane>
