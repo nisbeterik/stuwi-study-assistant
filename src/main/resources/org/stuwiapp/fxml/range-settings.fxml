@@ -26,7 +26,7 @@
       <Label layoutX="82.0" layoutY="155.0" text="LO" />
       <Label layoutX="500.0" layoutY="220.0" text="HI " />
       <Label layoutX="82.0" layoutY="220.0" text="LO" />
-      <Label alignment="CENTER" layoutX="202.0" layoutY="155.0" prefHeight="17.0" prefWidth="203.0" text="Temparature Range C°" />
+      <Label alignment="CENTER" layoutX="202.0" layoutY="155.0" prefHeight="17.0" prefWidth="203.0" text="Temperature Range C°" />
       <Label alignment="CENTER" layoutX="202.0" layoutY="220.0" prefHeight="17.0" prefWidth="203.0" text="Humidity Range %" />
       <Label alignment="CENTER" layoutX="202.0" layoutY="286.0" prefHeight="17.0" prefWidth="203.0" text="Loudness Threshold Db." />
       <Label fx:id="humidHighLabel" alignment="CENTER_RIGHT" layoutX="430.0" layoutY="220.0" prefHeight="17.0" prefWidth="59.0" />

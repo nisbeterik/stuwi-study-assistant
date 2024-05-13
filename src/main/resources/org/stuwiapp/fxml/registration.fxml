@@ -9,10 +9,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane styleClass="pane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.RegistrationController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="pane" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.RegistrationController">
    <children>
-      <TextField fx:id="usernameField" layoutX="354.0" layoutY="80.0" prefHeight="46.0" prefWidth="188.0" promptText="Username" />
-      <PasswordField fx:id="passwordField" layoutX="354.0" layoutY="142.0" prefHeight="46.0" prefWidth="188.0" promptText="Password" />
+      <TextField fx:id="usernameField" layoutX="354.0" layoutY="80.0" prefHeight="46.0" prefWidth="188.0" promptText="Username" stylesheets="@../CSS/main-style.css">
+         <font>
+            <Font name="Tahoma" size="17.0" />
+         </font></TextField>
+      <PasswordField fx:id="passwordField" layoutX="354.0" layoutY="142.0" prefHeight="46.0" prefWidth="188.0" promptText="Password">
+         <font>
+            <Font name="Tahoma" size="17.0" />
+         </font></PasswordField>
       <Button fx:id="registerButton" layoutX="354.0" layoutY="200.0" mnemonicParsing="false" onAction="#registerNewUser" prefHeight="53.0" prefWidth="188.0" text="Register">
          <font>
             <Font name="Tahoma Bold" size="19.0" />
@@ -31,9 +37,9 @@
             <Image url="@../images/speech-bubble.png" />
          </image>
       </ImageView>
-      <Label layoutX="221.0" layoutY="103.0" prefHeight="20.0" prefWidth="72.0" stylesheets="@../CSS/alt-style.css" text="Welcome !">
+      <Label layoutX="209.0" layoutY="103.0" prefHeight="20.0" prefWidth="97.0" stylesheets="@../CSS/alt-style.css" text="Welcome!">
          <font>
-            <Font name="Tahoma" size="12.0" />
+            <Font name="Tahoma" size="18.0" />
          </font>
       </Label>
    </children>
