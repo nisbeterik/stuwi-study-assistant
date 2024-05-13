@@ -1,3 +1,6 @@
+.root {
+    -fx-font-family: "Tahoma";
+}
 .pane {
     -fx-background-color: rgb(54,55,74);
     -fx-background-image: url('../images/stuwi-background.png');
@@ -11,6 +14,7 @@
     -fx-background-position: center center;
     -fx-effect:dropshadow(Gaussian, rgb(30,31,50),0,2, 3, 3);
     -fx-text-fill: white;
+    -fx-font-family: "Tahoma";
 }
 .button:hover{
     -fx-background-image: url('../images/blue-button-lighter.png');
@@ -54,6 +58,7 @@
     -fx-background-color: #454566;
     -fx-text-fill: white;
     -fx-effect:dropshadow(Gaussian, rgb(30,31,50),0,2, 3, 3);
+    -fx-font-family: "Tahoma";
 }
 .text-field:hover{
     -fx-background-color: #404061;
