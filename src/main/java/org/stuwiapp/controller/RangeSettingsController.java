@@ -150,7 +150,7 @@ public class RangeSettingsController extends ParentController implements Initial
         RangeSettingsTemplateDAO.saveRangeTemplateInDatabase(newRangeSettingsTemplate, UserManager.getInstance().getCurrentUser());
 
         templateChoiceBox.getItems().add(newRangeSettingsTemplate);
-        infoLabel.setStyle("-fx-text-fill: green;");
+        infoLabel.setStyle("-fx-text-fill: lightgreen;");
         infoLabel.setText("Successfully saved template " + title);
         return newRangeSettingsTemplate;
     }
@@ -161,7 +161,7 @@ public class RangeSettingsController extends ParentController implements Initial
 
         try{
             rangeSettings.publishRangeSettings();
-            infoLabel.setStyle("-fx-text-fill: green;");
+            infoLabel.setStyle("-fx-text-fill: lightgreen;");
             infoLabel.setText("Successfully loaded settings to terminal!");
         } catch (Exception e){
             infoLabel.setStyle("-fx-text-fill: red;");
@@ -196,7 +196,7 @@ public class RangeSettingsController extends ParentController implements Initial
             RangeSettingsTemplateDAO.deleteRangeSettingsFromDatabase(settings);
             templateChoiceBox.getItems().remove(settings);
             templateChoiceBox.setValue(RECOMMENDED_TEMPLATE);
-            infoLabel.setStyle("-fx-text-fill: green;");
+            infoLabel.setStyle("-fx-text-fill: lightgreen;");
             infoLabel.setText("Template deleted");
         }
     }

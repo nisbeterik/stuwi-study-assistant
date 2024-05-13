@@ -1,0 +1,168 @@
+.root {
+}
+.pane {
+    -fx-background-color: rgb(54,55,74);
+    -fx-background-image: url('../images/stuwi-background.png');
+    -fx-background-size: stretch;
+    -fx-background-position: center center;
+}
+.button {
+    -fx-background-image: url('../images/blue-button.png');
+    -fx-background-color: transparent;
+    -fx-background-size: stretch;
+    -fx-background-position: center center;
+    -fx-effect:dropshadow(Gaussian, rgb(30,31,50),0,2, 3, 3);
+    -fx-text-fill: white;
+}
+.button:hover{
+    -fx-background-image: url('../images/blue-button-lighter.png');
+}
+.button:pressed{
+    -fx-background-image: url('../images/blue-button-darker.png');;
+}
+.choice-box {
+    -fx-background-image: url('../images/blue-button.png');
+    -fx-background-color: transparent;
+    -fx-background-size: stretch;
+    -fx-background-position: center center;
+    -fx-opacity: 100;
+    -fx-effect:dropshadow(Gaussian, rgb(30,31,50),0,2, 3, 3);
+}
+.choice-box:hover {
+    -fx-background-image: url('../images/blue-button-lighter.png');
+}
+.choice-box:pressed{
+    -fx-background-image: url('../images/blue-button-darker.png');;
+}
+.choice-box .context-menu {
+    -fx-background-image: url('../images/stuwi-background.png');
+    -fx-background-size: stretch;
+    -fx-background-position: center center;
+}
+
+   .choice-box .menu-item:focused {
+       -fx-background-color: rgb(117,179,189);
+   }
+
+   .choice-box .menu-item > .label {
+       -fx-text-fill: white;
+   }
+
+   .choice-box .menu-item:focused > .label {
+       -fx-text-fill: black;
+   }
+
+.text-field{
+    -fx-background-color: #454566;
+    -fx-text-fill: white;
+    -fx-effect:dropshadow(Gaussian, rgb(30,31,50),0,2, 3, 3);
+}
+.text-field:hover{
+    -fx-background-color: #404061;
+}
+.label{
+    -fx-text-fill: white;
+    -fx-font-family: Tahoma;
+}
+.table-view {
+     -fx-background-color: transparent;
+     -fx-text-fill: white;
+     -fx-font-family: Tahoma;
+ }
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+.table-view .column-header-background{
+    -fx-background-image: url('../images/stuwi-background.png');
+    -fx-background-color: transparent;
+    -fx-background-size: stretch;
+    -fx-background-position: right center;
+    -fx-background-radius: 7px 7px 0px 0px;
+    -fx-background-insets: 0 11px 0 0;
+    -fx-padding: 0 0 5px 0;
+}
+.table-view .column-header {
+    -fx-border-color: white;
+    -fx-border-width: 0 1 0 0;
+    -fx-background-color: transparent;
+}
+.table-view .arrow{
+    -fx-background-color: white;
+}
+.table-view .table-cell {
+    -fx-border-color: rgb(54,55,74);
+    -fx-border-width: 0 1 0 0;
+    -fx-text-fill: white;
+}
+.table-row-cell:odd {
+    -fx-background-color: rgb(44,45,64);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+    -fx-text-fill: white;
+}
+.table-row-cell:even {
+    -fx-background-color: rgb(54,55,74);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+    -fx-text-fill: white;
+}
+.table-row-cell:hover {
+    -fx-background-color: rgb(64,65,94);
+    -fx-text-background-color: #010101 ;
+
+
+}
+.table-row-cell:selected {
+    -fx-background-color: #101030;
+}
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 0;
+}
+.table-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color:  linear-gradient(to bottom, #454566, #797999);
+}
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color:  linear-gradient(to right, #454566, #797999);
+}
+.chart-plot-background{
+    -fx-background-image: url('../images/stuwi-background.png');
+    -fx-background-color: transparent;
+    -fx-background-size: stretch;
+    -fx-background-position: center center;
+}
+.axis {
+    -fx-tick-label-fill: white;
+}
+.slider .track{
+    -fx-background-color: rgb(54,55,74);
+}
+.slider .thumb{
+    -fx-background-color: rgb(147,209,219);
+}
+.range-slider .track{
+    -fx-background-color: rgb(54,55,74);
+}
+.range-slider .low-thumb{
+     -fx-background-color: rgb(147,209,219);
+}
+.range-slider .high-thumb{
+    -fx-background-color: rgb(147,209,219);
+}
+
+.range-slider .range-bar{
+    -fx-background-color: rgb(107,169,179);
+}
+

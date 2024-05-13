@@ -3,6 +3,7 @@ package org.stuwiapp;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import javafx.fxml.FXMLLoader;
@@ -51,7 +52,9 @@ public class StuWiApp extends Application {
     public void start(Stage stage) throws IOException {
         Object login = FXMLUtil.loadFxml("login.fxml");
         Scene scene = new Scene((Parent) login);
+        scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.setOnCloseRequest(event -> {
             try {
                 onCloseCallback();

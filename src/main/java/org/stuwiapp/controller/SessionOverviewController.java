@@ -105,7 +105,7 @@ public class SessionOverviewController extends ParentController implements Initi
                 StudySessionDAO.deleteSessionFromDatabase(selectedSession);
 
                 //Confirmation label for when user deletes a session
-                deletedSessionLabel.setStyle("-fx-text-fill: green;");
+                deletedSessionLabel.setStyle("-fx-text-fill: lightgreen;");
                 deletedSessionLabel.setText("Session deleted");
 
                 System.out.println("User deleted session");

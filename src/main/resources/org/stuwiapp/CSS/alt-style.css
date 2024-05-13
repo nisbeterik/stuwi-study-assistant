@@ -1,0 +1,17 @@
+.label{
+    -fx-text-fill: black;
+}
+.button {
+    -fx-background-image: url('../images/red-button.png');
+    -fx-background-color: transparent;
+    -fx-background-size: stretch;
+    -fx-background-position: center center;
+    -fx-effect:dropshadow(Gaussian, rgba(44,45,64,90),0,2, 3, 3);
+    -fx-text-fill: white;
+}
+.button:hover{
+    -fx-background-image: url('../images/red-button-lighter.png');
+}
+.button:pressed{
+    -fx-background-image: url('../images/red-button-darker.png');;
+}
