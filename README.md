@@ -82,6 +82,10 @@ TODO: Sensor plugin
 2. Run _mvn --version_ & _java --version_ in your machine's terminal to verify they've been installed correctly
 
 ## Usage
+1. Connect the Wio Terminal to your computer using a USB-cable. Once the screen GUI interface shows up, the Wi-Fi has successfully connected. This may take a few seconds.
+2. Using the command line terminal, navigate to the top directory of the application source code (where pom.xml is located).
+3. Run the following line: **mvn javafx:run**
+4. For instructions on how to navigate the StuWi application and its features, please see video demo below.
 
 ## Video Demo
 
