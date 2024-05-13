@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane styleClass="pane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.DashboardController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="pane" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.DashboardController">
       <Label id="temp" fx:id="tempReadingLabel" layoutX="116.0" layoutY="116.0" text="00.00">
          <font>
             <Font name="Tahoma" size="20.0" />
@@ -46,7 +46,7 @@
             <Font name="Tahoma" size="20.0" />
          </font>
       </Label>
-      <Label id="temp" fx:id="studyStatusLabel" layoutX="332.0" layoutY="197.0" prefHeight="33.0" prefWidth="133.0" text="Not studying">
+      <Label id="temp" fx:id="studyStatusLabel" layoutX="332.0" layoutY="197.0" prefHeight="33.0" prefWidth="183.0" text="Not studying">
          <font>
             <Font name="Tahoma" size="20.0" />
          </font>
@@ -66,7 +66,10 @@
          <Image url="@../images/speech-bubble.png" />
       </image>
    </ImageView>
-   <Label layoutX="147.0" layoutY="192.0" stylesheets="@../CSS/alt-style.css" text="You're doing great!" />
+   <Label layoutX="147.0" layoutY="192.0" stylesheets="@../CSS/alt-style.css" text="You're doing great!">
+      <font>
+         <Font name="Tahoma" size="13.0" />
+      </font></Label>
    <ImageView fx:id="tempStatusImage" fitHeight="25.0" fitWidth="25.0" layoutX="171.0" layoutY="48.0">
       <image>
          <Image url="@../images/greenCircle.png" />
