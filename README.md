@@ -38,12 +38,13 @@ This section outlines dependencies & requirements to run StuWi Study Assistant.
 2. [Arduino IDE](https://www.arduino.cc/en/software)
 3. Wio Terminal Board Library. See: [Link](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/#getting-started)
 4. Following Arduino Libraries:
-   - "Seeed Arduino rpcWiFi@1.0.6" (WiFi)
-   - "PubSubClient@2.8" (MQTT)
-   - "Seeed Arduino RTC@2.0.0" (Built-in Real-Time CLock)
-   - "ArduinoQueue@1.2.5" (Queue data structure)
-   - "DHT sensor library@1.4.6" (DHT11 Temp/Humid)
+   - "Seeed Arduino rpcWiFi@1.0.6" by Seeed Studio (WiFi)
+   - "PubSubClient@2.8" by Nick O'Leary (MQTT)
+   - "Seeed Arduino RTC@2.0.0" by Seeed Studio (Built-in Real-Time CLock)
+   - "ArduinoQueue@1.2.5" by Einar Arnason (Queue data structure)
+   - "DHT sensor library@1.4.6" by Adafruit (DHT11 Temp/Humid)
 
+Other libraries used exist natively in Arduino IDE & Seeed Wio Terminal Board library
 5. Java SDK 21.0.2 [Download](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
 6. [Apache Maven 4.0.0 Alpha](https://maven.apache.org/download.cgi)
 
@@ -51,6 +52,7 @@ This section outlines dependencies & requirements to run StuWi Study Assistant.
 
 **Microcontroller**
 * [Seeed Wio Terminal](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/)
+* [Wio Terminal LCD](https://wiki.seeedstudio.com/Wio-Terminal-LCD-Overview/)
 
 **Sensors:**
 * [Loudness](https://wiki.seeedstudio.com/Grove-Loudness_Sensor/)
@@ -61,6 +63,23 @@ This section outlines dependencies & requirements to run StuWi Study Assistant.
 * [Buzzer](https://wiki.seeedstudio.com/Wio-Terminal-Buzzer/)
 
 ## Installation
+
+Before any steps below, clone or download the repo source code onto your local machine.
+
+#### Wio Terminal
+
+1. Install Arduino [IDE](https://www.arduino.cc/en/software)
+2. Add Wio Terminal Board library to Arduino IDE See: [Link](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/#getting-started)
+3. Install required Arduino Libraries outlined in [Dependencies & Requirements](#dependencies--requirements) through searching by name in Library Manager of Arduino IDE. See how to install libraries: [Link](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries/) 
+4. Change variables 'SSID' & 'PASSWORD' in [wifi.cpp](src/wio-StuWi/src/stuwi_sketch_main/wifi.cpp) to your network SSID & Password in your local cloned/downloaded repo
+6. Upload sketch to Wio Terminal. See step 5 in: [Link](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/)
+
+
+TODO: Sensor plugin
+#### JavaFX Desktop Application
+
+1. Download & install SDK 21.0.2 & Maven 4.0.0 outlined in [Dependencies & Requirements](#dependencies--requirements)
+2. Run _mvn --version_ & _java --version_ in your machine's terminal to verify they've been installed correctly
 
 ## Usage
 
