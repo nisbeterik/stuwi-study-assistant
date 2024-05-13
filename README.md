@@ -25,9 +25,11 @@ StuWi study assistant is a system created for students or anyone engaged in cogn
 StuWi’s desktop application aims to provide a user-friendly interface to monitor sensor values in real time and plan out study sessions with ease so that all effort can be put into doing valuable work. With persistent data storage to track progress and other analytics, StuWi helps the user further optimize how they work to reach their goals.
 
 ## System Design 
-Last updated May 05, 2024
+Last updated May 11, 2024
 
-![StuWi Study Assistant](/docs/images/architecture_diagrams/Architecture_DiagramV4.png)
+![StuWi Study Assistant](/docs/images/architecture_diagrams/Architecture_DiagramV5.png)
+
+[Diagram 4th edition (May 5, 2024)](/docs/images/architecture_diagrams/Architecture_DiagramV4.png)
 
 [Diagram 3rd edition (Apr 24, 2024)](/docs/images/architecture_diagrams/Architecture_DiagramV3.png)
 

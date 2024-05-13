@@ -11,14 +11,13 @@ import java.util.ArrayList;
 
 public class StudySessionTemplateDAO {
 
-    // TODO Implement methods for template deletion
-
     public static void saveTemplateInDatabase(StudySessionTemplate template, String user){
         MongoClient client = MongoConnectionManager.getMongoClient();
         MongoDatabase db = client.getDatabase("stuwi");
         MongoCollection<Document> collection = db.getCollection("sessionTemplates");
 
         JSONObject templateJson = new JSONObject();
+        templateJson.put("_id", template.getId());
         templateJson.put("user", user);
         templateJson.put("title", template.getTitle());
         templateJson.put("subject", template.getSubject());
@@ -37,6 +36,7 @@ public class StudySessionTemplateDAO {
 
         ArrayList<StudySessionTemplate> templates = new ArrayList<>();
         for (Document doc : collection.find(new Document("user", user))){
+            String id = doc.getString("_id");
             String title = doc.getString("title");
             String subject = doc.getString("subject");
             int blockDuration = doc.getInteger("blockDuration");
@@ -44,7 +44,7 @@ public class StudySessionTemplateDAO {
             int blocks = doc.getInteger("blocks");
             StudySessionTemplate template = null;
             try {
-                template = new StudySessionTemplate(title, subject, blockDuration, breakDuration, blocks);
+                template = new StudySessionTemplate(id, title, subject, blockDuration, breakDuration, blocks);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -53,4 +53,11 @@ public class StudySessionTemplateDAO {
         return templates;
     }
 
+    public static void deleteTemplateFromDatabase(StudySessionTemplate template) {
+        MongoClient client = MongoConnectionManager.getMongoClient();
+        MongoDatabase db = client.getDatabase("stuwi");
+        MongoCollection<Document> collection = db.getCollection("sessionTemplates");
+
+        collection.deleteOne(new Document("_id", template.getId()));
+    }
 }

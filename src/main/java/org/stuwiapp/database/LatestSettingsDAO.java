@@ -20,13 +20,13 @@ public class LatestSettingsDAO {
 
     public static void saveLatestRangeSettings(RangeSettingsTemplate template, String user){
 
-
         if (collection.countDocuments() > 0) {
-            Bson filter = Filters.eq("title", "LATESTRANGES");
+            Bson filter = Filters.and(Filters.eq("title", "LATESTRANGES"), Filters.eq("user", user));
             collection.deleteOne(filter);
         }
 
         JSONObject templateJson = new JSONObject();
+        templateJson.put("_id", template.getId());
         templateJson.put("user", user);
         templateJson.put("title", "LATESTRANGES");
         templateJson.put("tempMax", template.getTempMax());
@@ -41,11 +41,12 @@ public class LatestSettingsDAO {
     public static void saveLatestStudyTemplateInDatabase(StudySessionTemplate template, String user){
 
         if (collection.countDocuments() > 0) {
-            Bson filter = Filters.eq("title", "LATESTSESSION");
+            Bson filter = Filters.and(Filters.eq("title", "LATESTSESSION"), Filters.eq("user", user));
             collection.deleteOne(filter);
         }
 
         JSONObject templateJson = new JSONObject();
+        templateJson.put("_id", template.getId());
         templateJson.put("user", user);
         templateJson.put("title", "LATESTSESSION");
         templateJson.put("subject", template.getSubject());
@@ -57,17 +58,17 @@ public class LatestSettingsDAO {
         collection.insertOne(sessionAsDoc);
     }
     public static StudySessionTemplate getLatestStudyTemplate(String user){
+        Bson filter = Filters.and(Filters.eq("title", "LATESTSESSION"), Filters.eq("user", user));
 
-        for (Document doc : collection.find(new Document("title", "LATESTSESSION"))) {
-
+        for (Document doc : collection.find(filter)) {
+            String id = doc.getString("_id");
             String title = doc.getString("title");
             String subject = doc.getString("subject");
             int blockDuration = doc.getInteger("blockDuration");
             int breakDuration = doc.getInteger("breakDuration");
             int blocks = doc.getInteger("blocks");
-
             try {
-                return new StudySessionTemplate(title, subject, blockDuration, breakDuration, blocks);
+                return new StudySessionTemplate(id, title, subject, blockDuration, breakDuration, blocks);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -76,7 +77,10 @@ public class LatestSettingsDAO {
     }
     public static RangeSettingsTemplate getLatestRangeTemplate(String user){
 
-        for (Document doc : collection.find(new Document("title", "LATESTRANGES"))){
+        Bson filter = Filters.and(Filters.eq("title", "LATESTRANGES"), Filters.eq("user", user));
+
+        for (Document doc : collection.find(filter)){
+            String id = doc.getString("_id");
             String title = doc.getString("title");
             int tempMax = doc.getInteger("tempMax");
             int tempMin = doc.getInteger("tempMin");
@@ -85,7 +89,7 @@ public class LatestSettingsDAO {
             int loudMax = doc.getInteger("loudMax");
 
 
-            return new RangeSettingsTemplate(title, tempMax, tempMin, humidMax, humidMin, loudMax);
+            return new RangeSettingsTemplate(id, title, tempMax, tempMin, humidMax, humidMin, loudMax);
         }
         return null;
     }

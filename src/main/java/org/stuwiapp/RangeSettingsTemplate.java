@@ -5,21 +5,19 @@ import org.stuwiapp.controller.DashboardController;
 import org.stuwiapp.database.LatestSettingsDAO;
 
 public class RangeSettingsTemplate {
-
+    private String id;
     private String title;
     private int tempMax;
     private int tempMin;
-
     private int humidMax;
     private int humidMin;
-
-
     private int loudMax;
 
     MQTTManager mqttManager = MQTTManagerSingleton.getMqttInstance();
     private final String publicRangeDataTopic = "stuwi/rangeupdate";
 
-    public RangeSettingsTemplate(String title, int tempMax, int tempMin, int humidMax, int humidMin, int loudMax){
+    public RangeSettingsTemplate(String id, String title, int tempMax, int tempMin, int humidMax, int humidMin, int loudMax){
+        this.id = id;
         this.title = title;
         this.tempMax = tempMax;
         this.tempMin = tempMin;
@@ -45,6 +43,7 @@ public class RangeSettingsTemplate {
     public int getLoudMax() {
         return loudMax;
     }
+    public String getId(){return id;}
 
 
     @Override

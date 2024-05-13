@@ -11,7 +11,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.stuwiapp.MQTTManager;
 import org.stuwiapp.MQTTManagerSingleton;
 import org.stuwiapp.StudySessionManager;
-import java.util.Objects;
+import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.util.Pair;
@@ -81,9 +81,9 @@ public class DashboardController extends ParentController {
             tempReadingLabel.setText(String.valueOf(currentTemp) + " C");
 
             if (currentTemp >= temperatureFloor && currentTemp <= temperatureRoof){
-                tempStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/happy-regular-240.png")));
+                tempStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/greenCircle.png")));
             } else {
-                tempStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/sad-regular-240.png")));
+                tempStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/redCircle.png")));
             }
         });
     }
@@ -94,9 +94,9 @@ public class DashboardController extends ParentController {
             humiReadingLabel.setText(String.valueOf(currentHumid) + " %");
 
             if (currentHumid >= humidityFloor && currentHumid <= humidityRoof){
-                humiStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/happy-regular-240.png")));
+                humiStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/greenCircle.png")));
             } else {
-                humiStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/sad-regular-240.png")));
+                humiStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/redCircle.png")));
             }
         });
     }
@@ -109,9 +109,9 @@ public class DashboardController extends ParentController {
             loudnessReadingLabel.setText(String.valueOf(currentLoudness));
 
             if (currentLoudness <= loudnessRoof) {
-                loudStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/happy-regular-240.png")));
+                loudStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/greenCircle.png")));
             } else {
-                loudStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/sad-regular-240.png")));
+                loudStatusImage.setImage(new Image(getClass().getResourceAsStream("/org/stuwiapp/images/redCircle.png")));
             }
         });
     }
@@ -144,9 +144,13 @@ public class DashboardController extends ParentController {
 
 
     public static Pair<Integer, String> showFeedbackPopup() {
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+    ButtonType saveButton = new ButtonType("Save Session", ButtonBar.ButtonData.OK_DONE);
+    ButtonType discardButton = new ButtonType("Discard Session", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", saveButton, discardButton);
     alert.setTitle("Study Session Ended");
-    alert.setHeaderText("Please provide your feedback");
+    alert.setHeaderText("Please provide your rating to save the session");
 
     DialogPane dialogPane = alert.getDialogPane();
 
@@ -168,22 +172,14 @@ public class DashboardController extends ParentController {
     VBox vbox = new VBox(slider, textArea);
     dialogPane.setContent(vbox);
 
-    alert.showAndWait();
+    Optional<ButtonType> result = alert.showAndWait();
 
-    return new Pair<>((int) slider.getValue(), textArea.getText());
-}
-
-
-    // binds to studyStatus label to prompt user for feedback when status goes from anything to "Not Studying"
-    /*
-    private void initListener() {
-        studyStatusLabel.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (Objects.equals(newValue, "Not Studying") && !Objects.equals(oldValue, newValue)) {
-                showFeedbackPopup();
-            }
-        });
+    if (result.isPresent() && result.get() == saveButton) {
+        return new Pair<>((int) slider.getValue(), textArea.getText());
+    } else {
+        return null;
     }
-    */
+}
 
     public static void setRanges(int tempMax, int tempMin, int humidMax, int humidMin, int loudMax){ //updates the ranges when new setting is loaded.
         humidityFloor = humidMin;

@@ -68,7 +68,8 @@ void loop() {
         publish_break_active();
     } else if (!activeBreak) {
         publish_break_inactive();
-    }    
+    }
+
   }
 }
 
