@@ -6,8 +6,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane styleClass="pane" prefHeight="338.0" prefWidth="530.0" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StuwiHomeController">
+<AnchorPane prefHeight="338.0" prefWidth="530.0" styleClass="pane" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.StuwiHomeController">
    <children>
       <Label alignment="CENTER" layoutX="77.0" layoutY="39.0" prefHeight="32.0" prefWidth="376.0" stylesheets="@../CSS/main-style.css" text="StuWi Study Assistant">
          <font>
@@ -30,20 +31,25 @@
          <font>
             <Font name="Tahoma Bold" size="19.0" />
          </font></Button>
-      <ImageView fitHeight="248.0" fitWidth="250.0" layoutX="14.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="248.0" fitWidth="250.0" layoutX="-11.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/StuWi.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="162.0" fitWidth="180.0" layoutX="108.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="165.0" fitWidth="200.0" layoutX="77.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/speech-bubble.png" />
          </image>
       </ImageView>
-      <Label layoutX="124.0" layoutY="151.0" stylesheets="@../CSS/alt-style.css" text="It's a good day to study!">
+      <Label layoutX="105.0" layoutY="128.0" stylesheets="@../CSS/alt-style.css" text="It's a good day">
          <font>
-            <Font name="Tahoma" size="12.0" />
+            <Font name="Tahoma" size="18.0" />
          </font>
       </Label>
+      <Text layoutX="127.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to study!" wrappingWidth="92.8447265625">
+         <font>
+            <Font name="Tahoma" size="18.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
