@@ -9,13 +9,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane styleClass="pane" prefHeight="387.0" prefWidth="600.0" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.SessionOverviewController">
+<AnchorPane prefHeight="387.0" prefWidth="600.0" styleClass="pane" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.SessionOverviewController">
    <children>
       <Button fx:id="returnButton" layoutX="106.0" layoutY="318.0" mnemonicParsing="false" onAction="#redirectToHome" prefHeight="54.0" prefWidth="212.0" text="Return to home">
          <font>
             <Font name="Tahoma Bold" size="19.0" />
          </font></Button>
-      <TableView fx:id="sessionTable" layoutX="13.0" layoutY="16.0" prefHeight="275.0" prefWidth="584.0">
+      <TableView fx:id="sessionTable" layoutX="7.0" layoutY="14.0" prefHeight="275.0" prefWidth="584.0">
          <columns>
             <TableColumn id="startDateColumn" fx:id="startDateColumn" editable="false" prefWidth="75.0" text="Start" />
             <TableColumn id="subjectColumn" fx:id="subjectColumn" editable="false" prefWidth="86.0" text="Subject" />
@@ -25,7 +25,7 @@
             <TableColumn id="loudColumn" fx:id="loudColumn" editable="false" prefWidth="106.0" text="Loud" />
             <TableColumn id="ratingColumn" fx:id="ratingColumn" editable="false" prefWidth="62.0" text="Rating" />
          </columns></TableView>
-      <Label layoutX="14.0" layoutY="291.0" text="Sensor data is displayed as LOW / HIGH / AVG" />
+      <Label layoutX="14.0" layoutY="290.0" text="Sensor data is displayed as LOW / HIGH / AVG" />
       <Button fx:id="deleteSessionButton" layoutX="352.0" layoutY="329.0" mnemonicParsing="false" onAction="#deleteSession" prefHeight="33.0" prefWidth="140.0" stylesheets="@../CSS/alt-style.css" text="Delete Session">
          <font>
             <Font name="Tahoma Bold" size="13.0" />
