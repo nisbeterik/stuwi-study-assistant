@@ -62,6 +62,7 @@
 }
 .label{
     -fx-text-fill: white;
+    -fx-font-family: Tahoma;
 }
 .table-view {
      -fx-background-color: transparent;
