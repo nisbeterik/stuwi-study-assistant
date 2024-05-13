@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.ColorAdjust?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="pane" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.DashboardController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="pane" stylesheets="@../CSS/main-style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.stuwiapp.controller.DashboardController">
       <Label id="temp" fx:id="tempReadingLabel" layoutX="116.0" layoutY="116.0" text="00.00">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma Bold" size="20.0" />
          </font></Label>
       <Label fx:id="humiReadingLabel" layoutX="276.0" layoutY="117.0" text="00.00">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma Bold" size="20.0" />
          </font></Label>
       <ImageView fx:id="tempImage" fitHeight="130.0" fitWidth="83.0" layoutX="100.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -43,12 +41,12 @@
       </ImageView>
       <Label id="temp" fx:id="loudnessReadingLabel" layoutX="437.0" layoutY="115.0" text="00.00">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Label>
-      <Label id="temp" fx:id="studyStatusLabel" layoutX="332.0" layoutY="197.0" prefHeight="33.0" prefWidth="183.0" text="Not studying">
+      <Label id="temp" fx:id="studyStatusLabel" layoutX="332.0" layoutY="197.0" prefHeight="33.0" prefWidth="250.0" text="Not studying">
          <font>
-            <Font name="Tahoma" size="20.0" />
+            <Font name="Tahoma Bold" size="20.0" />
          </font>
       </Label>
       <Button fx:id="stopSessionButton" layoutX="326.0" layoutY="310.0" mnemonicParsing="false" onAction="#stopSession" prefHeight="63.0" prefWidth="250.0" stylesheets="@../CSS/alt-style.css" text="Stop Session">

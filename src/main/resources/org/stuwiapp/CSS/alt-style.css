@@ -1,6 +1,5 @@
 .label{
     -fx-text-fill: black;
-    -fx-font-family: "Tahoma";
 }
 .button {
     -fx-background-image: url('../images/red-button.png');
@@ -9,7 +8,6 @@
     -fx-background-position: center center;
     -fx-effect:dropshadow(Gaussian, rgba(44,45,64,90),0,2, 3, 3);
     -fx-text-fill: white;
-    -fx-font-family: "Tahoma";
 }
 .button:hover{
     -fx-background-image: url('../images/red-button-lighter.png');
