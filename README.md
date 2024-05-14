@@ -91,8 +91,10 @@ TODO: Sensor plugin
 
 ## Team Members & Contributions
 
-* Erik Nisbet @eriknis
-* Edvin Sanfridsson @edvsan 
+### Erik Nisbet @eriknis
+#### Contributions:
+### Edvin Sanfridsson @edvsan 
+#### Contributions:
 ### Johannes Borg @johabo
 #### Contributions:
 * Helped with Mqtt connection and setting up maven.
@@ -101,12 +103,13 @@ TODO: Sensor plugin
 * Implemented notification feature when trespassing loudness threshold.
 * Worked on and implemented the termination of study session through via hardware interface (hardware buttons) (issue #4).
 * Been implementing a delete session button via session overview and improved the feature (issue #38).
-* * Refactored and "clean up" source code (examples of issues: #45, #46).
+* Refactored and "clean up" source code (examples of issues: #45, #46).
 * Redesign some of StuWi GUI (example of issue: #47).
 * Done multiple merge request and code reviews.
-* 
-* Love Carlander Strandäng @loveca
-* Martin Lidgren @marlidg
+### Love Carlander Strandäng @loveca
+#### Contributions:
+### Martin Lidgren @marlidg
+#### Contributions:
 
 
 
