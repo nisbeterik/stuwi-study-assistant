@@ -99,7 +99,8 @@ TODO: Sensor plugin
 * Worked on and implementing the sensors.
 * Done more work on loudness sensor together with @loveca (issue #8).
 * Implemented notification feature when trespassing loudness threshold.
-
+* Worked on and implemented the termination of study session through via hardware interface (hardware buttons) (issue #4).
+* Been implementing a delete session button via session overview and improved the feature (issue #38).
 Love Carlander Strandäng @loveca
 * Martin Lidgren @marlidg
 
