@@ -92,9 +92,12 @@ TODO: Sensor plugin
 ## Team Members & Contributions
 
 * Erik Nisbet @eriknis
-* Edvin Sanfridsson @edvsan
-* Johannes Borg @johabo
-* Love Carlander Strandäng @loveca
+* Edvin Sanfridsson @edvsan 
+### Johannes Borg @johabo
+#### Contributions:
+
+
+Love Carlander Strandäng @loveca
 * Martin Lidgren @marlidg
 
 
