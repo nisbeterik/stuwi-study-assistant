@@ -125,8 +125,17 @@ TODO: Sensor plugin
 #### Contributions:
 ### Martin Lidgren @marlidg
 #### Contributions:
-
-
-
+* Setting up Maven for project
+* MongoDB database connectivity
+* Functionality for database interaction, i.e. DAO classes
+* Back-end and frontend of the registration functionality
+* Back-end and frontend of the login functionality
+* Back-end logic for handling study session objects, like creation and deletion
+* Study session manager for handling active sessions and collecting sensor data to be processed/saved
+* User manager for keeping track of users
+* Session dashboard back-end and frontend
+* Session overview back-end and frontend
+* Screen drawing functionality on the Wio Terminal to display sensor data
+* Bug fixing
 
 
