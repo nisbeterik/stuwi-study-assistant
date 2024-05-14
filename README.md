@@ -95,7 +95,10 @@ TODO: Sensor plugin
 * Edvin Sanfridsson @edvsan 
 ### Johannes Borg @johabo
 #### Contributions:
-
+* Helped with Mqtt connection and setting up maven.
+* Worked on and implementing the sensors.
+* Done more work on loudness sensor together with @loveca (issue #8).
+* Implemented notification feature when trespassing loudness threshold.
 
 Love Carlander Strandäng @loveca
 * Martin Lidgren @marlidg
