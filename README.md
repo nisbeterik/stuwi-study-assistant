@@ -95,6 +95,21 @@ TODO: Sensor plugin
 #### Contributions:
 ### Edvin Sanfridsson @edvsan 
 #### Contributions:
+* Sensor data reading for humidity and temperature
+* MQTT handling with and topic/message parsing.
+* Setting up JavaFX
+* WIKI templates
+* Session Configuration screen when starting a new session
+* Ability to save session templates for later use
+* Range settings screen when setting up thresholds
+* Ability to save range settings.
+* Updating ranges on the WIO terminal with Mqtt from settings and in the application
+* Range threshold handling and notification on the WIO terminal.
+* Saving/loading latest settings when closing and starting software
+* WIO terminal UI
+* Application CSS and UI
+* Demo Video
+* General bug fixing
 ### Johannes Borg @johabo
 #### Contributions:
 * Helped with Mqtt connection and setting up maven.
