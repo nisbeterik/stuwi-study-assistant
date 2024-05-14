@@ -123,6 +123,16 @@ TODO: Sensor plugin
 * Done multiple merge request and code reviews.
 ### Love Carlander Strandäng @loveca
 #### Contributions:
+* Implemented the sensors and actuators
+* MQTT handling topics/messages
+* Implemented breaks for WIO terminal
+* Implemented breaks for GUI/software
+* Implemented notifications for user when a study session is over/a break starts/stops
+* Quality of life improvements to GUI (example issue: 49)
+* Refactoring, removing unnecessary methods/comments
+* Redesign GUI (example issue: #36)
+* CSS tuning for font styling
+* General bug fixes
 ### Martin Lidgren @marlidg
 #### Contributions:
 
