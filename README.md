@@ -101,6 +101,23 @@ TODO: Sensor plugin
 
 ### Erik Nisbet @eriknis
 #### Contributions:
+* Maven setup
+* MQTT Connectivity between devices
+* Wio Source code structuring, emphasizing separation of concerns
+* Re-usable sceneswitch function in JavaFX App
+* RTC implementation (retrieve time on boot through NTP-service)
+* Session processing logic in Wio Terminal (using RTC and queue datastructure)
+* Buzzer & break notification implementation
+* CI pipeline setup
+* Hardware session initiation feature
+* Unit testing
+* Notable code-refactoring
+* Graph analytics feature
+* Small UI fixes
+* Major README and Wiki contributions
+* Creation & iterative updating of System Architecture Diagram
+* Creation of releases 1.0, 1.5 and 2.0
+* Heavily involved in planning, management & oversight of project
 ### Edvin Sanfridsson @edvsan 
 #### Contributions:
 * Sensor data reading for humidity and temperature
