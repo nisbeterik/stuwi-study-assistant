@@ -133,6 +133,7 @@ TODO: Sensor plugin
 * Redesign GUI (example issue: #36)
 * CSS tuning for font styling
 * General bug fixes
+* Demo video
 ### Martin Lidgren @marlidg
 #### Contributions:
 * Setting up Maven for project
