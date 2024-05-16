@@ -97,6 +97,8 @@ TODO: Sensor plugin
 
 ## Video Demo
 
+[`StuWi Study Assistant` - Video Promotion](https://www.youtube.com/watch?v=0l-vjSTTGDc)
+
 ## Team Members & Contributions
 
 ### Erik Nisbet @eriknis
