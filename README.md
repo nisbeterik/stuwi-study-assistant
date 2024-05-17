@@ -15,6 +15,7 @@
     - [Usage](#usage)
     - [Video Demo](#video-demo)
     - [Team Members & Contributions](#team-members--contributions)
+    - [Acknowledgements & Special Thanks](#acknowledgements-and-special-thanks)
 
 *Study + Wio Terminal = 'StuWi'*
 
@@ -175,5 +176,14 @@ TODO: Sensor plugin
 * Session overview back-end and frontend
 * Screen drawing functionality on the Wio Terminal to display sensor data
 * Bug fixing
+
+## Acknowledgements and Special Thanks
+
+A special thanks goes to:
+
+- Teaching Assistants Nasit Vurgun & Erik Lindstrand for their guidance and supervision over the course of this project's lifetime
+- Course Examiner Francisco Gomes for creating the DIT113 course that teaches skills that the whole team found invaluable in terms of project workflow and development practices.
+- Artist [Maura Keulen](https://www.linkedin.com/in/maurakeulen/) for helping bringing the [StuWi brand mascot and logo to life](/docs/images/StuWi-Transparent.png).
+- Creators and maintainers of the numeours open source libraries utilized within this project.
 
 
