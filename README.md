@@ -146,6 +146,8 @@ TODO: Sensor plugin
 * Refactored and "clean up" source code (examples of issues: #45, #46).
 * Redesign some of StuWi GUI (example of issue: #47).
 * Done multiple merge request and code reviews.
+* Demo Video
+* General bug fixing
 ### Love Carlander Strandäng @loveca
 #### Contributions:
 * Implemented the sensors and actuators
