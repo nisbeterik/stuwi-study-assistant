@@ -81,10 +81,10 @@ Before any steps below, clone or download the repo source code onto your local m
 2. Add Wio Terminal Board library to Arduino IDE See: [Link](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/#getting-started)
 3. Install required Arduino Libraries outlined in [Dependencies & Requirements](#dependencies--requirements) through searching by name in Library Manager of Arduino IDE. See how to install libraries: [Link](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries/) 
 4. Change variables 'SSID' & 'PASSWORD' in [wifi.cpp](src/wio-StuWi/src/stuwi_sketch_main/wifi.cpp) to your network SSID & Password in your local cloned/downloaded repo
+5. Connect the sensors to the Wio Terminal according to following schema: ![Connection Diagram](docs/images/connection_diagram.jpg)
 6. Upload sketch to Wio Terminal. See step 5 in: [Link](https://wiki.seeedstudio.com/Wio-Terminal-Getting-Started/)
 
 
-TODO: Sensor plugin
 #### JavaFX Desktop Application
 
 1. Download & install SDK 21.0.2 & Maven 4.0.0 outlined in [Dependencies & Requirements](#dependencies--requirements)
