@@ -32,7 +32,7 @@ Last updated May 11, 2024
 
 The system is divided in two Tiers: Wio Terminal (Tier 1) and a JavaFX Desktop Application (Tier 2) with a MongoDB Atlas cloud database.
 The two tiers communicate with each other through a broker using the MQTT protocol, with a publish/subscribe architectural pattern. <br />
-In the MQTT protocol, the 'publisher' sends messages to a specific topic of which the 'subscriber' subscribes. The MQTT broker mediates communication in its server by directing messages to received by publishers to their desired topics and sending it out to the topic's subscribers.
+In the MQTT protocol, the 'publisher' sends messages to a specific topic of which the 'subscriber' subscribes. The MQTT broker mediates communication in its server by directing messages received by publishers to their desired topics and sending it out to the topic's subscribers.
 
 The connection to MongoDB Atlas Database is made possible through the instance of a MongoClient that connects to the Atlas App Services wire protocol using a MongoDB connection string. The Atlas App Services protocol is a subset of the MongoDB wire protocol (TCP/IP).
 
