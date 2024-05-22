@@ -98,7 +98,7 @@ Before any steps below, clone or download the repo source code onto your local m
 
 ## Video Demo
 
-[`StuWi Study Assistant` - Video Promotion](https://www.youtube.com/watch?v=0l-vjSTTGDc)
+[`StuWi Study Assistant` - Video Promotion](https://www.youtube.com/watch?v=zWGuKwf31Do)
 
 ## Team Members & Contributions
 
