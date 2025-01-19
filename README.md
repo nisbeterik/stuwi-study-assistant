@@ -1,3 +1,7 @@
+## Video Demo
+
+[`StuWi Study Assistant` - Video Promotion](https://www.youtube.com/watch?v=zWGuKwf31Do)
+
 # StuWi Study Assistant
 
 <div style="text-align:center">
@@ -13,7 +17,6 @@
         - [Hardware Components](#hardware-components)
     - [Installation](#installation)
     - [Usage](#usage)
-    - [Video Demo](#video-demo)
     - [Team Members & Contributions](#team-members--contributions)
     - [Acknowledgements & Special Thanks](#acknowledgements-and-special-thanks)
 
@@ -95,10 +98,6 @@ Before any steps below, clone or download the repo source code onto your local m
 2. Using the command line terminal, navigate to the top directory of the application source code (where pom.xml is located).
 3. Run the following line: **mvn javafx:run**
 4. For instructions on how to navigate the StuWi application and its features, please see video demo below.
-
-## Video Demo
-
-[`StuWi Study Assistant` - Video Promotion](https://www.youtube.com/watch?v=zWGuKwf31Do)
 
 ## Team Members & Contributions
 
